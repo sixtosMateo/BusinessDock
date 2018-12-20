@@ -19,9 +19,14 @@ class CustomLayout extends React.Component{
             defaultSelectedKeys={['2']}
             style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1">Home</Menu.Item>
-            <Menu.Item key="2"></Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
+            <Menu.Item key="1">BusinessDock</Menu.Item>
+            <Menu.Item key="2">Outgoing</Menu.Item>
+            <Menu.Item key="3">Incoming</Menu.Item>
+            <Menu.Item key="4">Employees</Menu.Item>
+            <Menu.Item key="5">Inventory</Menu.Item>
+            <Menu.Item key="6">Vendors</Menu.Item>
+            <Menu.Item key="7">Reports</Menu.Item>
+
           </Menu>
         </Header>
 
