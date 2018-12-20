@@ -12,7 +12,7 @@ Django framework
     $ pip3 install django-allauth
 
 React
-    $ npm install antd --save
-    $ sudo npm install -g create-react-app
+    $ npm install create-react-app
     $ create-react-app <project-name>
     $ cd <project-name>
+    $ npm install antd --save
