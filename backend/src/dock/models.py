@@ -1,5 +1,49 @@
+from __future__ import unicode_literals
 from django.db import models
+import datetime
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.utils import timezone
+
+
+
+class Store(models.Model):
+    storeId = models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 30, default=None)
+    address = models.CharField(max_length = 50, default=None)
+    hoursOpen =  models.CharField(max_length = 150, default=None)
+    phoneNumber = models.CharField(max_length = 30, default=None)
+
+    class Meta:
+        db_table = ''
+
+    def save(self, *args, **kwargs):
+        print('save() is called.')
+        super(Store, self).save(using='')
+
+    def __unicode__(self):
+        return "{0} {1} {2} {3} {4}".format(
+            self.pk, self.name, self.address, self.hoursOpen, self.phoneNumber)
+
+
+class Vendor(models.Model):
+    vendorId = models.AutoField(primary_key=True)
+    address = models.CharField(max_length = 100, default=None)
+    phoneNumber = models.CharField(max_length = 30, default=None)
+    name = models.CharField(max_length = 30, default=None)
+    hoursOpen = models.CharField(max_length = 150, default=None)
+
+    class Meta:
+        db_table = ""
+
+    def save(self, *args, **kwargs):
+        print('save() is called.')
+        super(Vendor,self).save(using="")
+
+    def __unicode__(self):
+        return "{0} {1} {2} {3} {4}".format(
+            self.vendorId, self.address, self.phoneNumber, self.name,
+            self.hoursOpen)
 
 
 class Employee(models.Model):
@@ -21,7 +65,6 @@ class Item(models.Models):
     barcode = models.CharField(unique=True, max_length=30, default=None)
     name = models.CharField(max_length = 30, default=None)
     inStockQty = models.IntegerField(default = 0, blank=True)
-    picture = models.CharField(max_length = 30, default=None)
     color = models.CharField(max_length = 30, default=None)
     ageRequirement = models.CharField(max_length = 30, default=None)
     purchasedPrice = models.FloatField(default = 0.0, blank=True)
@@ -30,7 +73,7 @@ class Item(models.Models):
     createdAt = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = "item"
+        db_table = ""
 
     def save(self, *args, **kwargs):
         print('Item save() is called.')
@@ -41,6 +84,29 @@ class Item(models.Models):
             self.itemId, self.name, self.inStockQty, self.picture, self.color,
             self.ageRequirement, self.purchasedPrice, self.salePrice,
             self.department, self.barcode,self.createdAt)
+
+
+class DamageItem(models.Model):
+    itemId = models.AutoField(primary_key=True)
+    quantity = models.IntegerField(default = 0, blank=True)
+    createdAt = models.DateTimeField(auto_now=True)
+    employeeId = models.CharField(max_length = 30, default=None)
+    storeId = models.IntegerField(default = 0, blank=True)
+    locationId = models.IntegerField(default = 0, blank=True)
+    barcode = models.CharField(unique=True, max_length = 30, default=None)
+    description=models.CharField(max_length = 500, default=None)
+
+    class Meta:
+        db_table = ""
+
+    def save(self, *args, **kwargs):
+        print('save() is called.')
+        super(DamageItem,self).save(using="")
+
+    def __unicode__(self):
+        return "{0} {1} {2} {3} {4} {5} {6} {7}".format(
+            self.itemId, self.quantity, self.createdAt, self.employeeId,
+            self.storeId, self.locationId, self.barcode, self.description)
 
 class OutgoingTransaction(models.Models):
     transactionId = models.AutoField(primary_key=True)
