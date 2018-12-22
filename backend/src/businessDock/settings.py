@@ -137,11 +137,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS =[
-os.path.join(BASE_DIR, 'build/static')
-]
+# STATICFILES_DIRS =[
+# os.path.join(BASE_DIR, 'build/static')
+# ]
 
-STATICFILES_STORAGE = "whitenoise.django.GzipManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.django.GzipManifestStaticFilesStorage"
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
 # Use Django's standard `django.contrib.auth` permissions,
 # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-    'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    'rest_framework.authentication.TokenAuthentication',
     ]
 }
 
