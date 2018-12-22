@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/auth';
+
 
 const { Header, Content, Footer } = Layout;
 
@@ -17,18 +19,33 @@ class CustomLayout extends React.Component{
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={['2']}
+            defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
           >
 
             <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
-            <Menu.Item key="2">Outgoing</Menu.Item>
-            <Menu.Item key="3">Incoming</Menu.Item>
-            <Menu.Item key="4">Employees</Menu.Item>
-            <Menu.Item key="5">Inventory</Menu.Item>
-            <Menu.Item key="6">Vendors</Menu.Item>
-            <Menu.Item key="7">Reports</Menu.Item>
-            <Menu.Item key="8"><Link to="/">Login</Link></Menu.Item>
+
+
+
+            {
+
+              this.props.isAuthenticated ?
+
+
+                <Menu.Item key="8" onClick={ this.props.logout} >
+                  Logout
+                </Menu.Item>
+
+              :
+
+              <Menu.Item key="8">
+                <Link to="/login/">Login</Link>
+              </Menu.Item>
+
+
+
+          }
+
 
           </Menu>
         </Header>
@@ -40,7 +57,10 @@ class CustomLayout extends React.Component{
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
-          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>Content</div>
+          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+          { this.props.children }
+
+          </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
           BusinessDock ©2018 Created by Mateo Sixtos
@@ -52,4 +72,11 @@ class CustomLayout extends React.Component{
   }
 }
 
-export default CustomLayout;
+
+const mapDispatchToProps = dispatch =>{
+  return {
+    logout: () => dispatch(actions.logout())
+  }
+}
+
+export default withRouter(connect(null,  mapDispatchToProps)(CustomLayout));

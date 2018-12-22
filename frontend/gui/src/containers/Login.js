@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  Form, Icon, Input, Button, Checkbox,
+  Form, Icon, Input, Button,  Spin
 } from 'antd';
 
 
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 
 
@@ -20,6 +20,7 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onAuth(values.userName, values.password);
+        
         this.props.history.push('/');
       }
     });
@@ -39,30 +40,43 @@ class NormalLoginForm extends React.Component {
 
 
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
-        <FormItem>
-            {getFieldDecorator('userName', {
-              rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-            )}
-        </FormItem>
 
-        <FormItem>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+      <div>
+        {errorMessage}
+        {
+
+        this.props.loading ?
+
+            <Spin indicator={antIcon} />
+
+            :
+
+        <Form onSubmit={this.handleSubmit} className="login-form">
+          <FormItem>
+              {getFieldDecorator('userName', {
+                rules: [{ required: true, message: 'Please input your username!' }],
               })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
               )}
-        </FormItem>
+          </FormItem>
 
-        <FormItem>
-                <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
-                    Login
-                </Button>
+          <FormItem>
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your Password!' }],
+                })(
+                  <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                )}
+          </FormItem>
 
-        </FormItem>
-        </Form>
+          <FormItem>
+                  <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
+                      Login
+                  </Button>
+
+          </FormItem>
+          </Form>
+        }
+      </div>
     );
   }
 }
