@@ -4,5 +4,6 @@ from docks import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
+    url('api-auth/', include('rest_framework.urls')),
     url('docks/', include('docks.urls')),
 ]
