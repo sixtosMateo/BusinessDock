@@ -60,7 +60,7 @@ class Employee(models.Model):
     createdAt = models.DateTimeField(default=timezone.now)
 
 
-class Item(models.Models):
+class Item(models.Model):
     itemId = models.AutoField(primary_key=True)
     barcode = models.CharField(unique=True, max_length=30, default=None)
     name = models.CharField(max_length = 30, default=None)
@@ -108,7 +108,7 @@ class DamageItem(models.Model):
             self.itemId, self.quantity, self.createdAt, self.employeeId,
             self.storeId, self.locationId, self.barcode, self.description)
 
-class OutgoingTransaction(models.Models):
+class OutgoingTransaction(models.Model):
     transactionId = models.AutoField(primary_key=True)
     createdAt = models.DateTimeField(auto_now=True)
     storeId = models.IntegerField(default = 0, blank=True)
