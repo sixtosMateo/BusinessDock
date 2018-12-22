@@ -20,7 +20,7 @@ class NormalLoginForm extends React.Component {
   }
 
   render() {
-    
+
 
 
     return (

@@ -26,6 +26,7 @@ class CustomLayout extends React.Component{
             <Menu.Item key="5">Inventory</Menu.Item>
             <Menu.Item key="6">Vendors</Menu.Item>
             <Menu.Item key="7">Reports</Menu.Item>
+            <Menu.Item key="8">Login</Menu.Item>
 
           </Menu>
         </Header>
