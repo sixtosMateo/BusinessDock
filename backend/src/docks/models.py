@@ -172,3 +172,5 @@ class TransactionItem(models.Model):
         return "{0} {1} {2} {3} {4} {5} {6}".format(
             self.barcode, self.transactionId, self.transactionType, self.tax,
             self.quantity, self.price, self.createdAt)
+
+# Create your models here.
