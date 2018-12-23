@@ -50,12 +50,12 @@ class CustomLayout extends React.Component{
           this.props.isAuthenticated ?
 
           <Breadcrumb style={{ margin: '16px 0'}}>
-            <Breadcrumb.Item><Link to="">Outgoing</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="">Incoming</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="">Employee</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="">Inventory</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="">Vendors</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="">Reports</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/outgoing/">Outgoing</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/incoming/">Incoming</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/employees/">Employee</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/inventory/">Inventory</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/vendors/">Vendors</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/reports/">Reports</Link></Breadcrumb.Item>
           </Breadcrumb>
           :
           <Breadcrumb style={{ margin: '16px 0' }}>
