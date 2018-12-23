@@ -32,7 +32,7 @@ class CustomLayout extends React.Component{
               this.props.isAuthenticated ?
 
                 <Menu.Item key="8" onClick={ this.props.logout} style={{ float:'right'}}>
-                  Logout
+                  <Link to="/">logout</Link>
                 </Menu.Item>
               :
                 <Menu.Item key="8" style={{ float:'right'}}>
