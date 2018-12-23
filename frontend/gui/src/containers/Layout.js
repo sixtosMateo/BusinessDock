@@ -31,37 +31,46 @@ class CustomLayout extends React.Component{
 
               this.props.isAuthenticated ?
 
-
-                <Menu.Item key="8" onClick={ this.props.logout} >
+                <Menu.Item key="8" onClick={ this.props.logout} style={{ float:'right'}}>
                   Logout
                 </Menu.Item>
-
               :
-
-              <Menu.Item key="8">
-                <Link to="/login/">Login</Link>
-              </Menu.Item>
-
-
-
+                <Menu.Item key="8" style={{ float:'right'}}>
+                  <Link to="/login/">Login</Link>
+                </Menu.Item>
           }
-
 
           </Menu>
         </Header>
 
-
         <Content style={{ padding: '0 50px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
+
+        {
+
+          this.props.isAuthenticated ?
+
+          <Breadcrumb style={{ margin: '16px 0'}}>
+            <Breadcrumb.Item><Link to="">Outgoing</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="">Incoming</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="">Employee</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="">Inventory</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="">Vendors</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="">Reports</Link></Breadcrumb.Item>
           </Breadcrumb>
+          :
+          <Breadcrumb style={{ margin: '16px 0' }}>
+          </Breadcrumb>
+
+        }
+
           <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
           { this.props.children }
 
           </div>
+
         </Content>
+
+
         <Footer style={{ textAlign: 'center' }}>
           BusinessDock ©2018 Created by Mateo Sixtos
         </Footer>
