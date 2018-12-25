@@ -73,7 +73,7 @@ class Item(models.Model):
     createdAt = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = ""
+        db_table = "docks_item"
 
     def save(self, *args, **kwargs):
         print('Item save() is called.')

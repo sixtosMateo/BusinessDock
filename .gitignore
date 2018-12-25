@@ -1,0 +1,4 @@
+frontend/gui/node_modules
+backend/src/businessDock/settings.py
+backend/src/docks/migrations
+backend/src/docks/__pycache__
