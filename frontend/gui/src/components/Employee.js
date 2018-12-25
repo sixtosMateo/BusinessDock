@@ -1,11 +1,18 @@
 import React from 'react';
 
+import { Input } from 'antd';
+
+const Search = Input.Search;
 
 class Employee extends React.Component{
 render(){
     return(
       <div>
-        <p>Employee Page</p>
+      <Search
+      placeholder="Search Employee"
+      onSearch={value => console.log(value)}
+      enterButton
+      />
       </div>
 
 

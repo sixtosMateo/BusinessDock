@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { Input } from 'antd';
+
 
 class Incoming extends React.Component{
 render(){
     return(
       <div>
-        <p>Incoming Page</p>
+        <Input placeholder="Incoming" />
       </div>
 
 

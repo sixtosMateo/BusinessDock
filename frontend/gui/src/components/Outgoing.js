@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { Input } from 'antd';
+
 
 class Outgoing extends React.Component{
 render(){
     return(
       <div>
-        <p>Outgoing Page</p>
+        <Input placeholder="Outgoing" />
       </div>
-
 
     );
 }

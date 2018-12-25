@@ -15,7 +15,29 @@ class CustomLayout extends React.Component{
     return(
       <Layout className="layout">
         <Header>
+        {
 
+          this.props.isAuthenticated ?
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={['1']}
+            style={{ lineHeight: '64px' }}
+          >
+            <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
+
+            <Menu.Item key="2"><Link to="/outgoing/">Outgoing</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/incoming/">Incoming</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/employees/">Employees</Link></Menu.Item>
+            <Menu.Item key="5"><Link to="/inventory/">Inventory</Link></Menu.Item>
+            <Menu.Item key="6"><Link to="/vendors/">Vendors</Link></Menu.Item>
+            <Menu.Item key="7"><Link to="/reports/">Reports</Link></Menu.Item>
+            <Menu.Item key="8" onClick={ this.props.logout} style={{ float:'right'}}>
+              <Link to="/">logout</Link>
+            </Menu.Item>
+          </Menu>
+
+          :
           <Menu
             theme="dark"
             mode="horizontal"
@@ -24,44 +46,25 @@ class CustomLayout extends React.Component{
           >
 
             <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
-
-
-
-            {
-
-              this.props.isAuthenticated ?
-
-                <Menu.Item key="8" onClick={ this.props.logout} style={{ float:'right'}}>
-                  <Link to="/">logout</Link>
-                </Menu.Item>
-              :
-                <Menu.Item key="8" style={{ float:'right'}}>
+            <Menu.Item key="8" style={{ float:'right'}}>
                   <Link to="/login/">Login</Link>
-                </Menu.Item>
-          }
-
+              </Menu.Item>
           </Menu>
+
+
+
+
+        }
+
         </Header>
 
         <Content style={{ padding: '0 50px' }}>
 
-        {
-
-          this.props.isAuthenticated ?
 
           <Breadcrumb style={{ margin: '16px 0'}}>
-            <Breadcrumb.Item><Link to="/outgoing/">Outgoing</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/incoming/">Incoming</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/employees/">Employee</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/inventory/">Inventory</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/vendors/">Vendors</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/reports/">Reports</Link></Breadcrumb.Item>
-          </Breadcrumb>
-          :
-          <Breadcrumb style={{ margin: '16px 0' }}>
-          </Breadcrumb>
+            <Breadcrumb.Item><Link to="/">Outgoing</Link></Breadcrumb.Item>
 
-        }
+          </Breadcrumb>
 
           <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
           { this.props.children }
