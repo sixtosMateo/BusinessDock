@@ -9,6 +9,7 @@ import Employee from './components/Employee';
 import Inventory from './components/Inventory';
 import Vendor from './components/Vendor';
 import Report from './components/Report';
+import ItemList from './containers/ItemListView';
 
 
 
