@@ -140,7 +140,7 @@ class IncomingTransaction(models.Model):
     tax = models.FloatField(null=True, blank=True, default=None)
 
     class Meta:
-        db_table = ""
+        db_table = "docks_incomingtransaction"
 
     def save(self, *args, **kwargs):
         print('save() is called.')
