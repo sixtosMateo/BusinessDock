@@ -1,13 +1,10 @@
+
 from docks.models import Item
-from docks.api.serializers import ItemSerializer
+from .serializers import ItemSerializer
 
-from rest_framework.generics import (ListAPIView,
-                                    RetrieveAPIView,
-                                    CreateAPIView,
-                                    DestroyAPIView,
-                                    UpdateAPIView
-                                    )
+from rest_framework import viewsets
 
-class ItemListView(ListAPIView):
+# putting all Rest-rest_framework generics views(CRUD) into one single view
+class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer

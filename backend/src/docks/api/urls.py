@@ -1,13 +1,6 @@
-from docks.api.views import ItemListView
-from django.urls import path
-from django.conf.urls import url
+from docks.api.views import ItemViewSet
+from rest_framework.routers import DefaultRouter
 
-
-urlpatterns = [
-
-    url(r'^', ItemListView.as_view()),
-#     path('create/', ArticleCreateView.as_view()),
-#     path('<pk>', ArticleDetailView.as_view()),
-#     path('<pk>/update/', ArticleUpdateView.as_view()),
-#     path('<pk>/delete/', ArticleDeleteView.as_view()),
-]
+router = DefaultRouter()
+router.register(r'', ItemViewSet, base_name='items')
+urlpatterns = router.urls
