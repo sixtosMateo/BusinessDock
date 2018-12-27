@@ -118,7 +118,7 @@ class OutgoingTransaction(models.Model):
     total = models.FloatField(null=True, blank=True, default=None)
 
     class Meta:
-        db_table = ''
+        db_table = 'docks_outgoingtransaction'
 
     def save(self, *args, **kwargs):
         print('save() is called.')
