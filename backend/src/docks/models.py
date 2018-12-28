@@ -162,7 +162,7 @@ class TransactionItem(models.Model):
     createdAt = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = ""
+        db_table = "docks_transactionitem"
 
     def save(self, *args, **kwargs):
         print('save() is called.')
