@@ -97,7 +97,7 @@ class DamageItem(models.Model):
     description=models.CharField(max_length = 500, default=None)
 
     class Meta:
-        db_table = ""
+        db_table = "docks_damageitem"
 
     def save(self, *args, **kwargs):
         print('save() is called.')

@@ -4,7 +4,8 @@ from docks.models import (Item,
                         IncomingTransaction,
                         Vendor,
                         TransactionItem,
-                        Store)
+                        Store,
+                        DamageItem)
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -36,4 +37,9 @@ class TransactionItemSerializer(serializers.ModelSerializer):
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
+        fields = '__all__'
+
+class DamageItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DamageItem
         fields = '__all__'
