@@ -1,10 +1,16 @@
+from docks.models import (Item,
+                        OutgoingTransaction,
+                        IncomingTransaction,
+                        Vendor,
+                        TransactionItem,
+                        Store)
 
-from docks.models import Item, OutgoingTransaction, IncomingTransaction, Vendor, TransactionItem
 from .serializers import (ItemSerializer,
                         OutgoingTransactionSerializer,
                         IncomingTransactionSerializer,
                         VendorSerializer,
-                        TransactionItemSerializer)
+                        TransactionItemSerializer,
+                        StoreSerializer)
 
 from rest_framework import viewsets
 
@@ -28,3 +34,7 @@ class VendorViewSet(viewsets.ModelViewSet):
 class TransactionItemViewSet(viewsets.ModelViewSet):
     queryset = TransactionItem.objects.all()
     serializer_class = TransactionItemSerializer
+
+class StoreViewSet(viewsets.ModelViewSet):
+    queryset = Store.objects.all()
+    serializer_class = StoreSerializer

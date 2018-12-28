@@ -34,7 +34,7 @@ const Items =(props)=>{
               title={<a href={`/`}>{item.name}</a>}
               description={item.barcode}
             />
-            {item.content}
+            {item.name}
           </List.Item>
         )}
       />

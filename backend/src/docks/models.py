@@ -15,7 +15,7 @@ class Store(models.Model):
     phoneNumber = models.CharField(max_length = 30, default=None)
 
     class Meta:
-        db_table = ''
+        db_table = 'docks_store'
 
     def save(self, *args, **kwargs):
         print('save() is called.')

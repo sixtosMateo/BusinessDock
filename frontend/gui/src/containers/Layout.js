@@ -11,6 +11,7 @@ const { Header, Content, Footer } = Layout;
 
 class CustomLayout extends React.Component{
 
+
   render(){
     return(
       <Layout className="layout">
@@ -18,6 +19,7 @@ class CustomLayout extends React.Component{
         {
 
           this.props.isAuthenticated ?
+
           <Menu
             theme="dark"
             mode="horizontal"
@@ -25,7 +27,6 @@ class CustomLayout extends React.Component{
             style={{ lineHeight: '64px' }}
           >
             <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
-
             <Menu.Item key="2"><Link to="/outgoing/">Outgoing</Link></Menu.Item>
             <Menu.Item key="3"><Link to="/incoming/">Incoming</Link></Menu.Item>
             <Menu.Item key="4"><Link to="/employees/">Employees</Link></Menu.Item>
@@ -38,33 +39,24 @@ class CustomLayout extends React.Component{
           </Menu>
 
           :
+
           <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
           >
-
             <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
             <Menu.Item key="8" style={{ float:'right'}}>
                   <Link to="/login/">Login</Link>
               </Menu.Item>
           </Menu>
 
-
-
-
         }
 
         </Header>
 
         <Content style={{ padding: '0 50px' }}>
-
-
-          <Breadcrumb style={{ margin: '16px 0'}}>
-            <Breadcrumb.Item><Link to="/">Outgoing</Link></Breadcrumb.Item>
-
-          </Breadcrumb>
 
           <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
           { this.props.children }

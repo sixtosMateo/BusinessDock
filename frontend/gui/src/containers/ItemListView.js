@@ -30,12 +30,11 @@ class ItemList extends React.Component{
 
      }
 
-     axios.get('http://127.0.0.1:8000/api/')
+     axios.get('http://127.0.0.1:8000/api/items/')
        .then(res => {
          this.setState({
            items: res.data
          });
-           console.log(res.data);
        })
    }
 
