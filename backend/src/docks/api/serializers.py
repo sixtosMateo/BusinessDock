@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from docks.models import Item, OutgoingTransaction, IncomingTransaction
+from docks.models import Item, OutgoingTransaction, IncomingTransaction, Vendor
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -16,4 +16,9 @@ class OutgoingTransactionSerializer(serializers.ModelSerializer):
 class IncomingTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncomingTransaction
+        fields = '__all__'
+
+class VendorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vendor
         fields = '__all__'

@@ -34,7 +34,7 @@ class Vendor(models.Model):
     hoursOpen = models.CharField(max_length = 150, default=None)
 
     class Meta:
-        db_table = ""
+        db_table = "docks_vendor"
 
     def save(self, *args, **kwargs):
         print('save() is called.')
