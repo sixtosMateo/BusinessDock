@@ -47,17 +47,26 @@ class Vendor(models.Model):
 
 
 class Employee(models.Model):
-
-    employeeId = models.CharField(max_length = 30, default=None)
-    firstName = models.CharField(max_length = 30, default=None)
-    lastName = models.CharField(max_length = 30, default=None)
+    employeeId = models.AutoField(primary_key=True)
+    userId = models.CharField(unique=True, max_length=30, default=None)
     storeId = models.IntegerField(default = 0, blank=True)
     birthDate = models.DateField(blank=True)
     age = models.IntegerField(default = 0, blank=True)
     employmentType = models.CharField(max_length = 30, default=None)
-
-
     createdAt = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        db_table="docks_employee"
+
+    def save(self, *args, **kwargs):
+        print('Employee save() is called.')
+        super(Employee, self).save(using='')
+
+    def __unicode__(self):
+        return "{0} {1} {2} {3} {4} {5} {6}".format(
+            self.employeeId, self.userId, self.storeId, self.birthDate, self.age,
+            self.employmentType, self.createdAt)
+
 
 
 class Item(models.Model):

@@ -4,7 +4,8 @@ from docks.api.views import (ItemViewSet,
                             VendorViewSet,
                             TransactionItemViewSet,
                             StoreViewSet,
-                            DamageItemViewSet)
+                            DamageItemViewSet,
+                            EmployeeViewSet)
 
 from rest_framework.routers import DefaultRouter
 
@@ -16,4 +17,5 @@ router.register(r'transactionItem', TransactionItemViewSet, base_name='transacti
 router.register(r'stores', StoreViewSet, base_name='stores')
 router.register(r'vendors', VendorViewSet, base_name='vendors')
 router.register(r'damageItem', DamageItemViewSet, base_name='damageItem')
+router.register(r'employees', EmployeeViewSet, base_name='employees')
 urlpatterns = router.urls
