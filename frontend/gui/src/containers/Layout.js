@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Switch } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
-
+import Submenu from './Submenu';
 
 const { Header, Content, Footer } = Layout;
 
@@ -21,7 +21,7 @@ class CustomLayout extends React.Component{
           mode="horizontal"
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
-          onClick={ this.activateBreadCrumb()}
+
         >
           <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
           <Menu.Item key="2"><Link to="/outgoing/">Outgoing</Link></Menu.Item>
@@ -51,11 +51,7 @@ class CustomLayout extends React.Component{
       )
   }
 
-  activateBreadCrumb(){
-    const {location} = {...this.props};
-    const pathSnippets = location.pathname.split('/').filter(i => i);
 
-  }
 
   render(){
     return(
@@ -65,9 +61,9 @@ class CustomLayout extends React.Component{
         </Header>
 
         <Content style={{ padding: '0 50px' }}>
-
-
-          <div className="layoutContentChildren" style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+          <Submenu {...this.props}/>
+          
+          <div className="layoutContentChildren" style={{ background: '#fff', padding: 10, minHeight: 280 }}>
 
           { this.props.children }
 
