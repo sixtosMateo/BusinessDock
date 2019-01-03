@@ -38,8 +38,7 @@ class Submenu extends React.Component{
     else if (pathSnippets == "employees") {
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
-          <Breadcrumb.Item><Link to="/">New Employee</Link></Breadcrumb.Item>
-
+          <Breadcrumb.Item><Link to="/newEmployee">New Employee</Link></Breadcrumb.Item>
         </Breadcrumb>
       )
     }
@@ -90,7 +89,7 @@ class Submenu extends React.Component{
   render(){
       return(
         <div className="submenuComponent">
-          {this.renderSubmenu()}
+          { this.renderSubmenu() }
         </div>
 
 

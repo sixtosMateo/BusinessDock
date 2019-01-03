@@ -1,15 +1,19 @@
 import React from 'react';
 
-import { Button, Breadcrumb } from 'antd';
+import { Button, Breadcrumb, Input } from 'antd';
 
+const Search = Input.Search;
 
 class Inventory extends React.Component{
-
 
 render(){
     return(
         <div className="inventoryComponent">
-          Inventory Page
+        <Search
+        placeholder="Search Item"
+        onSearch={value => console.log(value)}
+        enterButton
+        />
         </div>
 
 
