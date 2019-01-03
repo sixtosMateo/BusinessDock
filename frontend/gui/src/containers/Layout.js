@@ -21,7 +21,7 @@ class CustomLayout extends React.Component{
           mode="horizontal"
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
-          onClick={ this.renderSubmenu()}
+          onClick={ this.activateBreadCrumb()}
         >
           <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
           <Menu.Item key="2"><Link to="/outgoing/">Outgoing</Link></Menu.Item>
@@ -51,13 +51,11 @@ class CustomLayout extends React.Component{
       )
   }
 
-  renderSubmenu(){
+  activateBreadCrumb(){
     const {location} = {...this.props};
     const pathSnippets = location.pathname.split('/').filter(i => i);
-    console.log(pathSnippets);
+
   }
-
-
 
   render(){
     return(
@@ -67,11 +65,10 @@ class CustomLayout extends React.Component{
         </Header>
 
         <Content style={{ padding: '0 50px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-          </Breadcrumb>
 
-          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+
+          <div className="layoutContentChildren" style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+
           { this.props.children }
 
           </div>

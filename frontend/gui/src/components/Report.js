@@ -4,7 +4,7 @@ import React from 'react';
 class Report extends React.Component{
 render(){
     return(
-      <div>
+      <div className = "reportComponent">
         <p>Reports Page</p>
       </div>
 

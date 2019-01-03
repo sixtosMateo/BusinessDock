@@ -8,7 +8,7 @@ class Inventory extends React.Component{
 
 render(){
     return(
-        <div>
+        <div className="inventoryComponent">
           Inventory Page
         </div>
 

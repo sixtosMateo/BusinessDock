@@ -7,12 +7,12 @@ const Search = Input.Search;
 class Employee extends React.Component{
 render(){
     return(
-      <div>
-      <Search
-      placeholder="Search Employee"
-      onSearch={value => console.log(value)}
-      enterButton
-      />
+      <div className="employeeComponent">
+        <Search
+        placeholder="Search Employee"
+        onSearch={value => console.log(value)}
+        enterButton
+        />
       </div>
 
 
