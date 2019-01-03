@@ -11,6 +11,7 @@ const { Header, Content, Footer } = Layout;
 
 class CustomLayout extends React.Component{
 
+
   renderNavigation(){
     return(
         this.props.isAuthenticated ?
@@ -20,14 +21,15 @@ class CustomLayout extends React.Component{
           mode="horizontal"
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
+          onClick={ this.renderSubmenu()}
         >
           <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
           <Menu.Item key="2"><Link to="/outgoing/">Outgoing</Link></Menu.Item>
           <Menu.Item key="3"><Link to="/incoming/">Incoming</Link></Menu.Item>
-          <Menu.Item key="4"><Link to="/employees/">Employees</Link></Menu.Item>
-          <Menu.Item key="5"><Link to="/inventory/">Inventory</Link></Menu.Item>
-          <Menu.Item key="6"><Link to="/vendors/">Vendors</Link></Menu.Item>
-          <Menu.Item key="7"><Link to="/reports/">Reports</Link></Menu.Item>
+          <Menu.Item key="4" ><Link to="/employees/">Employees</Link></Menu.Item>
+          <Menu.Item key="5" ><Link to="/inventory/">Inventory</Link></Menu.Item>
+          <Menu.Item key="6" ><Link to="/vendors/">Vendors</Link></Menu.Item>
+          <Menu.Item key="7" ><Link to="/reports/">Reports</Link></Menu.Item>
           <Menu.Item key="8" onClick={ this.props.logout} style={{ float:'right'}}>
             <Link to="/">logout</Link>
           </Menu.Item>
@@ -46,22 +48,29 @@ class CustomLayout extends React.Component{
                 <Link to="/login/">Login</Link>
             </Menu.Item>
         </Menu>
-    )
+      )
   }
+
+  renderSubmenu(){
+    const {location} = {...this.props};
+    const pathSnippets = location.pathname.split('/').filter(i => i);
+    console.log(pathSnippets);
+  }
+
 
 
   render(){
     return(
       <Layout className="layout">
         <Header>
-          {this.renderNavigation()}
+          { this.renderNavigation() }
         </Header>
 
         <Content style={{ padding: '0 50px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-
           </Breadcrumb>
+
           <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
           { this.props.children }
 
