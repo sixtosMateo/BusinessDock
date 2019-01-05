@@ -38,7 +38,7 @@ class Submenu extends React.Component{
     else if (pathSnippets == "employees") {
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
-          <Breadcrumb.Item><Link to="./all">All</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./">All</Link></Breadcrumb.Item>
           <Breadcrumb.Item><Link to="./newEmployee">New Employee</Link></Breadcrumb.Item>
         </Breadcrumb>
       )

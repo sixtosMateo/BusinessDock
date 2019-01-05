@@ -1,3 +1,6 @@
+// bug: componentWillReceiveProps(props) is being called twice therefore two calls to server
+// create a cached that check whether the query was called or not
+
 import React from 'react';
 import axios from 'axios';
 import { List, Input, Breadcrumb, Avatar, Icon} from 'antd';
@@ -15,7 +18,7 @@ class Employee extends React.Component{
 
   constructor(props) {
        super(props);
-       this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+       // this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
        this.employees = this.componentWillReceiveProps(props);
      }
 
@@ -31,6 +34,7 @@ class Employee extends React.Component{
 }
 
   componentWillReceiveProps(newProps){
+    console.log("called");
     if(newProps.token){
       axios.defaults.headers = {
          "Content-Type": "application/json",

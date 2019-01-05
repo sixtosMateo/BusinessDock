@@ -10,7 +10,7 @@ import Inventory from './components/Inventory';
 import Vendor from './components/Vendor';
 import Report from './components/Report';
 
-import ItemList from './containers/ItemListView';
+import Items from './components/Items';
 
 
 
@@ -21,7 +21,7 @@ const BaseRouter = () =>(
     <Route exact path='/outgoing/' component={Outgoing}/>{" "}
     <Route exact path='/incoming/' component={Incoming}/>{" "}
     <Route exact path='/employees/' component={Employee}/>{" "}
-    <Route exact path='/inventory/' component={Inventory}/>{" "}
+    <Route exact path='/inventory/' component={Items}/>{" "}
     <Route exact path='/vendors/' component={Vendor}/>{" "}
     <Route exact path='/reports/' component={Report}/>{" "}
 
