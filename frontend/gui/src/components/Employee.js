@@ -1,3 +1,5 @@
+// bug: when employee page refreshes data disapears
+
 import React from 'react';
 import axios from 'axios';
 import { List, Input, Breadcrumb, Avatar, Icon} from 'antd';
@@ -12,7 +14,8 @@ const Search = Input.Search;
 class Employee extends React.Component{
   constructor(props) {
        super(props);
-       this.componentWillReceiveProps = this.componentWillReceiveProps(props);
+       this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+       this.articles = this.componentWillReceiveProps(props);
      }
 
   state ={

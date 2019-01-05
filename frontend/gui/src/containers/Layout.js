@@ -76,9 +76,7 @@ class CustomLayout extends React.Component{
           BusinessDock ©2018 Created by Mateo Sixtos
         </Footer>
       </Layout>
-
     );
-
   }
 }
 
