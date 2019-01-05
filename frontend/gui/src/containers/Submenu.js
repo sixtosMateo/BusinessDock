@@ -35,7 +35,7 @@ class Submenu extends React.Component{
         </Breadcrumb>
       )
     }
-    else if (pathSnippets == "employees") {
+    else if (pathSnippets.includes("employees")) {
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
           <Breadcrumb.Item><Link to="./">All</Link></Breadcrumb.Item>
@@ -44,12 +44,12 @@ class Submenu extends React.Component{
       )
     }
 
-    else if (pathSnippets == "inventory") {
+    else if (pathSnippets.includes('inventory')) {
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
-          <Breadcrumb.Item><Link to="/newItem/">New Item</Link></Breadcrumb.Item>
-          <Breadcrumb.Item><Link to="/countCyle/">Count Cyle</Link></Breadcrumb.Item>
-          <Breadcrumb.Item><Link to="/damageItem/">Damage Item</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./newItem/">New Item</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./countCyle/">Count Cyle</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./damageItem/">Damage Item</Link></Breadcrumb.Item>
         </Breadcrumb>
       )
     }

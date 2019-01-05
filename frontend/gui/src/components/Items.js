@@ -1,5 +1,6 @@
 // bug: componentWillReceiveProps(props) is being called twice therefore two calls to server
-// create a cached that check whether the query was called or not
+// approach: create a cache that check whether the query was called or not
+//bug: when navigation through each Breadcrumb it adds to the url
 
 import React from 'react';
 import axios from 'axios';
@@ -18,7 +19,6 @@ class Items extends React.Component{
 
   constructor(props) {
        super(props);
-       // this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
        this.items = this.componentWillReceiveProps(props);
      }
 

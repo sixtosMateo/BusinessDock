@@ -18,7 +18,7 @@ class Employee extends React.Component{
 
   constructor(props) {
        super(props);
-       // this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+       
        this.employees = this.componentWillReceiveProps(props);
      }
 
