@@ -1,10 +1,10 @@
-// bug: when employee page refreshes data disapears
-
 import React from 'react';
 import axios from 'axios';
 import { List, Input, Breadcrumb, Avatar, Icon} from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import escapeRegExp from 'escape-string-regexp';
+import sortBy from 'sort-by'
 
 import EmployeeAvatar from './EmployeeAvatar';
 
@@ -12,15 +12,23 @@ import EmployeeAvatar from './EmployeeAvatar';
 const Search = Input.Search;
 
 class Employee extends React.Component{
+
   constructor(props) {
        super(props);
        this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
-       this.articles = this.componentWillReceiveProps(props);
+       this.employees = this.componentWillReceiveProps(props);
      }
 
   state ={
-    articles:[]
+    employees:[],
+    query:  ''
   }
+
+  updateQuery=(query)=>{
+  this.setState({
+    query: query.trim()
+  })
+}
 
   componentWillReceiveProps(newProps){
     if(newProps.token){
@@ -33,7 +41,7 @@ class Employee extends React.Component{
       axios.get('http://127.0.0.1:8000/api/employees/')
         .then(res => {
           this.setState({
-            articles: res.data
+            employees: res.data
           });
         })
     }
@@ -42,15 +50,31 @@ class Employee extends React.Component{
   }
 
   render(){
+    let showingEmployees
+
+      if(this.state.query){
+        const match = new RegExp(escapeRegExp(this.state.query), 'i')
+
+        showingEmployees = this.state.employees.filter((employee) =>
+        match.test(employee.employeeId))
+      }
+      else{
+        showingEmployees = this.state.employees
+      }
+
+      showingEmployees.sort(sortBy('employeeId'))
+
       return(
+
         <div className="employeeComponent">
-          <Search
+        <Search
           placeholder="Search Employee"
-          onSearch={value => console.log(value)}
-          enterButton
+          value={this.state.query}
+          onChange={(event) => this.updateQuery(event.target.value)}
           />
 
-          <EmployeeAvatar data={this.state.articles} />
+
+          <EmployeeAvatar data={showingEmployees} />
         </div>
       )
 
