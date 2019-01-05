@@ -20,25 +20,26 @@ class Submenu extends React.Component{
     else if(pathSnippets == "outgoing"){
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
-          <Breadcrumb.Item><Link to="/editTransaction/">Edit Transaction</Link></Breadcrumb.Item>
-          <Breadcrumb.Item><Link to="/deleteTransaction/">Delete Transaction</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./editTransaction/">Edit Transaction</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./deleteTransaction/">Delete Transaction</Link></Breadcrumb.Item>
         </Breadcrumb>
       )
     }
     else if (pathSnippets == "incoming") {
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
-          <Breadcrumb.Item><Link to="/newItem/">New Item</Link></Breadcrumb.Item>
-          <Breadcrumb.Item><Link to="/newVendor/">New Vendor</Link></Breadcrumb.Item>
-          <Breadcrumb.Item><Link to="/editTransaction/">Edit Transaction</Link></Breadcrumb.Item>
-          <Breadcrumb.Item><Link to="/deleteTransaction/">Delete Transaction</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./newItem/">New Item</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./newVendor/">New Vendor</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./editTransaction/">Edit Transaction</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./deleteTransaction/">Delete Transaction</Link></Breadcrumb.Item>
         </Breadcrumb>
       )
     }
     else if (pathSnippets == "employees") {
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
-          <Breadcrumb.Item><Link to="/newEmployee">New Employee</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./all">All</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="./newEmployee">New Employee</Link></Breadcrumb.Item>
         </Breadcrumb>
       )
     }
