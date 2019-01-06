@@ -19,7 +19,7 @@ class Items extends React.Component{
 
   constructor(props) {
        super(props);
-       this.items = this.componentWillReceiveProps(props);
+
      }
 
   state ={
@@ -28,19 +28,12 @@ class Items extends React.Component{
   }
 
   updateQuery=(query)=>{
-  this.setState({
-    query: query.trim()
-  })
-}
+    this.setState({
+      query: query.trim()
+    })
+  }
 
-  componentWillReceiveProps(newProps){
-
-    if(newProps.token){
-      axios.defaults.headers = {
-         "Content-Type": "application/json",
-         Authorization: newProps.token,
-
-      }
+  componentDidMount(){
 
       axios.get('http://127.0.0.1:8000/api/items/')
         .then(res => {
@@ -48,10 +41,10 @@ class Items extends React.Component{
             items: res.data
           });
         })
-    }
-
-
   }
+
+
+
 
   render(){
     let showingItems

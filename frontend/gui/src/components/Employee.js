@@ -18,8 +18,6 @@ class Employee extends React.Component{
 
   constructor(props) {
        super(props);
-       
-       this.employees = this.componentWillReceiveProps(props);
      }
 
   state ={
@@ -33,14 +31,8 @@ class Employee extends React.Component{
   })
 }
 
-  componentWillReceiveProps(newProps){
+  componentDidMount(){
     console.log("called");
-    if(newProps.token){
-      axios.defaults.headers = {
-         "Content-Type": "application/json",
-         Authorization: newProps.token,
-
-      }
 
       axios.get('http://127.0.0.1:8000/api/employees/')
         .then(res => {
@@ -51,7 +43,7 @@ class Employee extends React.Component{
     }
 
 
-  }
+  
 
   render(){
     let showingEmployees
