@@ -44,8 +44,6 @@ class Items extends React.Component{
   }
 
 
-
-
   render(){
     let showingItems
 
@@ -69,7 +67,6 @@ class Items extends React.Component{
           value={this.state.query}
           onChange={(event) => this.updateQuery(event.target.value)}
           />
-
 
           <ItemAvatar data={showingItems} />
         </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import {
   HashRouter as Router, Route, Switch, Link, withRouter,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Breadcrumb, Alert } from 'antd';
 
 
@@ -99,5 +100,12 @@ class Submenu extends React.Component{
 
 }
 
+const mapStateToProps = state =>{
+  // return object is what you want to map into a property
+  return {
+    token: state.token
+  }
+}
 
-export default Submenu;
+
+export default withRouter(connect(mapStateToProps)(Submenu));
