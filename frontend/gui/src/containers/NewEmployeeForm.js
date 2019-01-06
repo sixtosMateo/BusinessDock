@@ -128,7 +128,7 @@ class NewEmployee extends React.Component{
 
 
             <FormItem label="StoreId">
-              <Input name="StoreId"  placeholder="Enter StoreId" />
+              <InputNumber name="storeId" min={1} max={100000} />
             </FormItem>
 
             <FormItem label="isStaff">
