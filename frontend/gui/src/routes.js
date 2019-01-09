@@ -13,6 +13,7 @@ import NewItem from './containers/NewItemForm';
 import NewEmployee from './containers/NewEmployeeForm'
 import Items from './components/Items';
 import DamageItem from './containers/DamageItem';
+import NewVendor from './containers/NewVendorForm';
 
 
 
@@ -28,6 +29,7 @@ const BaseRouter = () =>(
     <Route exact path='/inventory/newItem/' component={NewItem}/>{" "}
     <Route exact path='/inventory/damageItem/' component={DamageItem}/>{" "}
     <Route exact path='/vendors/' component={Vendor}/>{" "}
+    <Route exact path='/vendors/newVendor/' component={NewVendor}/>{" "}
     <Route exact path='/reports/' component={Report}/>{" "}
 
   </div>
