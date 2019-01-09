@@ -55,7 +55,7 @@ class Submenu extends React.Component{
       )
     }
 
-    else if (pathSnippets == "vendors") {
+    else if (pathSnippets.includes('vendors')) {
       return(
         <Breadcrumb style={{ margin: '10px 0' }}>
           <Breadcrumb.Item><Link to="./newVendor/">New Vendor</Link></Breadcrumb.Item>

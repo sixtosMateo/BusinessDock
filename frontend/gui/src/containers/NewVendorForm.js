@@ -44,7 +44,42 @@ class NewVendor extends React.Component{
       return(
         <div className="newVendorComponent">
 
-          
+          <Form onSubmit={this.handleSubmit}>
+
+
+            <FormItem label="Name" >
+
+              {getFieldDecorator('name', {
+                  rules: [{
+                    required: true,
+                    message: 'Please input name of the vendor!',
+                  }],
+                })(
+                <Input name="name" placeholder="Enter Name" />
+              )}
+            </FormItem>
+
+            <Form.Item label="Phone Number">
+               {getFieldDecorator('phoneNumber', {
+                 rules: [{ required: true, message: 'Please input your phone number!' }],
+               })(
+                 <Input name="phoneNumber" placeholder="(###)###-####"  style={{ width: '100%' }} />
+               )}
+             </Form.Item>
+
+            <FormItem label="Address">
+              <Input name="address"  placeholder="Enter the address!" />
+            </FormItem>
+
+            <FormItem label="Hours Open">
+              <Input name="hoursOpen"  placeholder="Enter times the vendor is open!" />
+            </FormItem>
+
+            <FormItem>
+              <Button type="primary" htmlType="submit">Submit</Button>
+            </FormItem>
+
+          </Form>
 
         </div>
 
