@@ -164,6 +164,7 @@ class IncomingTransaction(models.Model):
 class TransactionItem(models.Model):
     barcode = models.CharField(max_length=30, default=None)
     transactionId = models.IntegerField(default = 0, blank=True)
+    name = models.CharField(max_length = 30, default=None)
     transactionType = models.CharField(max_length=30, default=None)
     quantity = models.IntegerField(default = 0, blank=True)
     price = models.FloatField(null=True, blank=True, default=None)
