@@ -2,18 +2,22 @@
 // call the items when login this can be ddone in a higher level Component
 
 // when creating a item update state and post to db
+// sale tax has to be dynamically based on location geo-location AND api call
 
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
+import escapeRegExp from 'escape-string-regexp';
+import sortBy from 'sort-by'
 import { Input } from 'antd';
 import axios from 'axios';
+import OutgoingItemAvatar from './OutgoingItems'
 
 
 class Outgoing extends React.Component{
   state={
     items:[],
     query:'',
-    purchasedItems:{}
+    purchasedItems:[]
   }
 
 
@@ -29,21 +33,57 @@ class Outgoing extends React.Component{
 
   updateQuery=(query)=>{
       this.setState({
-        query: query
+        query: query.trim()
       })
 
+      let item
+
+      if(this.state.query){
+        const match = new RegExp(escapeRegExp(this.state.query), 'i')
+        // ITEM IS A ARRAY OF ITEMS THAT MATCH BARCODE TO QUERY
+        item = this.state.items.filter((item) =>
+          match.test(item.barcode)
+        )
+      }
+      else{
+        item = ""
+      }
+
+      this.pushItem(item[0])
+  }
+
+  pushItem = (item) =>{
+    // what happens when the item is repeated
+    // quantity needs to change
+    // itemSaleTotal needs to change depending on the quantity
+    if(item){
+      let newItem = {"barcode": item.barcode, "name":item.name,
+                    "transactionType": "outgoing", "quantity": 1,
+                    "price": item.salePrice, "tax": 0.0925,
+                    "itemSaleTotal": parseFloat((item.salePrice + item.salePrice * 0.0925).toFixed(2))}
+
+      this.setState({
+        purchasedItems: [...this.state.purchasedItems, newItem]
+      })
     }
+
+
+
+  }
+
 
   render(){
       return(
         <div className="outgoingComponent">
-        <DebounceInput
-        minLength={5}
-        onChange={event => this.updateQuery(event.target.value)} />
+          <DebounceInput
+          minLength={5}
+          debounceTimeout={300}
+          onChange={event => this.updateQuery(event.target.value)} />
 
-        <p>Value: {this.state.query}</p>
-
+          <OutgoingItemAvatar data={this.state.purchasedItems}/>
         </div>
+
+
 
       );
   }
