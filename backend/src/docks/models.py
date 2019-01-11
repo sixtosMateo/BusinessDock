@@ -169,6 +169,7 @@ class TransactionItem(models.Model):
     quantity = models.IntegerField(default = 0, blank=True)
     price = models.FloatField(null=True, blank=True, default=None)
     tax = models.FloatField(null=True, blank=True, default=0.0925)
+    itemSaleTotal = models.FloatField(null=True, blank=True, default=None)
     createdAt = models.DateTimeField(auto_now=True)
 
     class Meta:
