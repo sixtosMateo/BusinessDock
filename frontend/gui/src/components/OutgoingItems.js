@@ -13,29 +13,23 @@ const OutgoingItemAvatar =(props)=>{
     <div>
       <List
         itemLayout="vertical"
-        size="large"
+        size="small"
         pagination={{
           onChange: (page) => {
             console.log(page);
           },
-          pageSize: 3,
+          pageSize: 8,
         }}
         dataSource={props.data}
 
         renderItem={item => (
 
           <List.Item
-            key={item.barcode}
-            actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-
-          >
-
-
+            key={item.barcode}>
             <List.Item.Meta
               title={item.barcode}
-              description={item.quantity}
-            />
-            {item.name}
+              description={item.name}/>
+            {item.quantity}
           </List.Item>
         )}
       />

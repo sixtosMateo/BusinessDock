@@ -78,6 +78,8 @@ class Outgoing extends React.Component{
           <DebounceInput
           minLength={5}
           debounceTimeout={300}
+          placeholder="Scan Item"
+          style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
           onChange={event => this.updateQuery(event.target.value)} />
 
           <OutgoingItemAvatar data={this.state.purchasedItems}/>
