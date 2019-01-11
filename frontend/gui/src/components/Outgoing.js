@@ -4,6 +4,8 @@
 // when creating a item update state and post to db
 // sale tax has to be dynamically based on location geo-location AND api call
 
+// need OutgoingItemAvatar to be in a in scroll table
+
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 import escapeRegExp from 'escape-string-regexp';
@@ -17,7 +19,7 @@ class Outgoing extends React.Component{
   state={
     items:[],
     query:'',
-    purchasedItems:[]
+    soldItems:[]
   }
 
 
@@ -63,7 +65,7 @@ class Outgoing extends React.Component{
                     "itemSaleTotal": parseFloat((item.salePrice + item.salePrice * 0.0925).toFixed(2))}
 
       this.setState({
-        purchasedItems: [...this.state.purchasedItems, newItem]
+        soldItems: [...this.state.soldItems, newItem]
       })
     }
 
@@ -78,11 +80,11 @@ class Outgoing extends React.Component{
           <DebounceInput
           minLength={5}
           debounceTimeout={300}
-          placeholder="Scan Item"
+          placeholder="Outgoing: Scan Item"
           style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
           onChange={event => this.updateQuery(event.target.value)} />
 
-          <OutgoingItemAvatar data={this.state.purchasedItems}/>
+          <OutgoingItemAvatar data={this.state.soldItems}/>
         </div>
 
 
