@@ -16,6 +16,7 @@ import OutgoingItemAvatar from './OutgoingItems'
 
 
 class Outgoing extends React.Component{
+
   state={
     items:[],
     query:'',
@@ -54,6 +55,8 @@ class Outgoing extends React.Component{
       this.pushItem(item[0])
   }
 
+
+
   pushItem = (item) =>{
     // what happens when the item is repeated
     // quantity needs to change
@@ -69,8 +72,6 @@ class Outgoing extends React.Component{
       })
     }
 
-
-
   }
 
 
@@ -80,9 +81,12 @@ class Outgoing extends React.Component{
           <DebounceInput
           minLength={5}
           debounceTimeout={300}
+          onClick={(event => event.target.select())}
           placeholder="Outgoing: Scan Item"
           style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
-          onChange={event => this.updateQuery(event.target.value)} />
+          onChange={(event =>
+            this.updateQuery(event.target.value))}
+            />
 
           <OutgoingItemAvatar data={this.state.soldItems}/>
         </div>

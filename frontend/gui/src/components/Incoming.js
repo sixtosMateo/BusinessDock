@@ -73,6 +73,7 @@ class Incoming extends React.Component{
           <DebounceInput
           minLength={5}
           debounceTimeout={300}
+          onClick={(event => event.target.select())}
           placeholder="Incoming: Scan Item"
           style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
           onChange={event => this.updateQuery(event.target.value)} />

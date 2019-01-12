@@ -29,19 +29,21 @@ class NewItem extends React.Component{
   //     })
   //
   // }
+  // console.log(values)
+  // axios.post('http://127.0.0.1:8000/api/items/', values).then(res => console.log(res))
+  //   .catch(error => console.log(error));
 
-  handleSubmit = (e) =>{
 
-      e.preventDefault()
-
-      const values = serializeForm(e.target, // e.target is the from itself
-      {
-        hash: true
-      })
-      console.log(values)
-      axios.post('http://127.0.0.1:8000/api/items/', values).then(res => console.log(res))
-        .catch(error => console.log(error));
-  }
+  // handleSubmit = (e) =>{
+  //
+  //     e.preventDefault()
+  //
+  //     const values = serializeForm(e.target, // e.target is the from itself
+  //     {
+  //       hash: true
+  //     })
+  //
+  // }
 
   onChange = (value) => {
     console.log('changed', value);

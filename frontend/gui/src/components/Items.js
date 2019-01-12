@@ -17,11 +17,6 @@ const Search = Input.Search;
 
 class Items extends React.Component{
 
-  constructor(props) {
-       super(props);
-
-     }
-
   state ={
     items:[],
     query:  ''
@@ -62,13 +57,13 @@ class Items extends React.Component{
       return(
 
         <div className="ItemComponent">
-        <Search
-          placeholder="Search Item"
-          value={this.state.query}
-          onChange={(event) => this.updateQuery(event.target.value)}
-          />
+          <Search
+            placeholder="Search Item"
+            value={this.state.query}
+            onChange={(event) => this.updateQuery(event.target.value)}
+            />
 
-          <ItemAvatar data={showingItems} />
+            <ItemAvatar data={showingItems} />
         </div>
       )
 
