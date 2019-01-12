@@ -28,6 +28,10 @@ class Incoming extends React.Component{
         })
   }
 
+  checkPurchasedItem(purchasedItem) {
+    return this.state.purchasedItems.some(item => purchasedItem === item.barcode);
+  }
+
   updateQuery=(query)=>{
       this.setState({
         query: query.trim()
@@ -36,11 +40,16 @@ class Incoming extends React.Component{
       let item
 
       if(this.state.query){
-        const match = new RegExp(escapeRegExp(this.state.query), 'i')
-        // ITEM IS A ARRAY OF ITEMS THAT MATCH BARCODE TO QUERY
-        item = this.state.items.filter((item) =>
-          match.test(item.barcode)
-        )
+        if (this.checkPurchasedItem(query) ===  false){
+          const match = new RegExp(escapeRegExp(this.state.query), 'i')
+          // ITEM IS A ARRAY OF ITEMS THAT MATCH BARCODE TO QUERY
+          item = this.state.items.filter((item) =>
+            match.test(item.barcode)
+          )
+        }
+        else{
+          item=""
+        }
       }
       else{
         item = ""
@@ -69,7 +78,7 @@ class Incoming extends React.Component{
 
   render(){
       return(
-        
+
         <div className="incomingComponent">
           <DebounceInput
           minLength={5}

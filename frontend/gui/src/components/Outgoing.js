@@ -33,8 +33,8 @@ class Outgoing extends React.Component{
         })
   }
 
-  checkPurchasedItem(purchasedItem) {
-    return this.state.soldItems.some(item => purchasedItem === item.barcode);
+  checkPurchasedItem(soldItem) {
+    return this.state.soldItems.some(item => soldItem === item.barcode);
   }
 
 
