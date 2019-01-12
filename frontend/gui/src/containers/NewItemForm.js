@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { Form, Input, Button, DatePicker, InputNumber, Switch, Icon } from 'antd';
 import axios from 'axios';
 
+import serializeForm from 'form-serialize';
+
 
 const FormItem = Form.Item;
 
@@ -14,22 +16,31 @@ class NewItem extends React.Component{
     confirmDirty: false,
   };
 
+  // createItem(item){
+  //   axios.post('http://127.0.0.1:8000/api/items/'), item).then(
+  //     (item) =>
+  //       { this.setState(state =>
+  //         ({
+  //
+  //           items: state.items.concat([item])
+  //
+  //         })
+  //       )
+  //     })
+  //
+  // }
+
   handleSubmit = (e) =>{
 
-      // e.preventDefault()
-      // // serializeForm will do the browser behavior when submitting a form
-      // // but instead of serializing into a string and reload the browser
-      // // it will the browser
-      // const values = serializeForm(e.target, // e.target is the from itself
-      // {
-      //   hash: true
-      // })
-      // //console.log(values)
-      // // makes sure that the passed something
-      // if(this.props.onCreateContact){
-      //   this.props.onCreateContact(values);
-      // }
+      e.preventDefault()
 
+      const values = serializeForm(e.target, // e.target is the from itself
+      {
+        hash: true
+      })
+      console.log(values)
+      axios.post('http://127.0.0.1:8000/api/items/', values).then(res => console.log(res))
+        .catch(error => console.log(error));
   }
 
   onChange = (value) => {
@@ -45,6 +56,7 @@ class NewItem extends React.Component{
       const { getFieldDecorator } = this.props.form;
       return(
         <div className="newItemComponent">
+
           <Form onSubmit={this.handleSubmit}>
             <FormItem label="Barcode" >
 

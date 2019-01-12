@@ -12,22 +12,9 @@ class NewEmployee extends React.Component{
   };
 
   handleSubmit = (e) =>{
-
-      // e.preventDefault()
-      // // serializeForm will do the browser behavior when submitting a form
-      // // but instead of serializing into a string and reload the browser
-      // // it will the browser
-      // const values = serializeForm(e.target, // e.target is the from itself
-      // {
-      //   hash: true
-      // })
-      // //console.log(values)
-      // // makes sure that the passed something
-      // if(this.props.onCreateContact){
-      //   this.props.onCreateContact(values);
-      // }
-
+  
   }
+
   handleConfirmBlur = (e) => {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
