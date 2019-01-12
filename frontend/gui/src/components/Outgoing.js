@@ -33,6 +33,10 @@ class Outgoing extends React.Component{
         })
   }
 
+  checkPurchasedItem(purchasedItem) {
+    return this.state.soldItems.some(item => purchasedItem === item.barcode);
+  }
+
 
   updateQuery=(query)=>{
       this.setState({
@@ -42,11 +46,17 @@ class Outgoing extends React.Component{
       let item
 
       if(this.state.query){
-        const match = new RegExp(escapeRegExp(this.state.query), 'i')
-        // ITEM IS A ARRAY OF ITEMS THAT MATCH BARCODE TO QUERY
-        item = this.state.items.filter((item) =>
-          match.test(item.barcode)
-        )
+        if (this.checkPurchasedItem(query) ===  false){
+          const match = new RegExp(escapeRegExp(this.state.query), 'i')
+          // ITEM IS A ARRAY OF ITEMS THAT MATCH BARCODE TO QUERY
+          item = this.state.items.filter((item) =>
+            match.test(item.barcode)
+          )
+        }
+        else{
+          console.log("repeated")
+          item=""
+        }
       }
       else{
         item = ""
@@ -84,8 +94,8 @@ class Outgoing extends React.Component{
           onClick={(event => event.target.select())}
           placeholder="Outgoing: Scan Item"
           style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
-          onChange={(event =>
-            this.updateQuery(event.target.value))}
+          onChange={ (event) =>{
+            this.updateQuery(event.target.value)}}
             />
 
           <OutgoingItemAvatar data={this.state.soldItems}/>

@@ -60,6 +60,7 @@ class Items extends React.Component{
           <Search
             placeholder="Search Item"
             value={this.state.query}
+            onClick={(event => event.target.select())}
             onChange={(event) => this.updateQuery(event.target.value)}
             />
 

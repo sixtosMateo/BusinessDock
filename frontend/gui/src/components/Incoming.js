@@ -69,6 +69,7 @@ class Incoming extends React.Component{
 
   render(){
       return(
+        
         <div className="incomingComponent">
           <DebounceInput
           minLength={5}

@@ -53,6 +53,7 @@ class Vendor extends React.Component{
           <Search
             placeholder="Search Vendor"
             value={this.state.query}
+            onClick={(event => event.target.select())}
             onChange={(event) => this.updateQuery(event.target.value)}
             />
 

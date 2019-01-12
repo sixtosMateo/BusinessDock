@@ -43,7 +43,7 @@ class Employee extends React.Component{
     }
 
 
-  
+
 
   render(){
     let showingEmployees
@@ -65,6 +65,7 @@ class Employee extends React.Component{
         <div className="employeeComponent">
         <Search
           placeholder="Search Employee"
+          onClick={(event => event.target.select())}
           value={this.state.query}
           onChange={(event) => this.updateQuery(event.target.value)}
           />
