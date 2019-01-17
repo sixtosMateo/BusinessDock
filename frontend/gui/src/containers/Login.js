@@ -20,6 +20,7 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onAuth(values.userName, values.password);
+        this.props.getItems();
         this.props.history.push('/');
       }
     });
@@ -91,7 +92,8 @@ const mapStateToProps= (state) =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
-    onAuth: (username, password)=> dispatch(actions.authLogin(username, password))
+    onAuth: (username, password)=> dispatch(actions.authLogin(username, password)),
+    getItems: ()=> dispatch(actions.fetchItems())
   }
 }
 

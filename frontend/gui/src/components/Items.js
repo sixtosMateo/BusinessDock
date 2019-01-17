@@ -18,7 +18,6 @@ const Search = Input.Search;
 class Items extends React.Component{
 
   state ={
-    items:[],
     query:  ''
   }
 
@@ -28,30 +27,20 @@ class Items extends React.Component{
     })
   }
 
-  componentDidMount(){
-
-      axios.get('http://127.0.0.1:8000/api/items/')
-        .then(res => {
-          this.setState({
-            items: res.data
-          });
-        })
-  }
-
 
   render(){
     let showingItems
+      const {items} = this.props
 
       if(this.state.query){
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
 
-        showingItems = this.state.items.filter((item) =>
+        showingItems = items.filter((item) =>
         match.test(item.barcode))
       }
       else{
-        showingItems = this.state.items
+        showingItems = items
       }
-
       showingItems.sort(sortBy('itemId'))
 
       return(
@@ -67,17 +56,14 @@ class Items extends React.Component{
             <ItemAvatar data={showingItems} />
         </div>
       )
-
   }
-
-
 }
 
 
 const mapStateToProps = state =>{
   // return object is what you want to map into a property
   return {
-    token: state.token
+    items: state.items
   }
 }
 

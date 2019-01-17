@@ -2,8 +2,6 @@ import * as actionTypes from '../actions/actionTypes';
 import { combineReducers } from 'redux';
 import { updateObject } from '../utility';
 
-
-
 // here we define our initial state
     // ex: loading any errors, authentication token
 
@@ -18,6 +16,12 @@ const initialState = {
 }
 
 
+const initialItems =(state, action)=>{
+  return updateObject(state, {
+    items: action.items
+  });
+
+}
 
 
 // defining our actions
@@ -67,6 +71,9 @@ const reducer = (state=initialState, action) =>{
       case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
       case actionTypes.AUTH_FAIL: return authFail(state, action);
       case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
+      case actionTypes.GET_ITEMS: return initialItems(state, action);
+
+        break;
       default:
         return state;
   }

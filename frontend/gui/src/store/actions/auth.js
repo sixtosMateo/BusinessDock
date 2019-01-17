@@ -1,11 +1,6 @@
-// define methods that takes place on receiving those action
-
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-import * as ItemsApi from '../../api/getItemsRequest'
-
-// actions are executed with dispatch and return a type and maybe other args to
-// reducers
+import * as ItemsApi from '../../api/getItemsRequest';
 
 
 
@@ -30,21 +25,6 @@ export const authFail = error =>{
     error: error
   }
 }
-//
-export const initializeItems = items =>{
-  return {
-    type: actionTypes.AUTH_SUCCESS,
-    items: items
-  }
-
-}
-
-
-// export const fetchItems = () => dispatch => (
-//   ItemsApi
-//       .fetchItems()
-//       .then(res=> dispatch(initializeItems(res)))
-// )
 
 
 // this function requires 2 parameters from djangorestframework, currently we
@@ -75,7 +55,6 @@ export const authLogin = (username, password) =>{
 
     })
     .catch(err => {
-        console.log(authFail(err))
         dispatch(authFail(err))
     })
   }
@@ -99,8 +78,6 @@ const checkAuthTimeout = expirationTime =>{
     }, expirationTime * 1000)
   }
 }
-
-
 
 export const authCheckState = () =>{
   // check if token is store at local storage if not logout
@@ -126,5 +103,19 @@ export const authCheckState = () =>{
 }
 
 
-// these methods are important because they are events that signals so that you
-  // can do something else
+
+// Fetching Items information 
+export const initializeItems = items =>{
+  return {
+    type: actionTypes.GET_ITEMS,
+    items: items
+  }
+}
+
+
+export const fetchItems = () =>
+dispatch => (
+  ItemsApi
+      .fetchItems()
+      .then(res=> dispatch(initializeItems(res)))
+)
