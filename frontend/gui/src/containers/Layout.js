@@ -4,14 +4,12 @@ import { Layout } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
-
+import Submenu from './Submenu';
 
 const { Header, Content, Footer } = Layout;
 
 
 class CustomLayout extends React.Component{
-
-
 
   render(){
     return(
@@ -19,7 +17,9 @@ class CustomLayout extends React.Component{
         <Header>
           <Dashboard {...this.props}/>
         </Header>
+
         <Content style={{ padding: '0 50px' }}>
+          <Submenu {...this.props}/>
 
           <div className="layoutContentChildren" style={{ background: '#fff', padding: 10, minHeight: 280 }}>
 
