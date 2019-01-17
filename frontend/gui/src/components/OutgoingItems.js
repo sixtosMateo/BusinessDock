@@ -1,12 +1,6 @@
 import React from 'react';
-import { List, Avatar, Icon } from 'antd';
+import { List} from 'antd';
 
-const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
 
 const OutgoingItemAvatar =(props)=>{
   return(

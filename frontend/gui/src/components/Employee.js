@@ -3,8 +3,8 @@
 
 import React from 'react';
 import axios from 'axios';
-import { List, Input, Breadcrumb, Avatar, Icon} from 'antd';
-import { Link, withRouter } from 'react-router-dom';
+import { Input } from 'antd';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
@@ -15,10 +15,6 @@ import EmployeeAvatar from './EmployeeAvatar';
 const Search = Input.Search;
 
 class Employee extends React.Component{
-
-  constructor(props) {
-       super(props);
-     }
 
   state ={
     employees:[],

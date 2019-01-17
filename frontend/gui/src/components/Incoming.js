@@ -6,10 +6,8 @@
 // INSTEAD OF USING THE FILTER METHOD WE CAN USER THE REDUCE METHOD THAT WILL RETURN ONE ITEM
 
 import React from 'react';
-import { Input } from 'antd';
 import {DebounceInput} from 'react-debounce-input';
 import escapeRegExp from 'escape-string-regexp';
-import sortBy from 'sort-by';
 import axios from 'axios';
 
 import IncomingItemAvatar from './IncomingItems';

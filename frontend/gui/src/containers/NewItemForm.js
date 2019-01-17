@@ -1,12 +1,10 @@
 // IN THE STATE WE CAN HAVE AN ARRAY OF BARCODE TO INDENTIFY WHETHER ITEM EXIST OR NOT
 
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Form, Input, Button, DatePicker, InputNumber, Switch, Icon } from 'antd';
-import axios from 'axios';
+import { Form, Input, Button, InputNumber} from 'antd';
 
-import serializeForm from 'form-serialize';
 
 
 const FormItem = Form.Item;

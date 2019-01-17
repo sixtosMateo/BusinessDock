@@ -9,8 +9,7 @@
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 import escapeRegExp from 'escape-string-regexp';
-import sortBy from 'sort-by'
-import { Input } from 'antd';
+
 import axios from 'axios';
 import OutgoingItemAvatar from './OutgoingItems'
 

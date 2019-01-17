@@ -1,3 +1,5 @@
+// what happens when item has no barcode
+
 Django framework
     $ virtualenv env
     $ source env/bin/activate
@@ -16,3 +18,7 @@ React
     $ create-react-app <project-name>
     $ cd <project-name>
     $ npm install antd --save
+    $ npm install -save escape-string-regexp sort-by
+    $ npm install axios --save  
+    $ npm install --save react react-debounce-input
+    $ npm install --save form-serialize

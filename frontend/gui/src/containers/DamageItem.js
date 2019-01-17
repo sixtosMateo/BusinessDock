@@ -2,10 +2,10 @@
 
 
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Form, Input, Button, DatePicker, InputNumber, Switch, Icon } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { Form, Input, InputNumber } from 'antd';
 import { connect } from 'react-redux';
-import axios from 'axios';
+
 
 const FormItem = Form.Item;
 

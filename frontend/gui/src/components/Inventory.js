@@ -1,9 +1,7 @@
 import React from 'react';
 import Items from './Items';
-import { Button, Breadcrumb, Input } from 'antd';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-const Search = Input.Search;
+import { withRouter } from 'react-router-dom';
 
 
 class Inventory extends React.Component{

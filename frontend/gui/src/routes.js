@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route} from 'react-router-dom';
 
 import Login from './containers/Login';
 import Welcome from './components/Welcome';
@@ -11,7 +11,7 @@ import Vendor from './components/Vendor';
 import Report from './components/Report';
 import NewItem from './containers/NewItemForm';
 import NewEmployee from './containers/NewEmployeeForm'
-import Items from './components/Items';
+
 import DamageItem from './containers/DamageItem';
 import NewVendor from './containers/NewVendorForm';
 
@@ -25,9 +25,12 @@ const BaseRouter = () =>(
     <Route exact path='/incoming/' component={Incoming}/>{" "}
     <Route exact path='/employees/' component={Employee}/>{" "}
     <Route exact path='/employees/newEmployee/' component={NewEmployee}/>{" "}
+
     <Route exact path='/inventory/' component={Inventory}/>{" "}
     <Route exact path='/inventory/newItem/' component={NewItem}/>{" "}
     <Route exact path='/inventory/damageItem/' component={DamageItem}/>{" "}
+
+
     <Route exact path='/vendors/' component={Vendor}/>{" "}
     <Route exact path='/vendors/newVendor/' component={NewVendor}/>{" "}
     <Route exact path='/reports/' component={Report}/>{" "}

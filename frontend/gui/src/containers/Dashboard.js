@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import { Layout, Menu, Breadcrumb, Switch } from 'antd';
+import { Menu } from 'antd';
 import * as actions from '../store/actions/auth';
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import escapeRegExp from 'escape-string-regexp';
-import { Link, withRouter } from 'react-router-dom';
-import { List, Input, Breadcrumb, Avatar, Icon} from 'antd';
+import { withRouter } from 'react-router-dom';
+import { Input } from 'antd';
 import sortBy from 'sort-by';
 import { connect } from 'react-redux';
 import VendorAvatar from './VendorAvatar';
@@ -44,7 +44,7 @@ class Vendor extends React.Component{
         showingVendors = this.state.vendors
       }
 
-      showingVendors .sort(sortBy('name'))
+      showingVendors.sort(sortBy('name'))
 
 
       return(

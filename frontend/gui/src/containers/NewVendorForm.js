@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Form, Input, Button, DatePicker, InputNumber, Switch, Icon } from 'antd';
-import axios from 'axios';
+import { Form, Input, Button } from 'antd';
+
 
 
 const FormItem = Form.Item;
