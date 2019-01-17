@@ -2,20 +2,22 @@ import React from 'react';
 import { Route} from 'react-router-dom';
 
 import Login from './containers/Login';
+
+// Components
 import Welcome from './components/Welcome';
 import Outgoing from './components/Outgoing';
-
-
 import Incoming from './components/Incoming';
 import Employee from './components/Employee';
 import Inventory from './components/Inventory';
 import Vendor from './components/Vendor';
 import Report from './components/Report';
-import NewItem from './containers/NewItemForm';
-import NewEmployee from './containers/NewEmployeeForm'
-import CountCycle from './containers/CountCycle';
-import DamageItem from './containers/DamageItem';
-import NewVendor from './containers/NewVendorForm';
+
+// Forms
+import NewItem from './containers/Forms/NewItemForm';
+import NewEmployee from './containers/Forms/NewEmployeeForm'
+import CountCycle from './containers/Forms/CountCycle';
+import DamageItem from './containers/Forms/DamageItem';
+import NewVendor from './containers/Forms/NewVendorForm';
 
 
 

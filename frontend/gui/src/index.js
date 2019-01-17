@@ -14,14 +14,14 @@ import rootReducer from './store/reducers/auth';
 
 
 
-const logger = store => next => action => {
-  console.group(action.type)
-  console.info('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  console.groupEnd(action.type)
-  return result
-}
+// const logger = store => next => action => {
+//   console.group(action.type)
+//   console.info('dispatching', action)
+//   let result = next(action)
+//   console.log('next state', store.getState())
+//   console.groupEnd(action.type)
+//   return result
+// }
 
 
 
@@ -32,7 +32,7 @@ const composeEnhances = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose
 //second argument is an enhancer
     // composeEnhances takes in params and inside will handle our MIDDLEWARE
 const store = createStore(rootReducer , composeEnhances(
-  applyMiddleware(thunk, logger)))
+  applyMiddleware(thunk)))
 
 
 
