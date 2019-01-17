@@ -15,7 +15,7 @@ class CustomLayout extends React.Component{
     return(
       <Layout className="layout">
         <Header>
-          <Dashboard {...this.props}/>
+          <Dashboard/>
         </Header>
 
         <Content style={{ padding: '0 50px' }}>
@@ -41,6 +41,7 @@ class CustomLayout extends React.Component{
 
 const mapDispatchToProps = dispatch =>{
   return {
+    onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
     logout: () => dispatch(actions.logout())
   }
 }

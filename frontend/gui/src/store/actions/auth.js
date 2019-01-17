@@ -2,6 +2,7 @@
 
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
+import * as ItemsApi from '../../api/getItemsRequest'
 
 // actions are executed with dispatch and return a type and maybe other args to
 // reducers
@@ -29,6 +30,22 @@ export const authFail = error =>{
     error: error
   }
 }
+//
+export const initializeItems = items =>{
+  return {
+    type: actionTypes.AUTH_SUCCESS,
+    items: items
+  }
+
+}
+
+
+// export const fetchItems = () => dispatch => (
+//   ItemsApi
+//       .fetchItems()
+//       .then(res=> dispatch(initializeItems(res)))
+// )
+
 
 // this function requires 2 parameters from djangorestframework, currently we
 // know 2 parameters but these would be initialized once django backend is setup
@@ -46,14 +63,13 @@ export const authLogin = (username, password) =>{
       const token = res.data.key;
 
       // setting up an expirationDate to one hour
-      const expirationDate = new Date(new Date().getTime() +3600 * 1000);
+      const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
 
       localStorage.setItem('token', token);
       localStorage.setItem('expirationDate', expirationDate);
 
       // if res is successful dispatch authSuccess method with toke as args
       dispatch(authSuccess(token));
-      console.log('after success');
       // 3600 seconds times 1000 gives 1hr
       dispatch(checkAuthTimeout(3600));
 
@@ -78,7 +94,6 @@ export const logout = () =>{
 const checkAuthTimeout = expirationTime =>{
   // setTimeout will be in millisecond so need to turn seconds into milliseconds
   return dispatch =>{
-
     setTimeout(()=>{
         dispatch(logout());
     }, expirationTime * 1000)

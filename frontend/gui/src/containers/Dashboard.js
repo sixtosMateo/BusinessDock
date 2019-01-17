@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import * as actions from '../store/actions/auth';
@@ -20,6 +21,7 @@ class Dashboard extends Component {
             defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
           >
+          {console.log(this.props.isAuthenticated)}
             <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
             <Menu.Item key="2"><Link to="/outgoing/">Outgoing</Link></Menu.Item>
             <Menu.Item key="3"><Link to="/incoming/">Incoming</Link></Menu.Item>
@@ -65,8 +67,9 @@ class Dashboard extends Component {
   // onTryAutoSignUp is a dispatch
   const mapDispatchToProps = dispatch =>{
     return {
-        onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+        onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
+        logout: () => dispatch(actions.logout())
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Dashboard);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (Dashboard));

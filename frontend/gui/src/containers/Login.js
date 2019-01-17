@@ -20,7 +20,6 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onAuth(values.userName, values.password);
-        
         this.props.history.push('/');
       }
     });
@@ -36,8 +35,6 @@ class NormalLoginForm extends React.Component {
     }
 
     const { getFieldDecorator } = this.props.form;
-
-
 
     return (
 
@@ -89,7 +86,6 @@ const mapStateToProps= (state) =>{
     loading: state.loading,
     error: state.error
   }
-
 }
 
 

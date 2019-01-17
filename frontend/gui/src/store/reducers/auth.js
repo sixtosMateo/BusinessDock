@@ -1,5 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
+import { combineReducers } from 'redux';
 import { updateObject } from '../utility';
+
+
 
 // here we define our initial state
     // ex: loading any errors, authentication token
@@ -10,8 +13,11 @@ import { updateObject } from '../utility';
 const initialState = {
    token: null,
    error: null,
-   loading: false
+   loading: false,
+   items:[]
 }
+
+
 
 
 // defining our actions
@@ -65,5 +71,8 @@ const reducer = (state=initialState, action) =>{
         return state;
   }
 }
+
+
+
 
 export default reducer;

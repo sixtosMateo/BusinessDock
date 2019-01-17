@@ -10,15 +10,29 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 // this reducer will be used inside our store
-import reducer from './store/reducers/auth';
+import rootReducer from './store/reducers/auth';
+
+
+
+const logger = store => next => action => {
+  console.group(action.type)
+  console.info('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  console.groupEnd(action.type)
+  return result
+}
+
+
+
 
 // inherits from window
 const composeEnhances = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose
 
 //second argument is an enhancer
     // composeEnhances takes in params and inside will handle our MIDDLEWARE
-const store = createStore(reducer, composeEnhances(
-  applyMiddleware(thunk)))
+const store = createStore(rootReducer , composeEnhances(
+  applyMiddleware(thunk, logger)))
 
 
 
