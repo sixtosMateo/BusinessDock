@@ -12,7 +12,8 @@ const initialState = {
    token: null,
    error: null,
    loading: false,
-   items:[]
+   items:[],
+   employees:[]
 }
 
 
@@ -22,6 +23,14 @@ const initialItems =(state, action)=>{
   });
 
 }
+
+const initialEmployees =(state, action)=>{
+  return updateObject(state, {
+    employees: action.employees
+  });
+
+}
+
 
 
 // defining our actions
@@ -71,9 +80,8 @@ const reducer = (state=initialState, action) =>{
       case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
       case actionTypes.AUTH_FAIL: return authFail(state, action);
       case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-      case actionTypes.GET_ITEMS: return initialItems(state, action);
-
-        break;
+      case actionTypes.FETCH_ITEMS: return initialItems(state, action);
+      case actionTypes.FETCH_EMPLOYEES: return initialEmployees(state, action);
       default:
         return state;
   }

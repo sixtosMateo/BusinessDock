@@ -1,6 +1,11 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import * as ItemsApi from '../../api/getItemsRequest';
+import * as DamageItemsApi  from '../../api/getDamageItemRequest';
+import * as EmployeesApi from '../../api/getEmployeesRequest';
+import * as IncomingsApi from '../../api/getIncomingRequest';
+import * as OutgoingsApi from '../../api/getOutgoingRequest';
+import * as VendorsApi from '../../api/getVendorsRequest';
 
 
 
@@ -25,6 +30,35 @@ export const authFail = error =>{
     error: error
   }
 }
+
+// Fetching Items information
+export const initializeItems = items =>{
+  return {
+    type: actionTypes.FETCH_ITEMS,
+    items: items
+  }
+}
+
+export const initializeEmployees = employees =>{
+  return {
+    type: actionTypes.FETCH_EMPLOYEES,
+    employees: employees
+  }
+}
+
+export const fetchItems = () =>
+dispatch => (
+  ItemsApi
+      .fetchItems()
+      .then(res=> dispatch(initializeItems(res)))
+)
+
+export const fetchEmployees = () =>
+dispatch => (
+  EmployeesApi
+      .fetchEmployees()
+      .then(res=> dispatch(initializeEmployees(res)))
+)
 
 
 // this function requires 2 parameters from djangorestframework, currently we
@@ -101,21 +135,3 @@ export const authCheckState = () =>{
     }
   }
 }
-
-
-
-// Fetching Items information 
-export const initializeItems = items =>{
-  return {
-    type: actionTypes.GET_ITEMS,
-    items: items
-  }
-}
-
-
-export const fetchItems = () =>
-dispatch => (
-  ItemsApi
-      .fetchItems()
-      .then(res=> dispatch(initializeItems(res)))
-)

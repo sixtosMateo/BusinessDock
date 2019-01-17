@@ -21,7 +21,6 @@ class Dashboard extends Component {
             defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
           >
-          {console.log(this.props.isAuthenticated)}
             <Menu.Item key="1"><Link to="/">BusinessDock</Link></Menu.Item>
             <Menu.Item key="2"><Link to="/outgoing/">Outgoing</Link></Menu.Item>
             <Menu.Item key="3"><Link to="/incoming/">Incoming</Link></Menu.Item>

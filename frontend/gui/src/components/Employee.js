@@ -17,7 +17,6 @@ const Search = Input.Search;
 class Employee extends React.Component{
 
   state ={
-    employees:[],
     query:  ''
   }
 
@@ -27,31 +26,19 @@ class Employee extends React.Component{
   })
 }
 
-  componentDidMount(){
-    console.log("called");
-
-      axios.get('http://127.0.0.1:8000/api/employees/')
-        .then(res => {
-          this.setState({
-            employees: res.data
-          });
-        })
-    }
-
-
 
 
   render(){
     let showingEmployees
-
+    const { employees } = this.props
       if(this.state.query){
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
 
-        showingEmployees = this.state.employees.filter((employee) =>
+        showingEmployees = employees.filter((employee) =>
         match.test(employee.employeeId))
       }
       else{
-        showingEmployees = this.state.employees
+        showingEmployees = employees
       }
 
       showingEmployees.sort(sortBy('employeeId'))
@@ -80,7 +67,7 @@ class Employee extends React.Component{
 const mapStateToProps = state =>{
   // return object is what you want to map into a property
   return {
-    token: state.token
+    employees: state.employees
   }
 }
 

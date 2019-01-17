@@ -6,4 +6,5 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 
-export const GET_ITEMS = "GET_ITEMS";
+export const FETCH_ITEMS = "FETCH_ITEMS";
+export const FETCH_EMPLOYEES = "FETCH_EMPLOYEES";
