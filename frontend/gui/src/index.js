@@ -18,9 +18,7 @@ const composeEnhances = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose
 //second argument is an enhancer
     // composeEnhances takes in params and inside will handle our MIDDLEWARE
 const store = createStore(reducer, composeEnhances(
-  applyMiddleware(thunk)
-
-))
+  applyMiddleware(thunk)))
 
 
 

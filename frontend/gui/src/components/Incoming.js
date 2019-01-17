@@ -3,6 +3,8 @@
 // display table when item is new ask user if they want to add new item
 // when user finished scanning the value needs to disapear
 
+// INSTEAD OF USING THE FILTER METHOD WE CAN USER THE REDUCE METHOD THAT WILL RETURN ONE ITEM
+
 import React from 'react';
 import { Input } from 'antd';
 import {DebounceInput} from 'react-debounce-input';

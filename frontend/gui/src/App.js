@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import BaseRouter from './routes';
+
 import * as actions from './store/actions/auth';
 import CustomLayout from './containers/Layout';
 
