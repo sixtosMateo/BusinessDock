@@ -8,3 +8,4 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const FETCH_ITEMS = "FETCH_ITEMS";
 export const FETCH_EMPLOYEES = "FETCH_EMPLOYEES";
+export const FETCH_VENDORS = "FETCH_VENDORS";

@@ -53,7 +53,6 @@ class Employee extends React.Component{
           onChange={(event) => this.updateQuery(event.target.value)}
           />
 
-
           <EmployeeAvatar data={showingEmployees} />
         </div>
       )

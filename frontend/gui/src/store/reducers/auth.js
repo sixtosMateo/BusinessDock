@@ -13,7 +13,9 @@ const initialState = {
    error: null,
    loading: false,
    items:[],
-   employees:[]
+   employees:[],
+   inventory:[],
+   vendors:[]
 }
 
 
@@ -31,6 +33,12 @@ const initialEmployees =(state, action)=>{
 
 }
 
+const initialVendors =(state, action)=>{
+  return updateObject(state, {
+    vendors: action.vendors
+  });
+
+}
 
 
 // defining our actions
@@ -82,6 +90,7 @@ const reducer = (state=initialState, action) =>{
       case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
       case actionTypes.FETCH_ITEMS: return initialItems(state, action);
       case actionTypes.FETCH_EMPLOYEES: return initialEmployees(state, action);
+      case actionTypes.FETCH_VENDORS: return initialVendors(state, action);
       default:
         return state;
   }

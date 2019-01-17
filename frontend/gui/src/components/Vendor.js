@@ -10,18 +10,7 @@ const Search = Input.Search;
 
 class Vendor extends React.Component{
   state={
-    vendors:[],
     query:''
-  }
-
-  componentDidMount(){
-
-      axios.get('http://127.0.0.1:8000/api/vendors/')
-        .then(res => {
-          this.setState({
-            vendors: res.data
-          });
-        })
   }
 
   updateQuery=(query)=>{
@@ -33,15 +22,16 @@ class Vendor extends React.Component{
 
   render(){
     let showingVendors
+    const {vendors} = this.props
 
       if(this.state.query){
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
 
-        showingVendors = this.state.vendors.filter((item) =>
-        match.test(item.name))
+        showingVendors = vendors.filter((vendor) =>
+        match.test(vendor.name))
       }
       else{
-        showingVendors = this.state.vendors
+        showingVendors = vendors
       }
 
       showingVendors.sort(sortBy('name'))
@@ -67,7 +57,7 @@ class Vendor extends React.Component{
 const mapStateToProps = state =>{
   // return object is what you want to map into a property
   return {
-    token: state.token
+    vendors: state.vendors
   }
 }
 

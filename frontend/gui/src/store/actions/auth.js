@@ -46,6 +46,14 @@ export const initializeEmployees = employees =>{
   }
 }
 
+export const initializeVendors = vendors =>{
+  return {
+    type: actionTypes.FETCH_VENDORS,
+    vendors: vendors
+  }
+}
+
+
 export const fetchItems = () =>
 dispatch => (
   ItemsApi
@@ -60,6 +68,12 @@ dispatch => (
       .then(res=> dispatch(initializeEmployees(res)))
 )
 
+export const fetchVendors = () =>
+dispatch => (
+  VendorsApi
+      .fetchVendors()
+      .then(res=> dispatch(initializeVendors(res)))
+)
 
 // this function requires 2 parameters from djangorestframework, currently we
 // know 2 parameters but these would be initialized once django backend is setup
