@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
-
+import * as actions from '../store/actions/auth';
 import ItemAvatar from './ItemAvatar';
 
 
@@ -63,9 +63,16 @@ class Items extends React.Component{
 const mapStateToProps = state =>{
   // return object is what you want to map into a property
   return {
-    items: state.items
+    items: state.items,
+    isAuthenticated: state.token !== null
+
   }
 }
 
+const mapDispatchToProps = dispatch =>{
+  return {
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+  }
+}
 
-export default withRouter(connect(mapStateToProps)(Items));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Items));

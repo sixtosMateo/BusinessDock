@@ -58,21 +58,33 @@ export const fetchItems = () =>
 dispatch => (
   ItemsApi
       .fetchItems()
-      .then(res=> dispatch(initializeItems(res)))
+      .then((res)=>
+      {
+        dispatch(initializeItems(res))
+        localStorage.setItem('localItems', res)
+      })
+
 )
 
 export const fetchEmployees = () =>
 dispatch => (
   EmployeesApi
       .fetchEmployees()
-      .then(res=> dispatch(initializeEmployees(res)))
+      .then((res)=> {
+        dispatch(initializeEmployees(res))
+        localStorage.setItem('localEmployees', res)
+      })
+
 )
 
 export const fetchVendors = () =>
 dispatch => (
   VendorsApi
       .fetchVendors()
-      .then(res=> dispatch(initializeVendors(res)))
+      .then((res) =>{
+        dispatch(initializeVendors(res))
+        localStorage.setItem('localVendors', res)
+      })
 )
 
 // this function requires 2 parameters from djangorestframework, currently we
