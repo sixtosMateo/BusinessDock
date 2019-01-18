@@ -61,7 +61,7 @@ dispatch => (
       .then((res)=>
       {
         dispatch(initializeItems(res))
-        localStorage.setItem('localItems', res)
+        localStorage.setItem('localItems', JSON.stringify(res))
       })
 
 )
@@ -72,7 +72,7 @@ dispatch => (
       .fetchEmployees()
       .then((res)=> {
         dispatch(initializeEmployees(res))
-        localStorage.setItem('localEmployees', res)
+        localStorage.setItem('localEmployees', JSON.stringify(res))
       })
 
 )
@@ -83,7 +83,7 @@ dispatch => (
       .fetchVendors()
       .then((res) =>{
         dispatch(initializeVendors(res))
-        localStorage.setItem('localVendors', res)
+        localStorage.setItem('localVendors', JSON.stringify(res))
       })
 )
 
