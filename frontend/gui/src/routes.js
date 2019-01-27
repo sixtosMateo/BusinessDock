@@ -12,6 +12,9 @@ import Inventory from './components/Inventory';
 import Vendor from './components/Vendor';
 import Report from './components/Report';
 
+
+import Contact from './components/general/Contact';
+
 // Forms
 import NewItem from './containers/Forms/NewItemForm';
 import NewEmployee from './containers/Forms/NewEmployeeForm'
@@ -56,6 +59,8 @@ const BaseRouter = () =>(
     <Route exact path='/reports/' component={Report}/>{" "}
     <Route exact path='/reports/pdf/' component={Report}/>{" "}
     <Route exact path='/reports/graphs/' component={Report}/>{" "}
+
+    <Route exact path='/contact/' component={Contact}/>{" "}
 
   </div>
 
