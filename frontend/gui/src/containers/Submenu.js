@@ -81,7 +81,7 @@ class Submenu extends React.Component{
 
         return(
           <Breadcrumb style={{ margin: '10px 0' }}>
-            <Breadcrumb.Item><Link to="/overview/">Overview</Link></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/">Overview</Link></Breadcrumb.Item>
             <Breadcrumb.Item><Link to="/demo/">Demo</Link></Breadcrumb.Item>
             <Breadcrumb.Item><Link to="/client/">Client</Link></Breadcrumb.Item>
             <Breadcrumb.Item><Link to="/contact/">Contact</Link></Breadcrumb.Item>

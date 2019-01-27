@@ -14,6 +14,7 @@ import Report from './components/Report';
 
 
 import Contact from './components/general/Contact';
+import Client from './components/general/Clients';
 
 // Forms
 import NewItem from './containers/Forms/NewItemForm';
@@ -61,6 +62,7 @@ const BaseRouter = () =>(
     <Route exact path='/reports/graphs/' component={Report}/>{" "}
 
     <Route exact path='/contact/' component={Contact}/>{" "}
+    <Route exact path='/client/' component={Client}/>{" "}
 
   </div>
 
