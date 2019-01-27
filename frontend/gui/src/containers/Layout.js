@@ -1,6 +1,6 @@
 import React from 'react';
 import Dashboard from './Dashboard';
-import { Layout } from 'antd';
+import { Layout, Icon } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -31,7 +31,15 @@ class CustomLayout extends React.Component{
 
 
         <Footer style={{ textAlign: 'center' }}>
-          BusinessDock ©2018 Created by Mateo Sixtos
+          <div>BusinessDock ©2018 Created by Mateo Sixtos</div>
+          <div>
+            <div onClick={()=>window.open('https://www.linkedin.com/in/sixtosmateo/')}><Icon type="linkedin"/>  in/sixtosmateo/</div>
+            <div onClick={()=>window.open('https://github.com/sixtosMateo/')}><Icon type="github" />  github.com/sixtosMateo/</div>
+            <div onClick={()=>window.open('https://twitter.com/SixtosMateo')}><Icon type="twitter" />  twitter.com/SixtosMateo</div>
+            <div><Icon type="mail" />  sixtosmateo@gmail.com</div>
+            <div><Icon type="phone"/>  (831)585-0879</div>
+          </div>
+
         </Footer>
       </Layout>
     );
