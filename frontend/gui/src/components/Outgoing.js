@@ -79,6 +79,30 @@ class Outgoing extends React.Component{
       }
   }
 
+  decrement = (barcode) =>{
+    let tempCart = [...this.state.cart]
+    const selectedItem = tempCart.find(item=>item.barcode===barcode);
+
+    const index = tempCart.indexOf(selectedItem)
+
+    const item  = tempCart[index]
+
+    item.quantity = item.quantity-1;
+
+    if(item.quantity ==0){
+      this.removeItem(barcode)
+    }
+    else{
+      // item.total = item.count * item.price
+
+      this.setState(()=>{
+        return {cart:[...tempCart]}},
+        // ()=>{this.addTotal()}
+      )
+    }
+  }
+
+
 
 // ============ Helper methods ====================
   // find items from copy of items
@@ -118,6 +142,30 @@ class Outgoing extends React.Component{
 
   }
 
+  removeItem=(barcode)=>{
+    // let tempProducts = [...this.state.products];
+    let tempCart = [...this.state.cart];
+    tempCart = tempCart.filter(item => item.barcode !== barcode)
+
+    // const index =  tempProducts.indexOf(this.getItem(id))
+    // remove item based on the index
+    // let removedItem = tempProducts[index]
+
+  // this the overall products and setting the values to defaut
+    // removedItem.inCart = false
+    // removedItem.count = 0
+    // removedItem.total = 0
+
+    this.setState(()=>{
+      return {
+        cart:[...tempCart],
+        // product:[...tempProducts]
+      }
+    },
+    // ()=> {this.addTotal()}
+  )
+  }
+
   render(){
       return(
         <div className="outgoingComponent">
@@ -132,6 +180,8 @@ class Outgoing extends React.Component{
             />
           <OutgoingItemAvatar
           data={this.state.cart}
+          increment={this.increment}
+          decrement={this.decrement}
           />
         </div>
 

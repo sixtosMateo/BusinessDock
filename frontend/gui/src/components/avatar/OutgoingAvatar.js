@@ -1,9 +1,12 @@
 import React from 'react';
-import { List} from 'antd';
+import { List, Icon} from 'antd';
 
 
 const OutgoingItemAvatar =(props)=>{
+
+  const {increment, decrement} = props;
   return(
+
     <div>
       <List
         itemLayout="vertical"
@@ -23,7 +26,13 @@ const OutgoingItemAvatar =(props)=>{
             <List.Item.Meta
               title={item.barcode}
               description={item.name}/>
-            <div>{item.quantity}</div>
+            <div>
+              <Icon type="minus" onClick={()=> decrement(item.barcode)}
+                style={{ fontSize: '16px', color: '#ff0000', border:"solid 1px" }}/>
+              {  item.quantity  }
+              <Icon type="plus" onClick={()=> increment(item.barcode)}
+                style={{ fontSize: '16px', color: '#0000ff', border:"solid 1px" }}/>
+            </div>
             <div>{item.salePrice}</div>
           </List.Item>
         )}
