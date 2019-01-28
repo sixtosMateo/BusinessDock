@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import * as actions from '../store/actions/auth';
-import OutgoingItemAvatar from './OutgoingItems'
+import OutgoingItemAvatar from './avatar/OutgoingAvatar';
 
 
 class Outgoing extends React.Component{
@@ -29,6 +29,59 @@ class Outgoing extends React.Component{
     this.setItems()
   }
 
+  // adding to cart
+  setToCart=(barcode)=>{
+    const tempSoldItems = [...this.state.soldItems]
+    // prevents if error if item is not found // could set it into var so it dont repeat
+    if(this.getItem(barcode) == null){
+      return;
+    }
+
+    if(this.isDuplicateCart(barcode)){
+      this.increment(barcode)
+      return
+    }
+
+    const index = tempSoldItems.indexOf(this.getItem(barcode))
+    const item = tempSoldItems[index]
+
+    // setting the initial values
+    item.quantity = 1;
+
+    this.setState(()=>{
+      return { soldItems:tempSoldItems, cart:[...this.state.cart, item]}
+    })
+
+  }
+
+  // incrementing the quantity of products
+  increment = (barcode)=>{
+    let tempCart =[...this.state.cart]
+    const duplicateItem = tempCart.find(item=>item.barcode === barcode)
+    const index = tempCart.indexOf(duplicateItem)
+    const item = tempCart[index]
+
+    item.quantity = item.quantity + 1
+
+    this.setState(()=>{
+      return { cart:[...tempCart]}
+    })
+  }
+
+  // updating the query everytime it changes
+  updateQuery=(query)=>{
+      this.setState({
+        query: query.trim()
+      })
+
+      if(this.state.query){
+        this.setToCart(this.state.query);
+      }
+  }
+
+
+// ============ Helper methods ====================
+  // find items from copy of items
   getItem =(barcode)=>{
     const item = this.state.soldItems.find(item=> item.barcode===barcode);
     if(item){
@@ -39,6 +92,15 @@ class Outgoing extends React.Component{
     }
   }
 
+  // defines whether item is already in cart
+  isDuplicateCart=(barcode)=>{
+    let duplicate
+    duplicate = this.state.cart.find(item=> item.barcode === barcode)
+    return duplicate
+
+  }
+
+  // set state a copy from state items
   setItems=()=>{
 
     // we are copying the values not referencing items
@@ -56,40 +118,6 @@ class Outgoing extends React.Component{
 
   }
 
-  setToCart=(barcode)=>{
-    const tempSoldItems = [...this.state.soldItems]
-    // prevents if error if item is not found // could set it into var so it dont repeat
-    if(this.getItem(barcode) == null){
-      return;
-    }
-    const index = tempSoldItems.indexOf(this.getItem(barcode))
-    const item = tempSoldItems[index]
-
-
-    // item.quantity =1;
-    // const price = item.price;
-    // item.total = price;
-
-
-    this.setState(()=>{
-      return { soldItems:tempSoldItems, cart:[...this.state.cart, item]}
-    })
-
-  }
-
-
-
-  updateQuery=(query)=>{
-      this.setState({
-        query: query.trim()
-      })
-
-      if(this.state.query){
-        this.setToCart(this.state.query);
-      }
-  }
-
-
   render(){
       return(
         <div className="outgoingComponent">
@@ -102,8 +130,9 @@ class Outgoing extends React.Component{
           onChange={ (event) =>{
             this.updateQuery(event.target.value)}}
             />
-
-          <OutgoingItemAvatar data={this.state.cart}/>
+          <OutgoingItemAvatar
+          data={this.state.cart}
+          />
         </div>
 
 

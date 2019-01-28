@@ -23,7 +23,8 @@ const OutgoingItemAvatar =(props)=>{
             <List.Item.Meta
               title={item.barcode}
               description={item.name}/>
-            {item.quantity}
+            <div>{item.quantity}</div>
+            <div>{item.salePrice}</div>
           </List.Item>
         )}
       />
