@@ -9,32 +9,74 @@
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 import escapeRegExp from 'escape-string-regexp';
-
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import * as actions from '../store/actions/auth';
 import OutgoingItemAvatar from './OutgoingItems'
 
 
 class Outgoing extends React.Component{
 
   state={
-    items:[],
     query:'',
-    soldItems:[]
+    soldItems:[],
+    cart:[]
   }
 
 
   componentDidMount(){
-      axios.get('http://127.0.0.1:8000/api/items/')
-        .then(res => {
-          this.setState({
-            items: res.data
-          });
-        })
+    this.setItems()
   }
 
-  checkPurchasedItem(soldItem) {
-    return this.state.soldItems.some(item => soldItem === item.barcode);
+  getItem =(barcode)=>{
+    const item = this.state.soldItems.find(item=> item.barcode===barcode);
+    if(item){
+      return item
+    }
+    else{
+      return null
+    }
   }
+
+  setItems=()=>{
+
+    // we are copying the values not referencing items
+    // getting a new set of values rather than copying them
+    let soldItems =[];
+
+    this.props.items.forEach(item=>{
+      const singleItem = {...item}
+      soldItems = [...soldItems, singleItem]
+    })
+
+    this.setState(()=>{
+      return {soldItems}
+    });
+
+  }
+
+  setToCart=(barcode)=>{
+    const tempSoldItems = [...this.state.soldItems]
+    // prevents if error if item is not found // could set it into var so it dont repeat
+    if(this.getItem(barcode) == null){
+      return;
+    }
+    const index = tempSoldItems.indexOf(this.getItem(barcode))
+    const item = tempSoldItems[index]
+
+
+    // item.quantity =1;
+    // const price = item.price;
+    // item.total = price;
+
+
+    this.setState(()=>{
+      return { soldItems:tempSoldItems, cart:[...this.state.cart, item]}
+    })
+
+  }
+
 
 
   updateQuery=(query)=>{
@@ -42,45 +84,9 @@ class Outgoing extends React.Component{
         query: query.trim()
       })
 
-      let item
-
       if(this.state.query){
-        if (this.checkPurchasedItem(query) ===  false){
-          const match = new RegExp(escapeRegExp(this.state.query), 'i')
-          // ITEM IS A ARRAY OF ITEMS THAT MATCH BARCODE TO QUERY
-          item = this.state.items.filter((item) =>
-            match.test(item.barcode)
-          )
-        }
-        else{
-          console.log("repeated")
-          item=""
-        }
+        this.setToCart(this.state.query);
       }
-      else{
-        item = ""
-      }
-
-      this.pushItem(item[0])
-  }
-
-
-
-  pushItem = (item) =>{
-    // what happens when the item is repeated
-    // quantity needs to change
-    // itemSaleTotal needs to change depending on the quantity
-    if(item){
-      let newItem = {"barcode": item.barcode, "name":item.name,
-                    "transactionType": "outgoing", "quantity": 1,
-                    "price": item.salePrice, "tax": 0.0925,
-                    "itemSaleTotal": parseFloat((item.salePrice + item.salePrice * 0.0925).toFixed(2))}
-
-      this.setState({
-        soldItems: [...this.state.soldItems, newItem]
-      })
-    }
-
   }
 
 
@@ -97,7 +103,7 @@ class Outgoing extends React.Component{
             this.updateQuery(event.target.value)}}
             />
 
-          <OutgoingItemAvatar data={this.state.soldItems}/>
+          <OutgoingItemAvatar data={this.state.cart}/>
         </div>
 
 
@@ -106,4 +112,20 @@ class Outgoing extends React.Component{
   }
 }
 
-export default Outgoing;
+
+const mapStateToProps = state =>{
+  // return object is what you want to map into a property
+  return {
+    items: state.items,
+    isAuthenticated: state.token !== null
+
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return {
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+  }
+}
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Outgoing));

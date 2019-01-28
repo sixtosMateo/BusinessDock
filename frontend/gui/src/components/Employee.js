@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
 
-import EmployeeAvatar from './EmployeeAvatar';
+import EmployeeAvatar from './avatar/EmployeeAvatar';
 
 
 const Search = Input.Search;

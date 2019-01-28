@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
 import * as actions from '../store/actions/auth';
-import ItemAvatar from './ItemAvatar';
+import ItemAvatar from './avatar/ItemAvatar';
 
 
 const Search = Input.Search;

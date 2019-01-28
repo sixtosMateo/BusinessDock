@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Input } from 'antd';
 import sortBy from 'sort-by';
 import { connect } from 'react-redux';
-import VendorAvatar from './VendorAvatar';
+import VendorAvatar from './avatar/VendorAvatar';
 const Search = Input.Search;
 
 class Vendor extends React.Component{
