@@ -15,6 +15,8 @@ import axios from 'axios';
 import * as actions from '../store/actions/auth';
 import OutgoingItemAvatar from './avatar/OutgoingAvatar';
 import TotalTable from './cart/TotalTable';
+import 'antd/dist/antd.css';
+import { Icon } from 'antd';
 
 class Outgoing extends React.Component{
 
@@ -51,10 +53,9 @@ class Outgoing extends React.Component{
 
     const index = tempSoldItems.indexOf(this.getItem(barcode))
     const item = tempSoldItems[index]
-    console.log(item)
+
     // setting the initial values
     item.quantity = 1;
-    console.log(item.salePrice);
     const price = item.salePrice;
     item.itemSaleTotal = price;
 
@@ -117,21 +118,16 @@ class Outgoing extends React.Component{
     }
   }
 
-  addTotal=()=>{
-    let subTotal = 0
-    this.state.cart.map(item=>(subTotal += item.itemSaleTotal));
-    const tempTax = subTotal * .0975;
-    const tax = parseFloat(tempTax.toFixed(2));
-    const total = subTotal + tax;
-
+  clearCart=()=>{
     this.setState(()=>{
-      return{
-      cartSubtotal:subTotal,
-      cartTax:tax,
-      cartTotal:total
-    }
-    })
-
+      return {cart:[]}
+    },()=>{
+      //callback function
+      // new originalfresh copy of all the items rather than referencing
+      // all the modify object are set to default
+      this.setItems();
+      this.addTotal();
+    });
   }
 
 // ============ Helper methods ====================
@@ -175,27 +171,44 @@ class Outgoing extends React.Component{
   }
 
   removeItem=(barcode)=>{
-    // let tempProducts = [...this.state.products];
+    let tempItems = [...this.state.soldItems];
     let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.barcode !== barcode)
 
-    // const index =  tempProducts.indexOf(this.getItem(id))
+    const index =  tempItems.indexOf(this.getItem(barcode))
     // remove item based on the index
-    // let removedItem = tempProducts[index]
+    let removedItem = tempItems[index]
 
   // this the overall products and setting the values to defaut
-    // removedItem.inCart = false
-    // removedItem.count = 0
-    // removedItem.total = 0
+
+    removedItem.quantity = 0
+    removedItem.itemSaleTotal = 0
 
     this.setState(()=>{
       return {
         cart:[...tempCart],
-        // product:[...tempProducts]
+        product:[...tempItems]
       }
     },
     ()=> {this.addTotal()}
   )
+  }
+
+  addTotal=()=>{
+    let subTotal = 0
+    this.state.cart.map(item=>(subTotal += item.itemSaleTotal));
+    const tempTax = subTotal * .0975;
+    const tax = parseFloat(tempTax.toFixed(2));
+    const total = subTotal + tax;
+
+    this.setState(()=>{
+      return{
+      cartSubtotal:subTotal,
+      cartTax:tax,
+      cartTotal:total
+    }
+    })
+
   }
 
   render(){
@@ -215,10 +228,13 @@ class Outgoing extends React.Component{
 
           {
             this.state.cart.length > 0 ?
-            <TotalTable total={this.state.cartTotal}
-                        subTotal={this.state.cartSubtotal}
-                        tax={this.state.cartTax}/>
+            <div>
+              <TotalTable total={this.state.cartTotal}
+                          subTotal={this.state.cartSubtotal}
+                          tax={this.state.cartTax}/>
 
+              <div onClick={()=>this.clearCart()}><Icon type="delete" />Clear Cart</div>
+            </div>
             :
 
             "Cart is Empty"
