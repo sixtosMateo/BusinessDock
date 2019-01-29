@@ -21,7 +21,7 @@ render(){
               <img src="/Karis.png" style={{width:'10rem', height:"10rem", marginBottom:"10px"}} alt="Karis Image"/>
 
               <div onClick={()=>window.open('http://karistoys.herokuapp.com')}
-                style={{color:"#1e90ff", marginBottom:"5px"}}><Icon type="desktop" />
+                style={{color:"#1e90ff", marginBottom:"5px", width:'11.5rem'}}><Icon type="desktop"/>
                 karistoys.herokuapp.com
               </div>
 

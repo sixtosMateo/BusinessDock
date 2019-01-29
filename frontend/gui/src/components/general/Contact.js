@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Icon } from 'antd';
+import { Icon, Col, Row } from 'antd';
 import {Link} from 'react-router-dom';
 
 
@@ -9,36 +9,58 @@ class Contact extends React.Component{
 render(){
     return(
       <div className = "contactComponent">
-        <div className = "title">
-          <h1>Mateo Sixtos</h1>
-        </div>
 
-        <div className = "position">
-          <h2>Full-Stack Developer</h2>
-        </div>
+        <Row>
 
-        <div className = "profileImage">
-          <img src="/profileImage.png" style={{width:'10rem', height:"10rem"}} alt="profile Image"/>
-        </div>
+          <Col span={12} style={{fontFamily: "Permanent Marker", left:"0"}}>
+            <div style={{ width:'16rem'}} >
+              <h1>Mateo Sixtos: </h1>
+              <img src="/profileImage.png" style={{width:'15rem', height:"15rem", border:"solid 1px"}} alt="profile Image"/>
+            </div>
+          </Col>
 
-        <div className = "csumbImage">
-          <img src="/csumb.png" style={{width:'5rem', height:"5rem"}} alt="csumb Image"/>
-        </div>
+          <div style={{ textAlign:"left", float:'right',  width:'15rem'}}>
+
+            <div>
+              <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Software Engineer</h2>
+              <h4>CSU Monterey Bay </h4>
+              <img src="/csumb.png" style={{width:'5rem', height:"5rem", border:"solid 1px"}} alt="csumb Image"/>
+            </div>
+            <div style={{ width:'12rem'}} >
+              <h2 style={{fontFamily: "Permanent Marker"}}>Contact info:</h2>
+              <div style={{color:"#1e90ff"}}><Icon type="linkedin" onClick={()=>window.open('https://www.linkedin.com/in/sixtosmateo/')}/>  in/sixtosmateo/</div>
+              <div style={{color:"#1e90ff"}}><Icon type="github" onClick={()=>window.open('https://github.com/sixtosMateo/')}/>  github.com/sixtosMateo/</div>
+              <div style={{color:"#1e90ff"}}><Icon type="twitter" onClick={()=>window.open('https://twitter.com/SixtosMateo')}/>  twitter.com/SixtosMateo</div>
+              <div><Icon type="mail" />  sixtosmateo@gmail.com</div>
+              <div><Icon type="phone"/>  (831)585-0879</div>
+            </div>
+
+          </div>
 
 
-        <div className = "contact-container">
-          <div><Icon type="linkedin" onClick={()=>window.open('https://www.linkedin.com/in/sixtosmateo/')}/>  in/sixtosmateo/</div>
-          <div><Icon type="github" onClick={()=>window.open('https://github.com/sixtosMateo/')}/>  github.com/sixtosMateo/</div>
-          <div><Icon type="twitter" onClick={()=>window.open('https://twitter.com/SixtosMateo')}/>  twitter.com/SixtosMateo</div>
-          <div><Icon type="mail" />  sixtosmateo@gmail.com</div>
-          <div><Icon type="phone"/>  (831)585-0879</div>
-        </div>
+        </Row>
 
-        <div className = "Description">
+        <div className = "Description" style={{margin:"15px"}}>
           <p>Hi, my name is Mateo Sixtos. I am a Full-Stack Developer who enjoys
           developing responsive web-applications that innovates the process of
-          managing business operations for local vendors. Feel free to contact
-          me!</p>
+          managing business operations for local vendors. I was able to graduate
+          from California State University Monterey Bay in less than four years.
+          My degree is in Computer Science and Information Technology with an
+          emphasis in Software Engineer.
+          </p>
+
+          <p>I been interested in Full-Stack development ever since I participated
+          in several hackathons. After attending several networking events, I was
+          able to land a Full-Stack internship with nLightn Technologies. I learned
+          so much with this opportunity that I took the initiative to develop a
+          TransactionApp for Karis Toys. My client needed an web-application that
+          helped them keep track of their inventory and financial records.</p>
+
+          <p>Now I am developing BusinessDock. This is an extend of TransactionApp
+          but intergrating other frameworks and libraries to improve performance and user
+          experience.</p>
+
+          <p>If you have any questions feel free to contact me at sixtosmateo@gmail.com!</p>
         </div>
       </div>
     );
