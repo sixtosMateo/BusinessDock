@@ -14,19 +14,25 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import * as actions from '../store/actions/auth';
 import OutgoingItemAvatar from './avatar/OutgoingAvatar';
-
+import TotalTable from './cart/TotalTable';
 
 class Outgoing extends React.Component{
 
   state={
     query:'',
     soldItems:[],
-    cart:[]
+    cart:[],
+    cartSubtotal:0,
+    cartTax:0,
+    cartTotal: 0,
+
   }
 
 
   componentDidMount(){
+
     this.setItems()
+
   }
 
   // adding to cart
@@ -37,6 +43,7 @@ class Outgoing extends React.Component{
       return;
     }
 
+    // if item was scanned increment quantity
     if(this.isDuplicateCart(barcode)){
       this.increment(barcode)
       return
@@ -44,13 +51,17 @@ class Outgoing extends React.Component{
 
     const index = tempSoldItems.indexOf(this.getItem(barcode))
     const item = tempSoldItems[index]
-
+    console.log(item)
     // setting the initial values
     item.quantity = 1;
+    console.log(item.salePrice);
+    const price = item.salePrice;
+    item.itemSaleTotal = price;
 
     this.setState(()=>{
-      return { soldItems:tempSoldItems, cart:[...this.state.cart, item]}
-    })
+      return { soldItems: tempSoldItems, cart:[...this.state.cart, item]}
+    },
+    ()=>{this.addTotal()})
 
   }
 
@@ -61,11 +72,15 @@ class Outgoing extends React.Component{
     const index = tempCart.indexOf(duplicateItem)
     const item = tempCart[index]
 
-    item.quantity = item.quantity + 1
+    item.quantity = item.quantity + 1;
+    const sum = item.quantity * item.salePrice;
+    item.itemSaleTotal = sum;
+
 
     this.setState(()=>{
       return { cart:[...tempCart]}
-    })
+    },
+    ()=>{this.addTotal()})
   }
 
   // updating the query everytime it changes
@@ -93,16 +108,31 @@ class Outgoing extends React.Component{
       this.removeItem(barcode)
     }
     else{
-      // item.total = item.count * item.price
+      item.itemSaleTotal = item.quantity * item.salePrice;
 
       this.setState(()=>{
         return {cart:[...tempCart]}},
-        // ()=>{this.addTotal()}
+        ()=>{this.addTotal()}
       )
     }
   }
 
+  addTotal=()=>{
+    let subTotal = 0
+    this.state.cart.map(item=>(subTotal += item.itemSaleTotal));
+    const tempTax = subTotal * .0975;
+    const tax = parseFloat(tempTax.toFixed(2));
+    const total = subTotal + tax;
 
+    this.setState(()=>{
+      return{
+      cartSubtotal:subTotal,
+      cartTax:tax,
+      cartTotal:total
+    }
+    })
+
+  }
 
 // ============ Helper methods ====================
   // find items from copy of items
@@ -137,6 +167,8 @@ class Outgoing extends React.Component{
     })
 
     this.setState(()=>{
+
+        console.log(soldItems)
       return {soldItems}
     });
 
@@ -162,13 +194,15 @@ class Outgoing extends React.Component{
         // product:[...tempProducts]
       }
     },
-    // ()=> {this.addTotal()}
+    ()=> {this.addTotal()}
   )
   }
 
   render(){
       return(
         <div className="outgoingComponent">
+
+
           <DebounceInput
           minLength={5}
           debounceTimeout={300}
@@ -178,6 +212,19 @@ class Outgoing extends React.Component{
           onChange={ (event) =>{
             this.updateQuery(event.target.value)}}
             />
+
+          {
+            this.state.cart.length > 0 ?
+            <TotalTable total={this.state.cartTotal}
+                        subTotal={this.state.cartSubtotal}
+                        tax={this.state.cartTax}/>
+
+            :
+
+            "Cart is Empty"
+          }
+
+
           <OutgoingItemAvatar
           data={this.state.cart}
           increment={this.increment}

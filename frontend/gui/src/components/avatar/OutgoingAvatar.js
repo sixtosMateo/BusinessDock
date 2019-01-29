@@ -34,6 +34,8 @@ const OutgoingItemAvatar =(props)=>{
                 style={{ fontSize: '16px', color: '#0000ff', border:"solid 1px" }}/>
             </div>
             <div>{item.salePrice}</div>
+            {item.itemSaleTotal}
+            
           </List.Item>
         )}
       />

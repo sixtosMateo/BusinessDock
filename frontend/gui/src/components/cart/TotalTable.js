@@ -4,11 +4,14 @@ import { Icon } from 'antd';
 import {Link} from 'react-router-dom';
 
 
-class Cart extends React.Component{
+class TotalTable extends React.Component{
 render(){
     return(
       <div className="cart">
 
+      <div>{this.props.subTotal}</div>
+      <div>{this.props.tax}</div>
+      <div>{this.props.total}</div>
 
       </div>
 
@@ -17,4 +20,4 @@ render(){
 }
 }
 
-export default Cart;
+export default TotalTable;

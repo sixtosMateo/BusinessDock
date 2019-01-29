@@ -23,6 +23,7 @@ class NormalLoginForm extends React.Component {
         this.props.getItems();
         this.props.getEmployees();
         this.props.getVendors();
+        
         this.props.history.push('/');
       }
     });

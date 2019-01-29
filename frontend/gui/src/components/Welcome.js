@@ -10,7 +10,7 @@ render(){
       <div className="welcomeComponent">
         <div className="icon-container">
           <h2>Scan barcode:</h2>
-          <Icon type="qrcode" style={{fontSize: '50px'}}/>
+          <Icon type="barcode" style={{fontSize: '50px'}}/>
         </div>
 
         <div className="icon-container">

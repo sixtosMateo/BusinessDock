@@ -66,7 +66,9 @@ class CustomLayout extends React.Component{
             </div>
         </Footer>
 
-        <div style={{ float:"bottom", color:"#FFFFFF",textAlign:"center", width:"100%", background:'#001529'} }>BusinessDock ©2018 Created by Mateo Sixtos</div>
+        <div style={{ float:"bottom", textAlign:"center", width:"100%", background:'#001529'}}>
+        <h4 style={{color:"#FFFFFF"}}>BusinessDock ©2018 Created by Mateo Sixtos</h4>
+        </div>
       </Layout>
     );
   }
