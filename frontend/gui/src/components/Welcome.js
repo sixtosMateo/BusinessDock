@@ -9,10 +9,10 @@ class Welcome extends React.Component{
 render(){
     return(
       <div className="welcomeComponent">
-        <h1>Welcome to BusinessDock Homepage!</h1>
+        <h1 >Welcome to BusinessDock Homepage!</h1>
         <Row style={{marginBottom:"20px"}}>
           <Col span={6}>
-            <h3>Scan barcode:</h3>
+            <h3 style={{font:"oswald"}}>Scan barcode:</h3>
             <Icon type="barcode" style={{fontSize: '40px'}}/>
           </Col>
           <Col span={6}>
