@@ -19,7 +19,7 @@ class CustomLayout extends React.Component{
           <Dashboard/>
         </Header>
 
-        <Content style={{ padding: '0 50px', marginBottom:'60px'}}>
+        <Content style={{ padding: '0 50px', marginBottom:'90px'}}>
           <Submenu {...this.props}/>
 
           <div className="layoutContentChildren" style={{ background: '#fff', padding: 10, minHeight: 280 }}>

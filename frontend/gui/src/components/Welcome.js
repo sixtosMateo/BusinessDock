@@ -30,7 +30,7 @@ render(){
         </Row>
         <div>
           <h2>BusinessDock</h2>
-          <div style={{width:"600px"}}>
+          <div style={{width:"600px auto"}}>
           <p>BusinessDock helps local vendors innovate the
           process of managing business operations in a daily basis. The
           user-interface is straightforward and helps clents interact with
