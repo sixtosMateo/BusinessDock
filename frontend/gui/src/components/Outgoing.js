@@ -121,6 +121,8 @@ class Outgoing extends React.Component{
   }
 
   clearCart=()=>{
+
+    console.log("hello");
     this.setState(()=>{
       return {cart:[]}
     },()=>{
@@ -232,17 +234,29 @@ class Outgoing extends React.Component{
 
           {
             this.state.cart.length > 0 ?
+            <div>
+              <Col span={8} style={{position: "absolute",right: "0"}}>
+                <TotalTable total={this.state.cartTotal}
+                            subTotal={this.state.cartSubtotal}
+                            tax={this.state.cartTax}
+                            clearCart={this.clearCart}/>
+                <div className="empty-cart" onClick={()=>this.clearCart()}
+                     style={{fontFamily: "Permanent Marker",
+                             border:"solid 1px",
+                             color:"#cc0000",
+                             width:"7rem"}}>
+                    <Icon type="delete" style={{color:"#cc0000"}}/>
+                        EmptyCart
+                </div>
+              </Col>
 
-            <Col span={6} style={{position: "absolute",right: "0"}}>
-              <TotalTable total={this.state.cartTotal}
-                          subTotal={this.state.cartSubtotal}
-                          tax={this.state.cartTax}
-                          clearCart={this.state.clearCart}/>
-            </Col>
+            </div>
+
             :
             ""
           }
           </Row>
+
 
           <OutgoingItemAvatar
           data={this.state.cart}
