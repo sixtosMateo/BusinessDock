@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 class TotalTable extends React.Component{
 render(){
     return(
-      <div className="cart">
+      <div className="total-table">
 
       <div>{this.props.subTotal}</div>
       <div>{this.props.tax}</div>

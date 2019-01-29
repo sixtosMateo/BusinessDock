@@ -9,6 +9,7 @@ class Welcome extends React.Component{
 render(){
     return(
       <div className="welcomeComponent">
+        <h1>Welcome to BusinessDock Homepage!</h1>
         <Row style={{marginBottom:"20px"}}>
           <Col span={6}>
             <h3>Scan barcode:</h3>
@@ -28,7 +29,7 @@ render(){
           </Col>
         </Row>
         <div>
-          <h1>BusinessDock</h1>
+          <h2>BusinessDock</h2>
           <div style={{width:"600px"}}>
           <p>BusinessDock helps local vendors innovate the
           process of managing business operations in a daily basis. The
