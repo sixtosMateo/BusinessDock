@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { List, Icon, Row, Col} from 'antd';
-
+import TransactionDashboard from "../cart/TransactionDashboard";
 
 const OutgoingItemAvatar =(props)=>{
 
@@ -11,13 +11,7 @@ const OutgoingItemAvatar =(props)=>{
 
     <div style={{marginTop:"15px"}}>
         {props.data.length > 0 ?
-          <Row type="flex" justify="start">
-            <Col span={4} style={{fontFamily: "Permanent Marker"}}>Barcode: </Col>
-            <Col span={4} style={{fontFamily: "Permanent Marker"}}>Name: </Col>
-            <Col span={4} style={{fontFamily: "Permanent Marker"}}>Sale Price: </Col>
-            <Col span={4} style={{fontFamily: "Permanent Marker"}}>Quantity: </Col>
-            <Col span={4} style={{fontFamily: "Permanent Marker"}}>Item Sum: </Col>
-          </Row>
+          <TransactionDashboard/>
         :
         ""
       }

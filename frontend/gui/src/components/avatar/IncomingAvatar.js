@@ -1,11 +1,21 @@
+// activate a modal when they hover the item 
+
 import React from 'react';
 import { List } from 'antd';
 import { Icon, Row, Col} from 'antd';
+import TransactionDashboard from "../cart/TransactionDashboard";
 
 const IncomingItemAvatar =(props)=>{
   const {increment, decrement} = props;
   return(
-    <div>
+    <div style={{marginTop:"15px"}}>
+
+      {props.data.length > 0 ?
+        <TransactionDashboard/>
+        :
+        ""
+      }
+
       <List
         itemLayout="vertical"
         size="small"

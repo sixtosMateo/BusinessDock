@@ -1,4 +1,4 @@
-// what happens when user wants to buy a new item
+// what happens when user wants to buy a new item: display a modal
 // i think its best two have two separate table for incoming and outgoing tables
 // display table when item is new ask user if they want to add new item
 // when user finished scanning the value needs to disapear
@@ -13,6 +13,7 @@ import * as actions from '../store/actions/auth';
 import { connect } from 'react-redux';
 import IncomingItemAvatar from './avatar/IncomingAvatar';
 import TotalTable from './cart/TotalTable';
+import { Row, Col , Icon } from 'antd';
 
 class Incoming extends React.Component{
   state={
@@ -181,13 +182,40 @@ class Incoming extends React.Component{
       return(
 
         <div className="incomingComponent">
-          <DebounceInput
-          minLength={5}
-          debounceTimeout={300}
-          onClick={(event => event.target.select())}
-          placeholder="Incoming: Scan Item"
-          style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
-          onChange={event => this.updateQuery(event.target.value)} />
+        <Row>
+          <Col span={12}>
+
+            <DebounceInput
+            minLength={5}
+            debounceTimeout={300}
+            onClick={(event => event.target.select())}
+            placeholder="Incoming: Scan Item"
+            style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
+            onChange={event => this.updateQuery(event.target.value)} />
+          </Col>
+
+          {
+            this.state.cart.length > 0 ?
+            <div>
+              <Col span={8} style={{position: "absolute",right: "0"}}>
+                <TotalTable
+                  total={this.state.total}
+                  subTotal={this.state.subTotal}
+                  tax={this.state.tax}
+                  clearCart={this.clearCart}/>
+                <div className="empty-cart" onClick={()=>this.clearCart()}
+                         style={{fontFamily: "Permanent Marker",
+                                 color:"#cc0000",
+                                 width:"7rem"}}>
+                <Icon type="delete" style={{color:"#cc0000"}}/> EmptyCart
+
+                </div>
+              </Col>
+            </div>:
+            ""
+          }
+          </Row>
+
 
           <IncomingItemAvatar
             data={this.state.cart}
@@ -195,11 +223,7 @@ class Incoming extends React.Component{
             decrement={this.decrement}
           />
 
-          <TotalTable
-          total={this.state.total}
-                      subTotal={this.state.subTotal}
-                      tax={this.state.tax}
-                      clearCart={this.clearCart}/>
+
         </div>
 
 
