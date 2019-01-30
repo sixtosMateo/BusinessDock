@@ -17,7 +17,10 @@ class Incoming extends React.Component{
   state={
     boughtItems:[],
     query:'',
-    cart:[]
+    cart:[],
+    subTotal:0,
+    tax:0,
+    total:0
   }
 
   componentDidMount(){
@@ -71,7 +74,7 @@ class Incoming extends React.Component{
     }
 
     if(this.isDuplicateCart(barcode)){
-      // increment
+      this.increment(barcode)
       return
     }
 
@@ -87,9 +90,89 @@ class Incoming extends React.Component{
     this.setState(()=>{
       return { boughtItems: tempBoughtItems, cart:[...this.state.cart, item]}
     },
-    // ()=>{this.addTotal()}
+    ()=>{this.addTotal()}
   )
 
+  }
+
+  addTotal =()=>{
+    let subTotal = 0;
+    this.state.cart.map(item => (subTotal += item.itemSaleTotal));
+    const tempTax = subTotal * .0975;
+    const tax = parseFloat(tempTax.toFixed(2));
+    const total = subTotal + tax;
+
+    this.setState(()=>{
+      return {
+        subTotal,
+        tax,
+        total
+      }
+    })
+
+  }
+
+  increment = (barcode)=>{
+    let tempCart =[...this.state.cart]
+    const duplicateItem = tempCart.find(item=> item.barcode === barcode)
+    const index = tempCart.indexOf(duplicateItem)
+    const item = tempCart[index]
+
+    item.quantity = item.quantity + 1;
+    const sum = item.quantity * item.purchasedPrice;
+    item.itemSaleTotal = sum;
+
+
+    this.setState(()=>{
+      return { cart:[...tempCart]}
+    },
+    ()=>{this.addTotal()})
+  }
+
+  decrement = (barcode)=>{
+    let tempCart = [...this.state.cart]
+    const selectedItem = tempCart.find(item=>item.barcode===barcode);
+
+    const index = tempCart.indexOf(selectedItem)
+
+    const item  = tempCart[index]
+
+    item.quantity = item.quantity-1;
+
+    if(item.quantity ==0){
+      this.removeItem(barcode)
+    }
+    else{
+      item.itemSaleTotal = item.quantity * item.salePrice;
+
+      this.setState(()=>{
+        return {cart:[...tempCart]}},
+        ()=>{this.addTotal()}
+      )
+    }
+  }
+
+  removeItem=(barcode)=>{
+    let tempItems = [...this.state.boughtItems];
+    let tempCart = [...this.state.cart];
+    tempCart = tempCart.filter(item => item.barcode !== barcode)
+
+    const index =  tempItems.indexOf(this.getItem(barcode))
+    let removedItem = tempItems[index]
+
+  // this the overall products and setting the values to defaut
+
+    removedItem.quantity = 0
+    removedItem.itemSaleTotal = 0
+
+    this.setState(()=>{
+      return {
+        cart:[...tempCart],
+        product:[...tempItems]
+      }
+    },
+    ()=> {this.addTotal()}
+  )
   }
 
 
