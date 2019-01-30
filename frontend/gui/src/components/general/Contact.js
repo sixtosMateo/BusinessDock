@@ -10,37 +10,29 @@ render(){
     return(
       <div className = "contactComponent">
 
-        <Row>
+        <Row gutter={24} >
 
-          <Col span={12} style={{fontFamily: "Permanent Marker", left:"0"}}>
-            <div style={{ width:'16rem'}} >
+            <Col span={8} >
               <h1>Mateo Sixtos: </h1>
               <img src="/profileImage.png" style={{width:'15rem', height:"15rem", border:"solid 1px"}} alt="profile Image"/>
-            </div>
-          </Col>
+            </Col>
 
-          <div style={{ textAlign:"left", float:'right',  width:'15rem'}}>
-
-            <div>
+            <Col span={8} >
               <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Software Engineer</h2>
               <h4>CSU Monterey Bay </h4>
               <img src="/csumb.png" style={{width:'5rem', height:"5rem", border:"solid 1px"}} alt="csumb Image"/>
-            </div>
-            <div style={{ width:'12rem'}} >
+            </Col>
+
+            <Col span={8} >
               <h2 style={{fontFamily: "Permanent Marker"}}>Contact info:</h2>
               <div style={{color:"#1e90ff"}}><Icon type="linkedin" onClick={()=>window.open('https://www.linkedin.com/in/sixtosmateo/')}/>  in/sixtosmateo/</div>
               <div style={{color:"#1e90ff"}}><Icon type="github" onClick={()=>window.open('https://github.com/sixtosMateo/')}/>  github.com/sixtosMateo/</div>
               <div style={{color:"#1e90ff"}}><Icon type="twitter" onClick={()=>window.open('https://twitter.com/SixtosMateo')}/>  twitter.com/SixtosMateo</div>
               <div><Icon type="mail" />  sixtosmateo@gmail.com</div>
               <div><Icon type="phone"/>  (831)585-0879</div>
-            </div>
-
-          </div>
-
-
+            </Col>
         </Row>
-
-        <div className = "Description" style={{margin:"15px"}}>
+        <div className = "Description" style={{right:"0"}}>
           <p>Hi, my name is Mateo Sixtos. I am a Full-Stack Developer who enjoys
           developing responsive web-applications that innovates the process of
           managing business operations for local vendors. I was able to graduate
@@ -62,6 +54,7 @@ render(){
 
           <p>If you have any questions feel free to contact me at sixtosmateo@gmail.com!</p>
         </div>
+
       </div>
     );
 }
