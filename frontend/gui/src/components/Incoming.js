@@ -3,33 +3,47 @@
 // display table when item is new ask user if they want to add new item
 // when user finished scanning the value needs to disapear
 
-// INSTEAD OF USING THE FILTER METHOD WE CAN USER THE REDUCE METHOD THAT WILL RETURN ONE ITEM
 
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 import escapeRegExp from 'escape-string-regexp';
 import axios from 'axios';
-
+import { withRouter } from 'react-router-dom';
+import * as actions from '../store/actions/auth';
+import { connect } from 'react-redux';
 import IncomingItemAvatar from './IncomingItems';
 
 class Incoming extends React.Component{
   state={
-    items:[],
+    boughtItems:[],
     query:'',
-    purchasedItems:[]
+    cart:[]
   }
 
   componentDidMount(){
-      axios.get('http://127.0.0.1:8000/api/items/')
-        .then(res => {
-          this.setState({
-            items: res.data
-          });
-        })
+    this.setItems()
   }
 
-  checkPurchasedItem(purchasedItem) {
-    return this.state.purchasedItems.some(item => purchasedItem === item.barcode);
+  setItems=()=>{
+    let boughtItems =[];
+
+    this.props.items.forEach(item=>{
+      const singleItem = {...item}
+      boughtItems = [...boughtItems, singleItem]
+    })
+
+    this.setState(()=>{
+      return {boughtItems}
+    });
+
+  }
+
+  getItem=(barcode)=>{
+    const item = this.state.boughtItems.find(item => item.barcode === barcode)
+    if(item){
+      return item
+    }
+    return null
   }
 
   updateQuery=(query)=>{
@@ -37,44 +51,47 @@ class Incoming extends React.Component{
         query: query.trim()
       })
 
-      let item
-
       if(this.state.query){
-        if (this.checkPurchasedItem(query) ===  false){
-          const match = new RegExp(escapeRegExp(this.state.query), 'i')
-          // ITEM IS A ARRAY OF ITEMS THAT MATCH BARCODE TO QUERY
-          item = this.state.items.filter((item) =>
-            match.test(item.barcode)
-          )
-        }
-        else{
-          item=""
-        }
+        this.addToCart(this.state.query)
       }
-      else{
-        item = ""
-      }
-
-      this.pushItem(item[0])
 
   }
 
+  isDuplicateCart=(barcode)=>{
+    let duplicate
+    duplicate = this.state.cart.find(item=> item.barcode === barcode)
+    return duplicate
+  }
 
-  pushItem = (item) =>{
-    // what happens when the item is repeated
-    // quantity needs to change
-    // itemSaleTotal needs to change depending on the quantity
-    if(item){
-      let newItem = {"barcode": item.barcode, "name":item.name,
-                    "transactionType": "incoming", "quantity": 1,
-                    "price": item.purchasedPrice, "tax": 0.0925,
-                    "itemSaleTotal": parseFloat((item.purchasedPrice + item.purchasedPrice * 0.0925).toFixed(2))}
-
-      this.setState({
-        purchasedItems: [...this.state.purchasedItems, newItem]
-      })
+  addToCart=(barcode)=>{
+    const tempBoughtItems = [...this.state.boughtItems]
+    // item not found, we can use this to activate modal
+    if(this.getItem(barcode) == null){
+      return
     }
+
+    if(this.isDuplicateCart(barcode)){
+      // increment
+      return
+    }
+
+    const index = tempBoughtItems.indexOf(this.getItem(barcode))
+    const item = tempBoughtItems[index]
+
+    item.quantity = 1;
+    item.transactionType = "incoming"
+    const price = item.purchasedPrice;
+    item.tax = .0975;
+    item.itemSaleTotal = price;
+
+    this.setState(()=>{
+      return { boughtItems: tempBoughtItems, cart:[...this.state.cart, item]}
+    },
+    // ()=>{this.addTotal()}
+  )
+
   }
+
 
   render(){
       return(
@@ -88,7 +105,7 @@ class Incoming extends React.Component{
           style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
           onChange={event => this.updateQuery(event.target.value)} />
 
-          <IncomingItemAvatar data={this.state.purchasedItems}/>
+          <IncomingItemAvatar data={this.state.cart}/>
         </div>
 
 
@@ -96,4 +113,20 @@ class Incoming extends React.Component{
 }
 }
 
-export default Incoming;
+
+const mapStateToProps = state =>{
+  // return object is what you want to map into a property
+  return {
+    items: state.items,
+    isAuthenticated: state.token !== null
+
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return {
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+  }
+}
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Incoming));

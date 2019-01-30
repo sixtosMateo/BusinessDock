@@ -18,6 +18,8 @@ import TotalTable from './cart/TotalTable';
 import 'antd/dist/antd.css';
 import { Row, Col , Icon } from 'antd';
 
+
+
 class Outgoing extends React.Component{
 
   state={
@@ -56,6 +58,7 @@ class Outgoing extends React.Component{
 
     // setting the initial values
     item.quantity = 1;
+    item.transactionType = "outgoing"
     const price = item.salePrice;
     item.tax = .0975;
     item.itemSaleTotal = price;
@@ -121,17 +124,15 @@ class Outgoing extends React.Component{
   }
 
   clearCart=()=>{
-
-    console.log("hello");
-    this.setState(()=>{
-      return {cart:[]}
-    },()=>{
-      //callback function
-      // new originalfresh copy of all the items rather than referencing
-      // all the modify object are set to default
-      this.setItems();
-      this.addTotal();
-    });
+      this.setState(()=>{
+        return {cart:[]}
+      },()=>{
+        //callback function
+        // new originalfresh copy of all the items rather than referencing
+        // all the modify object are set to default
+        this.setItems();
+        this.addTotal();
+      });
   }
 
 // ============ Helper methods ====================
@@ -141,9 +142,8 @@ class Outgoing extends React.Component{
     if(item){
       return item
     }
-    else{
+
       return null
-    }
   }
 
   // defines whether item is already in cart
@@ -151,7 +151,6 @@ class Outgoing extends React.Component{
     let duplicate
     duplicate = this.state.cart.find(item=> item.barcode === barcode)
     return duplicate
-
   }
 
   // set state a copy from state items
@@ -167,8 +166,6 @@ class Outgoing extends React.Component{
     })
 
     this.setState(()=>{
-
-        console.log(soldItems)
       return {soldItems}
     });
 
@@ -263,7 +260,6 @@ class Outgoing extends React.Component{
           increment={this.increment}
           decrement={this.decrement}
           />
-
 
 
         </div>
