@@ -11,7 +11,8 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import { connect } from 'react-redux';
-import IncomingItemAvatar from './IncomingItems';
+import IncomingItemAvatar from './avatar/IncomingAvatar';
+import TotalTable from './cart/TotalTable';
 
 class Incoming extends React.Component{
   state={
@@ -188,7 +189,17 @@ class Incoming extends React.Component{
           style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
           onChange={event => this.updateQuery(event.target.value)} />
 
-          <IncomingItemAvatar data={this.state.cart}/>
+          <IncomingItemAvatar
+            data={this.state.cart}
+            increment={this.increment}
+            decrement={this.decrement}
+          />
+
+          <TotalTable
+          total={this.state.total}
+                      subTotal={this.state.subTotal}
+                      tax={this.state.tax}
+                      clearCart={this.clearCart}/>
         </div>
 
 

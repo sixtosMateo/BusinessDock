@@ -11,8 +11,6 @@ class TotalTable extends React.Component{
   render(){
       return(
         <div className="total-table" style={{border:"solid 1px" ,float:"right" , width: "150px"}}>
-
-
           <div>
             <div style={{fontFamily: "Permanent Marker"}}><h3>Subtotal: {this.props.subTotal}</h3></div>
             <div style={{fontFamily: "Permanent Marker"}}><h3>Tax: {this.props.tax}</h3></div>
