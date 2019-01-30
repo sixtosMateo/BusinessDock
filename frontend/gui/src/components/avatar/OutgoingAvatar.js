@@ -9,7 +9,7 @@ const OutgoingItemAvatar =(props)=>{
   const {increment, decrement} = props;
   return(
 
-    <div style={{marginTop:"15px"}}>
+    <div style={{marginTop:"25px"}}>
         {props.data.length > 0 ?
           <TransactionDashboard/>
         :

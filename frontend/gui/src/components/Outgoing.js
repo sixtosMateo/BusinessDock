@@ -1,10 +1,7 @@
-// instead of calling all my items eveytime they come to this page why not
-// call the items when login this can be ddone in a higher level Component
-
 // when creating a item update state and post to db
 // sale tax has to be dynamically based on location geo-location AND api call
 
-// need OutgoingItemAvatar to be in a in scroll table
+
 
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
@@ -102,10 +99,8 @@ class Outgoing extends React.Component{
 
   decrement = (barcode) =>{
     let tempCart = [...this.state.cart]
-    const selectedItem = tempCart.find(item=>item.barcode===barcode);
-
+    const selectedItem = tempCart.find(item=>item.barcode===barcode)
     const index = tempCart.indexOf(selectedItem)
-
     const item  = tempCart[index]
 
     item.quantity = item.quantity-1;
@@ -239,7 +234,6 @@ class Outgoing extends React.Component{
                             clearCart={this.clearCart}/>
                 <div className="empty-cart" onClick={()=>this.clearCart()}
                      style={{fontFamily: "Permanent Marker",
-                             border:"solid 1px",
                              color:"#cc0000",
                              width:"7rem"}}>
                     <Icon type="delete" style={{color:"#cc0000"}}/>

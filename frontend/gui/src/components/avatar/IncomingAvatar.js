@@ -1,4 +1,4 @@
-// activate a modal when they hover the item 
+// activate a modal when they hover the item
 
 import React from 'react';
 import { List } from 'antd';
@@ -8,7 +8,7 @@ import TransactionDashboard from "../cart/TransactionDashboard";
 const IncomingItemAvatar =(props)=>{
   const {increment, decrement} = props;
   return(
-    <div style={{marginTop:"15px"}}>
+    <div style={{marginTop:"25px"}}>
 
       {props.data.length > 0 ?
         <TransactionDashboard/>
@@ -31,10 +31,12 @@ const IncomingItemAvatar =(props)=>{
 
           <List.Item
             key={item.barcode}>
-            <List.Item.Meta
-              title={item.barcode}
-              description={item.name}/>
-
+            <List.Item.Meta/>
+            <Row type="flex" justify="start">
+            <Col span={4}>{item.barcode} </Col>
+            <Col span={4}>{item.name}</Col>
+            <Col span={4}>{item.purchasedPrice}</Col>
+            <Col span={4}>
               <Icon type="minus" onClick={()=> decrement(item.barcode)}
                 style={{ fontSize: '16px', color: '#ff0000' }}/>
 
@@ -42,6 +44,12 @@ const IncomingItemAvatar =(props)=>{
 
               <Icon type="plus" onClick={()=> increment(item.barcode)}
                 style={{ fontSize: '16px', color: '#0000ff'}}/>
+            </Col>
+
+            <Col span={4}>{item.itemSaleTotal}</Col>
+            </Row>
+
+
           </List.Item>
         )}
       />

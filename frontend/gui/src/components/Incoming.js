@@ -177,6 +177,17 @@ class Incoming extends React.Component{
   )
   }
 
+  clearCart=()=>{
+      this.setState(()=>{
+        return {cart:[]}
+      },()=>{
+        //callback function
+        // new originalfresh copy of all the items rather than referencing
+        // all the modify object are set to default
+        this.setItems();
+        this.addTotal();
+      });
+  }
 
   render(){
       return(
