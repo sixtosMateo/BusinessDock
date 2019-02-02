@@ -1,8 +1,6 @@
 // when creating a item update state and post to db
 // sale tax has to be dynamically based on location geo-location AND api call
 
-
-
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 import escapeRegExp from 'escape-string-regexp';
@@ -27,8 +25,8 @@ class Outgoing extends React.Component{
     cartTax:0,
     cartTotal: 0,
 
-  }
 
+  }
 
   componentDidMount(){
 
@@ -248,13 +246,11 @@ class Outgoing extends React.Component{
           }
           </Row>
 
-
           <OutgoingItemAvatar
           data={this.state.cart}
           increment={this.increment}
           decrement={this.decrement}
           />
-
 
         </div>
 

@@ -6,6 +6,7 @@
     "acorn": "^6.0.4",
     "antd": "^3.11.2",
     "axios": "^0.18.0",
+    "bootstrap": "^4.2.1",
     "escape-string-regexp": "^1.0.5",
     "form-serialize": "^0.7.2",
     "react": "^16.7.0",
@@ -19,6 +20,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "sort-by": "^1.2.0",
+    "styled-components": "^4.1.3",
     "webpack": "^4.19.1",
     "webpack-dev-server": "^3.1.9"
   },

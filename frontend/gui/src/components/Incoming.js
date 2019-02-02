@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import IncomingItemAvatar from './avatar/IncomingAvatar';
 import TotalTable from './cart/TotalTable';
 import { Row, Col , Icon } from 'antd';
+import Model from './general/ModelContainer';
 
 class Incoming extends React.Component{
   state={
@@ -22,7 +23,8 @@ class Incoming extends React.Component{
     cart:[],
     subTotal:0,
     tax:0,
-    total:0
+    total:0,
+    modelOpen: false
   }
 
   componentDidMount(){
@@ -57,6 +59,7 @@ class Incoming extends React.Component{
       })
 
       if(this.state.query){
+        this.openModel(this.state.query)
         this.addToCart(this.state.query)
       }
 
@@ -189,6 +192,30 @@ class Incoming extends React.Component{
       });
   }
 
+  // openModel
+  openModel=(query)=>{
+    const product = this.getItem(query);
+
+    if(product == null){
+      this.setState(()=>{
+        return { modelOpen:true}
+      })
+      console.log("hello")
+    }
+    else{
+      this.setState(()=>{
+        return { modelOpen:false}
+      })
+    }
+
+  }
+
+  closeModel=()=>{
+    this.setState(()=>{
+      return {modelOpen:false}
+    })
+  }
+
   render(){
       return(
 
@@ -202,8 +229,12 @@ class Incoming extends React.Component{
             onClick={(event => event.target.select())}
             placeholder="Incoming: Scan Item"
             style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
-            onChange={event => this.updateQuery(event.target.value)} />
+            onChange={event =>
+              this.updateQuery(event.target.value)}/>
           </Col>
+
+
+
 
           {
             this.state.cart.length > 0 ?
@@ -228,6 +259,7 @@ class Incoming extends React.Component{
           </Row>
 
 
+
           <IncomingItemAvatar
             data={this.state.cart}
             increment={this.increment}
@@ -235,13 +267,22 @@ class Incoming extends React.Component{
           />
 
 
+
         </div>
 
 
       );
-}
+    }
 }
 
+//
+// {
+//   this.state.modelOpen ?
+//
+//     <Model/>
+//     :
+//     ""
+// }
 
 const mapStateToProps = state =>{
   // return object is what you want to map into a property
