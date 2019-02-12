@@ -26,7 +26,7 @@ import NewVendor from './containers/Forms/NewVendorForm';
 
 
 const BaseRouter = () =>(
-  <div>
+  <div className="routes-div">
     <Route exact path='/' component={Welcome}/>{" "}
     <Route exact path='/login/' component={Login}/>{" "}
 
