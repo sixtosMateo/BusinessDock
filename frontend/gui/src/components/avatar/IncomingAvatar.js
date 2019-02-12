@@ -8,7 +8,7 @@ import TransactionDashboard from "../cart/TransactionDashboard";
 const IncomingItemAvatar =(props)=>{
   const {increment, decrement} = props;
   return(
-    <div style={{marginTop:"25px"}}>
+    <div className="incoming-item-avatar">
 
       {props.data.length > 0 ?
         <TransactionDashboard/>
@@ -26,9 +26,7 @@ const IncomingItemAvatar =(props)=>{
           pageSize: 8,
         }}
         dataSource={props.data}
-
         renderItem={item => (
-
           <List.Item
             key={item.barcode}>
             <List.Item.Meta/>

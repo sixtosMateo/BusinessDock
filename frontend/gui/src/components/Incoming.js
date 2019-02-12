@@ -219,43 +219,56 @@ class Incoming extends React.Component{
   render(){
       return(
 
-        <div className="incomingComponent">
-        <Row>
-          <Col span={12}>
+        <div className="incomingComponent" >
+          <Row>
+            <Col span={12} style={{width:"50%"}}>
+                <DebounceInput
+                minLength={5}
+                debounceTimeout={300}
+                onClick={(event => event.target.select())}
+                placeholder="Incoming: Scan Item"
+                style={{width:"100%",border: "1px solid #ccc", font:"sans-serif"}}
+                onChange={event =>
+                  this.updateQuery(event.target.value)}/>
 
-            <DebounceInput
-            minLength={5}
-            debounceTimeout={300}
-            onClick={(event => event.target.select())}
-            placeholder="Incoming: Scan Item"
-            style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
-            onChange={event =>
-              this.updateQuery(event.target.value)}/>
-          </Col>
+            </Col>
+
+            {
+              this.state.cart.length > 0 ?
+
+              <Col span={12} style={{width:"50%", padding:"2px"}}>
+                  
+                  <Col span={12} style={{padding:"1px", width:"50%"}}>
+                    <Icon type="shopping-cart"
+                          className="submit-cart"
+                          onClick={()=>this.clearCart()}
+                          style={{fontFamily: "Permanent Marker",
+                                  color:"#00AF33",
+                                  width:"3rem",
+                                  border:"1px solid"}}/> <span style={{width:"5rem", color:"#00AF33"}}>Submit</span>
 
 
+                    <Icon type="delete"
+                          className="empty-cart"
+                          onClick={()=>this.clearCart()}
+                          style={{fontFamily: "Permanent Marker",
+                                  color:"#cc0000",
+                                  width:"3rem",
+                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}>ClearCart</span>
+                  </Col>
 
-
-          {
-            this.state.cart.length > 0 ?
-            <div>
-              <Col span={8} style={{position: "absolute",right: "0"}}>
-                <TotalTable
-                  total={this.state.total}
-                  subTotal={this.state.subTotal}
-                  tax={this.state.tax}
-                  clearCart={this.clearCart}/>
-                <div className="empty-cart" onClick={()=>this.clearCart()}
-                         style={{fontFamily: "Permanent Marker",
-                                 color:"#cc0000",
-                                 width:"7rem"}}>
-                <Icon type="delete" style={{color:"#cc0000"}}/> EmptyCart
-
-                </div>
+                  <Col span={12} style={{padding:"1px", width:"50%"}}>
+                    <TotalTable
+                      total={this.state.total}
+                      subTotal={this.state.subTotal}
+                      tax={this.state.tax}
+                      clearCart={this.clearCart}/>
+                  </Col>
               </Col>
-            </div>:
-            ""
-          }
+
+              :
+              ""
+            }
           </Row>
 
 
