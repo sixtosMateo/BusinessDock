@@ -209,48 +209,64 @@ class Outgoing extends React.Component{
       return(
         <div className="outgoingComponent">
 
-        <Row>
-          <Col span={12}>
-            <DebounceInput
-            minLength={5}
-            debounceTimeout={300}
-            onClick={(event => event.target.select())}
-            placeholder="Outgoing: Scan Item"
-            style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
-            onChange={ (event) =>{
-              this.updateQuery(event.target.value)}}
-              />
-          </Col>
+          <Row>
+            <Col span={12} style={{width:"50%"}}>
+              <DebounceInput
+              minLength={5}
+              debounceTimeout={300}
+              onClick={(event => event.target.select())}
+              placeholder="Outgoing: Scan Item"
+              style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
+              onChange={ (event) =>{
+                this.updateQuery(event.target.value)}}
+                />
+            </Col>
 
-          {
-            this.state.cart.length > 0 ?
-            <div>
-              <Col span={8} style={{position: "absolute",right: "0"}}>
-                <TotalTable total={this.state.cartTotal}
-                            subTotal={this.state.cartSubtotal}
-                            tax={this.state.cartTax}
-                            clearCart={this.clearCart}/>
-                <div className="empty-cart" onClick={()=>this.clearCart()}
-                     style={{fontFamily: "Permanent Marker",
-                             color:"#cc0000",
-                             width:"7rem"}}>
-                    <Icon type="delete" style={{color:"#cc0000"}}/>
-                        EmptyCart
-                </div>
-              </Col>
+            {
+              this.state.cart.length > 0 ?
 
-            </div>
+                <Col span={12} style={{width:"50%", padding:"2px"}}>
+                  
+                  <Col span={12} style={{width:"50%", padding:"2px"}}>
 
-            :
-            ""
-          }
-          </Row>
+                    <Icon type="shopping-cart"
+                          className="submit-cart"
+                          onClick={()=>this.clearCart()}
+                          style={{fontFamily: "Permanent Marker",
+                                  color:"#00AF33",
+                                  width:"3rem",
+                                  border:"1px solid"}}/> <span style={{width:"5rem", color:"#00AF33"}}>Submit</span>
 
-          <OutgoingItemAvatar
-          data={this.state.cart}
-          increment={this.increment}
-          decrement={this.decrement}
-          />
+
+                    <Icon type="delete"
+                          className="empty-cart"
+                          onClick={()=>this.clearCart()}
+                          style={{fontFamily: "Permanent Marker",
+                                  color:"#cc0000",
+                                  width:"3rem",
+                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}>ClearCart</span>
+                  </Col>
+
+                  <Col span={12} style={{padding:"1px", width:"50%"}}>
+                    <TotalTable total={this.state.cartTotal}
+                                subTotal={this.state.cartSubtotal}
+                                tax={this.state.cartTax}
+                                clearCart={this.clearCart}/>
+                  </Col>
+                </Col>
+
+
+
+              :
+              ""
+            }
+            </Row>
+
+            <OutgoingItemAvatar
+            data={this.state.cart}
+            increment={this.increment}
+            decrement={this.decrement}
+            />
 
         </div>
 
