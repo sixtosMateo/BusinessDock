@@ -2,7 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
-
+import * as actions from '../../store/actions/auth';
+import serializeForm from 'form-serialize';
+import axios from 'axios';
 
 
 const FormItem = Form.Item;
@@ -10,29 +12,35 @@ const FormItem = Form.Item;
 class NewVendor extends React.Component{
   state = {
     confirmDirty: false,
-  };
+  }
+
+  createVendor(vendor){
+    axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
+    .then(function (response) {
+      // console.log(response)
+      if(response.status === 201){
+        window.location.reload()
+        console.log("Success Vendor was submit")
+      }
+    })
+  }
+
 
   handleSubmit = (e) =>{
 
-      // e.preventDefault()
-      // // serializeForm will do the browser behavior when submitting a form
-      // // but instead of serializing into a string and reload the browser
-      // // it will the browser
-      // const values = serializeForm(e.target, // e.target is the from itself
-      // {
-      //   hash: true
-      // })
+      e.preventDefault()
+
+      const values = serializeForm(e.target, // e.target is the from itself
+      {
+        hash: true
+      })
+
       // //console.log(values)
-      // // makes sure that the passed something
-      // if(this.props.onCreateContact){
-      //   this.props.onCreateContact(values);
-      // }
-
+      // need to check if values has content
+      this.createVendor(values);
   }
 
-  onChange = (value) => {
-    console.log('changed', value);
-  }
+
 
   handleConfirmBlur = (e) => {
     const value = e.target.value;
@@ -45,8 +53,6 @@ class NewVendor extends React.Component{
         <div className="newVendorComponent">
 
           <Form onSubmit={this.handleSubmit}>
-
-
             <FormItem label="Name" >
 
               {getFieldDecorator('name', {
@@ -92,6 +98,12 @@ const mapStateToProps = state =>{
   // return object is what you want to map into a property
   return {
     token: state.token
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return {
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
   }
 }
 

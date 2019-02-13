@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Form, Input, Button, InputNumber} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
 
 
@@ -16,26 +17,18 @@ const FormItem = Form.Item;
 class NewItem extends React.Component{
   state = {
     confirmDirty: false,
-    items:[]
+
   };
 
   createItem(item){
     axios.post('http://127.0.0.1:8000/api/items/', item)
     .then(function (response) {
-        if(response.status == 201){
-
-        }
-      })
-    .then(
-      (item) =>
-        { this.setState(state =>
-          ({
-
-            items: state.items.concat([item])
-
-          })
-        )
-      })
+      // console.log(response)
+      if(response.status === 201){
+        window.location.reload()
+        console.log("Success item was submit")
+      }
+    })
 
   }
   // console.log(values)
@@ -50,7 +43,7 @@ class NewItem extends React.Component{
         hash: true
       })
 
-
+      // need to check if values has content
       this.createItem(values)
 
 
@@ -67,7 +60,7 @@ class NewItem extends React.Component{
       return(
         <div className="newItemComponent">
 
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} >
             <FormItem label="Barcode" >
 
               {getFieldDecorator('barcode', {
@@ -119,7 +112,7 @@ class NewItem extends React.Component{
             </FormItem>
 
             <FormItem>
-              <Button type="primary" htmlType="submit"><Link to="/inventory/">Submit</Link></Button>
+              <Button type="primary" htmlType="submit">Submit</Button>
             </FormItem>
 
           </Form>
@@ -136,7 +129,12 @@ const mapStateToProps = state =>{
     token: state.token
   }
 }
+const mapDispatchToProps = dispatch =>{
+  return {
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+  }
+}
 
 const WrappedItemForm = Form.create()(NewItem);
 
-export default withRouter(connect(mapStateToProps)(WrappedItemForm));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));
