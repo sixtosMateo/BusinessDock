@@ -6,11 +6,11 @@ render(){
     return(
       <div className = "items-dashboard" style={{border:"1px solid"}}>
         <Row type="flex" justify="start">
-          <Col span={4} style={{fontFamily: "Permanent Marker"}}>Barcode: </Col>
-          <Col span={4} style={{fontFamily: "Permanent Marker"}}>Name: </Col>
-          <Col span={4} style={{fontFamily: "Permanent Marker"}}>Price: </Col>
-          <Col span={4} style={{fontFamily: "Permanent Marker"}}>Quantity: </Col>
-          <Col span={4} style={{fontFamily: "Permanent Marker"}}>Item Sum: </Col>
+          <Col span={4} style={{width:"20%", fontFamily: "Permanent Marker"}}>Barcode:</Col>
+          <Col span={4} style={{width:"20%", fontFamily: "Permanent Marker"}}>Name:</Col>
+          <Col span={4} style={{width:"20%", fontFamily: "Permanent Marker"}}>Price:</Col>
+          <Col span={4} style={{width:"20%", fontFamily: "Permanent Marker"}}>Qty:</Col>
+          <Col span={4} style={{width:"20%", fontFamily: "Permanent Marker"}}>Sum:</Col>
         </Row>
       </div>
 

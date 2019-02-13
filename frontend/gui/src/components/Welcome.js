@@ -11,20 +11,23 @@ render(){
       <div className="welcomeComponent">
         <h1 >Welcome to BusinessDock Homepage!</h1>
         <Row style={{marginBottom:"20px"}}>
-          <Col span={6}>
-            <h3 style={{font:"oswald"}}>Scan barcode:</h3>
+          <Col xs={12} sm={6} md={6} lg={6} style={{marginBottom:"5px", height: "100px"}}>
+            <h3 style={{font:"oswald", height: "50px"}}>Scan barcode:</h3>
             <Icon type="barcode" style={{fontSize: '40px'}}/>
           </Col>
-          <Col span={6}>
-            <h3>Devices Accessible:</h3>
+
+          <Col xs={12} sm={6} md={6} lg={6} style={{marginBottom:"5px", height: "100px"}}>
+            <h3 style={{font:"oswald", height: "50px"}}>Devices Accessible:</h3>
             <Icon type="tablet" style={{fontSize: '40px'}}/>
           </Col>
-          <Col span={6}>
-            <h3>Real-Time Dashboards:</h3>
+
+          <Col xs={12} sm={6} md={6} lg={6} style={{marginBottom:"5px", height: "100px"}}>
+            <h3 style={{font:"oswald", height: "50px"}}>Real-Time Dashboards:</h3>
             <Icon type="line-chart" style={{fontSize: '40px'}}/>
           </Col>
-          <Col span={6}>
-            <h3>PDF Reports:</h3>
+
+          <Col xs={12} sm={6} md={6} lg={6} style={{marginBottom:"5px", height: "100px"}}>
+            <h3 style={{font:"oswald", height: "50px"}}>PDF Reports:</h3>
             <Icon type="file-pdf" style={{fontSize: '40px'}}/>
           </Col>
         </Row>

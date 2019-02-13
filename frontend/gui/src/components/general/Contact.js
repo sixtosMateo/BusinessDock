@@ -10,28 +10,33 @@ render(){
     return(
       <div className = "contactComponent">
 
-        <Row gutter={24} >
+        <Row style={{background:"#F5F5F5", marginBottom:"10px", textAlign:"center"}}>
 
-            <Col span={8} >
-              <h1>Mateo Sixtos: </h1>
-              <img src="/profileImage.png" style={{width:'15rem', height:"15rem", border:"solid 1px"}} alt="profile Image"/>
+            <Col xs={14} sm={12} md={10} lg={6}>
+              <h1 style={{fontFamily: "Permanent Marker"}}>Mateo Sixtos: </h1>
+              <img src="/profileImage.png" style={{width:'13rem', height:"13rem"}} alt="profile Image"/>
             </Col>
 
-            <Col span={8} >
+            <Col xs={16} sm={12} md={6} lg={8}>
+
               <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Software Engineer</h2>
-              <h4>CSU Monterey Bay </h4>
-              <img src="/csumb.png" style={{width:'5rem', height:"5rem", border:"solid 1px"}} alt="csumb Image"/>
+              <h3>CSU Monterey Bay </h3>
+              <img src="/csumb.png" style={{width:'5rem', height:"5rem"}} alt="csumb Image"/>
+              <h4>CSIT-in-3 Program</h4>
             </Col>
 
-            <Col span={8} >
-              <h2 style={{fontFamily: "Permanent Marker"}}>Contact info:</h2>
-              <div style={{color:"#1e90ff"}}><Icon type="linkedin" onClick={()=>window.open('https://www.linkedin.com/in/sixtosmateo/')}/>  in/sixtosmateo/</div>
-              <div style={{color:"#1e90ff"}}><Icon type="github" onClick={()=>window.open('https://github.com/sixtosMateo/')}/>  github.com/sixtosMateo/</div>
-              <div style={{color:"#1e90ff"}}><Icon type="twitter" onClick={()=>window.open('https://twitter.com/SixtosMateo')}/>  twitter.com/SixtosMateo</div>
-              <div><Icon type="mail" />  sixtosmateo@gmail.com</div>
-              <div><Icon type="phone"/>  (831)585-0879</div>
+            <Col xs={16} sm={10} md={8} lg={8}>
+
+              <h2 style={{color:"#5f9ea0",fontFamily: "Permanent Marker"}}>Contact info:</h2>
+              <div style={{color:"#1e90ff", fontSize:"1.1rem"}}><Icon type="linkedin" onClick={()=>window.open('https://www.linkedin.com/in/sixtosmateo/')}/>  in/sixtosmateo/</div>
+              <div style={{color:"#1e90ff", fontSize:"1.005rem"}}><Icon type="github" onClick={()=>window.open('https://github.com/sixtosMateo/')}/>  github.com/sixtosMateo/</div>
+              <div style={{color:"#1e90ff", fontSize:"1.005rem"}}><Icon type="twitter" onClick={()=>window.open('https://twitter.com/SixtosMateo')}/>  twitter.com/SixtosMateo</div>
+              <div style={{fontSize:"1.1rem"}}><Icon type="mail" />  sixtosmateo@gmail.com</div>
+              <div style={{fontSize:"1.1rem"}}><Icon type="phone"/>  (831)585-0879</div>
             </Col>
         </Row>
+
+        <div></div>
         <div className = "Description" style={{right:"0"}}>
           <p>Hi, my name is Mateo Sixtos. I am a Full-Stack Developer who enjoys
           developing responsive web-applications that innovates the process of

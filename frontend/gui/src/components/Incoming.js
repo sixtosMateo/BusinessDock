@@ -237,7 +237,7 @@ class Incoming extends React.Component{
               this.state.cart.length > 0 ?
 
               <Col span={12} style={{width:"50%", padding:"2px"}}>
-                  
+
                   <Col span={12} style={{padding:"1px", width:"50%"}}>
                     <Icon type="shopping-cart"
                           className="submit-cart"
@@ -245,7 +245,7 @@ class Incoming extends React.Component{
                           style={{fontFamily: "Permanent Marker",
                                   color:"#00AF33",
                                   width:"3rem",
-                                  border:"1px solid"}}/> <span style={{width:"5rem", color:"#00AF33"}}>Submit</span>
+                                  border:"1px solid"}}/> <span style={{width:"5rem", color:"#00AF33"}}> Submit  </span>
 
 
                     <Icon type="delete"
@@ -254,7 +254,7 @@ class Incoming extends React.Component{
                           style={{fontFamily: "Permanent Marker",
                                   color:"#cc0000",
                                   width:"3rem",
-                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}>ClearCart</span>
+                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}> ClearCart </span>
                   </Col>
 
                   <Col span={12} style={{padding:"1px", width:"50%"}}>
