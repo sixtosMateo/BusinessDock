@@ -24,8 +24,6 @@ class Outgoing extends React.Component{
     cartSubtotal:0,
     cartTax:0,
     cartTotal: 0,
-
-
   }
 
   componentDidMount(){
@@ -226,7 +224,7 @@ class Outgoing extends React.Component{
               this.state.cart.length > 0 ?
 
                 <Col span={12} style={{width:"50%", padding:"2px"}}>
-                  
+
                   <Col span={12} style={{width:"50%", padding:"2px"}}>
 
                     <Icon type="shopping-cart"

@@ -255,7 +255,7 @@ class Incoming extends React.Component{
                           style={{fontFamily: "Permanent Marker",
                                   color:"#cc0000",
                                   width:"3rem",
-                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}> ClearCart </span>
+                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}> ClearCart</span>
                   </Col>
 
                   <Col span={12} style={{padding:"1px", width:"50%"}}>
@@ -294,15 +294,6 @@ class Incoming extends React.Component{
       );
     }
 }
-
-//
-// {
-//   this.state.modelOpen ?
-//
-//     <Model/>
-//     :
-//     ""
-// }
 
 const mapStateToProps = state =>{
   // return object is what you want to map into a property

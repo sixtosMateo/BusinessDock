@@ -1,10 +1,14 @@
 // IN THE STATE WE CAN HAVE AN ARRAY OF BARCODE TO INDENTIFY WHETHER ITEM EXIST OR NOT
+// maybe keep the button disable till all the necessary items are filled
+
 
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button, InputNumber} from 'antd';
-
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import serializeForm from 'form-serialize';
 
 
 const FormItem = Form.Item;
@@ -12,40 +16,46 @@ const FormItem = Form.Item;
 class NewItem extends React.Component{
   state = {
     confirmDirty: false,
+    items:[]
   };
 
-  // createItem(item){
-  //   axios.post('http://127.0.0.1:8000/api/items/'), item).then(
-  //     (item) =>
-  //       { this.setState(state =>
-  //         ({
-  //
-  //           items: state.items.concat([item])
-  //
-  //         })
-  //       )
-  //     })
-  //
-  // }
+  createItem(item){
+    axios.post('http://127.0.0.1:8000/api/items/', item)
+    .then(function (response) {
+        if(response.status == 201){
+
+        }
+      })
+    .then(
+      (item) =>
+        { this.setState(state =>
+          ({
+
+            items: state.items.concat([item])
+
+          })
+        )
+      })
+
+  }
   // console.log(values)
   // axios.post('http://127.0.0.1:8000/api/items/', values).then(res => console.log(res))
   //   .catch(error => console.log(error));
 
 
-  // handleSubmit = (e) =>{
-  //
-  //     e.preventDefault()
-  //
-  //     const values = serializeForm(e.target, // e.target is the from itself
-  //     {
-  //       hash: true
-  //     })
-  //
-  // }
+  handleSubmit=(e)=>{
+      e.preventDefault()
+      const values = serializeForm(e.target, // e.target is the from itself
+      {
+        hash: true
+      })
 
-  onChange = (value) => {
-    console.log('changed', value);
+
+      this.createItem(values)
+
+
   }
+
 
   handleConfirmBlur = (e) => {
     const value = e.target.value;
@@ -92,7 +102,7 @@ class NewItem extends React.Component{
             </FormItem>
 
             <FormItem label="AgeRequirement">
-              <InputNumber name="ageRequirement" min={1} max={10000} />
+              <Input name="ageRequirement" placeholder="Enter Age require"  />
               <span className="ant-form-text">+</span>
             </FormItem>
 
@@ -109,7 +119,7 @@ class NewItem extends React.Component{
             </FormItem>
 
             <FormItem>
-              <Button type="primary" htmlType="submit">Submit</Button>
+              <Button type="primary" htmlType="submit"><Link to="/inventory/">Submit</Link></Button>
             </FormItem>
 
           </Form>
