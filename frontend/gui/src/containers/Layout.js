@@ -33,7 +33,7 @@ class CustomLayout extends React.Component{
 
         <Footer style={{background:'#001529', padding: "10px", margin:"0"}}>
 
-          <Row style={{width:"100%",  padding: "0", margin:"0", textAlign:"center"}}>
+          <Row style={{width:"100%",  padding: "0", marginTop:"25px", textAlign:"center"}}>
 
             <Col xs={12} sm={10} md={6} lg={6}  style={{ height: "150px"}}>
               <div className="visitor-navigation" style={{color:"#C0C0C0"}}>

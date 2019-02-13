@@ -212,8 +212,8 @@ class Incoming extends React.Component{
   }
 
   closeModel=()=>{
-    this.setState(()=>{
-      return {modelOpen:false}
+    this.setState({
+      modelOpen:false
     })
   }
 
@@ -283,7 +283,7 @@ class Incoming extends React.Component{
           {
             this.state.modelOpen  ?
 
-            <Model/>:""
+            <Model closeModel={this.closeModel} />:""
 
           }
 

@@ -31,11 +31,21 @@ class Model extends React.Component{
       return(
 
           <ModelContainer>
-                    <div id="modal" style={{width: "60%", height:"100%", marginTop:"30px"}}>
+                    <div id="modal" style={{width: "75%",
+                                            height:"60%",
+                                            padding:"20px 20px 20px 20px",
+                                            overflow:"auto"}}>
+                      <h1>New Item Form</h1>
+
+                      <Button type="danger"
+                      style={{background:"#CC3333", color:"#FFFFFF"}}
+                      onClick={()=>{
+                        this.props.closeModel()
+                      }}>Cancel</Button>
 
                       <Form onSubmit={this.handleSubmit}>
 
-                        <FormItem label="Barcode" >
+                        <FormItem label="Barcode:" >
 
                           {getFieldDecorator('barcode', {
                               rules: [{
@@ -47,7 +57,7 @@ class Model extends React.Component{
                           )}
                         </FormItem>
 
-                        <FormItem label="Name" >
+                        <FormItem label="Name:" >
 
                           {getFieldDecorator('name', {
                               rules: [{
@@ -59,34 +69,40 @@ class Model extends React.Component{
                           )}
                         </FormItem>
 
-                        <FormItem label="InStockQty">
+                        <FormItem label="InStockQty:">
                           <InputNumber name="inStockQty" min={1} max={10000} />
                           <span className="ant-form-text">qty</span>
                         </FormItem>
 
-                        <FormItem label="Color">
+                        <FormItem label="Color:">
                           <Input name="color"  placeholder="Enter the colors you see!" />
                         </FormItem>
 
-                        <FormItem label="AgeRequirement">
+                        <FormItem label="AgeRequirement:">
                           <InputNumber name="ageRequirement" min={1} max={10000} />
                           <span className="ant-form-text">+</span>
                         </FormItem>
 
-                        <FormItem label="PurchasedPrice">
+                        <FormItem label="PurchasedPrice:">
                           <InputNumber name="purchasedPrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
                         </FormItem>
 
-                        <FormItem label="SalePrice">
+                        <FormItem label="SalePrice:">
                           <InputNumber name="salePrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
                         </FormItem>
 
-                        <FormItem label="Department">
+                        <FormItem label="Department:">
                           <Input name="department"  placeholder="Enter the department!" />
                         </FormItem>
 
                         <FormItem>
                           <Button type="primary" htmlType="submit">Submit</Button>
+                          <span>    </span>
+                          <Button type="danger"
+                          style={{background:"#CC3333", color:"#FFFFFF"}}
+                          onClick={()=>{
+                            this.props.closeModel()
+                          }}>Cancel</Button>
                         </FormItem>
 
                       </Form>
@@ -107,18 +123,16 @@ const mapStateToProps = state =>{
 
 const ModelContainer= styled.div`
   position:fixed;
-  top:60px;
-  left:100px;
-  right:100px;
-  bottom:200px;
-  background: rgb(76, 175, 80);
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: rgba(0,0,0,0.3);
   display:flex;
-  overflow:auto;
   align-items:center;
   justify-content: center;
-  background: #C0C0C0;
   #modal{
-    background: #C0C0C0;
+    background: #f3f3f3
   }
 `
 
