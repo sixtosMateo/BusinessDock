@@ -31,6 +31,7 @@ render(){
             <Icon type="file-pdf" style={{fontSize: '40px'}}/>
           </Col>
         </Row>
+        
         <div>
           <h2>BusinessDock</h2>
           <div style={{width:"600px auto"}}>

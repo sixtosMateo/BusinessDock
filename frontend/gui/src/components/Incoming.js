@@ -75,6 +75,7 @@ class Incoming extends React.Component{
     const tempBoughtItems = [...this.state.boughtItems]
     // item not found, we can use this to activate modal
     if(this.getItem(barcode) == null){
+      this.openModel(barcode)
       return
     }
 
@@ -200,7 +201,7 @@ class Incoming extends React.Component{
       this.setState(()=>{
         return { modelOpen:true}
       })
-      console.log("hello")
+
     }
     else{
       this.setState(()=>{
@@ -279,6 +280,12 @@ class Incoming extends React.Component{
             decrement={this.decrement}
           />
 
+          {
+            this.state.modelOpen  ?
+
+            <Model/>:""
+
+          }
 
 
         </div>
