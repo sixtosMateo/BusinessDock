@@ -1,4 +1,5 @@
 // new item or edit item change state
+// have an db parameter determines whether its on the floor or not // backend work too
 
 import React from 'react';
 import axios from 'axios';

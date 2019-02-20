@@ -3,9 +3,11 @@
 
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Form, Input, InputNumber } from 'antd';
+import { Form, Input, Button, InputNumber } from 'antd';
 import { connect } from 'react-redux';
-
+import axios from 'axios';
+import * as actions from '../../store/actions/auth';
+import serializeForm from 'form-serialize';
 
 const FormItem = Form.Item;
 
@@ -13,21 +15,31 @@ class DamageItem extends React.Component{
   state = {
     confirmDirty: false,
   }
+
+  createDamageItem(damageItem){
+    axios.post('http://127.0.0.1:8000/api/damageItem/', damageItem)
+    .then(function (response) {
+      // console.log(response)
+      if(response.status === 201){
+        window.location.reload()
+        console.log("Success item was submit")
+      }
+    })
+  }
+
   handleSubmit = (e) =>{
 
-      // e.preventDefault()
+      e.preventDefault()
       // // serializeForm will do the browser behavior when submitting a form
       // // but instead of serializing into a string and reload the browser
       // // it will the browser
-      // const values = serializeForm(e.target, // e.target is the from itself
-      // {
-      //   hash: true
-      // })
-      // //console.log(values)
-      // // makes sure that the passed something
-      // if(this.props.onCreateContact){
-      //   this.props.onCreateContact(values);
-      // }
+      const values = serializeForm(e.target, // e.target is the from itself
+      {
+        hash: true
+      })
+      //need to check if values has content
+      this.createDamageItem(values)
+
 
   }
   handleConfirmBlur = (e) => {
@@ -102,7 +114,13 @@ class DamageItem extends React.Component{
                 <Input name="description" placeholder="Describe what happen?" />
               )}
             </FormItem>
+
+            <FormItem>
+              <Button type="primary" htmlType="submit">Submit</Button>
+            </FormItem>
           </Form>
+
+
 
         </div>
 
