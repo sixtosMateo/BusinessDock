@@ -1,12 +1,13 @@
 import React from 'react';
-import { List, Icon } from 'antd';
+import { List,
+  Icon } from 'antd';
 
-const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
+// const IconText = ({ type, text }) => (
+//   <span>
+//     <Icon type={type} style={{ marginRight: 8 }} />
+//     {text}
+//   </span>
+// );
 
 const ItemAvatar =(props)=>{
   return(

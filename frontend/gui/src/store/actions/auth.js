@@ -1,10 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import * as ItemsApi from '../../api/getItemsRequest';
-import * as DamageItemsApi  from '../../api/getDamageItemRequest';
+// import * as DamageItemsApi  from '../../api/getDamageItemRequest';
 import * as EmployeesApi from '../../api/getEmployeesRequest';
-import * as IncomingsApi from '../../api/getIncomingRequest';
-import * as OutgoingsApi from '../../api/getOutgoingRequest';
+// import * as IncomingsApi from '../../api/getIncomingRequest';
+// import * as OutgoingsApi from '../../api/getOutgoingRequest';
 import * as VendorsApi from '../../api/getVendorsRequest';
 
 

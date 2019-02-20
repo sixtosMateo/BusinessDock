@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  HashRouter as Router, Route, Switch, Link, withRouter,
+   Link, withRouter,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Breadcrumb, Alert } from 'antd';
+import { Breadcrumb } from 'antd';
 
 
 

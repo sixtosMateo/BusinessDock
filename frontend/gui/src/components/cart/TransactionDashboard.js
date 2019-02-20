@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Row, Col} from 'antd';
+import { Row, Col} from 'antd';
 
 class TransactionDashboard extends React.Component{
 render(){
