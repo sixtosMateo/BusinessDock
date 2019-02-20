@@ -88,16 +88,21 @@ export const fetchVendors = () =>{
 )
 }
 
-// data from local storage and dispatching action types with new state 
+// data from local storage and dispatching action types with new state
 export const reloadLocalItems=()=>{
   return dispatch=>{
       const items = JSON.parse(localStorage.getItem('localItems'));
       dispatch(initializeItems(items))
-
   }
 }
 
-
+//
+export const reloadLocalEmployees=()=>{
+  return dispatch=>{
+      const employees = JSON.parse(localStorage.getItem('localEmployees'));
+      dispatch(initializeEmployees(employees))
+  }
+}
 
 
 // this function requires 2 parameters from djangorestframework, currently we

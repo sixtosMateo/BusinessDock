@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
-
+import * as actions from '../store/actions/auth';
 import EmployeeAvatar from './avatar/EmployeeAvatar';
 
 
@@ -21,11 +21,14 @@ class Employee extends React.Component{
   }
 
   updateQuery=(query)=>{
-  this.setState({
-    query: query.trim()
-  })
-}
+    this.setState({
+      query: query.trim()
+    })
+  }
 
+  componentDidMount(){
+      this.props.refreshEmployees();
+  }
 
 
   render(){
@@ -70,5 +73,10 @@ const mapStateToProps = state =>{
   }
 }
 
+const mapDispatchToProps = dispatch =>{
+  return {
+      refreshEmployees: () => dispatch(actions.reloadLocalEmployees())
+  }
+}
 
-export default withRouter(connect(mapStateToProps)(Employee));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Employee));
