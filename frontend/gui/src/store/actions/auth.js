@@ -9,7 +9,7 @@ import * as VendorsApi from '../../api/getVendorsRequest';
 
 
 
-
+// action types
 // when working with actions the objects that need to return always need to
 // return a type. Therefore, type property needs to be include
 export const authStart = () =>{
@@ -82,7 +82,6 @@ export const fetchVendors = () =>{
   VendorsApi
       .fetchVendors()
       .then((res) =>{
-        dispatch(initializeVendors(res))
         localStorage.setItem('localVendors', JSON.stringify(res))
       })
 )
@@ -96,7 +95,6 @@ export const reloadLocalItems=()=>{
   }
 }
 
-//
 export const reloadLocalEmployees=()=>{
   return dispatch=>{
       const employees = JSON.parse(localStorage.getItem('localEmployees'));
@@ -104,6 +102,12 @@ export const reloadLocalEmployees=()=>{
   }
 }
 
+export const reloadLocalVendors=()=>{
+  return dispatch=>{
+      const vendors = JSON.parse(localStorage.getItem('localVendors'));
+      dispatch(initializeVendors(vendors))
+  }
+}
 
 // this function requires 2 parameters from djangorestframework, currently we
 // know 2 parameters but these would be initialized once django backend is setup

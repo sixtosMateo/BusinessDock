@@ -1,3 +1,5 @@
+// new item or edit item change state 
+
 import React from 'react';
 import axios from 'axios';
 import escapeRegExp from 'escape-string-regexp';
@@ -6,7 +8,9 @@ import { Input } from 'antd';
 import sortBy from 'sort-by';
 import { connect } from 'react-redux';
 import VendorAvatar from './avatar/VendorAvatar';
+import * as actions from '../store/actions/auth';
 const Search = Input.Search;
+
 
 class Vendor extends React.Component{
   state={
@@ -18,6 +22,11 @@ class Vendor extends React.Component{
       query: query.trim()
     })
   }
+
+  componentDidMount(){
+      this.props.refreshVendors();
+  }
+
 
 
   render(){
@@ -61,4 +70,10 @@ const mapStateToProps = state =>{
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Vendor));
+const mapDispatchToProps = dispatch =>{
+  return {
+      refreshVendors: () => dispatch(actions.reloadLocalVendors())
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Vendor));

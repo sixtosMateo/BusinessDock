@@ -1,6 +1,4 @@
-// bug: componentWillReceiveProps(props) is being called twice therefore two calls to server
-// approach: create a cache that check whether the query was called or not
-//bug: when navigation through each Breadcrumb it adds to the url
+// new item or edit item change state
 
 import React from 'react';
 import axios from 'axios';

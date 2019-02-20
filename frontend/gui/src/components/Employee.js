@@ -1,5 +1,4 @@
-// bug: componentWillReceiveProps(props) is being called twice therefore two calls to server
-// create a cached that check whether the query was called or not
+// new item or edit employee change state 
 
 import React from 'react';
 import axios from 'axios';
