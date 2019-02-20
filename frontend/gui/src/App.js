@@ -15,6 +15,7 @@ class App extends Component {
   componentDidMount(){
     //this is a dispatch method
     this.props.onTryAutoSignup();
+
   }
   render() {
     return (

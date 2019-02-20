@@ -21,6 +21,10 @@ class Items extends React.Component{
     query:  ''
   }
 
+  componentDidMount(){
+      this.props.refreshItems();
+  }
+
   updateQuery=(query)=>{
     this.setState({
       query: query.trim()
@@ -71,7 +75,7 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
-      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+      refreshItems: () => dispatch(actions.reloadLocalItems())
   }
 }
 

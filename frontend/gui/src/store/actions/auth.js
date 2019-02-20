@@ -9,6 +9,7 @@ import * as VendorsApi from '../../api/getVendorsRequest';
 
 
 
+
 // when working with actions the objects that need to return always need to
 // return a type. Therefore, type property needs to be include
 export const authStart = () =>{
@@ -31,7 +32,6 @@ export const authFail = error =>{
   }
 }
 
-// Fetching Items information
 export const initializeItems = items =>{
   return {
     type: actionTypes.FETCH_ITEMS,
@@ -54,31 +54,31 @@ export const initializeVendors = vendors =>{
 }
 
 
-export const fetchItems = () =>
-dispatch => (
-  ItemsApi
-      .fetchItems()
-      .then((res)=>
-      {
-        dispatch(initializeItems(res))
-        localStorage.setItem('localItems', JSON.stringify(res))
-      })
-
-)
-
-export const fetchEmployees = () =>
-dispatch => (
+// Fetching data from api calls
+export const fetchEmployees = () =>{
+  return dispatch => (
   EmployeesApi
       .fetchEmployees()
       .then((res)=> {
-        dispatch(initializeEmployees(res))
         localStorage.setItem('localEmployees', JSON.stringify(res))
       })
 
 )
+}
 
-export const fetchVendors = () =>
-dispatch => (
+export const fetchItems = () =>{
+  return dispatch => (
+  ItemsApi
+      .fetchItems()
+      .then((res)=>
+      {
+        localStorage.setItem('localItems', JSON.stringify(res))
+      })
+
+)}
+
+export const fetchVendors = () =>{
+ return dispatch => (
   VendorsApi
       .fetchVendors()
       .then((res) =>{
@@ -86,6 +86,19 @@ dispatch => (
         localStorage.setItem('localVendors', JSON.stringify(res))
       })
 )
+}
+
+// data from local storage and dispatching action types with new state 
+export const reloadLocalItems=()=>{
+  return dispatch=>{
+      const items = JSON.parse(localStorage.getItem('localItems'));
+      dispatch(initializeItems(items))
+
+  }
+}
+
+
+
 
 // this function requires 2 parameters from djangorestframework, currently we
 // know 2 parameters but these would be initialized once django backend is setup
@@ -120,6 +133,8 @@ export const authLogin = (username, password) =>{
   }
 }
 
+
+
 export const logout = () =>{
 
   localStorage.removeItem('token');
@@ -139,6 +154,7 @@ const checkAuthTimeout = expirationTime =>{
   }
 }
 
+
 export const authCheckState = () =>{
   // check if token is store at local storage if not logout
   // if it is revaluate localStorage
@@ -146,7 +162,7 @@ export const authCheckState = () =>{
     const token = localStorage.getItem('token');
 
     if(token === 'undefined'){
-      dispatch(logout);
+      dispatch(logout());
     }
     else{
       const expirationDate = new Date(localStorage.getItem('expirationDate'));
