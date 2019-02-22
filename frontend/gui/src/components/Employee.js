@@ -16,7 +16,8 @@ const Search = Input.Search;
 class Employee extends React.Component{
 
   state ={
-    query:  ''
+    query:  '',
+    combinedEmployee:[]
   }
 
   updateQuery=(query)=>{
@@ -26,22 +27,49 @@ class Employee extends React.Component{
   }
 
   componentDidMount(){
+
       this.props.refreshEmployees();
       this.props.refreshUsers();
-  }
+
+      let tempArray = [...this.props.employees]
+
+      this.props.users.forEach((user)=>{
+       const matchEmployee = this.props.employees.find(employee => employee.userId === user.id)
+       const index = tempArray.indexOf(matchEmployee)
+       const item = tempArray[index]
+
+       item.first_name = user.first_name
+       item.last_name = user.last_name
+       item.username = user.username
+       item.email = user.email
+       item.is_staff = user.is_staff
+       item.date_joined = user.date_joined
+
+
+
+       this.setState(() => {
+         return {combinedEmployee:[...tempArray]}
+        })
+
+  })
+}
+
+
 
 
   render(){
     let showingEmployees
-    const { employees } = this.props
+
+    const { combinedEmployee } = this.state
+    console.log(combinedEmployee)
       if(this.state.query){
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
 
-        showingEmployees = employees.filter((employee) =>
+        showingEmployees = combinedEmployee.filter((employee) =>
         match.test(employee.employeeId))
       }
       else{
-        showingEmployees = employees
+        showingEmployees = combinedEmployee
       }
 
       showingEmployees.sort(sortBy('employeeId'))
@@ -69,7 +97,8 @@ class Employee extends React.Component{
 const mapStateToProps = state =>{
   // return object is what you want to map into a property
   return {
-    employees: state.employees
+    employees: state.employees,
+    users: state.users
   }
 }
 
