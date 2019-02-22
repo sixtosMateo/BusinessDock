@@ -29,10 +29,12 @@ const EmployeeAvatar =(props)=>{
             extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
             <List.Item.Meta
-              title={item.employeeId}
+
               description={item.employmentType}
             />
             {item.storeId}
+            {item.employeeId}
+            {item.employmentType}
           </List.Item>
         )}
       />

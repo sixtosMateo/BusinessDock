@@ -1,4 +1,4 @@
-// new item or edit employee change state 
+// new item or edit employee change state
 
 import React from 'react';
 import axios from 'axios';
@@ -27,6 +27,7 @@ class Employee extends React.Component{
 
   componentDidMount(){
       this.props.refreshEmployees();
+      this.props.refreshUsers();
   }
 
 
@@ -74,7 +75,9 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
-      refreshEmployees: () => dispatch(actions.reloadLocalEmployees())
+      refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
+      refreshUsers: () => dispatch(actions.reloadLocalUsers())
+
   }
 }
 

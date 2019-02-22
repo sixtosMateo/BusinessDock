@@ -23,7 +23,7 @@ class NormalLoginForm extends React.Component {
         this.props.getItems();
         this.props.getEmployees();
         this.props.getVendors();
-
+        this.props.getUsers();
         this.props.history.push('/');
       }
     });
@@ -98,7 +98,8 @@ const mapDispatchToProps = dispatch =>{
     onAuth: (username, password)=> dispatch(actions.authLogin(username, password)),
     getItems: ()=> dispatch(actions.fetchItems()),
     getEmployees: ()=> dispatch(actions.fetchEmployees()),
-    getVendors: ()=> dispatch(actions.fetchVendors())
+    getVendors: ()=> dispatch(actions.fetchVendors()),
+    getUsers: ()=>dispatch(actions.fetchUsers())
 
   }
 }
