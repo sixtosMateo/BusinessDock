@@ -10,7 +10,7 @@ import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
 import * as actions from '../store/actions/auth';
 import ItemAvatar from './avatar/ItemAvatar';
-
+import ItemDashboard from './avatar/ItemDashboard';
 
 const Search = Input.Search;
 
@@ -55,6 +55,8 @@ class Items extends React.Component{
             onClick={(event => event.target.select())}
             onChange={(event) => this.updateQuery(event.target.value)}
             />
+
+            <ItemDashboard/>
 
             <ItemAvatar data={showingItems} />
         </div>

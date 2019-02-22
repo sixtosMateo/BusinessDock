@@ -1,6 +1,6 @@
 import React from 'react';
 import { List,
-  Icon } from 'antd';
+  Icon, Row, Col } from 'antd';
 
 // const IconText = ({ type, text }) => (
 //   <span>
@@ -18,7 +18,7 @@ const ItemAvatar =(props)=>{
           onChange: (page) => {
             console.log(page);
           },
-          pageSize: 3,
+          pageSize: 8,
         }}
         dataSource={props.data}
 
@@ -26,13 +26,20 @@ const ItemAvatar =(props)=>{
           <List.Item
             key={item.barcode}
             actions={[]}
-            extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+            // image
+            // extra={}
           >
-            <List.Item.Meta
-              title={item.barcode}
-              description={item.inStockQty}
+          <List.Item.Meta
             />
-            {item.name}
+
+            <Row type="flex" justify="start">
+              <Col span={2} style={{width:"15%"}}>{item.barcode}</Col>
+              <Col span={2} style={{width:"15%"}}>{item.name}</Col>
+              <Col span={2} style={{width:"15%"}}>{item.inStockQty}</Col>
+              <Col span={2} style={{width:"15%"}}>{item.salePrice}</Col>
+              <Col span={2} style={{width:"15%"}}>{item.color}</Col>
+              <Col span={2} style={{width:"15%"}}>{item.ageRequirement}</Col>
+            </Row>
           </List.Item>
         )}
       />

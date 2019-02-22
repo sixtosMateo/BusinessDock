@@ -31,10 +31,10 @@ const IncomingItemAvatar =(props)=>{
             key={item.barcode}>
             <List.Item.Meta/>
             <Row type="flex" justify="start">
-            <Col span={4}>{item.barcode} </Col>
-            <Col span={4}>{item.name}</Col>
-            <Col span={4}>{item.purchasedPrice}</Col>
-            <Col span={4}>
+            <Col span={4} style={{width:"20%"}}>{item.barcode} </Col>
+            <Col span={4} style={{width:"20%"}}>{item.name}</Col>
+            <Col span={4} style={{width:"20%"}}>{item.purchasedPrice}</Col>
+            <Col span={4} style={{width:"20%"}}>
               <Icon type="minus" onClick={()=> decrement(item.barcode)}
                 style={{ fontSize: '16px', color: '#ff0000' }}/>
 
@@ -44,7 +44,7 @@ const IncomingItemAvatar =(props)=>{
                 style={{ fontSize: '16px', color: '#0000ff'}}/>
             </Col>
 
-            <Col span={4}>{item.itemSaleTotal}</Col>
+            <Col span={4} style={{width:"20%"}}>{item.itemSaleTotal}</Col>
             </Row>
 
 

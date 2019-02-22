@@ -1,4 +1,7 @@
 // activate modal when they hover over the barcode
+// bug: when signed in and immediately redirect to outgoing it doesnt read data
+//      only when you navigate to items
+// prediction: the componentDidMount will set state has to be in the upper parent node
 
 import React from 'react';
 import { List, Icon, Row, Col} from 'antd';
@@ -38,19 +41,20 @@ const OutgoingItemAvatar =(props)=>{
 
 
             <Row type="flex" justify="start">
-              <Col span={4}>{item.barcode} </Col>
-              <Col span={4}>{item.name}</Col>
-              <Col span={4}>{item.salePrice}</Col>
-              <Col span={4}>
+              <Col span={4} style={{width:"20%"}}>{item.barcode} </Col>
+              <Col span={4} style={{width:"20%"}}>{item.name}</Col>
+              <Col span={4} style={{width:"20%"}}>{item.salePrice}</Col>
+              <Col span={4} style={{width:"20%"}}>
                 <Icon type="minus" onClick={()=> decrement(item.barcode)}
                   style={{ fontSize: '16px', color: '#ff0000' }}/>
                 <span>  {  item.quantity  }  </span>
                 <Icon type="plus" onClick={()=> increment(item.barcode)}
                   style={{ fontSize: '16px', color: '#0000ff'}}/>
               </Col>
-              <Col span={4}>{item.itemSaleTotal}</Col>
+              <Col span={4} style={{width:"20%"}}>{item.itemSaleTotal}</Col>
 
             </Row>
+
 
           </List.Item>
         )}
