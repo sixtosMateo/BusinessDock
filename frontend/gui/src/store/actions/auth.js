@@ -6,6 +6,7 @@ import * as EmployeesApi from '../../api/getEmployeesRequest';
 // import * as IncomingsApi from '../../api/getIncomingRequest';
 // import * as OutgoingsApi from '../../api/getOutgoingRequest';
 import * as VendorsApi from '../../api/getVendorsRequest';
+import * as UsersApi from '../../api/getUserRequest';
 
 
 
@@ -53,6 +54,15 @@ export const initializeVendors = vendors =>{
   }
 }
 
+export const initializeUsers = users =>{
+  return {
+    type: actionTypes.FETCH_USERS,
+    users: users
+}
+}
+
+
+
 
 // Fetching data from api calls
 export const fetchEmployees = () =>{
@@ -64,6 +74,16 @@ export const fetchEmployees = () =>{
       })
 
 )
+}
+
+export const fetchUsers = () =>{
+  return dispatch =>{
+    UsersApi
+      .fetchUsers()
+      .then((res)=>{
+        localStorage.setItem('localUsers', JSON.stringify(res))
+      })
+  }
 }
 
 export const fetchItems = () =>{
@@ -88,6 +108,15 @@ export const fetchVendors = () =>{
 }
 
 // data from local storage and dispatching action types with new state
+
+export const reloadLocalUsers=()=>{
+  return dispatch=>{
+      const users = JSON.parse(localStorage.getItem('localUsers'));
+      dispatch(initializeUsers(users))
+  }
+}
+
+
 export const reloadLocalItems=()=>{
   return dispatch=>{
       const items = JSON.parse(localStorage.getItem('localItems'));

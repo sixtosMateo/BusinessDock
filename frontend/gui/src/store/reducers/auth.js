@@ -15,9 +15,16 @@ const initialState = {
    items:[],
    employees:[],
    inventory:[],
-   vendors:[]
+   vendors:[],
+   users:[]
 }
 
+
+const initialUsers = (state, action)=>{
+  return updateObject(state, {
+    users: action.users
+  });
+}
 
 const initialItems =(state, action)=>{
   return updateObject(state, {
@@ -86,6 +93,7 @@ const reducer = (state=initialState, action) =>{
       case actionTypes.FETCH_ITEMS: return initialItems(state, action);
       case actionTypes.FETCH_EMPLOYEES: return initialEmployees(state, action);
       case actionTypes.FETCH_VENDORS: return initialVendors(state, action);
+      case actionTypes.FETCH_USERS: return initialUsers(state, action);
       default:
         return state;
   }
