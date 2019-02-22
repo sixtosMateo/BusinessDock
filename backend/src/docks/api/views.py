@@ -14,9 +14,16 @@ from .serializers import (ItemSerializer,
                         TransactionItemSerializer,
                         StoreSerializer,
                         DamageItemSerializer,
-                        EmployeeSerializer)
+                        EmployeeSerializer,
+                        UserSerializer)
+
+from django.contrib.auth.models import User
 
 from rest_framework import viewsets
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 # putting all Rest-rest_framework generics views(CRUD) into one single view
 class ItemViewSet(viewsets.ModelViewSet):
