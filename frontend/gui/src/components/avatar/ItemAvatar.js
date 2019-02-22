@@ -27,18 +27,18 @@ const ItemAvatar =(props)=>{
             key={item.barcode}
             actions={[]}
             // image
-            // extra={}
+            extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
           <List.Item.Meta
             />
 
-            <Row type="flex" justify="start">
-              <Col span={2} style={{width:"15%"}}>{item.barcode}</Col>
-              <Col span={2} style={{width:"15%"}}>{item.name}</Col>
-              <Col span={2} style={{width:"15%"}}>{item.inStockQty}</Col>
-              <Col span={2} style={{width:"15%"}}>{item.salePrice}</Col>
-              <Col span={2} style={{width:"15%"}}>{item.color}</Col>
-              <Col span={2} style={{width:"15%"}}>{item.ageRequirement}</Col>
+            <Row type="flex" justify="start" style={{textAlign:"center"}}>
+              <Col span={2} style={{width:"17%"}}>{item.barcode}</Col>
+              <Col span={2} style={{width:"16%"}}>{item.name}</Col>
+              <Col span={2} style={{width:"16%"}}>{item.inStockQty}</Col>
+              <Col span={2} style={{width:"17%"}}>{item.salePrice}</Col>
+              <Col span={2} style={{width:"17%"}}>{item.color}</Col>
+              <Col span={2} style={{width:"17%"}}>{item.ageRequirement}</Col>
             </Row>
           </List.Item>
         )}

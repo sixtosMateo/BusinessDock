@@ -9,9 +9,10 @@ render(){
           <Col span={2} style={{width:"15%", fontFamily: "Permanent Marker"}}>Barcode:</Col>
           <Col span={2} style={{width:"15%", fontFamily: "Permanent Marker"}}>Name:</Col>
           <Col span={2} style={{width:"15%", fontFamily: "Permanent Marker"}}>Qty:</Col>
-          <Col span={2} style={{width:"15%", fontFamily: "Permanent Marker"}}>Price:</Col>
-          <Col span={2} style={{width:"15%", fontFamily: "Permanent Marker"}}>Color:</Col>
-          <Col span={2} style={{width:"15%", fontFamily: "Permanent Marker"}}>Age+:</Col>
+          <Col span={2} style={{width:"14%", fontFamily: "Permanent Marker"}}>Price:</Col>
+          <Col span={2} style={{width:"14%", fontFamily: "Permanent Marker"}}>Color:</Col>
+          <Col span={2} style={{width:"14%", fontFamily: "Permanent Marker"}}>Age+:</Col>
+          <Col span={1} style={{width:"13%", fontFamily: "Permanent Marker"}}>Image:</Col>
         </Row>
       </div>
 

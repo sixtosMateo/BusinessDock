@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Icon } from 'antd';
+import { List, Icon, Row, Col } from 'antd';
 
 
 const IconText = ({ type, text }) => (
@@ -25,14 +25,25 @@ const VendorAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.vendorId}
-            actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-            extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+            // actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
+            extra={<img width={175} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
-            <List.Item.Meta
-              title={item.name}
-              description={item.phoneNumber}
-            />
-            {item.hoursOpen}
+            <List.Item.Meta/>
+
+            <Row>
+              <Col span={12} style={{textAlign:"left"}}>{item.name}</Col>
+              <Col span={12} style={{textAlign:"right"}}>{item.phoneNumber}</Col>
+            </Row>
+
+            <Row style={{marginLeft:"30px", background:"#F5F5F5"}}>
+              <Col span={12}>Address:</Col>
+              <Col span={12}>{item.address}</Col>
+            </Row>
+
+            <Row>
+              <Col span={12} style={{textAlign:"center"}}>Hours Open:</Col>
+              <Col span={12} style={{textAlign:"center"}}>{item.hoursOpen}</Col>
+            </Row>
           </List.Item>
         )}
       />

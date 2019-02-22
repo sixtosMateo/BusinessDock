@@ -37,7 +37,7 @@ const EmployeeAvatar =(props)=>{
               <Col xs={18} sm={14} md={12} lg={12} style={{textAlign:"right"}}><strong>Hired Date:</strong> {item.date_joined}</Col>
             </Row>
 
-            <Row style={{ marginLeft:"10px", background:"#F5F5F5"}}>
+            <Row style={{ marginLeft:"10px", marginBottom:"10px", background:"#F5F5F5"}}>
               <Col xs={18} sm={14} md={12} lg={12} style={{textAlign:"center"}}>
                 <span><strong>Username:</strong></span> {item.username}
               </Col>
