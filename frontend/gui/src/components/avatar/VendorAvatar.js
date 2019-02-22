@@ -31,17 +31,17 @@ const VendorAvatar =(props)=>{
             <List.Item.Meta/>
 
             <Row>
-              <Col span={12} style={{textAlign:"left"}}>{item.name}</Col>
-              <Col span={12} style={{textAlign:"right"}}>{item.phoneNumber}</Col>
+              <Col span={12} style={{textAlign:"left"}}><h2>{item.name}</h2></Col>
+              <Col span={12} style={{textAlign:"right"}}><strong>{item.phoneNumber}</strong></Col>
             </Row>
 
             <Row style={{marginLeft:"30px", background:"#F5F5F5"}}>
-              <Col span={12}>Address:</Col>
+              <Col span={12}><strong>Address:</strong></Col>
               <Col span={12}>{item.address}</Col>
             </Row>
 
             <Row>
-              <Col span={12} style={{textAlign:"center"}}>Hours Open:</Col>
+              <Col span={12} style={{textAlign:"center"}}><strong>Hours Open:</strong></Col>
               <Col span={12} style={{textAlign:"center"}}>{item.hoursOpen}</Col>
             </Row>
           </List.Item>
