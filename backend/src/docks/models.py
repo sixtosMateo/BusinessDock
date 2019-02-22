@@ -48,7 +48,7 @@ class Vendor(models.Model):
 
 class Employee(models.Model):
     employeeId = models.AutoField(primary_key=True)
-    userId = models.CharField(unique=True, max_length=30, default=None)
+    userId = models.IntegerField(unique=True, default=None)
     storeId = models.IntegerField(default = 0, blank=True)
     birthDate = models.DateField(blank=True)
     age = models.IntegerField(default = 0, blank=True)
