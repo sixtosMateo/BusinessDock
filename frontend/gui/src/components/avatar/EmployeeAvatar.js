@@ -7,7 +7,7 @@ import { List, Icon, Row, Col } from 'antd';
 
 const IconText = ({ type, text }) => (
   <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
+    <Icon type={type} style={{ marginRight: 8, marginTop:15 }} />
     {text}
   </span>
 );
@@ -28,7 +28,9 @@ const EmployeeAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.employeeId}
-            actions={[]}
+            actions={[<IconText type="edit" text="Edit Employee"/>,
+                      <IconText type="shop" text="Outgoing Transactions"/>,
+                      <IconText type="shopping" text="Incoming Transactions"/>]}
             extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
             <List.Item.Meta/>

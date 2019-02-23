@@ -25,7 +25,8 @@ const VendorAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.vendorId}
-            // actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
+            actions={[<IconText type="edit" text="Edit Vendor"/>,
+                      <IconText type="delete" text="Delete Vendor"/>  ]}
             extra={<img width={175} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
             <List.Item.Meta/>
