@@ -12,6 +12,9 @@ import Inventory from './components/Inventory';
 import Vendor from './components/Vendor';
 import Report from './components/Report';
 
+import EditVendor from './containers/Forms/EditVendor';
+import EditItem from './containers/Forms/EditItem';
+import EditEmployee from './containers/Forms/EditEmployee';
 
 import Contact from './components/general/Contact';
 import Client from './components/general/Clients';
@@ -45,16 +48,21 @@ const BaseRouter = () =>(
 
     <Route exact path='/employees/' component={Employee}/>{" "}
     <Route exact path='/employees/newEmployee/' component={NewEmployee}/>{" "}
+    <Route exact path='/employee/edit/:id' component={EditEmployee}/>{" "}
+
+
 
 
     <Route exact path='/inventory/' component={Inventory}/>{" "}
     <Route exact path='/inventory/newItem/' component={NewItem}/>{" "}
+    <Route exact path='/inventory/item/edit/:id' component={EditItem}/>{" "}
     <Route exact path='/inventory/damageItem/' component={DamageItem}/>{" "}
     <Route exact path='/inventory/countCycle/' component={CountCycle}/>{" "}
 
 
     <Route exact path='/vendors/' component={Vendor}/>{" "}
     <Route exact path='/vendors/newVendor/' component={NewVendor}/>{" "}
+    <Route exact path='/vendors/edit/:id' component={EditVendor}/>{" "}
 
 
     <Route exact path='/reports/' component={Report}/>{" "}
