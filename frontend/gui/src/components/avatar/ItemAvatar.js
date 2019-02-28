@@ -10,7 +10,18 @@ const IconText = ({ type, text, barcode }) => (
   <span>
 
   <Link to={`/item/edit/${barcode}/`}>
-    <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15 }}/>
+    <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15, color:"#61B329" }}/>
+  </Link>
+    {text}
+
+  </span>
+);
+
+const IconTextDelete = ({ type, text, barcode }) => (
+  <span>
+
+  <Link to={`/item/delete/${barcode}/`}>
+    <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15, color:"#e50000" }}/>
   </Link>
     {text}
 
@@ -33,8 +44,8 @@ const ItemAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.barcode}
-            actions={[<IconText type="edit" text="Edit Item" barcode={item.barcode}/>,
-                      <IconText type="delete" text="Delete Item"/>  ]}
+            actions={[<IconText type="edit" text="Edit" barcode={item.barcode}/>,
+                      <IconTextDelete type="delete" text="Delete" barcode={item.barcode}/>  ]}
             // image
             extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >

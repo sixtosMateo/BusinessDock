@@ -31,10 +31,10 @@ class NewItem extends React.Component{
     })
 
   }
-  // console.log(values)
-  // axios.post('http://127.0.0.1:8000/api/items/', values).then(res => console.log(res))
-  //   .catch(error => console.log(error));
 
+  componentDidMount(){
+    this.props.refreshItems();
+  }
 
   handleSubmit=(e)=>{
       e.preventDefault()
@@ -48,7 +48,6 @@ class NewItem extends React.Component{
 
 
   }
-
 
   handleConfirmBlur = (e) => {
     const value = e.target.value;
@@ -64,7 +63,7 @@ class NewItem extends React.Component{
             <FormItem label="Barcode" >
 
               {getFieldDecorator('barcode', {
-                  initialValue: this.props.item.barcode,
+                  initialValue: this.props.item? this.props.item.barcode:"",
                   rules: [{
                     required: true,
                     message: 'Please scan barcode',
@@ -77,7 +76,7 @@ class NewItem extends React.Component{
             <FormItem label="Name" >
 
               {getFieldDecorator('name', {
-                initialValue: this.props.item.name,
+                initialValue: this.props.item? this.props.item.name:"",
                   rules: [{
                     required: true,
                     message: 'Please input name of product',
@@ -89,7 +88,7 @@ class NewItem extends React.Component{
 
             <FormItem label="InStockQty">
             {getFieldDecorator('inStockQty', {
-              initialValue: this.props.item.inStockQty,
+              initialValue: this.props.item? this.props.item.inStockQty: null,
 
               })(
               <InputNumber name="inStockQty" min={1} max={10000} />
@@ -100,7 +99,7 @@ class NewItem extends React.Component{
 
             <FormItem label="Color">
             {getFieldDecorator('color', {
-              initialValue: this.props.item.color,
+              initialValue: this.props.item? this.props.item.color:"",
 
               })(
               <Input name="color"  placeholder="Enter the colors you see!" />
@@ -109,16 +108,15 @@ class NewItem extends React.Component{
 
             <FormItem label="AgeRequirement">
             {getFieldDecorator('ageRequirement', {
-              initialValue: this.props.item.ageRequirement,
+              initialValue: this.props.item? this.props.item.ageRequirement:null,
               })(
                 <Input name="ageRequirement" placeholder="Enter Age require"  />
               )}
-              <span className="ant-form-text">+</span>
             </FormItem>
 
             <FormItem label="PurchasedPrice">
             {getFieldDecorator('purchasedPrice', {
-              initialValue: this.props.item.purchasedPrice,
+              initialValue: this.props.item ? this.props.item.purchasedPrice : null,
 
               })(
                 <InputNumber name="purchasedPrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
@@ -127,7 +125,7 @@ class NewItem extends React.Component{
 
             <FormItem label="SalePrice">
             {getFieldDecorator('salePrice', {
-              initialValue: this.props.item.salePrice,
+              initialValue: this.props.item? this.props.item.salePrice:null,
 
               })(
                 <InputNumber name="salePrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
@@ -136,7 +134,7 @@ class NewItem extends React.Component{
 
             <FormItem label="Department">
             {getFieldDecorator('department', {
-              initialValue: this.props.item.department,
+              initialValue: this.props.item? this.props.item.department:"",
               })(
               <Input name="department"  placeholder="Enter the department!" />
               )}
@@ -155,15 +153,17 @@ class NewItem extends React.Component{
   }
 }
 
-const mapStateToProps = state =>{
-  // return object is what you want to map into a property
-  return {
-    token: state.token
-  }
-}
+const mapStateToProps = (state, props) => {
+    return {
+      items: state.items,
+      item: state.items.find((item) =>
+            item.barcode === props.match.params.barcode)
+    };
+};
+
 const mapDispatchToProps = dispatch =>{
   return {
-      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+      refreshItems: () => dispatch(actions.reloadLocalItems())
   }
 }
 

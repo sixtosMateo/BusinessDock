@@ -7,25 +7,18 @@ import serializeForm from 'form-serialize';
 import { Form, Input, Button } from 'antd';
 import NewItem from './NewItemForm';
 
-
+// item={this.props.item}
+//   onSubmitBook={() => {
+//         // props.dispatch(editBook(props.book.id, book))
+//   }}
 
 class EditItem extends React.Component{
 
-  componentDidMount(){
-    this.props.refreshItems();
-  }
-
   render(){
-    console.log(this.props.match.params.barcode)
-
+    
     return(
       <div className = "edit-item" style={{background:"#F5F5F5"}}>
-          <NewItem
-          item={this.props.item}
-            onSubmitBook={() => {
-                  // props.dispatch(editBook(props.book.id, book))
-            }}
-            />
+          <NewItem/>
       </div>
     );
   }

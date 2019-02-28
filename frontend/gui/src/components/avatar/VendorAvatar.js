@@ -7,7 +7,17 @@ const IconText = ({ type, text, id }) => (
 
   <span>
     <Link to={`/vendors/edit/${id}/`}>
-      <Icon type={type} style={{ marginRight: 8 }}/>
+      <Icon type={type} style={{ marginRight: 8, color:"#61B329" }}/>
+    </Link>
+    {text}
+  </span>
+);
+
+const IconTextDelete = ({ type, text, id }) => (
+
+  <span>
+    <Link to={`/vendors/delete/${id}/`}>
+      <Icon type={type} style={{ marginRight: 8, color:"#e50000" }}/>
     </Link>
     {text}
   </span>
@@ -32,8 +42,8 @@ const VendorAvatar =(props)=>{
           <List.Item
             key={item.vendorId}
 
-            actions={[<IconText type="edit" text="Edit Vendor" id={item.vendorId}/>,
-                      <IconText type="delete" text="Delete Vendor"/>  ]}
+            actions={[<IconText type="edit" text="Edit" id={item.vendorId}/>,
+                      <IconTextDelete type="delete" text="Delete" id={item.vendorId}/>  ]}
             extra={<img width={175} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
             <List.Item.Meta/>

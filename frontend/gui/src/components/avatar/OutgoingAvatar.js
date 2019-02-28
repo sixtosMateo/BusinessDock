@@ -52,7 +52,7 @@ const OutgoingItemAvatar =(props)=>{
                   style={{ fontSize: '16px', color: '#0000ff'}}/>
               </Col>
               <Col span={2} style={{width:"17%"}}>{item.itemSaleTotal}</Col>
-              <Col span={2} style={{width:"17%"}}><Icon type="delete" /></Col>
+              <Col span={2} style={{width:"17%"}}><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
 
             </Row>
 

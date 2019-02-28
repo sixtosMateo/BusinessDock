@@ -11,7 +11,7 @@ const FormItem = Form.Item;
 
 class NewVendor extends React.Component{
   state = {
-    confirmDirty: false,
+    confirmDirty: false
   }
 
   createVendor(vendor){
@@ -23,6 +23,10 @@ class NewVendor extends React.Component{
         console.log("Success Vendor was submit")
       }
     })
+  }
+
+  componentDidMount(){
+   this.props.refreshVendors();
   }
 
   handleSubmit = (e) =>{
@@ -39,8 +43,6 @@ class NewVendor extends React.Component{
       this.createVendor(values);
   }
 
-
-
   handleConfirmBlur = (e) => {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
@@ -56,7 +58,7 @@ class NewVendor extends React.Component{
             <FormItem label="Name" >
 
               {getFieldDecorator('name', {
-                  initialValue: this.props.vendor.name || {},
+                  initialValue: this.props.vendor ? this.props.vendor.name :"",
                   rules: [{
                     required: true,
                     message: 'Please input name of the vendor!',
@@ -70,7 +72,7 @@ class NewVendor extends React.Component{
 
             <Form.Item label="Phone Number">
                {getFieldDecorator('phoneNumber', {
-                 initialValue: this.props.vendor.phoneNumber || "",
+                 initialValue: this.props.vendor ? this.props.vendor.phoneNumber :"",
                  rules: [{ required: true, message: 'Please input your phone number!' }],
                })(
                  <Input name="phoneNumber" placeholder="(###)###-####"  style={{ width: '100%' }}/>
@@ -80,7 +82,7 @@ class NewVendor extends React.Component{
             <FormItem label="Address">
 
             {getFieldDecorator('address', {
-              initialValue: this.props.vendor.address || ""
+              initialValue: this.props.vendor ? this.props.vendor.address :"",
             })(
               <Input name="address"  placeholder="Enter the address!" />
               )}
@@ -88,7 +90,7 @@ class NewVendor extends React.Component{
 
             <FormItem label="Hours Open">
               {getFieldDecorator('hoursOpen', {
-                initialValue: this.props.vendor.hoursOpen || ""
+                initialValue: this.props.vendor ? this.props.vendor.hoursOpen :"",
               })(
               <Input name="hoursOpen"  placeholder="Enter times the vendor is open!" />
               )}
@@ -109,19 +111,20 @@ class NewVendor extends React.Component{
   }
 }
 
-const mapStateToProps = (state, props) =>{
-  // return object is what you want to map into a property
-  return {
-    token: state.token
-  }
-}
+const mapStateToProps = (state, props) => {
+    return {
+      vendors: state.vendors,
+      vendor: state.vendors.find((vendor) =>
+            vendor.vendorId === parseInt(props.match.params.id))
+    };
+};
 
 const mapDispatchToProps = dispatch =>{
   return {
-      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+      refreshVendors: () => dispatch(actions.reloadLocalVendors())
   }
 }
 
 const WrappedItemForm = Form.create()(NewVendor);
 
-export default withRouter(connect(mapStateToProps)(WrappedItemForm));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));

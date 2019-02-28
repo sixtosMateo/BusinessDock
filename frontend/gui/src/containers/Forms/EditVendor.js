@@ -10,22 +10,18 @@ import { Form, Input, Button } from 'antd';
 import NewVendor from './NewVendorForm';
 
 
+// vendor={this.props.vendor}
+// onSubmitBook={() => {
+//       // props.dispatch(editBook(props.book.id, book))
+//   }}
+
 class EditVendor extends React.Component{
 
-
-  componentDidMount(){
-
-   this.props.refreshVendors();
-  }
   render(){
     return(
      <div className = "edit-vendor" style={{background:"#F5F5F5"}}>
 
-      <NewVendor
-        vendor={this.props.vendor}
-        onSubmitBook={() => {
-              // props.dispatch(editBook(props.book.id, book))
-          }}/>
+      <NewVendor/>
       </div>
     );
   }
