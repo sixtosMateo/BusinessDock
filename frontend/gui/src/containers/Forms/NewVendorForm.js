@@ -25,7 +25,6 @@ class NewVendor extends React.Component{
     })
   }
 
-
   handleSubmit = (e) =>{
 
       e.preventDefault()
@@ -48,7 +47,9 @@ class NewVendor extends React.Component{
   }
 
   render(){
-      const { getFieldDecorator } = this.props.form;
+      const { getFieldDecorator} = this.props.form;
+      console.log(this.props.vendor)
+      console.log(this.props.form)
       return(
         <div className="newVendorComponent">
 
@@ -56,33 +57,48 @@ class NewVendor extends React.Component{
             <FormItem label="Name" >
 
               {getFieldDecorator('name', {
+                  initialValue: this.props.vendor.name || "",
                   rules: [{
                     required: true,
                     message: 'Please input name of the vendor!',
                   }],
-                })(
-                <Input name="name" placeholder="Enter Name" />
+                })
+
+                (
+                <Input name="name" placeholder="Enter Name"/>
               )}
             </FormItem>
 
             <Form.Item label="Phone Number">
                {getFieldDecorator('phoneNumber', {
+                 initialValue: this.props.vendor.phoneNumber || "",
                  rules: [{ required: true, message: 'Please input your phone number!' }],
                })(
-                 <Input name="phoneNumber" placeholder="(###)###-####"  style={{ width: '100%' }} />
+                 <Input name="phoneNumber" placeholder="(###)###-####"  style={{ width: '100%' }}/>
                )}
              </Form.Item>
 
             <FormItem label="Address">
+
+            {getFieldDecorator('address', {
+              initialValue: this.props.vendor.address || ""
+            })(
               <Input name="address"  placeholder="Enter the address!" />
+              )}
             </FormItem>
 
             <FormItem label="Hours Open">
+              {getFieldDecorator('hoursOpen', {
+                initialValue: this.props.vendor.hoursOpen || ""
+              })(
               <Input name="hoursOpen"  placeholder="Enter times the vendor is open!" />
+              )}
             </FormItem>
 
             <FormItem>
-              <Button type="primary" htmlType="submit">Submit</Button>
+              <Button type="primary" htmlType="submit" style={{marginLeft:"5px"}}>Submit</Button>
+
+              <Button type="danger" onClick={()=>this.props.history.push('/vendors/')} style={{background:"#e50000", color:"#e5e5e5"}}>Danger</Button>
             </FormItem>
 
           </Form>
@@ -94,7 +110,7 @@ class NewVendor extends React.Component{
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = (state, props) =>{
   // return object is what you want to map into a property
   return {
     token: state.token
