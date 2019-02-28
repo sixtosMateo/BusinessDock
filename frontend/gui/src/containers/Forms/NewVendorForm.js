@@ -48,8 +48,7 @@ class NewVendor extends React.Component{
 
   render(){
       const { getFieldDecorator} = this.props.form;
-      console.log(this.props.vendor)
-      console.log(this.props.form)
+
       return(
         <div className="newVendorComponent">
 
@@ -57,7 +56,7 @@ class NewVendor extends React.Component{
             <FormItem label="Name" >
 
               {getFieldDecorator('name', {
-                  initialValue: this.props.vendor.name || "",
+                  initialValue: this.props.vendor.name || {},
                   rules: [{
                     required: true,
                     message: 'Please input name of the vendor!',
@@ -96,7 +95,7 @@ class NewVendor extends React.Component{
             </FormItem>
 
             <FormItem>
-              <Button type="primary" htmlType="submit" style={{marginLeft:"5px"}}>Submit</Button>
+              <Button type="primary" htmlType="submit" style={{marginRight:"5px", marginLeft:"5px"}}>Submit</Button>
 
               <Button type="danger" onClick={()=>this.props.history.push('/vendors/')} style={{background:"#e50000", color:"#e5e5e5"}}>Danger</Button>
             </FormItem>

@@ -1,12 +1,15 @@
+/// need a case where the trash deletes item right now both Icontext edits
+
+
 import React from 'react';
 import { List,
   Icon, Row, Col } from 'antd';
-import {Link} from 'react-router-dom';  
+import {Link} from 'react-router-dom';
 
 const IconText = ({ type, text, barcode }) => (
   <span>
 
-  <Link to={`/inventory/item/edit/${barcode}`}>
+  <Link to={`/item/edit/${barcode}/`}>
     <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15 }}/>
   </Link>
     {text}

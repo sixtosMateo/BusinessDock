@@ -64,6 +64,7 @@ class NewItem extends React.Component{
             <FormItem label="Barcode" >
 
               {getFieldDecorator('barcode', {
+                  initialValue: this.props.item.barcode,
                   rules: [{
                     required: true,
                     message: 'Please scan barcode',
@@ -76,6 +77,7 @@ class NewItem extends React.Component{
             <FormItem label="Name" >
 
               {getFieldDecorator('name', {
+                initialValue: this.props.item.name,
                   rules: [{
                     required: true,
                     message: 'Please input name of product',
@@ -86,33 +88,63 @@ class NewItem extends React.Component{
             </FormItem>
 
             <FormItem label="InStockQty">
+            {getFieldDecorator('inStockQty', {
+              initialValue: this.props.item.inStockQty,
+
+              })(
               <InputNumber name="inStockQty" min={1} max={10000} />
+              )}
               <span className="ant-form-text">qty</span>
+
             </FormItem>
 
             <FormItem label="Color">
+            {getFieldDecorator('color', {
+              initialValue: this.props.item.color,
+
+              })(
               <Input name="color"  placeholder="Enter the colors you see!" />
+              )}
             </FormItem>
 
             <FormItem label="AgeRequirement">
-              <Input name="ageRequirement" placeholder="Enter Age require"  />
+            {getFieldDecorator('ageRequirement', {
+              initialValue: this.props.item.ageRequirement,
+              })(
+                <Input name="ageRequirement" placeholder="Enter Age require"  />
+              )}
               <span className="ant-form-text">+</span>
             </FormItem>
 
             <FormItem label="PurchasedPrice">
-              <InputNumber name="purchasedPrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
+            {getFieldDecorator('purchasedPrice', {
+              initialValue: this.props.item.purchasedPrice,
+
+              })(
+                <InputNumber name="purchasedPrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
+              )}
             </FormItem>
 
             <FormItem label="SalePrice">
-              <InputNumber name="salePrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
+            {getFieldDecorator('salePrice', {
+              initialValue: this.props.item.salePrice,
+
+              })(
+                <InputNumber name="salePrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
+              )}
             </FormItem>
 
             <FormItem label="Department">
+            {getFieldDecorator('department', {
+              initialValue: this.props.item.department,
+              })(
               <Input name="department"  placeholder="Enter the department!" />
+              )}
             </FormItem>
 
             <FormItem>
-              <Button type="primary" htmlType="submit">Submit</Button>
+              <Button type="primary" htmlType="submit" style={{marginRight:"5px"}}>Submit</Button>
+              <Button type="danger" onClick={()=>this.props.history.push('/inventory/')} style={{background:"#e50000", color:"#e5e5e5"}}>Danger</Button>
             </FormItem>
 
           </Form>

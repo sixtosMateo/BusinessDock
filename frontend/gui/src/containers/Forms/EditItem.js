@@ -10,27 +10,41 @@ import NewItem from './NewItemForm';
 
 
 class EditItem extends React.Component{
-  state={
-    item:{},
-  }
 
   componentDidMount(){
-
+    this.props.refreshItems();
   }
-  render(){
 
+  render(){
+    console.log(this.props.match.params.barcode)
 
     return(
       <div className = "edit-item" style={{background:"#F5F5F5"}}>
-          <NewItem/>
+          <NewItem
+          item={this.props.item}
+            onSubmitBook={() => {
+                  // props.dispatch(editBook(props.book.id, book))
+            }}
+            />
       </div>
     );
   }
 }
 
 
+const mapStateToProps = (state, props) => {
+    return {
+      items: state.items,
+      item: state.items.find((item) =>
+            item.barcode === props.match.params.barcode)
+    };
+};
+
+const mapDispatchToProps = dispatch =>{
+  return {
+      refreshItems: () => dispatch(actions.reloadLocalItems())
+  }
+}
 
 
-
-
-export default (EditItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditItem));
