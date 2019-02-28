@@ -1,11 +1,16 @@
 import React from 'react';
 import { List,
   Icon, Row, Col } from 'antd';
+import {Link} from 'react-router-dom';  
 
-const IconText = ({ type, text }) => (
+const IconText = ({ type, text, barcode }) => (
   <span>
+
+  <Link to={`/inventory/item/edit/${barcode}`}>
     <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15 }}/>
+  </Link>
     {text}
+
   </span>
 );
 
@@ -25,7 +30,7 @@ const ItemAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.barcode}
-            actions={[<IconText type="edit" text="Edit Item"/>,
+            actions={[<IconText type="edit" text="Edit Item" barcode={item.barcode}/>,
                       <IconText type="delete" text="Delete Item"/>  ]}
             // image
             extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}

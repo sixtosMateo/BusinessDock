@@ -1,11 +1,13 @@
 import React from 'react';
 import { List, Icon, Row, Col } from 'antd';
+import {Link} from 'react-router-dom';
 
-
-const IconText = ({ type, text }) => (
+const IconText = ({ type, text, id }) => (
 
   <span>
-    <Icon type={type} style={{ marginRight: 8 }}/>
+    <Link to={`/vendors/edit/${id}`}>
+      <Icon type={type} style={{ marginRight: 8 }}/>
+    </Link>
     {text}
   </span>
 );
@@ -28,7 +30,8 @@ const VendorAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.vendorId}
-            actions={[<IconText type="edit" text="Edit Vendor"/>,
+
+            actions={[<IconText type="edit" text="Edit Vendor" id={item.vendorId}/>,
                       <IconText type="delete" text="Delete Vendor"/>  ]}
             extra={<img width={175} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >

@@ -3,11 +3,14 @@
 //item.age
 import React from 'react';
 import { List, Icon, Row, Col } from 'antd';
+import {Link} from 'react-router-dom';
 
 
-const IconText = ({ type, text }) => (
+const IconText = ({ type, text, id }) => (
   <span>
-    <Icon type={type} style={{ marginRight: 8, marginTop:15 }} />
+  <Link to={`/employee/edit/${id}`}>
+    <Icon type={type} style={{ marginRight: 8, marginTop:15 }}/>
+  </Link>
     {text}
   </span>
 );
@@ -28,7 +31,7 @@ const EmployeeAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.employeeId}
-            actions={[<IconText type="edit" text="Edit Employee"/>,
+            actions={[<IconText type="edit" text="Edit Employee" id={item.id}/>,
                       <IconText type="shop" text="Outgoing Transactions"/>,
                       <IconText type="shopping" text="Incoming Transactions"/>]}
             extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
