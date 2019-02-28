@@ -3,11 +3,14 @@ import { List, Icon, Row, Col } from 'antd';
 
 
 const IconText = ({ type, text }) => (
+
   <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
+    <Icon type={type} style={{ marginRight: 8 }}/>
     {text}
   </span>
 );
+
+
 
 const VendorAvatar =(props)=>{
   return(

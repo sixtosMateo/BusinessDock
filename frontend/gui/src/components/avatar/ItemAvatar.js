@@ -4,7 +4,7 @@ import { List,
 
 const IconText = ({ type, text }) => (
   <span>
-    <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15 }} />
+    <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15 }}/>
     {text}
   </span>
 );
@@ -33,12 +33,12 @@ const ItemAvatar =(props)=>{
           <List.Item.Meta
             />
             <Row type="flex" justify="start" style={{textAlign:"center"}}>
-              <Col span={2} style={{width:"17%"}}>{item.barcode}</Col>
-              <Col span={2} style={{width:"16%"}}>{item.name}</Col>
-              <Col span={2} style={{width:"16%"}}>{item.inStockQty}</Col>
-              <Col span={2} style={{width:"17%"}}>{item.salePrice}</Col>
-              <Col span={2} style={{width:"17%"}}>{item.color}</Col>
-              <Col span={2} style={{width:"17%"}}>{item.ageRequirement}</Col>
+              <Col span={2} style={{width:"17%"}}><strong>{item.barcode}</strong></Col>
+              <Col span={2} style={{width:"16%"}}><strong>{item.name}</strong></Col>
+              <Col span={2} style={{width:"16%"}}><strong>{item.inStockQty}</strong></Col>
+              <Col span={2} style={{width:"17%"}}><strong>{item.salePrice}</strong></Col>
+              <Col span={2} style={{width:"17%"}}><strong>{item.color}</strong></Col>
+              <Col span={2} style={{width:"17%"}}><strong>{item.ageRequirement}</strong></Col>
             </Row>
 
 
