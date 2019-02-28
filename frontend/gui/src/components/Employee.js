@@ -1,4 +1,6 @@
 // new item or edit employee change state
+// when logging in the employees dont display employees
+// maybe for the combinedEmployee state array
 
 import React from 'react';
 import axios from 'axios';
