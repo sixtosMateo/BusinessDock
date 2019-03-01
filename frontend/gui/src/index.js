@@ -8,6 +8,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/auth';
+import CombineReducers from './store/reducers/index';
 
 // const logger = store => next => action => {
 //   console.group(action.type)
@@ -23,8 +24,10 @@ const composeEnhances = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose
 
 //second argument is an enhancer
     // composeEnhances takes in params and inside will handle our MIDDLEWARE
-const store = createStore(rootReducer, composeEnhances(
+const store = createStore(CombineReducers, composeEnhances(
   applyMiddleware(thunk)))
+
+console.log(store.getState())
 
 const app = (
   <Provider store={store}>

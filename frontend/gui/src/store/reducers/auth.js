@@ -12,49 +12,7 @@ const initialState = {
    token: null,
    error: null,
    loading: false,
-   items:[],
-   employees:[],
-   inventory:[],
-   vendors:[],
-   users:[]
 }
-
-
-
-// initializing datate to my state
-const initialUsers = (state, action)=>{
-  return updateObject(state, {
-    users: action.users
-  });
-}
-
-const initialItems =(state, action)=>{
-  return updateObject(state, {
-    items: action.items
-  });
-
-}
-
-const initialEmployees =(state, action)=>{
-  return updateObject(state, {
-    employees: action.employees
-  });
-
-}
-
-const initialVendors =(state, action)=>{
-  return updateObject(state, {
-    vendors: action.vendors
-  });
-
-}
-
-// // edit data to my state
-// const editVendor(state, action)=>{
-//   return updateObject(state,{
-//     vendors.map()
-//   })
-// }
 
 
 
@@ -92,18 +50,12 @@ const authLogout = (state, action) => {
 
 
 //define the methods where they take place
-const reducer = (state=initialState, action) =>{
+const AuthReducer = (state=initialState, action) =>{
   switch (action.type) {
       case actionTypes.AUTH_START: return authStart(state, action);
       case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
       case actionTypes.AUTH_FAIL: return authFail(state, action);
       case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-      case actionTypes.FETCH_ITEMS: return initialItems(state, action);
-      case actionTypes.FETCH_EMPLOYEES: return initialEmployees(state, action);
-      case actionTypes.FETCH_VENDORS: return initialVendors(state, action);
-      case actionTypes.FETCH_USERS: return initialUsers(state, action);
-      // case actionTypes.EDIT_VENDOR: return editVendor(state, action);
-
         break;
       default:
         return state;
@@ -111,6 +63,4 @@ const reducer = (state=initialState, action) =>{
 }
 
 
-
-
-export default reducer;
+export default AuthReducer;
