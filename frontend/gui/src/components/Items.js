@@ -11,13 +11,17 @@ import sortBy from 'sort-by'
 import * as actions from '../store/actions/auth';
 import ItemAvatar from './avatar/ItemAvatar';
 import ItemDashboard from './avatar/ItemDashboard';
+import DeleteModel from './general/DeleteModel';
 
 const Search = Input.Search;
 
 class Items extends React.Component{
 
   state ={
-    query:  ''
+    query:  '',
+    deleteId:null,
+    deleteName:"",
+    modelOpen:false
   }
 
   componentDidMount(){
@@ -27,6 +31,20 @@ class Items extends React.Component{
   updateQuery=(query)=>{
     this.setState({
       query: query.trim()
+    })
+  }
+
+  openModel=(id, name)=>{
+    this.setState(()=>{
+      return { modelOpen:true,
+              deleteId:id,
+              deleteName: name}
+    })
+  }
+
+  closeModel=()=>{
+    this.setState({
+      modelOpen:false
     })
   }
 
@@ -58,7 +76,14 @@ class Items extends React.Component{
 
             <ItemDashboard/>
 
-            <ItemAvatar data={showingItems} />
+            <ItemAvatar data={showingItems} openModel={this.openModel} />
+
+            {
+              this.state.modelOpen  ?
+
+              <DeleteModel closeModel={this.closeModel} id={this.state.deleteId} name={this.state.deleteName} />:""
+
+            }
         </div>
       )
   }

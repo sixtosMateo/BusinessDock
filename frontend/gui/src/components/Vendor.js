@@ -1,4 +1,4 @@
-// new item or edit item change state 
+// new item or edit item change state
 
 import React from 'react';
 import axios from 'axios';
@@ -9,12 +9,16 @@ import sortBy from 'sort-by';
 import { connect } from 'react-redux';
 import VendorAvatar from './avatar/VendorAvatar';
 import * as actions from '../store/actions/auth';
+import DeleteModel from './general/DeleteModel';
 const Search = Input.Search;
 
 
 class Vendor extends React.Component{
   state={
-    query:''
+    query:'',
+    modelOpen: false,
+    deleteId:null,
+    deleteName:""
   }
 
   updateQuery=(query)=>{
@@ -25,6 +29,21 @@ class Vendor extends React.Component{
 
   componentDidMount(){
       this.props.refreshVendors();
+  }
+
+  openModel=(id, name)=>{
+    console.log("open")
+    this.setState(()=>{
+      return { modelOpen:true,
+              deleteId:id,
+              deleteName: name}
+    })
+  }
+
+  closeModel=()=>{
+    this.setState({
+      modelOpen:false
+    })
   }
 
 
@@ -56,7 +75,16 @@ class Vendor extends React.Component{
             onChange={(event) => this.updateQuery(event.target.value)}
             />
 
-          <VendorAvatar data={showingVendors} />
+          <VendorAvatar data={showingVendors} openModel={this.openModel} />
+
+          {
+            this.state.modelOpen  ?
+
+            <DeleteModel closeModel={this.closeModel} id={this.state.deleteId} name={this.state.deleteName} />:""
+
+          }
+
+
         </div>
 
       );

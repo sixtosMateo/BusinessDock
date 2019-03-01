@@ -17,18 +17,15 @@ const IconText = ({ type, text, barcode }) => (
   </span>
 );
 
-const IconTextDelete = ({ type, text, barcode }) => (
-  <span>
-
-  <Link to={`/item/delete/${barcode}/`}>
-    <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15, color:"#e50000" }}/>
-  </Link>
-    {text}
-
-  </span>
-);
 
 const ItemAvatar =(props)=>{
+  const IconTextDelete = ({ type, text, id, name }) => (
+    <span onClick={()=>props.openModel(id, name)}>
+      <Icon type={type} style={{ marginRight: 8, marginLeft: 10, marginTop:15, color:"#e50000" }}/>
+      {text}
+    </span>
+  );
+
   return(
       <List
         itemLayout="vertical"
@@ -45,7 +42,7 @@ const ItemAvatar =(props)=>{
           <List.Item
             key={item.barcode}
             actions={[<IconText type="edit" text="Edit" barcode={item.barcode}/>,
-                      <IconTextDelete type="delete" text="Delete" barcode={item.barcode}/>  ]}
+                      <IconTextDelete type="delete" text="Delete" id={item.itemId} name={item.name}/>  ]}
             // image
             extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
