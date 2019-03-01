@@ -105,10 +105,10 @@ class Vendor extends React.Component{
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = ({VendorReducer}) =>{
   // return object is what you want to map into a property
   return {
-    vendors: state.vendors
+    vendors: VendorReducer.vendors
   }
 }
 

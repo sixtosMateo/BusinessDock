@@ -15,7 +15,7 @@ import NewItem from './NewItemForm';
 class EditItem extends React.Component{
 
   render(){
-    
+
     return(
       <div className = "edit-item" style={{background:"#F5F5F5"}}>
           <NewItem/>
@@ -25,10 +25,10 @@ class EditItem extends React.Component{
 }
 
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({ItemReducer}, props) => {
     return {
-      items: state.items,
-      item: state.items.find((item) =>
+      items: ItemReducer.items,
+      item: ItemReducer.items.find((item) =>
             item.barcode === props.match.params.barcode)
     };
 };

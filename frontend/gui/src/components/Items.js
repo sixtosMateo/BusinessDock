@@ -105,11 +105,11 @@ class Items extends React.Component{
 }
 
 
-const mapStateToProps = state =>{
+const mapStateToProps = ({ItemReducer,  AuthReducer}) =>{
   // return object is what you want to map into a property
   return {
-    items: state.items,
-    isAuthenticated: state.token !== null
+    items: ItemReducer.items,
+    isAuthenticated:  AuthReducer.token !== null
 
   }
 }

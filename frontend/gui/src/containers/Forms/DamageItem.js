@@ -131,10 +131,10 @@ class DamageItem extends React.Component{
 
 const WrappedDamageItemForm = Form.create()(DamageItem);
 
-const mapStateToProps = state =>{
+const mapStateToProps = ({AuthReducer})=>{
   // return object is what you want to map into a property
   return {
-    token: state.token
+    token: AuthReducer.token
   }
 }
 

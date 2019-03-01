@@ -55,10 +55,10 @@ class Dashboard extends Component {
 
 }
 
-  const mapStateToProps = state =>{
+  const mapStateToProps = ({AuthReducer}) =>{
     // return object is what you want to map into a property
     return{
-      isAuthenticated: state.token !== null
+      isAuthenticated: AuthReducer.token !== null
     }
   }
 

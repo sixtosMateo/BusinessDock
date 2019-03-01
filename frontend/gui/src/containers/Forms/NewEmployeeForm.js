@@ -152,10 +152,10 @@ class NewEmployee extends React.Component{
 
 const WrappedRegistrationForm = Form.create()(NewEmployee);
 
-const mapStateToProps = state =>{
+const mapStateToProps = ({AuthReducer}) =>{
   // return object is what you want to map into a property
   return {
-    token: state.token
+    token: AuthReducer.token
   }
 }
 export default withRouter(connect(mapStateToProps)(WrappedRegistrationForm));

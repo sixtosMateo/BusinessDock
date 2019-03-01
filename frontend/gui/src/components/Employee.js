@@ -99,11 +99,11 @@ class Employee extends React.Component{
 }
 
 
-const mapStateToProps = state =>{
+const mapStateToProps = ({EmployeeReducer, UserReducer}) =>{
   // return object is what you want to map into a property
   return {
-    employees: state.employees,
-    users: state.users
+    employees: EmployeeReducer.employees,
+    users: UserReducer.users
   }
 }
 

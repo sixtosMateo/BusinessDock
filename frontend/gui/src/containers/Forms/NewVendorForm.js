@@ -124,10 +124,10 @@ class NewVendor extends React.Component{
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({VendorReducer}, props) => {
     return {
-      vendors: state.vendors,
-      vendor: state.vendors.find((vendor) =>
+      vendors: VendorReducer.vendors,
+      vendor: VendorReducer.vendors.find((vendor) =>
             vendor.vendorId === parseInt(props.match.params.id))
     };
 };

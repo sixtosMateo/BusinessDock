@@ -121,7 +121,6 @@ class Outgoing extends React.Component{
         //callback function
         // new originalfresh copy of all the items rather than referencing
         // all the modify object are set to default
-        this.setItems();
         this.addTotal();
       });
   }
@@ -257,11 +256,11 @@ class Outgoing extends React.Component{
 }
 
 
-const mapStateToProps = state =>{
+const mapStateToProps = ({ItemReducer, AuthReducer}) =>{
   // return object is what you want to map into a property
   return {
-    items: state.items,
-    isAuthenticated: state.token !== null
+    items: ItemReducer.items,
+    isAuthenticated: AuthReducer.token !== null
 
   }
 }

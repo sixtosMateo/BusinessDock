@@ -86,10 +86,10 @@ class NormalLoginForm extends React.Component {
 const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 
-const mapStateToProps= (state) =>{
+const mapStateToProps= ({AuthReducer}) =>{
   return{
-    loading: state.loading,
-    error: state.error
+    loading: AuthReducer.loading,
+    error: AuthReducer.error
   }
 }
 
