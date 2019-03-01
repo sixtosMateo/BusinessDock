@@ -6,6 +6,15 @@ import { List, Icon, Row, Col } from 'antd';
 import {Link} from 'react-router-dom';
 
 
+const IconTextEdit = ({ type, text, id }) => (
+  <span>
+  <Link to={`/employee/edit/${id}`}>
+    <Icon type={type} style={{ marginRight: 8, marginTop:15, color:"#61B329" }}/>
+  </Link>
+    {text}
+  </span>
+);
+
 const IconText = ({ type, text, id }) => (
   <span>
   <Link to={`/employee/edit/${id}`}>
@@ -31,7 +40,7 @@ const EmployeeAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.employeeId}
-            actions={[<IconText type="edit" text="Edit Employee" id={item.id}/>,
+            actions={[<IconTextEdit type="edit" text="Edit Employee" id={item.id}/>,
                       <IconText type="shop" text="Outgoing Transactions"/>,
                       <IconText type="shopping" text="Incoming Transactions"/>]}
             extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}

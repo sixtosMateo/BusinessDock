@@ -18,7 +18,6 @@ import Model from './general/ModelContainer';
 
 class Incoming extends React.Component{
   state={
-    boughtItems:[],
     query:'',
     cart:[],
     subTotal:0,
@@ -28,25 +27,11 @@ class Incoming extends React.Component{
   }
 
   componentDidMount(){
-    this.setItems()
-  }
-
-  setItems=()=>{
-    let boughtItems =[];
-
-    this.props.items.forEach(item=>{
-      const singleItem = {...item}
-      boughtItems = [...boughtItems, singleItem]
-    })
-
-    this.setState(()=>{
-      return {boughtItems}
-    });
-
+    this.props.refreshItems()
   }
 
   getItem=(barcode)=>{
-    const item = this.state.boughtItems.find(item => item.barcode === barcode)
+    const item = this.props.items.find(item => item.barcode === barcode)
     if(item){
       return item
     }
@@ -72,7 +57,8 @@ class Incoming extends React.Component{
   }
 
   addToCart=(barcode)=>{
-    const tempBoughtItems = [...this.state.boughtItems]
+    const tempBoughtItems = [...this.props.items]
+
     // item not found, we can use this to activate modal
     if(this.getItem(barcode) == null){
       this.openModel(barcode)
@@ -94,10 +80,10 @@ class Incoming extends React.Component{
     item.itemSaleTotal = price;
 
     this.setState(()=>{
-      return { boughtItems: tempBoughtItems, cart:[...this.state.cart, item]}
+      return {cart:[...this.state.cart, item]}
     },
-    ()=>{this.addTotal()}
-  )
+    ()=>{this.addTotal()
+    })
 
   }
 
@@ -159,7 +145,7 @@ class Incoming extends React.Component{
   }
 
   removeItem=(barcode)=>{
-    let tempItems = [...this.state.boughtItems];
+    let tempItems = [...this.props.items];
     let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.barcode !== barcode)
 
@@ -306,7 +292,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
-      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
+      refreshItems: () => dispatch(actions.reloadLocalItems())
   }
 }
 

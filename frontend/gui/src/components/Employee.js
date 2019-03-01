@@ -32,30 +32,33 @@ class Employee extends React.Component{
 
       this.props.refreshEmployees();
       this.props.refreshUsers();
-
-      let tempArray = [...this.props.employees]
-
-      this.props.users.forEach((user)=>{
-       const matchEmployee = this.props.employees.find(employee => employee.userId === user.id)
-       const index = tempArray.indexOf(matchEmployee)
-       const item = tempArray[index]
-
-       item.first_name = user.first_name
-       item.last_name = user.last_name
-       item.username = user.username
-       item.email = user.email
-       item.is_staff = user.is_staff
-       item.date_joined = user.date_joined
+      this.setCombinedEmployees();
 
 
-
-       this.setState(() => {
-         return {combinedEmployee:[...tempArray]}
-        })
-
-  })
 }
 
+  setCombinedEmployees(){
+    let tempArray = [...this.props.employees]
+
+    this.props.users.forEach((user)=>{
+     const matchEmployee = this.props.employees.find(employee => employee.userId === user.id)
+     const index = tempArray.indexOf(matchEmployee)
+     const item = tempArray[index]
+
+     item.first_name = user.first_name
+     item.last_name = user.last_name
+     item.username = user.username
+     item.email = user.email
+     item.is_staff = user.is_staff
+     item.date_joined = user.date_joined
+
+
+
+     this.setState(() => {
+       return {combinedEmployee:[...tempArray]}
+      })
+  })
+}
 
 
 

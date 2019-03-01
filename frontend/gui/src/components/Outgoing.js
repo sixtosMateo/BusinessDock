@@ -19,7 +19,6 @@ class Outgoing extends React.Component{
 
   state={
     query:'',
-    soldItems:[],
     cart:[],
     cartSubtotal:0,
     cartTax:0,
@@ -27,14 +26,14 @@ class Outgoing extends React.Component{
   }
 
   componentDidMount(){
-
-    this.setItems()
+    this.props.refreshItems()
+    // this.setItems()
 
   }
 
   // adding to cart
   setToCart=(barcode)=>{
-    const tempSoldItems = [...this.state.soldItems]
+    const tempSoldItems = [...this.props.items]
     // prevents if error if item is not found // could set it into var so it dont repeat
     if(this.getItem(barcode) == null){
       return;
@@ -58,7 +57,8 @@ class Outgoing extends React.Component{
 
 
     this.setState(()=>{
-      return { soldItems: tempSoldItems, cart:[...this.state.cart, item]}
+      // return { soldItems: tempSoldItems, cart:[...this.state.cart, item]}
+      return { cart:[...this.state.cart, item]}
     },
     ()=>{this.addTotal()})
 
@@ -129,7 +129,7 @@ class Outgoing extends React.Component{
 // ============ Helper methods ====================
   // find items from copy of items
   getItem =(barcode)=>{
-    const item = this.state.soldItems.find(item=> item.barcode===barcode);
+    const item = this.props.items.find(item=> item.barcode===barcode);
     if(item){
       return item
     }
@@ -144,26 +144,8 @@ class Outgoing extends React.Component{
     return duplicate
   }
 
-  // set state a copy from state items
-  setItems=()=>{
-
-    // we are copying the values not referencing items
-    // getting a new set of values rather than copying them
-    let soldItems =[];
-
-    this.props.items.forEach(item=>{
-      const singleItem = {...item}
-      soldItems = [...soldItems, singleItem]
-    })
-
-    this.setState(()=>{
-      return {soldItems}
-    });
-
-  }
-
   removeItem=(barcode)=>{
-    let tempItems = [...this.state.soldItems];
+    let tempItems = [...this.props.items];
     let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.barcode !== barcode)
 
@@ -286,7 +268,9 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
+      refreshItems: () => dispatch(actions.reloadLocalItems()),
       onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+
   }
 }
 
