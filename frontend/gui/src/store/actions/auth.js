@@ -61,7 +61,13 @@ export const initializeUsers = users =>{
 }
 }
 
-
+// export const editVendor= (id, updates)=>{
+//   return {
+//     type: actionTypes.EDIT_VENDOR,
+//     id: id,
+//     updates: updates
+//   }
+// }
 
 
 // Fetching data from api calls
@@ -115,7 +121,6 @@ export const reloadLocalUsers=()=>{
       dispatch(initializeUsers(users))
   }
 }
-
 
 export const reloadLocalItems=()=>{
   return dispatch=>{
@@ -171,8 +176,6 @@ export const authLogin = (username, password) =>{
   }
 }
 
-
-
 export const logout = () =>{
 
   localStorage.removeItem('token');
@@ -191,7 +194,6 @@ const checkAuthTimeout = expirationTime =>{
     }, expirationTime * 1000)
   }
 }
-
 
 export const authCheckState = () =>{
   // check if token is store at local storage if not logout

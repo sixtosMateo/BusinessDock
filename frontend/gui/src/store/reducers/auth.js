@@ -20,6 +20,8 @@ const initialState = {
 }
 
 
+
+// initializing datate to my state
 const initialUsers = (state, action)=>{
   return updateObject(state, {
     users: action.users
@@ -47,7 +49,16 @@ const initialVendors =(state, action)=>{
 
 }
 
+// // edit data to my state
+// const editVendor(state, action)=>{
+//   return updateObject(state,{
+//     vendors.map()
+//   })
+// }
 
+
+
+// login authentication methos
 const authStart = (state, action) => {
       // error to null and loading to true -> spinner will start spinning
     return updateObject(state, {
@@ -55,7 +66,6 @@ const authStart = (state, action) => {
       loading: true
     });
 }
-
 
 const authSuccess = (state, action) => {
     // action is from action/actionTypes authSuccess one parameter is token & returns
@@ -67,14 +77,12 @@ const authSuccess = (state, action) => {
     });
 }
 
-
 const authFail = (state, action) => {
     return updateObject(state, {
       error: action.error,
       loading: false
     })
 }
-
 
 const authLogout = (state, action) => {
     return updateObject(state, {
@@ -94,6 +102,9 @@ const reducer = (state=initialState, action) =>{
       case actionTypes.FETCH_EMPLOYEES: return initialEmployees(state, action);
       case actionTypes.FETCH_VENDORS: return initialVendors(state, action);
       case actionTypes.FETCH_USERS: return initialUsers(state, action);
+      // case actionTypes.EDIT_VENDOR: return editVendor(state, action);
+
+        break;
       default:
         return state;
   }
