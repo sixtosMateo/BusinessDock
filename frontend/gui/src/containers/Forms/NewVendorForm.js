@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import * as actions from '../../store/actions/auth';
@@ -11,7 +11,8 @@ const FormItem = Form.Item;
 
 class NewVendor extends React.Component{
   state = {
-    confirmDirty: false
+    confirmDirty: false,
+
   }
 
   createVendor(vendor){
@@ -19,10 +20,21 @@ class NewVendor extends React.Component{
     .then(function (response) {
       // console.log(response)
       if(response.status === 201){
-        window.location.reload()
         console.log("Success Vendor was submit")
       }
     })
+    this.props.history.push('/vendors/')
+  }
+
+  editVendor(vendor){
+
+    axios.put(`http://127.0.0.1:8000/api/vendors/${this.props.vendor.vendorId}/`, vendor)
+    .then(function (response) {
+      if(response.status === 200){
+        console.log("Success Vendor was Edit")
+      }
+    })
+    this.props.history.push('/vendors/')
   }
 
   componentDidMount(){
@@ -37,10 +49,12 @@ class NewVendor extends React.Component{
       {
         hash: true
       })
-
-      // //console.log(values)
       // need to check if values has content
-      this.createVendor(values);
+      if(this.props.vendor){
+        this.editVendor(values)
+      }else{
+        this.createVendor(values);
+      }
   }
 
   handleConfirmBlur = (e) => {

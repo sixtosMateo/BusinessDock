@@ -25,11 +25,22 @@ class NewItem extends React.Component{
     .then(function (response) {
       // console.log(response)
       if(response.status === 201){
-        window.location.reload()
+
         console.log("Success item was submit")
       }
     })
+    this.props.history.push('/inventory/')
 
+  }
+
+  editItem(item){
+    axios.put(`http://127.0.0.1:8000/api/items/${this.props.item.itemId}/`, item)
+    .then(function (response) {
+      if(response.status === 200){
+        console.log("Success Item was Edit")
+      }
+    })
+    this.props.history.push('/inventory/')
   }
 
   componentDidMount(){
@@ -44,8 +55,11 @@ class NewItem extends React.Component{
       })
 
       // need to check if values has content
-      this.createItem(values)
-
+      if(this.props.item){
+        this.editItem(values)
+      }else{
+        this.createItem(values);
+      }
 
   }
 

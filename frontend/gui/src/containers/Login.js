@@ -24,9 +24,9 @@ class NormalLoginForm extends React.Component {
         this.props.getEmployees();
         this.props.getVendors();
         this.props.getUsers();
-        this.props.refreshItems();
         this.props.history.push('/');
       }
+
     });
   }
 
@@ -101,7 +101,6 @@ const mapDispatchToProps = dispatch =>{
     getEmployees: ()=> dispatch(actions.fetchEmployees()),
     getVendors: ()=> dispatch(actions.fetchVendors()),
     getUsers: ()=>dispatch(actions.fetchUsers()),
-    refreshItems: () => dispatch(actions.reloadLocalItems())
 
   }
 }
