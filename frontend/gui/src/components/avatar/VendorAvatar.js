@@ -30,7 +30,7 @@ const VendorAvatar =(props)=>{
         size="large"
         pagination={{
           onChange: (page) => {
-            console.log(page);
+            // can load batch of items
           },
           pageSize: 3,
         }}

@@ -18,7 +18,6 @@ class NewVendor extends React.Component{
   createVendor(vendor){
     axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
     .then(function (response) {
-      // console.log(response)
       if(response.status === 201){
         console.log("Success Vendor was submit")
       }

@@ -14,15 +14,20 @@ class DeleteModel extends React.Component{
       return(
         <ModelContainer>
           <div className="deleteModel" id="modal" style={{width: "50%", margin:"20px", padding:"20px", }}>
-            <h3 style={{textAlign:"center"}}>Are you sure you want to delete {this.props.id}: {this.props.name} ?</h3>
+            <h3 style={{textAlign:"center"}}>Are you sure you want to delete {this.props.name} ?</h3>
             <div style={{textAlign:"center"}}>
-              <Button type="primary" htmlType="submit" style={{marginRight:"5px"}}>Submit</Button>
+              <Button type="primary"
+                      htmlType="submit"
+                      style={{marginRight:"5px"}}
+                      onClick={()=>{
+                        this.props.deleteRecord(this.props.id)
+                      }}>Submit</Button>
 
               <Button type="danger"
-              style={{background:"#CC3333", color:"#FFFFFF"}}
-              onClick={()=>{
-                this.props.closeModel()
-              }}>Cancel</Button>
+                      style={{background:"#CC3333", color:"#FFFFFF"}}
+                      onClick={()=>{
+                      this.props.closeModel()
+                    }}>Cancel</Button>
             </div>
 
 

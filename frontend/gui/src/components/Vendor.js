@@ -32,7 +32,6 @@ class Vendor extends React.Component{
   }
 
   openModel=(id, name)=>{
-    console.log("open")
     this.setState(()=>{
       return { modelOpen:true,
               deleteId:id,
@@ -44,6 +43,18 @@ class Vendor extends React.Component{
     this.setState({
       modelOpen:false
     })
+  }
+
+  deleteRecord=(id)=>{
+    axios.delete(`http://127.0.0.1:8000/api/vendors/${id}/`)
+    .then(function (response) {
+      if(response.status == 204){
+        console.log("vendor was delete")
+      }
+
+    })
+    this.closeModel()
+    this.props.history.push('/vendors/')
   }
 
 
@@ -80,7 +91,10 @@ class Vendor extends React.Component{
           {
             this.state.modelOpen  ?
 
-            <DeleteModel closeModel={this.closeModel} id={this.state.deleteId} name={this.state.deleteName} />:""
+            <DeleteModel closeModel={this.closeModel}
+                         deleteRecord={this.deleteRecord}
+                         id={this.state.deleteId}
+                         name={this.state.deleteName} />:""
 
           }
 
