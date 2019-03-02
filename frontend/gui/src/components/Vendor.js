@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import VendorAvatar from './avatar/VendorAvatar';
 import * as actions from '../store/actions/auth';
 import DeleteModel from './general/DeleteModel';
+import * as helper from '../helperMethods/UpdateLocalStorage';
 const Search = Input.Search;
 
 
@@ -45,18 +46,7 @@ class Vendor extends React.Component{
     })
   }
 
-  /// need to delete it from localstorage and vendors state
-  // maybe change function deleteVendor to another that
-  // dispatch same function but at the same time it removes
-  // data from localStorage
-  deleteRecord=(id)=>{
-    axios.delete(`http://127.0.0.1:8000/api/vendors/${id}/`)
-    .then(function (response) {
-      if(response.status == 204){
-        console.log("vendor was delete")
-      }
-
-    })
+  deleteRecord = (id) =>{
     this.props.deleteVendor(id)
     this.closeModel()
     this.props.history.push('/vendors/')
@@ -118,7 +108,7 @@ const mapStateToProps = ({VendorReducer}) =>{
 const mapDispatchToProps = dispatch =>{
   return {
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),
-      deleteVendor:(id)=>dispatch(actions.deleteVendor(id))
+      deleteVendor:(id)=>dispatch(actions.deleteVendorLocalStorage(id))
   }
 }
 

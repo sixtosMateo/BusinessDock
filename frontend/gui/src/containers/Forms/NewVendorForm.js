@@ -6,7 +6,6 @@ import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
 import axios from 'axios';
 
-
 const FormItem = Form.Item;
 
 class NewVendor extends React.Component{
@@ -15,30 +14,10 @@ class NewVendor extends React.Component{
 
   }
 
-  // need to save data into local storage and my vendors state
-  // need a function in actions/auth to remove an item from local storage
-
   createVendor(vendor){
-    // const {vendors} = this.props
-    axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
-    .then(function (response) {
-      if(response.status === 201){
-        console.log(response)
-        console.log("Success Vendor was submit")
-        // vendors.push(response.data)
-      }
-    })
-
-    /// need to add it to localstorage and vendors state
-    // maybe change function addVendor to another that
-    // dispatch same function but at the same time it add
-    // data from localStorage
-    // this.props.addVendor()
-
-    // localStorage.setItem('localVendors', JSON.stringify(vendors))
+    this.props.addVendor(vendor)
     this.props.history.push('/vendors/')
   }
-
 
   // need to guarantee that the form has real data and meets requirements
   editVendor(vendor){
@@ -154,8 +133,8 @@ const mapStateToProps = ({VendorReducer}, props) => {
 const mapDispatchToProps = dispatch =>{
   return {
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),
-      editVendor: (id, editObject) => dispatch(actions.editVendor(id, editObject)),
-      addVendor:(vendor) => dispatch(actions.addVendor(vendor))
+      // editVendor: (id, editObject) => dispatch(actions.editVendor(id, editObject)),
+      addVendor:(vendor) => dispatch(actions.addVendorLocalStorage(vendor))
   }
 }
 

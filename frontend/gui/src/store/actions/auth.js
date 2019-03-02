@@ -7,6 +7,7 @@ import * as EmployeesApi from '../../api/getEmployeesRequest';
 // import * as OutgoingsApi from '../../api/getOutgoingRequest';
 import * as VendorsApi from '../../api/getVendorsRequest';
 import * as UsersApi from '../../api/getUserRequest';
+import * as helper from '../../helperMethods/UpdateLocalStorage';
 
 
 
@@ -61,7 +62,15 @@ export const initializeUsers = users =>{
 }
 }
 
-export const addVendor=(vendor)=>{
+export const deleteItem = (id)=>{
+  return {
+    type: actionTypes.DELETE_ITEM,
+    id: id,
+  }
+}
+
+
+export const addVendor = (vendor)=>{
   return {
     type: actionTypes.ADD_VENDOR,
     vendor: vendor
@@ -83,12 +92,26 @@ export const deleteVendor = (id)=>{
   }
 }
 
+export const addVendorLocalStorage = (vendor) =>{
+  return dispatch => {
+    axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
+    .then(function (response) {
+      if(response.status === 201){
+        dispatch(addVendor(response.data))
+        helper.addLocalStorage('localVendors',response.data)
+      }
+    })
+  }
+}
 
+export const deleteVendorLocalStorage = (id) =>{
+  return dispatch =>{
+    axios.delete(`http://127.0.0.1:8000/api/vendors/${id}/`)
+    .then(res=> {
+      dispatch(deleteVendor(id))
+      helper.deleteLocalStorage('localVendors',id)
+    })
 
-export const deleteItem = (id)=>{
-  return {
-    type: actionTypes.DELETE_ITEM,
-    id: id,
   }
 }
 
@@ -165,6 +188,9 @@ export const reloadLocalVendors=()=>{
       dispatch(initializeVendors(vendors))
   }
 }
+
+
+///put login here
 
 // this function requires 2 parameters from djangorestframework, currently we
 // know 2 parameters but these would be initialized once django backend is setup

@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
+import * as helper from '../../helperMethods/UpdateLocalStorage';
 
 
 const FormItem = Form.Item;
@@ -27,6 +28,7 @@ class NewItem extends React.Component{
       if(response.status === 201){
 
         console.log("Success item was submit")
+        helper.addLocalStorage('localItems',response.data)
       }
     })
     this.props.history.push('/inventory/')

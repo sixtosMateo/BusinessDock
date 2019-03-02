@@ -49,13 +49,7 @@ class Items extends React.Component{
   }
 
   deleteRecord=(id)=>{
-    axios.delete(`http://127.0.0.1:8000/api/items/${id}/`)
-    .then(function (response) {
-      if(response.status == 204){
-        console.log("items was delete")
-      }
-
-    })
+    
     this.props.deleteItem(id)
     this.closeModel()
     this.props.history.push('/inventory/')
