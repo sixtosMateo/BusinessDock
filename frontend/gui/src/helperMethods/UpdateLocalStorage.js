@@ -13,3 +13,10 @@ export function deleteLocalStorage(type,object){
   a = a.filter((vendor)=>{ return vendor.vendorId !== object})
   localStorage.setItem(type, JSON.stringify(a));
 }
+
+export function deleteItemLocalStorage(type,object){
+  var a = []
+  a = JSON.parse(localStorage.getItem(type));
+  a = a.filter((vendor)=>{ return vendor.itemId !== object})
+  localStorage.setItem(type, JSON.stringify(a));
+}

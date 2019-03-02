@@ -45,7 +45,6 @@ const deletingVendor = (state, action)=>{
     })
 }
 
-
 const VendorReducer = (state=initialState, action) =>{
   switch (action.type) {
       case actionTypes.FETCH_VENDORS: return initialVendors(state, action);

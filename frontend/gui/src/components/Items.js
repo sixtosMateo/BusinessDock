@@ -49,7 +49,7 @@ class Items extends React.Component{
   }
 
   deleteRecord=(id)=>{
-    
+
     this.props.deleteItem(id)
     this.closeModel()
     this.props.history.push('/inventory/')
@@ -112,7 +112,7 @@ const mapStateToProps = ({ItemReducer,  AuthReducer}) =>{
 const mapDispatchToProps = dispatch =>{
   return {
       refreshItems: () => dispatch(actions.reloadLocalItems()),
-      deleteItem: (id) => dispatch(actions.deleteItem(id))
+      deleteItem: (id) => dispatch(actions.deleteItemLocalStorage(id))
   }
 }
 

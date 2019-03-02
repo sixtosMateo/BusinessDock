@@ -69,6 +69,15 @@ export const deleteItem = (id)=>{
   }
 }
 
+export const deleteItemLocalStorage = (id)=>{
+  return dispatch =>{
+    axios.delete(`http://127.0.0.1:8000/api/items/${id}/`)
+    .then(res => {
+        dispatch(deleteItem(id))
+        helper.deleteItemLocalStorage('localItems', id)
+    })
+  }
+}
 
 export const addVendor = (vendor)=>{
   return {
@@ -107,9 +116,9 @@ export const addVendorLocalStorage = (vendor) =>{
 export const deleteVendorLocalStorage = (id) =>{
   return dispatch =>{
     axios.delete(`http://127.0.0.1:8000/api/vendors/${id}/`)
-    .then(res=> {
+    .then(res => {
       dispatch(deleteVendor(id))
-      helper.deleteLocalStorage('localVendors',id)
+      helper.deleteLocalStorage('localVendors', id)
     })
 
   }

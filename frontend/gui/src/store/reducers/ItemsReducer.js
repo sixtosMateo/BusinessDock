@@ -22,7 +22,6 @@ const deletingItem = (state, action)=>{
     })
 }
 
-
 const ItemReducer = (state=initialState, action) =>{
   switch (action.type) {
       case actionTypes.FETCH_ITEMS: return initialItems(state, action);
