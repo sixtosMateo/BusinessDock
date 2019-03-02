@@ -22,15 +22,7 @@ class NewItem extends React.Component{
   };
 
   createItem(item){
-    axios.post('http://127.0.0.1:8000/api/items/', item)
-    .then(function (response) {
-      // console.log(response)
-      if(response.status === 201){
-
-        console.log("Success item was submit")
-        helper.addLocalStorage('localItems',response.data)
-      }
-    })
+    this.props.addItem(item)
     this.props.history.push('/inventory/')
 
   }
@@ -179,7 +171,8 @@ const mapStateToProps = ({ItemReducer}, props) => {
 
 const mapDispatchToProps = dispatch =>{
   return {
-      refreshItems: () => dispatch(actions.reloadLocalItems())
+      refreshItems: () => dispatch(actions.reloadLocalItems()),
+      addItem:(item)=>dispatch(actions.addItemLocalStorage(item))
   }
 }
 

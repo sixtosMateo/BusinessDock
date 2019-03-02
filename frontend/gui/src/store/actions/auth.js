@@ -62,10 +62,31 @@ export const initializeUsers = users =>{
 }
 }
 
+
+export const addItem =(item)=>{
+  return {
+    type: actionTypes.ADD_ITEM,
+    item: item
+  }
+}
+
 export const deleteItem = (id)=>{
   return {
     type: actionTypes.DELETE_ITEM,
     id: id,
+  }
+}
+
+export const addItemLocalStorage = (item) =>{
+  return dispatch=>{
+    axios.post('http://127.0.0.1:8000/api/items/', item)
+    .then(function (response) {
+
+      if(response.status === 201){
+        dispatch(addItem(response.data))
+        helper.addLocalStorage('localItems',response.data)
+      }
+    })
   }
 }
 
@@ -79,6 +100,8 @@ export const deleteItemLocalStorage = (id)=>{
   }
 }
 
+
+// Vendor CRUD operations
 export const addVendor = (vendor)=>{
   return {
     type: actionTypes.ADD_VENDOR,
@@ -101,6 +124,7 @@ export const deleteVendor = (id)=>{
   }
 }
 
+// DB and CACHE DELETION
 export const addVendorLocalStorage = (vendor) =>{
   return dispatch => {
     axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
