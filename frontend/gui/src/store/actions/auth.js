@@ -61,6 +61,13 @@ export const initializeUsers = users =>{
 }
 }
 
+export const addVendor=(vendor)=>{
+  return {
+    type: actionTypes.ADD_VENDOR,
+    vendor: vendor
+  }
+}
+
 export const editVendor = (id, updates)=>{
   return {
     type: actionTypes.EDIT_VENDOR,
@@ -75,6 +82,7 @@ export const deleteVendor = (id)=>{
     id: id,
   }
 }
+
 
 
 export const deleteItem = (id)=>{

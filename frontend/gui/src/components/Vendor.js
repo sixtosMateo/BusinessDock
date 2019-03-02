@@ -45,6 +45,10 @@ class Vendor extends React.Component{
     })
   }
 
+  /// need to delete it from localstorage and vendors state
+  // maybe change function deleteVendor to another that
+  // dispatch same function but at the same time it removes
+  // data from localStorage
   deleteRecord=(id)=>{
     axios.delete(`http://127.0.0.1:8000/api/vendors/${id}/`)
     .then(function (response) {
@@ -57,8 +61,6 @@ class Vendor extends React.Component{
     this.closeModel()
     this.props.history.push('/vendors/')
   }
-
-
 
   render(){
     let showingVendors

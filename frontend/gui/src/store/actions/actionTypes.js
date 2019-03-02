@@ -12,9 +12,10 @@ export const FETCH_VENDORS = "FETCH_VENDORS";
 export const FETCH_USERS = "FETCH_USERS";
 
 
+export const ADD_VENDOR = "ADD_VENDOR";
 export const EDIT_VENDOR = "EDIT_VENDOR";
 export const DELETE_VENDOR = "DELETE_VENDOR";
 
-
+export const ADD_ITEM = "ADD_ITEM";
 export const EDIT_ITEM  = "EDIT_ITEM";
 export const DELETE_ITEM = "DELETE_ITEM";

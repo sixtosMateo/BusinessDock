@@ -21,7 +21,7 @@ class EditVendor extends React.Component{
     return(
      <div className = "edit-vendor" style={{background:"#F5F5F5"}}>
 
-      <NewVendor/>
+        <NewVendor/>
       </div>
     );
   }

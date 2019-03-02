@@ -13,6 +13,12 @@ const initialVendors = (state, action)=>{
   });
 }
 
+const addingVendor = (state,action)=>{
+  return updateObject(state,{
+    vendors: state.vendors.concat(action.vendor)
+  })
+}
+
 const editingVendor = (state, action)=>{
 
   return updateObject(
@@ -43,8 +49,10 @@ const deletingVendor = (state, action)=>{
 const VendorReducer = (state=initialState, action) =>{
   switch (action.type) {
       case actionTypes.FETCH_VENDORS: return initialVendors(state, action);
+      case actionTypes.ADD_VENDOR: return addingVendor(state, action);
       case actionTypes.EDIT_VENDOR: return editingVendor(state, action);
       case actionTypes.DELETE_VENDOR: return deletingVendor(state, action);
+
 
 
         break;
