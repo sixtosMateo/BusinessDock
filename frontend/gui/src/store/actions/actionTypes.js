@@ -11,4 +11,10 @@ export const FETCH_EMPLOYEES = "FETCH_EMPLOYEES";
 export const FETCH_VENDORS = "FETCH_VENDORS";
 export const FETCH_USERS = "FETCH_USERS";
 
+
 export const EDIT_VENDOR = "EDIT_VENDOR";
+export const DELETE_VENDOR = "DELETE_VENDOR";
+
+
+export const EDIT_ITEM  = "EDIT_ITEM";
+export const DELETE_ITEM = "DELETE_ITEM";

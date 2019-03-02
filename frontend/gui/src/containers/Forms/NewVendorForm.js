@@ -24,9 +24,11 @@ class NewVendor extends React.Component{
     })
     this.props.history.push('/vendors/')
   }
-
+  // need to guarantee that the form has real data and meets requirements
   editVendor(vendor){
-
+    vendor.vendorId = this.props.vendor.vendorId;
+    // this.props.editVendor(this.props.vendor.vendorId, vendor)
+    console.log(this.props.vendor.vendorId, vendor)
     axios.put(`http://127.0.0.1:8000/api/vendors/${this.props.vendor.vendorId}/`, vendor)
     .then(function (response) {
       if(response.status === 200){
@@ -62,6 +64,7 @@ class NewVendor extends React.Component{
   }
 
   render(){
+    // console.log(this.props.vendors)
       const { getFieldDecorator} = this.props.form;
 
       return(
@@ -134,7 +137,8 @@ const mapStateToProps = ({VendorReducer}, props) => {
 
 const mapDispatchToProps = dispatch =>{
   return {
-      refreshVendors: () => dispatch(actions.reloadLocalVendors())
+      refreshVendors: () => dispatch(actions.reloadLocalVendors()),
+      editVendor: (id, editObject) => dispatch(actions.editVendor(id, editObject))
   }
 }
 

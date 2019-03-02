@@ -53,6 +53,7 @@ class Vendor extends React.Component{
       }
 
     })
+    this.props.deleteVendor(id)
     this.closeModel()
     this.props.history.push('/vendors/')
   }
@@ -114,7 +115,8 @@ const mapStateToProps = ({VendorReducer}) =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
-      refreshVendors: () => dispatch(actions.reloadLocalVendors())
+      refreshVendors: () => dispatch(actions.reloadLocalVendors()),
+      deleteVendor:(id)=>dispatch(actions.deleteVendor(id))
   }
 }
 

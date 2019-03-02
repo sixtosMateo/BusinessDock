@@ -61,13 +61,28 @@ export const initializeUsers = users =>{
 }
 }
 
-// export const editVendor= (id, updates)=>{
-//   return {
-//     type: actionTypes.EDIT_VENDOR,
-//     id: id,
-//     updates: updates
-//   }
-// }
+export const editVendor = (id, updates)=>{
+  return {
+    type: actionTypes.EDIT_VENDOR,
+    id: id,
+    updates: updates
+  }
+}
+
+export const deleteVendor = (id)=>{
+  return {
+    type: actionTypes.DELETE_VENDOR,
+    id: id,
+  }
+}
+
+
+export const deleteItem = (id)=>{
+  return {
+    type: actionTypes.DELETE_ITEM,
+    id: id,
+  }
+}
 
 
 // Fetching data from api calls
