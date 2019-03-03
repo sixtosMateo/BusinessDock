@@ -2,8 +2,6 @@
 // i think its best two have two separate table for incoming and outgoing tables
 // display table when item is new ask user if they want to add new item
 // when user finished scanning the value needs to disapear
-
-
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 import escapeRegExp from 'escape-string-regexp';
@@ -13,21 +11,28 @@ import * as actions from '../store/actions/auth';
 import { connect } from 'react-redux';
 import IncomingItemAvatar from './avatar/IncomingAvatar';
 import TotalTable from './cart/TotalTable';
-import { Row, Col , Icon } from 'antd';
+import { Row, Col , Icon, Form, Select} from 'antd';
 import Model from './general/ModelContainer';
+import serializeForm from 'form-serialize';
+
+const FormItem = Form.Item;
+const Option = Select.Option;
 
 class Incoming extends React.Component{
   state={
     query:'',
+    vendorId:0,
     cart:[],
     subTotal:0,
     tax:0,
     total:0,
-    modelOpen: false
+    modelOpen: false,
+    confirmDirty: false,
   }
 
   componentDidMount(){
     this.props.refreshItems()
+    this.props.refreshVendors()
   }
 
   getItem=(barcode)=>{
@@ -202,10 +207,55 @@ class Incoming extends React.Component{
     })
   }
 
+  //post item
+  postTrasanction = (values)=>{
+    console.log(values)
+  }
+
+
+  handleSubmit=(e)=>{
+      e.preventDefault()
+      const values = serializeForm(e.target, // e.target is the from itself
+      {
+        hash: true
+      })
+
+      // need to check if values has content
+      this.postTrasanction(values)
+
+  }
+
+  handleConfirmBlur = (e) => {
+    const value = e.target.value;
+    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  }
+
+  handleChange=(value)=> {
+    this.setState({
+      vendorId: value
+    })
+  }
+
   render(){
+      const { vendors} = this.props.vendors
       return(
 
         <div className="incomingComponent" >
+
+              <Select showSearch
+                      defaultValue="Select a Vendor"
+                      style={{ width: 150, marginBottom:"20px" }}
+                      onChange={this.handleChange}>
+                {
+                  vendors.map((vendor)=>{
+                    return <Option key={vendor.vendorId}
+                                   value={vendor.vendorId}>{vendor.name}
+                            </Option>
+                  })
+                }
+              </Select>
+
+
           <Row>
             <Col span={12} style={{width:"50%"}}>
                 <DebounceInput
@@ -280,19 +330,20 @@ class Incoming extends React.Component{
     }
 }
 
-const mapStateToProps = ({ItemReducer, AuthReducer}) =>{
+const mapStateToProps = ({ItemReducer, AuthReducer, VendorReducer}) =>{
   // return object is what you want to map into a property
   return {
     items: ItemReducer.items,
+    vendors: VendorReducer,
     isAuthenticated: AuthReducer.token !== null
-
   }
 }
 
 const mapDispatchToProps = dispatch =>{
   return {
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
-      refreshItems: () => dispatch(actions.reloadLocalItems())
+      refreshItems: () => dispatch(actions.reloadLocalItems()),
+      refreshVendors: () => dispatch(actions.reloadLocalVendors()),
   }
 }
 
