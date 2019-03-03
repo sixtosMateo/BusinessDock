@@ -6,7 +6,7 @@ import { Icon, Row, Col} from 'antd';
 import TransactionDashboard from "../cart/TransactionDashboard";
 
 const IncomingItemAvatar =(props)=>{
-  const {increment, decrement} = props;
+  const {increment, decrement, removeItem} = props;
   return(
     <div className="incoming-item-avatar">
 
@@ -46,7 +46,7 @@ const IncomingItemAvatar =(props)=>{
             </Col>
 
             <Col span={2} style={{width:"17%"}}>{item.itemSaleTotal}</Col>
-            <Col span={2} style={{width:"17%"}}><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
+            <Col span={2} style={{width:"17%"}} onClick={()=> removeItem(item.barcode)} ><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
             </Row>
 
 

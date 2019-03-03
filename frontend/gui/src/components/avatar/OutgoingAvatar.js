@@ -9,7 +9,7 @@ import TransactionDashboard from "../cart/TransactionDashboard";
 
 const OutgoingItemAvatar =(props)=>{
 
-  const {increment, decrement} = props;
+  const {increment, decrement, removeItem} = props;
   return(
 
     <div className="outgoing-item-avatar">
@@ -52,7 +52,7 @@ const OutgoingItemAvatar =(props)=>{
                   style={{ fontSize: '16px', color: '#0000ff'}}/>
               </Col>
               <Col span={2} style={{width:"17%"}}>{item.itemSaleTotal}</Col>
-              <Col span={2} style={{width:"17%"}}><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
+              <Col span={2} style={{width:"17%"}} onClick={()=> removeItem(item.barcode)}><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
 
             </Row>
 

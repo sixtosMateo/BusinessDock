@@ -313,6 +313,7 @@ class Incoming extends React.Component{
             data={this.state.cart}
             increment={this.increment}
             decrement={this.decrement}
+            removeItem={this.removeItem}
           />
 
           {
