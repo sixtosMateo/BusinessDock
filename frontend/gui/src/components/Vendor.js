@@ -88,10 +88,7 @@ class Vendor extends React.Component{
                          deleteRecord={this.deleteRecord}
                          id={this.state.deleteId}
                          name={this.state.deleteName} />:""
-
           }
-
-
         </div>
 
       );

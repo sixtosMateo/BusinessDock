@@ -6,7 +6,6 @@ const initialState={
   vendors:[]
 }
 
-
 const initialVendors = (state, action)=>{
   return updateObject(state, {
     vendors: action.vendors
@@ -22,19 +21,21 @@ const addingVendor = (state,action)=>{
 const editingVendor = (state, action)=>{
 
   return updateObject(
-    state,{
+    state,
+    {
       vendors: state.vendors.map((vendor) =>{
         if(vendor.vendorId === action.id ){
           return {
             ...vendor,
-            ...action.updates
+            ...action.updates,
           }
         }
         else{
           return vendor
         }
       })
-    })
+    }
+  )
 }
 
 const deletingVendor = (state, action)=>{

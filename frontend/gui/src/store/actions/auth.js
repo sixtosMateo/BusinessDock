@@ -62,7 +62,6 @@ export const initializeUsers = users =>{
 }
 }
 
-
 export const addItem =(item)=>{
   return {
     type: actionTypes.ADD_ITEM,
@@ -132,6 +131,19 @@ export const addVendorLocalStorage = (vendor) =>{
       if(response.status === 201){
         dispatch(addVendor(response.data))
         helper.addLocalStorage('localVendors',response.data)
+      }
+    })
+  }
+}
+
+
+export const editVendorLocalStorage = (id, vendor) =>{
+  return dispatch =>{
+    axios.put(`http://127.0.0.1:8000/api/vendors/${id}/`, vendor)
+    .then(function (response) {
+      if(response.status === 200){
+        dispatch(editVendor(id, response.data))
+        helper.editVendorLocalStorage('localVendors', id, response.data)
       }
     })
   }

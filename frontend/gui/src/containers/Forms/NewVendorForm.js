@@ -19,17 +19,13 @@ class NewVendor extends React.Component{
     this.props.history.push('/vendors/')
   }
 
+  // console.log(this.props.vendor.vendorId, vendor)
   // need to guarantee that the form has real data and meets requirements
   editVendor(vendor){
-    vendor.vendorId = this.props.vendor.vendorId;
-    // this.props.editVendor(this.props.vendor.vendorId, vendor)
-    console.log(this.props.vendor.vendorId, vendor)
-    axios.put(`http://127.0.0.1:8000/api/vendors/${this.props.vendor.vendorId}/`, vendor)
-    .then(function (response) {
-      if(response.status === 200){
-        console.log("Success Vendor was Edit")
-      }
-    })
+    vendor.vendorId = this.props.vendor.vendorId
+    console.log(vendor.vendorId, vendor)
+    this.props.editVendor(vendor.vendorId, vendor)
+
     this.props.history.push('/vendors/')
   }
 
@@ -59,7 +55,7 @@ class NewVendor extends React.Component{
   }
 
   render(){
-    // console.log(this.props.vendors)
+    
       const { getFieldDecorator} = this.props.form;
 
       return(
@@ -133,7 +129,7 @@ const mapStateToProps = ({VendorReducer}, props) => {
 const mapDispatchToProps = dispatch =>{
   return {
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),
-      // editVendor: (id, editObject) => dispatch(actions.editVendor(id, editObject)),
+      editVendor: (id, editObject) => dispatch(actions.editVendorLocalStorage(id, editObject)),
       addVendor:(vendor) => dispatch(actions.addVendorLocalStorage(vendor))
   }
 }
