@@ -23,9 +23,7 @@ class NewVendor extends React.Component{
   // need to guarantee that the form has real data and meets requirements
   editVendor(vendor){
     vendor.vendorId = this.props.vendor.vendorId
-    console.log(vendor.vendorId, vendor)
     this.props.editVendor(vendor.vendorId, vendor)
-
     this.props.history.push('/vendors/')
   }
 
@@ -55,7 +53,7 @@ class NewVendor extends React.Component{
   }
 
   render(){
-    
+
       const { getFieldDecorator} = this.props.form;
 
       return(

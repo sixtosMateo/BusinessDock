@@ -27,12 +27,32 @@ const addingItem = (state,action)=>{
   })
 }
 
+const editingItem = (state, action)=>{
+  return updateObject(
+    state,
+    {
+      items: state.items.map((item) =>{
+        if(item.itemId === action.id ){
+          return {
+            ...item,
+            ...action.updates,
+          }
+        }
+        else{
+          return item
+        }
+      })
+    }
+  )
+}
+
+
 const ItemReducer = (state=initialState, action) =>{
   switch (action.type) {
       case actionTypes.FETCH_ITEMS: return initialItems(state, action);
       case actionTypes.DELETE_ITEM: return deletingItem(state, action);
       case actionTypes.ADD_ITEM: return addingItem(state, action);
-
+      case actionTypes.EDIT_ITEM: return editingItem(state, action);
         break;
       default:
         return state;

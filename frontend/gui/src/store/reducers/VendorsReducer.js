@@ -19,7 +19,6 @@ const addingVendor = (state,action)=>{
 }
 
 const editingVendor = (state, action)=>{
-
   return updateObject(
     state,
     {

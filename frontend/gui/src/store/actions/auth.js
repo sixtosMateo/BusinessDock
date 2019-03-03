@@ -69,6 +69,14 @@ export const addItem =(item)=>{
   }
 }
 
+export const editItem = (id, updates)=>{
+  return {
+    type: actionTypes.EDIT_ITEM,
+    id: id,
+    updates: updates
+  }
+}
+
 export const deleteItem = (id)=>{
   return {
     type: actionTypes.DELETE_ITEM,
@@ -98,6 +106,19 @@ export const deleteItemLocalStorage = (id)=>{
     })
   }
 }
+
+export const editItemLocalStorage = (id, item) =>{
+  return dispatch =>{
+    axios.put(`http://127.0.0.1:8000/api/items/${id}/`, item)
+    .then(function (response) {
+      if(response.status === 200){
+        dispatch(editItem(id, response.data))
+        helper.editItemLocalStorage('localItems', id, response.data)
+      }
+    })
+  }
+}
+
 
 
 // Vendor CRUD operations

@@ -28,12 +28,8 @@ class NewItem extends React.Component{
   }
 
   editItem(item){
-    axios.put(`http://127.0.0.1:8000/api/items/${this.props.item.itemId}/`, item)
-    .then(function (response) {
-      if(response.status === 200){
-        console.log("Success Item was Edit")
-      }
-    })
+    item.itemId = this.props.item.itemId
+    this.props.editItem(item.itemId, item)
     this.props.history.push('/inventory/')
   }
 
@@ -172,7 +168,8 @@ const mapStateToProps = ({ItemReducer}, props) => {
 const mapDispatchToProps = dispatch =>{
   return {
       refreshItems: () => dispatch(actions.reloadLocalItems()),
-      addItem:(item)=>dispatch(actions.addItemLocalStorage(item))
+      addItem:(item)=>dispatch(actions.addItemLocalStorage(item)),
+      editItem:(id,object) => dispatch(actions.editItemLocalStorage(id, object))
   }
 }
 

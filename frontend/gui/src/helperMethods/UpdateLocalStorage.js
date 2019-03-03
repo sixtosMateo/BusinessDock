@@ -7,13 +7,6 @@ export function addLocalStorage(type, object){
 
 }
 
-export function deleteLocalStorage(type,object){
-  var a = []
-  a = JSON.parse(localStorage.getItem(type));
-  a = a.filter((vendor)=>{ return vendor.vendorId !== object})
-  localStorage.setItem(type, JSON.stringify(a));
-}
-
 export function editVendorLocalStorage(type,id,object){
   var a = []
   a = JSON.parse(localStorage.getItem(type));
@@ -22,7 +15,26 @@ export function editVendorLocalStorage(type,id,object){
                   return vendor = object}
                 return vendor
               })
-  
+
+  localStorage.setItem(type, JSON.stringify(a));
+}
+
+export function deleteLocalStorage(type,object){
+  var a = []
+  a = JSON.parse(localStorage.getItem(type));
+  a = a.filter((vendor)=>{ return vendor.vendorId !== object})
+  localStorage.setItem(type, JSON.stringify(a));
+}
+
+export function editItemLocalStorage(type, id, object){
+  var a = []
+  a = JSON.parse(localStorage.getItem(type));
+  a = a.map((item)=>
+              { if(item.itemId === id){
+                  return item = object}
+                return item
+              })
+
   localStorage.setItem(type, JSON.stringify(a));
 }
 
