@@ -161,7 +161,7 @@ class IncomingTransaction(models.Model):
             self.tax, self.total, self.subtotal)
 
 
-class TransactionItem(models.Model):
+class IncomingTransactionItem(models.Model):
     barcode = models.CharField(max_length=30, default=None)
     transactionId = models.IntegerField(default = 0, blank=True)
     name = models.CharField(max_length = 30, default=None)
@@ -173,7 +173,7 @@ class TransactionItem(models.Model):
     createdAt = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = "docks_transactionitem"
+        db_table = "docks_incomingtransactionitem"
 
     def save(self, *args, **kwargs):
         print('save() is called.')
@@ -184,4 +184,27 @@ class TransactionItem(models.Model):
             self.barcode, self.transactionId, self.transactionType, self.tax,
             self.quantity, self.price, self.createdAt)
 
+
+class OutgoingTransactionItem(models.Model):
+    barcode = models.CharField(max_length=30, default=None)
+    transactionId = models.IntegerField(default = 0, blank=True)
+    name = models.CharField(max_length = 30, default=None)
+    transactionType = models.CharField(max_length=30, default=None)
+    quantity = models.IntegerField(default = 0, blank=True)
+    price = models.FloatField(null=True, blank=True, default=None)
+    tax = models.FloatField(null=True, blank=True, default=0.0925)
+    itemSaleTotal = models.FloatField(null=True, blank=True, default=None)
+    createdAt = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "docks_outgoingtransactionitem"
+
+    def save(self, *args, **kwargs):
+        print('save() is called.')
+        super(TransactionItem, self).save(using="")
+
+    def __unicode__(self):
+        return "{0} {1} {2} {3} {4} {5} {6}".format(
+            self.barcode, self.transactionId, self.transactionType, self.tax,
+            self.quantity, self.price, self.createdAt)
 # Create your models here.

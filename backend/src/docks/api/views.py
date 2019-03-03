@@ -2,7 +2,8 @@ from docks.models import (Item,
                         OutgoingTransaction,
                         IncomingTransaction,
                         Vendor,
-                        TransactionItem,
+                        OutgoingTransactionItem,
+                        IncomingTransactionItem,
                         Store,
                         DamageItem,
                         Employee)
@@ -11,7 +12,8 @@ from .serializers import (ItemSerializer,
                         OutgoingTransactionSerializer,
                         IncomingTransactionSerializer,
                         VendorSerializer,
-                        TransactionItemSerializer,
+                        OutgoingTransactionItemSerializer,
+                        IncomingTransactionItemSerializer,
                         StoreSerializer,
                         DamageItemSerializer,
                         EmployeeSerializer,
@@ -42,9 +44,13 @@ class VendorViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
 
-class TransactionItemViewSet(viewsets.ModelViewSet):
-    queryset = TransactionItem.objects.all()
-    serializer_class = TransactionItemSerializer
+class OutgoingTransactionItemViewSet(viewsets.ModelViewSet):
+    queryset = OutgoingTransactionItem.objects.all()
+    serializer_class = OutgoingTransactionItemSerializer
+
+class IncomingTransactionItemViewSet(viewsets.ModelViewSet):
+    queryset = IncomingTransactionItem.objects.all()
+    serializer_class = IncomingTransactionItemSerializer
 
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()

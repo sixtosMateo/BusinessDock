@@ -3,7 +3,8 @@ from docks.models import (Item,
                         OutgoingTransaction,
                         IncomingTransaction,
                         Vendor,
-                        TransactionItem,
+                        OutgoingTransactionItem,
+                        IncomingTransactionItem,
                         Store,
                         DamageItem,
                         Employee)
@@ -36,9 +37,14 @@ class VendorSerializer(serializers.ModelSerializer):
         model = Vendor
         fields = '__all__'
 
-class TransactionItemSerializer(serializers.ModelSerializer):
+class OutgoingTransactionItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TransactionItem
+        model = OutgoingTransactionItem
+        fields = '__all__'
+
+class IncomingTransactionItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IncomingTransactionItem
         fields = '__all__'
 
 class StoreSerializer(serializers.ModelSerializer):
