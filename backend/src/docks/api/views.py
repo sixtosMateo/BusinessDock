@@ -20,10 +20,14 @@ from .serializers import (ItemSerializer,
                         UserSerializer)
 
 from django.contrib.auth.models import User
-
+from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
 
-class UserViewSet(viewsets.ModelViewSet):
+
+class UserViewSet( viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

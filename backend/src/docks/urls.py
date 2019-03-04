@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^profile/$',views.ShowProfile.as_view(),name='profile')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
