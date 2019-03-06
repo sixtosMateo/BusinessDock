@@ -11,7 +11,7 @@ import * as actions from '../store/actions/auth';
 import OutgoingItemAvatar from './avatar/OutgoingAvatar';
 import TotalTable from './cart/TotalTable';
 import 'antd/dist/antd.css';
-import { Row, Col , Icon } from 'antd';
+import { Row, Col , Icon, InputNumber, Button } from 'antd';
 
 
 
@@ -28,6 +28,7 @@ class Outgoing extends React.Component{
   componentDidMount(){
     this.props.refreshItems()
     this.props.fetchCurrentUser()
+    this.props.refreshEmployees()
     // this.setItems()
 
   }
@@ -187,10 +188,15 @@ class Outgoing extends React.Component{
 
   render(){
     const user = this.props.currentUser
+    const employee = this.props.employees.find(employee=> employee.userId === user.pk);
       return(
         <div className="outgoingComponent">
         <h2>Clerk: {user ? user.username: ""}</h2>
-        <h3>ID: {user ? user.pk: ""}</h3>
+        <h3 >ID: <InputNumber value={employee ? employee.employeeId: ""}
+                             style={{border:"none",
+                                    color: "#000000",
+                                    backgroundColor:"transparent"}}
+                             disabled/></h3>
 
           <Row>
             <Col span={12} style={{width:"50%"}}>
@@ -212,22 +218,22 @@ class Outgoing extends React.Component{
 
                   <Col span={12} style={{width:"50%", padding:"2px"}}>
 
-                    <Icon type="shopping-cart"
-                          className="submit-cart"
-                          onClick={()=>this.clearCart()}
-                          style={{fontFamily: "Permanent Marker",
-                                  color:"#00AF33",
-                                  width:"3rem",
-                                  border:"1px solid"}}/> <span style={{width:"5rem", color:"#00AF33"}}>Submit</span>
+                    <Button htmlType="submit" >
+                      <Icon type="shopping-cart"
+                            className="submit-cart"
+                            style={{fontFamily: "Permanent Marker",
+                                    color:"#00AF33"}}/>
+                                    <span style={{color:"#00AF33"}}>Submit</span>
+                    </Button>
 
-
+                    <Button type="danger" onClick={()=>this.clearCart()}>
                     <Icon type="delete"
                           className="empty-cart"
-                          onClick={()=>this.clearCart()}
                           style={{fontFamily: "Permanent Marker",
-                                  color:"#cc0000",
-                                  width:"3rem",
-                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}>ClearCart</span>
+                                  color:"#cc0000"}}/>
+                                  <span style={{color:"#cc0000"}}>ClearCart</span>
+
+                    </Button>
                   </Col>
 
                   <Col span={12} style={{padding:"1px", width:"50%"}}>
@@ -261,9 +267,10 @@ class Outgoing extends React.Component{
 }
 
 
-const mapStateToProps = ({ItemReducer, AuthReducer}) =>{
+const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer}) =>{
   // return object is what you want to map into a property
   return {
+    employees:  EmployeeReducer.employees,
     currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     isAuthenticated: AuthReducer.token !== null
@@ -275,7 +282,8 @@ const mapDispatchToProps = dispatch =>{
   return {
       fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
-      onTryAutoSignup: ()=> dispatch(actions.authCheckState())
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
+      refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
 
   }
 }

@@ -11,7 +11,7 @@ import * as actions from '../store/actions/auth';
 import { connect } from 'react-redux';
 import IncomingItemAvatar from './avatar/IncomingAvatar';
 import TotalTable from './cart/TotalTable';
-import { Row, Col , Icon, Form, Select} from 'antd';
+import { Row, Col , Icon, Form, Select, Button, InputNumber} from 'antd';
 import Model from './general/ModelContainer';
 import serializeForm from 'form-serialize';
 
@@ -22,13 +22,13 @@ class Incoming extends React.Component{
   state={
     query:'',
     vendorId:0,
-    userId:0,
     cart:[],
     subTotal:0,
     tax:0,
     total:0,
     modelOpen: false,
     confirmDirty: false,
+    disabled: true,
   }
 
   componentDidMount(){
@@ -36,6 +36,7 @@ class Incoming extends React.Component{
     this.props.refreshVendors()
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
+
   }
 
   //copy
@@ -212,46 +213,56 @@ class Incoming extends React.Component{
   }
 
   //post item
-  postTrasanction = (values)=>{
-    console.log(values)
+  postTrasanction = ()=>{
+    console.log(this.props.employee.employeeId)
+    console.log(this.state.vendorId)
+    console.log(this.state.tax)
+    console.log(this.state.subTotal)
+    console.log(this.state.total)
   }
 
 
-  handleSubmit=(e)=>{
-      e.preventDefault()
-      const values = serializeForm(e.target, // e.target is the from itself
-      {
-        hash: true
-      })
+  // handleSubmit=(e)=>{
+  //     e.preventDefault()
+  //     const values = serializeForm(e.target, // e.target is the from itself
+  //     {
+  //       hash: true
+  //     })
+  //
+  //     // need to check if values has content
+  //     // this.postTrasanction(values)
+  //
+  // }
 
-      // need to check if values has content
-      this.postTrasanction(values)
-
-  }
-
-  handleConfirmBlur = (e) => {
-    const value = e.target.value;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  }
+  // handleConfirmBlur = (e) => {
+  //   const value = e.target.value;
+  //   this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  // }
 
   handleChange=(value)=> {
     this.setState({
-      vendorId: value
+      vendorId: value,
+      disabled: false,
     })
+
   }
 
   render(){
       const { vendors} = this.props.vendors
       const user = this.props.currentUser
-      
+
       return(
 
         <div className="incomingComponent" >
               <h2>Clerk: {user ? user.username: ""}</h2>
-              <h3>ID: {user ? user.pk: ""}</h3>
+              <h3 >ID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
+                                   style={{border:"none",
+                                          color: "#000000",
+                                          backgroundColor:"transparent"}}
+                                   disabled/></h3>
 
               <Select showSearch
-                      defaultValue="Select a Vendor"
+                      placeholder="Select a vendor"
                       style={{ width: 150, marginBottom:"20px" }}
                       onChange={this.handleChange}>
                 {
@@ -283,22 +294,22 @@ class Incoming extends React.Component{
               <Col span={12} style={{width:"50%", padding:"2px"}}>
 
                   <Col span={12} style={{padding:"1px", width:"50%"}}>
-                    <Icon type="shopping-cart"
-                          className="submit-cart"
-                          onClick={()=>this.clearCart()}
-                          style={{fontFamily: "Permanent Marker",
-                                  color:"#00AF33",
-                                  width:"3rem",
-                                  border:"1px solid"}}/> <span style={{width:"5rem", color:"#00AF33"}}> Submit  </span>
+                    <Button onClick={()=>this.postTrasanction()} disabled={this.state.disabled}>
+                      <Icon type="shopping-cart"
+                            className="submit-cart"
+                            style={{fontFamily: "Permanent Marker",
+                                    color:"#00AF33"}}/>
+                                    <span style={{color:"#00AF33"}}>Submit</span>
+                    </Button>
 
-
+                    <Button type="danger" onClick={()=>this.clearCart()} style={{backgroundColor:"transparent"}}>
                     <Icon type="delete"
                           className="empty-cart"
-                          onClick={()=>this.clearCart()}
                           style={{fontFamily: "Permanent Marker",
                                   color:"#cc0000",
-                                  width:"3rem",
-                                  border:"1px solid"}}/> <span style={{width:"5rem",color:"#cc0000"}}> ClearCart</span>
+                                  }}/>
+                                  <span style={{color:"#cc0000"}}>ClearCart</span>
+                    </Button>
                   </Col>
 
                   <Col span={12} style={{padding:"1px", width:"50%"}}>
@@ -308,14 +319,8 @@ class Incoming extends React.Component{
                       tax={this.state.tax}
                       clearCart={this.clearCart}/>
                   </Col>
-              </Col>
-
-              :
-              ""
-            }
+              </Col>:""}
           </Row>
-
-
 
           <IncomingItemAvatar
             data={this.state.cart}
@@ -331,7 +336,6 @@ class Incoming extends React.Component{
 
           }
 
-
         </div>
 
 
@@ -343,6 +347,7 @@ const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer, VendorReduc
   // return object is what you want to map into a property
   return {
     employees:  EmployeeReducer.employees,
+    employee: EmployeeReducer.employees.find(employee=> employee.userId === AuthReducer.currentUser.pk),
     currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     vendors: VendorReducer,
