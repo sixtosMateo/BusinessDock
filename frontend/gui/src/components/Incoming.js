@@ -22,6 +22,7 @@ class Incoming extends React.Component{
   state={
     query:'',
     vendorId:0,
+    userId:0,
     cart:[],
     subTotal:0,
     tax:0,
@@ -33,6 +34,8 @@ class Incoming extends React.Component{
   componentDidMount(){
     this.props.refreshItems()
     this.props.refreshVendors()
+    this.props.fetchCurrentUser()
+
   }
 
   getItem=(barcode)=>{
@@ -238,9 +241,11 @@ class Incoming extends React.Component{
 
   render(){
       const { vendors} = this.props.vendors
+      const user = this.props.currentUser
       return(
 
         <div className="incomingComponent" >
+              <h2>Clerk ID: {user ? user.username: ""}</h2>
 
               <Select showSearch
                       defaultValue="Select a Vendor"
@@ -334,6 +339,7 @@ class Incoming extends React.Component{
 const mapStateToProps = ({ItemReducer, AuthReducer, VendorReducer}) =>{
   // return object is what you want to map into a property
   return {
+    currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     vendors: VendorReducer,
     isAuthenticated: AuthReducer.token !== null
@@ -342,6 +348,7 @@ const mapStateToProps = ({ItemReducer, AuthReducer, VendorReducer}) =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
+      fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),

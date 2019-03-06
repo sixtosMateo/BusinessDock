@@ -24,6 +24,7 @@ class NormalLoginForm extends React.Component {
         this.props.getEmployees();
         this.props.getVendors();
         this.props.getUsers();
+
         this.props.history.push('/');
       }
 
@@ -31,7 +32,7 @@ class NormalLoginForm extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.currentUser)
     let errorMessage = null;
     if(this.props.error){
       errorMessage=(
@@ -100,7 +101,7 @@ const mapDispatchToProps = dispatch =>{
     getItems: ()=> dispatch(actions.fetchItems()),
     getEmployees: ()=> dispatch(actions.fetchEmployees()),
     getVendors: ()=> dispatch(actions.fetchVendors()),
-    getUsers: ()=>dispatch(actions.fetchUsers()),
+    getUsers: ()=>dispatch(actions.fetchUsers())
 
   }
 }

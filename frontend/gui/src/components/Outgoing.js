@@ -27,6 +27,7 @@ class Outgoing extends React.Component{
 
   componentDidMount(){
     this.props.refreshItems()
+    this.props.fetchCurrentUser()
     // this.setItems()
 
   }
@@ -185,9 +186,10 @@ class Outgoing extends React.Component{
   }
 
   render(){
+    const user = this.props.currentUser
       return(
         <div className="outgoingComponent">
-
+          <h2>Clerk ID: {user ? user.username: ""}</h2>
           <Row>
             <Col span={12} style={{width:"50%"}}>
               <DebounceInput
@@ -260,6 +262,7 @@ class Outgoing extends React.Component{
 const mapStateToProps = ({ItemReducer, AuthReducer}) =>{
   // return object is what you want to map into a property
   return {
+    currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     isAuthenticated: AuthReducer.token !== null
 
@@ -268,6 +271,7 @@ const mapStateToProps = ({ItemReducer, AuthReducer}) =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
+      fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       onTryAutoSignup: ()=> dispatch(actions.authCheckState())
 
