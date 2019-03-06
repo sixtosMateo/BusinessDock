@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from rest_framework.urlpatterns import format_suffix_patterns
 from django.views.generic import TemplateView
 
-
 from docks import views
 
 urlpatterns = [

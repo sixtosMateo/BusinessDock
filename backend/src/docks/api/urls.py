@@ -5,6 +5,7 @@ from docks.api.views import (ItemViewSet,
                             OutgoingTransactionItemViewSet,
                             IncomingTransactionItemViewSet,
                             StoreViewSet,
+                            UserViewSet,
                             DamageItemViewSet,
                             EmployeeViewSet,
                             UserViewSet)
@@ -12,7 +13,6 @@ from docks.api.views import (ItemViewSet,
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-# router.register(r'currentUser', CurrentUserSet, base_name='currentUser')
 router.register(r'items', ItemViewSet, base_name='items')
 router.register(r'users', UserViewSet, base_name='users')
 router.register(r'outgoingTransaction', OutgoingTransactionViewSet, base_name='outgoingTransaction')
