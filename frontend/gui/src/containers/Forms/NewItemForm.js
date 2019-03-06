@@ -39,11 +39,12 @@ class NewItem extends React.Component{
 
   handleSubmit=(e)=>{
       e.preventDefault()
+      console.log(e.target)
       const values = serializeForm(e.target, // e.target is the from itself
       {
         hash: true
       })
-
+      console.log(values)
       // need to check if values has content
       if(this.props.item){
         this.editItem(values)

@@ -186,10 +186,25 @@ class Outgoing extends React.Component{
 
   }
   postTrasanction = ()=>{
-    console.log(this.props.employee.employeeId)
-    console.log(this.state.cartTax)
-    console.log(this.state.cartSubtotal)
-    console.log(this.state.cartTotal)
+      const outgoing ={
+        employeeId: this.props.employee.employeeId,
+        vendorId: this.state.vendorId,
+        tax: this.state.cartTax,
+        subtotal: this.state.cartSubtotal,
+        total: this.state.cartTotal
+      }
+
+      axios.post('http://127.0.0.1:8000/api/outgoingTransaction/', outgoing)
+      .then(function (response) {
+      })
+      .catch(e=>{
+        console.log(e)
+      })
+
+      window.location.reload();
+
+
+
   }
 
   render(){

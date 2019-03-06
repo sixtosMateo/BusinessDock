@@ -11,11 +11,10 @@ import * as actions from '../store/actions/auth';
 import { connect } from 'react-redux';
 import IncomingItemAvatar from './avatar/IncomingAvatar';
 import TotalTable from './cart/TotalTable';
-import { Row, Col , Icon, Form, Select, Button, InputNumber} from 'antd';
+import { Row, Col , Icon, Select, Button, Input} from 'antd';
 import Model from './general/ModelContainer';
 import serializeForm from 'form-serialize';
 
-const FormItem = Form.Item;
 const Option = Select.Option;
 
 class Incoming extends React.Component{
@@ -214,30 +213,26 @@ class Incoming extends React.Component{
 
   //post item
   postTrasanction = ()=>{
-    console.log(this.props.employee.employeeId)
-    console.log(this.state.vendorId)
-    console.log(this.state.tax)
-    console.log(this.state.subTotal)
-    console.log(this.state.total)
+
+    const incoming ={
+      employeeId: this.props.employee.employeeId,
+      vendorId: this.state.vendorId,
+      tax: this.state.tax,
+      subtotal: this.state.subTotal,
+      total: this.state.total
+    }
+
+    axios.post('http://127.0.0.1:8000/api/incomingTransaction/', incoming)
+    .then(function (response) {
+
+    })
+    .catch(e=>{
+      console.log(e)
+    })
+
+    window.location.reload();
+
   }
-
-
-  // handleSubmit=(e)=>{
-  //     e.preventDefault()
-  //     const values = serializeForm(e.target, // e.target is the from itself
-  //     {
-  //       hash: true
-  //     })
-  //
-  //     // need to check if values has content
-  //     // this.postTrasanction(values)
-  //
-  // }
-
-  // handleConfirmBlur = (e) => {
-  //   const value = e.target.value;
-  //   this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  // }
 
   handleChange=(value)=> {
     this.setState({
@@ -255,7 +250,7 @@ class Incoming extends React.Component{
 
         <div className="incomingComponent" >
               <h2>Clerk: {user ? user.username: ""}</h2>
-              <h3 >ID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
+              <h3 >ID: <Input value={this.props.employee ? this.props.employee.employeeId: ""}
                                    style={{border:"none",
                                           color: "#000000",
                                           backgroundColor:"transparent"}}
