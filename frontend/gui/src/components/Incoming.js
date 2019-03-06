@@ -302,7 +302,8 @@ class Incoming extends React.Component{
                                     <span style={{color:"#00AF33"}}>Submit</span>
                     </Button>
 
-                    <Button type="danger" onClick={()=>this.clearCart()} style={{backgroundColor:"transparent"}}>
+                    <Button type="danger" onClick={()=>this.clearCart()}
+                            style={{backgroundColor:"transparent"}}>
                     <Icon type="delete"
                           className="empty-cart"
                           style={{fontFamily: "Permanent Marker",

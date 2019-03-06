@@ -185,14 +185,20 @@ class Outgoing extends React.Component{
     })
 
   }
+  postTrasanction = ()=>{
+    console.log(this.props.employee.employeeId)
+    console.log(this.state.cartTax)
+    console.log(this.state.cartSubtotal)
+    console.log(this.state.cartTotal)
+  }
 
   render(){
     const user = this.props.currentUser
-    const employee = this.props.employees.find(employee=> employee.userId === user.pk);
+
       return(
         <div className="outgoingComponent">
         <h2>Clerk: {user ? user.username: ""}</h2>
-        <h3 >ID: <InputNumber value={employee ? employee.employeeId: ""}
+        <h3 >ID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
                              style={{border:"none",
                                     color: "#000000",
                                     backgroundColor:"transparent"}}
@@ -218,7 +224,8 @@ class Outgoing extends React.Component{
 
                   <Col span={12} style={{width:"50%", padding:"2px"}}>
 
-                    <Button htmlType="submit" >
+                    <Button htmlType="submit"
+                            onClick={()=>this.postTrasanction()}>
                       <Icon type="shopping-cart"
                             className="submit-cart"
                             style={{fontFamily: "Permanent Marker",
@@ -226,7 +233,8 @@ class Outgoing extends React.Component{
                                     <span style={{color:"#00AF33"}}>Submit</span>
                     </Button>
 
-                    <Button type="danger" onClick={()=>this.clearCart()}>
+                    <Button type="danger" onClick={()=>this.clearCart()}
+                            style={{backgroundColor:"transparent"}}>
                     <Icon type="delete"
                           className="empty-cart"
                           style={{fontFamily: "Permanent Marker",
@@ -271,6 +279,7 @@ const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer}) =>{
   // return object is what you want to map into a property
   return {
     employees:  EmployeeReducer.employees,
+    employee: EmployeeReducer.employees.find(employee=> employee.userId === AuthReducer.currentUser.pk),
     currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     isAuthenticated: AuthReducer.token !== null

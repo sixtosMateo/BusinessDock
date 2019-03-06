@@ -41,18 +41,18 @@ const OutgoingItemAvatar =(props)=>{
 
 
             <Row type="flex" justify="start" style={{marginLeft:"15px"}}>
-              <Col span={2} style={{width:"17%"}}>{item.barcode} </Col>
-              <Col span={2} style={{width:"16%"}}>{item.name}</Col>
-              <Col span={2} style={{width:"16%"}}>{item.salePrice}</Col>
-              <Col span={2} style={{width:"17%"}}>
+              <Col span={2} style={{fontSize:"18px", width:"17%"}}>{item.barcode} </Col>
+              <Col span={2} style={{fontSize:"18px", width:"16%"}}>{item.name}</Col>
+              <Col span={2} style={{fontSize:"18px", width:"16%"}}>{item.salePrice}</Col>
+              <Col span={2} style={{fontSize:"18px", width:"17%"}}>
                 <Icon type="minus" onClick={()=> decrement(item.barcode)}
                   style={{ fontSize: '16px', color: '#ff0000' }}/>
                 <span>  {  item.quantity  }  </span>
                 <Icon type="plus" onClick={()=> increment(item.barcode)}
                   style={{ fontSize: '16px', color: '#0000ff'}}/>
               </Col>
-              <Col span={2} style={{width:"17%"}}>{item.itemSaleTotal}</Col>
-              <Col span={2} style={{width:"17%"}} onClick={()=> removeItem(item.barcode)}><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
+              <Col span={2} style={{fontSize:"18px", width:"17%"}}>{item.itemSaleTotal}</Col>
+              <Col span={2} style={{fontSize:"18px", width:"17%"}} onClick={()=> removeItem(item.barcode)}><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
 
             </Row>
 
