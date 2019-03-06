@@ -12,9 +12,7 @@ import * as helper from '../../helperMethods/UpdateLocalStorage';
 
 
 
-// action types
-// when working with actions the objects that need to return always need to
-// return a type. Therefore, type property needs to be include
+// Reducers methods: Authentication methods
 export const authStart = () =>{
   return{
     type: actionTypes.AUTH_START
@@ -34,7 +32,10 @@ export const authFail = error =>{
     error: error
   }
 }
+//########################################################################
 
+
+// // Reducers method: initialize state array
 export const initialCurrentUser = user =>{
   return{
     type: actionTypes.ADD_USER,
@@ -68,7 +69,10 @@ export const initializeUsers = users =>{
     users: users
 }
 }
+//########################################################################
 
+
+// Reducers method: with CRUD operations for Items and Vendor
 export const addItem =(item)=>{
   return {
     type: actionTypes.ADD_ITEM,
@@ -88,6 +92,67 @@ export const deleteItem = (id)=>{
   return {
     type: actionTypes.DELETE_ITEM,
     id: id,
+  }
+}
+
+export const addVendor = (vendor)=>{
+  return {
+    type: actionTypes.ADD_VENDOR,
+    vendor: vendor
+  }
+}
+
+export const editVendor = (id, updates)=>{
+  return {
+    type: actionTypes.EDIT_VENDOR,
+    id: id,
+    updates: updates
+  }
+}
+
+export const deleteVendor = (id)=>{
+  return {
+    type: actionTypes.DELETE_VENDOR,
+    id: id,
+  }
+}
+
+//########################################################################
+
+
+// DB (API) and CACHE DELETION (localStorage)
+export const addVendorLocalStorage = (vendor) =>{
+  return dispatch => {
+    axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
+    .then(function (response) {
+      if(response.status === 201){
+        dispatch(addVendor(response.data))
+        helper.addLocalStorage('localVendors',response.data)
+      }
+    })
+  }
+}
+
+export const editVendorLocalStorage = (id, vendor) =>{
+  return dispatch =>{
+    axios.put(`http://127.0.0.1:8000/api/vendors/${id}/`, vendor)
+    .then(function (response) {
+      if(response.status === 200){
+        dispatch(editVendor(id, response.data))
+        helper.editVendorLocalStorage('localVendors', id, response.data)
+      }
+    })
+  }
+}
+
+export const deleteVendorLocalStorage = (id) =>{
+  return dispatch =>{
+    axios.delete(`http://127.0.0.1:8000/api/vendors/${id}/`)
+    .then(res => {
+      dispatch(deleteVendor(id))
+      helper.deleteLocalStorage('localVendors', id)
+    })
+
   }
 }
 
@@ -126,69 +191,10 @@ export const editItemLocalStorage = (id, item) =>{
   }
 }
 
+//########################################################################
 
 
-// Vendor CRUD operations
-export const addVendor = (vendor)=>{
-  return {
-    type: actionTypes.ADD_VENDOR,
-    vendor: vendor
-  }
-}
-
-export const editVendor = (id, updates)=>{
-  return {
-    type: actionTypes.EDIT_VENDOR,
-    id: id,
-    updates: updates
-  }
-}
-
-export const deleteVendor = (id)=>{
-  return {
-    type: actionTypes.DELETE_VENDOR,
-    id: id,
-  }
-}
-
-// DB and CACHE DELETION
-export const addVendorLocalStorage = (vendor) =>{
-  return dispatch => {
-    axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
-    .then(function (response) {
-      if(response.status === 201){
-        dispatch(addVendor(response.data))
-        helper.addLocalStorage('localVendors',response.data)
-      }
-    })
-  }
-}
-
-export const editVendorLocalStorage = (id, vendor) =>{
-  return dispatch =>{
-    axios.put(`http://127.0.0.1:8000/api/vendors/${id}/`, vendor)
-    .then(function (response) {
-      if(response.status === 200){
-        dispatch(editVendor(id, response.data))
-        helper.editVendorLocalStorage('localVendors', id, response.data)
-      }
-    })
-  }
-}
-
-export const deleteVendorLocalStorage = (id) =>{
-  return dispatch =>{
-    axios.delete(`http://127.0.0.1:8000/api/vendors/${id}/`)
-    .then(res => {
-      dispatch(deleteVendor(id))
-      helper.deleteLocalStorage('localVendors', id)
-    })
-
-  }
-}
-
-
-// Fetching data from api calls
+// Fetching data from API calls
 export const fetchEmployees = () =>{
   return dispatch => (
   EmployeesApi
@@ -221,7 +227,6 @@ export const fetchItems = () =>{
 
 )}
 
-
 export const fetchVendors = () =>{
  return dispatch => (
   VendorsApi
@@ -232,8 +237,21 @@ export const fetchVendors = () =>{
 )
 }
 
-// data from local storage and dispatching action types with new state
+export const fetchCurrentUser = () =>{
+  return dispatch => (
+  CurrentUserApi
+      .fetchCurrentUser()
+      .then((res)=>
+      {
+        dispatch(initialCurrentUser(res))
+      })
 
+)}
+
+//########################################################################
+
+
+// data from local storage and dispatching action types with new state
 export const reloadLocalUsers=()=>{
   return dispatch=>{
       const users = JSON.parse(localStorage.getItem('localUsers'));
@@ -262,7 +280,6 @@ export const reloadLocalVendors=()=>{
   }
 }
 
-
 export const reloadCurrentUser=()=>{
   return dispatch=>{
       const currentUser = localStorage.getItem('currentUser');
@@ -270,25 +287,10 @@ export const reloadCurrentUser=()=>{
   }
 }
 
-
-//================ currentUserFetching from api folder =========================
-export const fetchCurrentUser = () =>{
-  return dispatch => (
-  CurrentUserApi
-      .fetchCurrentUser()
-      .then((res)=>
-      {
-        dispatch(initialCurrentUser(res))
-      })
-
-)}
-//=====================//=====================//=====================//=========
+//########################################################################
 
 
-///put login here
-
-// this function requires 2 parameters from djangorestframework, currently we
-// know 2 parameters but these would be initialized once django backend is setup
+// Login Authentication and authorization methods
 export const authLogin = (username, password) =>{
   // when we login we have to return a dispatch
   return dispatch=>{
@@ -323,7 +325,7 @@ export const authLogin = (username, password) =>{
 }
 
 export const logout = () =>{
-
+  localStorage.removeItem('currentUser');
   localStorage.removeItem('token');
   localStorage.removeItem('expirationDate');
   return{

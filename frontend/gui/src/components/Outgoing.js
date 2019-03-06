@@ -189,7 +189,9 @@ class Outgoing extends React.Component{
     const user = this.props.currentUser
       return(
         <div className="outgoingComponent">
-          <h2>Clerk ID: {user ? user.username: ""}</h2>
+        <h2>Clerk: {user ? user.username: ""}</h2>
+        <h3>ID: {user ? user.pk: ""}</h3>
+
           <Row>
             <Col span={12} style={{width:"50%"}}>
               <DebounceInput

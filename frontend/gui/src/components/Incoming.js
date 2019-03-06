@@ -35,9 +35,10 @@ class Incoming extends React.Component{
     this.props.refreshItems()
     this.props.refreshVendors()
     this.props.fetchCurrentUser()
-
+    this.props.refreshEmployees()
   }
 
+  //copy
   getItem=(barcode)=>{
     const item = this.props.items.find(item => item.barcode === barcode)
     if(item){
@@ -242,10 +243,12 @@ class Incoming extends React.Component{
   render(){
       const { vendors} = this.props.vendors
       const user = this.props.currentUser
+      
       return(
 
         <div className="incomingComponent" >
-              <h2>Clerk ID: {user ? user.username: ""}</h2>
+              <h2>Clerk: {user ? user.username: ""}</h2>
+              <h3>ID: {user ? user.pk: ""}</h3>
 
               <Select showSearch
                       defaultValue="Select a Vendor"
@@ -336,9 +339,10 @@ class Incoming extends React.Component{
     }
 }
 
-const mapStateToProps = ({ItemReducer, AuthReducer, VendorReducer}) =>{
+const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer, VendorReducer}) =>{
   // return object is what you want to map into a property
   return {
+    employees:  EmployeeReducer.employees,
     currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     vendors: VendorReducer,
@@ -352,6 +356,7 @@ const mapDispatchToProps = dispatch =>{
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),
+      refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
   }
 }
 

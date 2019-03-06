@@ -51,22 +51,18 @@ class Employee extends React.Component{
      item.email = user.email
      item.is_staff = user.is_staff
      item.date_joined = user.date_joined
-
-
-
-     this.setState(() => {
-       return {combinedEmployee:[...tempArray]}
-      })
   })
+  this.setState(() => {
+    return {combinedEmployee:[...tempArray]}
+   })
+   
 }
 
 
 
   render(){
     let showingEmployees
-
     const { combinedEmployee } = this.state
-    console.log(combinedEmployee)
       if(this.state.query){
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
 
