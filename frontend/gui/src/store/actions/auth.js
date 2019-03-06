@@ -7,6 +7,7 @@ import * as EmployeesApi from '../../api/getEmployeesRequest';
 // import * as OutgoingsApi from '../../api/getOutgoingRequest';
 import * as VendorsApi from '../../api/getVendorsRequest';
 import * as UsersApi from '../../api/getUserRequest';
+import * as CurrentUserApi from '../../api/getCurrentUserRequest';
 import * as helper from '../../helperMethods/UpdateLocalStorage';
 
 
@@ -32,6 +33,12 @@ export const authFail = error =>{
     type: actionTypes.AUTH_FAIL,
     error: error
   }
+}
+
+export const initialCurrentUser = user =>{
+  return{
+    type: actionTypes.ADD_USER,
+    currentUser: user}
 }
 
 export const initializeItems = items =>{
@@ -157,7 +164,6 @@ export const addVendorLocalStorage = (vendor) =>{
   }
 }
 
-
 export const editVendorLocalStorage = (id, vendor) =>{
   return dispatch =>{
     axios.put(`http://127.0.0.1:8000/api/vendors/${id}/`, vendor)
@@ -215,6 +221,7 @@ export const fetchItems = () =>{
 
 )}
 
+
 export const fetchVendors = () =>{
  return dispatch => (
   VendorsApi
@@ -256,6 +263,28 @@ export const reloadLocalVendors=()=>{
 }
 
 
+export const reloadCurrentUser=()=>{
+  return dispatch=>{
+      const currentUser = localStorage.getItem('currentUser');
+      dispatch(initialCurrentUser(JSON.parse(currentUser)))
+  }
+}
+
+
+//================ currentUserFetching from api folder =========================
+export const fetchCurrentUser = () =>{
+  return dispatch => (
+  CurrentUserApi
+      .fetchCurrentUser()
+      .then((res)=>
+      {
+        dispatch(initialCurrentUser(res))
+      })
+
+)}
+//=====================//=====================//=====================//=========
+
+
 ///put login here
 
 // this function requires 2 parameters from djangorestframework, currently we
@@ -270,6 +299,7 @@ export const authLogin = (username, password) =>{
       password: password
     })
     .then(res=>{
+
       // response we will receive a key that is return form djangorestframework
       const token = res.data.key;
 
@@ -281,6 +311,7 @@ export const authLogin = (username, password) =>{
 
       // if res is successful dispatch authSuccess method with toke as args
       dispatch(authSuccess(token));
+      dispatch(fetchCurrentUser())
       // 3600 seconds times 1000 gives 1hr
       dispatch(checkAuthTimeout(3600));
 

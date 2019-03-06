@@ -12,6 +12,7 @@ const initialState = {
    token: null,
    error: null,
    loading: false,
+   currentUser:{}
 }
 
 
@@ -48,6 +49,11 @@ const authLogout = (state, action) => {
     })
 }
 
+const initializingUser = (state, action) =>{
+  return updateObject(state,{
+    currentUser: action.currentUser
+  })
+}
 
 //define the methods where they take place
 const AuthReducer = (state=initialState, action) =>{
@@ -56,6 +62,7 @@ const AuthReducer = (state=initialState, action) =>{
       case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
       case actionTypes.AUTH_FAIL: return authFail(state, action);
       case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
+      case actionTypes.ADD_USER: return initializingUser(state, action);
         break;
       default:
         return state;

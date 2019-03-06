@@ -5,6 +5,7 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
+export const ADD_USER = "ADD_USER";
 
 export const FETCH_ITEMS = "FETCH_ITEMS";
 export const FETCH_EMPLOYEES = "FETCH_EMPLOYEES";
