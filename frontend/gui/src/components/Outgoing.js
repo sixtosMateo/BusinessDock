@@ -3,7 +3,6 @@
 
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
-import escapeRegExp from 'escape-string-regexp';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -103,7 +102,7 @@ class Outgoing extends React.Component{
 
     item.quantity = item.quantity-1;
 
-    if(item.quantity ==0){
+    if(item.quantity ===0){
       this.removeItem(barcode)
     }
     else{
@@ -188,7 +187,7 @@ class Outgoing extends React.Component{
   postTrasanction = ()=>{
       const outgoing ={
         employeeId: this.props.employee.employeeId,
-        vendorId: this.state.vendorId,
+        storeId: this.props.employee.storeId,
         tax: this.state.cartTax,
         subtotal: this.state.cartSubtotal,
         total: this.state.cartTotal
@@ -213,7 +212,12 @@ class Outgoing extends React.Component{
       return(
         <div className="outgoingComponent">
         <h2>Clerk: {user ? user.username: ""}</h2>
-        <h3 >ID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
+        <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
+                             style={{border:"none",
+                                    color: "#000000",
+                                    backgroundColor:"transparent"}}
+                             disabled/></h3>
+        <h3 >Store ID: <InputNumber value={this.props.employee ? this.props.employee.storeId: ""}
                              style={{border:"none",
                                     color: "#000000",
                                     backgroundColor:"transparent"}}

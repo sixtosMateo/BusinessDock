@@ -1,12 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
-import { combineReducers } from 'redux';
 import { updateObject } from '../utility';
 
-// here we define our initial state
-    // ex: loading any errors, authentication token
-
-// reducers recieved in the reducer as one of the params then the reducer method
-// (at the botton) taking in all the actions. Determines the type of action
 
 const initialState = {
    token: null,
@@ -63,7 +57,6 @@ const AuthReducer = (state=initialState, action) =>{
       case actionTypes.AUTH_FAIL: return authFail(state, action);
       case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
       case actionTypes.ADD_USER: return initializingUser(state, action);
-        break;
       default:
         return state;
   }

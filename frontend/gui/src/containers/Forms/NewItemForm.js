@@ -6,11 +6,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button, InputNumber} from 'antd';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
-import * as helper from '../../helperMethods/UpdateLocalStorage';
+
 
 
 const FormItem = Form.Item;

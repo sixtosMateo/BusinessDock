@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
-import { combineReducers } from 'redux';
 
 const initialState={
   vendors:[]
@@ -51,10 +50,6 @@ const VendorReducer = (state=initialState, action) =>{
       case actionTypes.ADD_VENDOR: return addingVendor(state, action);
       case actionTypes.EDIT_VENDOR: return editingVendor(state, action);
       case actionTypes.DELETE_VENDOR: return deletingVendor(state, action);
-
-
-
-        break;
       default:
         return state;
   }

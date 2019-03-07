@@ -4,16 +4,14 @@
 // when user finished scanning the value needs to disapear
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
-import escapeRegExp from 'escape-string-regexp';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import { connect } from 'react-redux';
 import IncomingItemAvatar from './avatar/IncomingAvatar';
 import TotalTable from './cart/TotalTable';
-import { Row, Col , Icon, Select, Button, Input} from 'antd';
+import { Row, Col , Icon, Select, Button, InputNumber} from 'antd';
 import Model from './general/ModelContainer';
-import serializeForm from 'form-serialize';
 
 const Option = Select.Option;
 
@@ -140,7 +138,7 @@ class Incoming extends React.Component{
 
     item.quantity = item.quantity-1;
 
-    if(item.quantity ==0){
+    if(item.quantity ===0){
       this.removeItem(barcode)
     }
     else{
@@ -250,7 +248,7 @@ class Incoming extends React.Component{
 
         <div className="incomingComponent" >
               <h2>Clerk: {user ? user.username: ""}</h2>
-              <h3 >ID: <Input value={this.props.employee ? this.props.employee.employeeId: ""}
+              <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
                                    style={{border:"none",
                                           color: "#000000",
                                           backgroundColor:"transparent"}}

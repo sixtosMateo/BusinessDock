@@ -1,7 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Icon, Col, Row } from 'antd';
-import {Link} from 'react-router-dom';
 
 
 
@@ -14,14 +13,14 @@ render(){
 
             <Col xs={14} sm={12} md={10} lg={6}>
               <h1 style={{fontFamily: "Permanent Marker"}}>Mateo Sixtos: </h1>
-              <img src="/profileImage.png" style={{width:'13rem', height:"13rem"}} alt="profile Image"/>
+              <img src="/profileImage.png" style={{width:'13rem', height:"13rem"}} alt="profile"/>
             </Col>
 
             <Col xs={16} sm={12} md={6} lg={8}>
 
               <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Software Engineer</h2>
               <h3>CSU Monterey Bay </h3>
-              <img src="/csumb.png" style={{width:'5rem', height:"5rem"}} alt="csumb Image"/>
+              <img src="/csumb.png" style={{width:'5rem', height:"5rem"}} alt="csumb"/>
               <h4>CSIT-in-3 Program</h4>
             </Col>
 

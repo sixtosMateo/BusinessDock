@@ -7,7 +7,6 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import rootReducer from './store/reducers/auth';
 import CombineReducers from './store/reducers/index';
 
 // const logger = store => next => action => {
@@ -19,7 +18,7 @@ import CombineReducers from './store/reducers/index';
 //   return result
 // }
 
-// inherits from window
+
 const composeEnhances = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose
 
 //second argument is an enhancer

@@ -65,7 +65,7 @@ class CustomLayout extends React.Component{
               <div className="contact-info" style={{color:"#C0C0C0"}}>
                 <div><h3 style={{color:"#C0C0C0"}}>Education: </h3></div>
                 <div className = "csumbImage">
-                  <img src="/csumb.png" style={{width:'5rem', height:"5rem"}} alt="csumb Image"/>
+                  <img src="/csumb.png" style={{width:'5rem', height:"5rem"}} alt="csumb"/>
                 </div>
               </div>
             </Col>

@@ -2,12 +2,8 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Row, Col } from 'antd';
-import { Icon } from 'antd';
 import { Form, Input, Button, InputNumber} from 'antd';
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import NewEmployee from '../../containers/Forms/NewEmployeeForm';
 
 const FormItem = Form.Item;
 
@@ -17,7 +13,7 @@ class Model extends React.Component{
   };
 
   onChange = (value) => {
-    console.log('changed', value);
+    // console.log('changed', value);
   }
 
   handleConfirmBlur = (e) => {

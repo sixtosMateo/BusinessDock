@@ -3,7 +3,6 @@
 // maybe for the combinedEmployee state array
 
 import React from 'react';
-import axios from 'axios';
 import { Input } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -29,12 +28,9 @@ class Employee extends React.Component{
   }
 
   componentDidMount(){
-
       this.props.refreshEmployees();
       this.props.refreshUsers();
       this.setCombinedEmployees();
-
-
 }
 
   setCombinedEmployees(){
@@ -55,7 +51,7 @@ class Employee extends React.Component{
   this.setState(() => {
     return {combinedEmployee:[...tempArray]}
    })
-   
+
 }
 
 

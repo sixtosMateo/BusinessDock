@@ -1,6 +1,5 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Icon } from 'antd';
 import * as actions from '../../store/actions/auth';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';

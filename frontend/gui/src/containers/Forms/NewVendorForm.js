@@ -1,10 +1,9 @@
 import React from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
-import axios from 'axios';
 
 const FormItem = Form.Item;
 
@@ -67,11 +66,8 @@ class NewVendor extends React.Component{
                   rules: [{
                     required: true,
                     message: 'Please input name of the vendor!',
-                  }],
-                })
-
-                (
-                <Input name="name" placeholder="Enter Name"/>
+                  }]
+                })(<Input name="name" placeholder="Enter Name"/>
               )}
             </FormItem>
 

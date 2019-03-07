@@ -1,7 +1,4 @@
-// new item or edit item change state
-
 import React from 'react';
-import axios from 'axios';
 import escapeRegExp from 'escape-string-regexp';
 import { withRouter } from 'react-router-dom';
 import { Input } from 'antd';
@@ -10,7 +7,6 @@ import { connect } from 'react-redux';
 import VendorAvatar from './avatar/VendorAvatar';
 import * as actions from '../store/actions/auth';
 import DeleteModel from './general/DeleteModel';
-import * as helper from '../helperMethods/UpdateLocalStorage';
 const Search = Input.Search;
 
 

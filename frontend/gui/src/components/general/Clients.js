@@ -2,8 +2,6 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Icon } from 'antd';
 import { Row, Col } from 'antd';
-import {Link} from 'react-router-dom';
-
 
 
 class Client extends React.Component{
@@ -18,7 +16,7 @@ render(){
         <Row style={{marginBottom:"10px"}}>
 
           <Col span={12}>
-              <img src="/Karis.png" style={{width:'10rem', height:"10rem", marginBottom:"10px"}} alt="Karis Image"/>
+              <img src="/Karis.png" style={{width:'10rem', height:"10rem", marginBottom:"10px"}} alt="Karis"/>
 
               <div onClick={()=>window.open('http://karistoys.herokuapp.com')}
                 style={{color:"#1e90ff", marginBottom:"5px", width:'11.5rem'}}><Icon type="desktop"/>

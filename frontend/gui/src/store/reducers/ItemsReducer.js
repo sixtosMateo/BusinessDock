@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
-import { combineReducers } from 'redux';
+
 
 
 const initialState={
@@ -53,7 +53,6 @@ const ItemReducer = (state=initialState, action) =>{
       case actionTypes.DELETE_ITEM: return deletingItem(state, action);
       case actionTypes.ADD_ITEM: return addingItem(state, action);
       case actionTypes.EDIT_ITEM: return editingItem(state, action);
-        break;
       default:
         return state;
   }

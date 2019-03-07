@@ -1,12 +1,10 @@
 // change in database that employeeId is integer not varchar
-
-
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, Button, InputNumber } from 'antd';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import * as actions from '../../store/actions/auth';
+// import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
 
 const FormItem = Form.Item;
@@ -19,7 +17,6 @@ class DamageItem extends React.Component{
   createDamageItem(damageItem){
     axios.post('http://127.0.0.1:8000/api/damageItem/', damageItem)
     .then(function (response) {
-      // console.log(response)
       if(response.status === 201){
         window.location.reload()
         console.log("Success item was submit")
