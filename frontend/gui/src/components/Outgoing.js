@@ -194,15 +194,32 @@ class Outgoing extends React.Component{
       }
 
       axios.post('http://127.0.0.1:8000/api/outgoingTransaction/', outgoing)
-      .then(function (response) {
+      .then((res)=>{
+        this.state.cart.forEach((cartItem)=>{
+          const price = cartItem.salePrice * cartItem.quantity
+          const object={
+            transactionId: res.data.transactionId,
+            barcode: cartItem.barcode,
+            name: cartItem.name,
+            transactionType:"outgoing",
+            quantity: cartItem.quantity,
+            price: price,
+            tax: Math.round(1000 *(price * cartItem.tax))/1000,
+            itemSaleTotal: Math.round(1000 * (price + (price * cartItem.tax)))/1000
+          }
+          axios.post('http://127.0.0.1:8000/api/outgoingtransactionItem/', object)
+          .catch(e=>{
+            console.log(e)
+          })
+        })
+
+      })
+      .then(()=>{
+        window.location.reload();
       })
       .catch(e=>{
         console.log(e)
       })
-
-      window.location.reload();
-
-
 
   }
 

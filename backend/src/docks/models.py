@@ -177,7 +177,7 @@ class IncomingTransactionItem(models.Model):
 
     def save(self, *args, **kwargs):
         print('save() is called.')
-        super(TransactionItem, self).save(using="")
+        super(IncomingTransactionItem, self).save(using="")
 
     def __unicode__(self):
         return "{0} {1} {2} {3} {4} {5} {6}".format(
@@ -201,7 +201,7 @@ class OutgoingTransactionItem(models.Model):
 
     def save(self, *args, **kwargs):
         print('save() is called.')
-        super(TransactionItem, self).save(using="")
+        super(OutgoingTransactionItem, self).save(using="")
 
     def __unicode__(self):
         return "{0} {1} {2} {3} {4} {5} {6}".format(

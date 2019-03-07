@@ -221,14 +221,15 @@ class Incoming extends React.Component{
     }
 
     axios.post('http://127.0.0.1:8000/api/incomingTransaction/', incoming)
-    .then(function (response) {
-
+    .then((res)=>{
+      console.log(res.data.transactionId)
+      console.log(this.state.cart)
     })
     .catch(e=>{
       console.log(e)
     })
 
-    window.location.reload();
+    // window.location.reload();
 
   }
 
