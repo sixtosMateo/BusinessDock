@@ -222,14 +222,30 @@ class Incoming extends React.Component{
 
     axios.post('http://127.0.0.1:8000/api/incomingTransaction/', incoming)
     .then((res)=>{
-      console.log(res.data.transactionId)
-      console.log(this.state.cart)
+      this.state.cart.forEach((cartItem)=>{
+        const object={
+          transactionId: res.data.transactionId,
+          barcode: cartItem.barcode,
+          name: cartItem.name,
+          transactionType:"outgoing",
+          quantity: cartItem.quantity,
+          price: cartItem.itemSaleTotal,
+          tax: Math.round(1000 *(cartItem.itemSaleTotal * cartItem.tax))/1000,
+          itemSaleTotal: Math.round(1000 * (cartItem.itemSaleTotal+ (cartItem.itemSaleTotal* cartItem.tax)))/1000
+        }
+        axios.post('http://127.0.0.1:8000/api/incomingtransactionItem/', object)
+        .catch(e=>{
+          console.log(e)
+        })
+      })
+    })
+    .then(()=>{
+      window.location.reload();
     })
     .catch(e=>{
       console.log(e)
     })
 
-    // window.location.reload();
 
   }
 
@@ -342,7 +358,7 @@ const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer, VendorReduc
   // return object is what you want to map into a property
   return {
     employees:  EmployeeReducer.employees,
-    employee: EmployeeReducer.employees.find(employee=> employee.userId === AuthReducer.currentUser.pk),
+    employee: EmployeeReducer.employees.find(employee => employee.userId === AuthReducer.currentUser.pk),
     currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     vendors: VendorReducer,
