@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button, DatePicker, InputNumber, Switch, Icon } from 'antd';
-
+import axios from 'axios';
+import serializeForm from 'form-serialize';
 
 const FormItem = Form.Item;
 
@@ -12,6 +13,17 @@ class NewEmployee extends React.Component{
   };
 
   handleSubmit = (e) =>{
+    e.preventDefault()
+    console.log(e.target)
+    const values = serializeForm(e.target, // e.target is the from itself
+    {
+      hash: true
+    })
+    console.log(values)
+
+    // if(values){
+    //     axios.post('http://127.0.0.1:8000/api/outgoingTransaction/', values)
+    // }
 
   }
 
@@ -69,10 +81,10 @@ class NewEmployee extends React.Component{
             </FormItem>
 
             <FormItem label="Username" >
-              {getFieldDecorator('userName', {
+              {getFieldDecorator('username', {
                 rules: [{ required: true, message: 'Please input your username!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                <Input name="username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
               )}
             </FormItem>
 
@@ -88,7 +100,6 @@ class NewEmployee extends React.Component{
               )}
             </FormItem>
 
-
             <FormItem label="Password" >
               {getFieldDecorator('password', {
                 rules: [{
@@ -97,7 +108,7 @@ class NewEmployee extends React.Component{
                   validator: this.validateToNextPassword,
                 }],
               })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                <Input name="password" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
               )}
             </FormItem>
 
@@ -108,22 +119,31 @@ class NewEmployee extends React.Component{
                 }, {
                   validator: this.compareToFirstPassword,
                 }],
-              })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" onBlur={this.handleConfirmBlur} />
+              })
+              (
+                <Input name="password2" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" onBlur={this.handleConfirmBlur} />
               )}
             </FormItem>
 
+            <FormItem label="is_staff">
+            {getFieldDecorator('is_staff', {
+            })
+            (
+              <Switch name="isStaff" />
+            )}
+            </FormItem>
+
+            <FormItem  label="is_active">
+              {getFieldDecorator('is_active', {
+                valuePropName: 'checked'
+              })
+              (
+                <Switch name="is_active"/>
+              )}
+            </FormItem>
 
             <FormItem label="StoreId">
               <InputNumber name="storeId" min={1} max={100000} />
-            </FormItem>
-
-            <FormItem label="isStaff">
-              <Switch />
-            </FormItem>
-
-            <FormItem label="isActive">
-              <Switch />
             </FormItem>
 
             <FormItem label="EmploymentType">
@@ -131,11 +151,11 @@ class NewEmployee extends React.Component{
             </FormItem>
 
             <FormItem label="Birthdate">
-               <DatePicker />
+               <DatePicker name="birthdate"/>
             </FormItem>
 
             <FormItem label="Age">
-              <InputNumber min={1} max={110} />
+              <InputNumber min={1} max={110} name="age"/>
               <span className="ant-form-text"> years</span>
             </FormItem>
 

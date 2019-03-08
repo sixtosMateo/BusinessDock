@@ -3,6 +3,7 @@ from docks.api.views import (ItemViewSet,
                             IncomingTransactionViewSet,
                             VendorViewSet,
                             OutgoingTransactionItemViewSet,
+                            OutgoingTransactionByEmployeeIdViewSet,
                             IncomingTransactionItemViewSet,
                             StoreViewSet,
                             UserViewSet,
@@ -16,6 +17,7 @@ router = DefaultRouter()
 router.register(r'items', ItemViewSet, base_name='items')
 router.register(r'users', UserViewSet, base_name='users')
 router.register(r'outgoingTransaction', OutgoingTransactionViewSet, base_name='outgoingTransaction')
+router.register(r'outgoingTransaction/(?P<id>\d+)$/', OutgoingTransactionByEmployeeIdViewSet, base_name='outgoingTransactionbyid')
 router.register(r'incomingTransaction', IncomingTransactionViewSet, base_name='incomingTransaction')
 router.register(r'outgoingtransactionItem', OutgoingTransactionItemViewSet, base_name='outgoingtransactionItem')
 router.register(r'incomingtransactionItem', IncomingTransactionItemViewSet, base_name='incomingtransactionItem')

@@ -37,7 +37,6 @@ class NewItem extends React.Component{
 
   handleSubmit=(e)=>{
       e.preventDefault()
-      console.log(e.target)
       const values = serializeForm(e.target, // e.target is the from itself
       {
         hash: true
