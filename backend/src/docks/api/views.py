@@ -25,7 +25,7 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
-from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class UserViewSet(viewsets.ModelViewSet):

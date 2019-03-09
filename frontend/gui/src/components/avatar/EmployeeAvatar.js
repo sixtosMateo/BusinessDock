@@ -33,6 +33,15 @@ const IconTextOutgoing = ({ type, text, employeeId }) => (
   </span>
 );
 
+const IconTextIncoming = ({ type, text, employeeId }) => (
+  <span>
+  <Link to={`/employee/${employeeId}/incoming/`}>
+    <Icon type={type} style={{ marginRight: 8, marginTop:15 }}/>
+  </Link>
+    {text}
+  </span>
+);
+
 const EmployeeAvatar =(props)=>{
   return(
       <List
@@ -51,7 +60,7 @@ const EmployeeAvatar =(props)=>{
             key={item.employeeId}
             actions={[<IconTextEdit type="edit" text="Edit Employee" id={item.id}/>,
                       <IconTextOutgoing type="shop" text="Outgoing Transactions" employeeId={item.employeeId}/>,
-                      <IconText type="shopping" text="Incoming Transactions"/>]}
+                      <IconTextIncoming type="shopping" text="Incoming Transactions" employeeId={item.employeeId}/>]}
             extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
           >
             <List.Item.Meta/>

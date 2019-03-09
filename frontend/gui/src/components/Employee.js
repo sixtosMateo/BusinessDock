@@ -53,9 +53,6 @@ class Employee extends React.Component{
    })
 
 }
-
-
-
   render(){
     let showingEmployees
     const { combinedEmployee } = this.state
