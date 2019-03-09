@@ -45,12 +45,19 @@ class OutgoingTransactionByEmployeeIdViewSet(viewsets.ModelViewSet):
     serializer_class = OutgoingTransactionSerializer
 
     def get_queryset(self):
-        books = OutgoingTransaction.objects.filter(employeeId=self.kwargs['employeeId'])
-        return books
+        outgoingTransactionbyid = OutgoingTransaction.objects.filter(employeeId=self.kwargs['employeeId'])
+        return outgoingTransactionbyid
 
 class IncomingTransactionViewSet(viewsets.ModelViewSet):
     queryset = IncomingTransaction.objects.all()
     serializer_class = IncomingTransactionSerializer
+
+class IncomingTransactionByEmployeeIdViewSet(viewsets.ModelViewSet):
+    serializer_class = OutgoingTransactionSerializer
+
+    def get_queryset(self):
+        incomingTransactionbyid = IncomingTransaction.objects.filter(employeeId=self.kwargs['employeeId'])
+        return incomingTransactionbyid
 
 class VendorViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()

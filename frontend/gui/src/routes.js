@@ -11,6 +11,7 @@ import Employee from './components/Employee';
 import Inventory from './components/Inventory';
 import Vendor from './components/Vendor';
 import Report from './components/Report';
+import EmployeeProfile from './components/EmployeeProfile';
 
 import EditVendor from './containers/Forms/EditVendor';
 import EditItem from './containers/Forms/EditItem';
@@ -49,6 +50,7 @@ const BaseRouter = () =>(
     <Route exact path='/employees/' component={Employee}/>{" "}
     <Route exact path='/employees/newEmployee/' component={NewEmployee}/>{" "}
     <Route exact path='/employee/edit/:id/' component={EditEmployee}/>{" "}
+    <Route exact path='/employee/:employeeId/outgoing/' component={EmployeeProfile}/>{" "}
 
 
 
