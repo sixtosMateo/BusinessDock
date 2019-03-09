@@ -25,7 +25,7 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
-
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -43,10 +43,10 @@ class OutgoingTransactionViewSet(viewsets.ModelViewSet):
 
 class OutgoingTransactionByEmployeeIdViewSet(viewsets.ModelViewSet):
     serializer_class = OutgoingTransactionSerializer
+
     def get_queryset(self):
-        print(self.kwargs)
-        employeeId = self.kwargs['id']
-        return OutgoingTransaction.objects.all().filter(employeeId=employeeId)
+        books = OutgoingTransaction.objects.filter(employeeId=self.kwargs['employeeId'])
+        return books
 
 class IncomingTransactionViewSet(viewsets.ModelViewSet):
     queryset = IncomingTransaction.objects.all()
