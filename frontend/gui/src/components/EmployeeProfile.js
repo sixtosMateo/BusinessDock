@@ -10,6 +10,7 @@ import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
 import * as actions from '../store/actions/auth';
 import EmployeeOutgoingAvatar from './avatar/EmployeeOutgoingAvatar';
+import TransactionHeaders from './avatar/TransactionHeaders';
 import { List, Icon, Row, Col } from 'antd';
 
 import axios from 'axios';
@@ -66,30 +67,28 @@ outgoingTransaction(){
             <Col md={12} lg={12} className="employee-info">
               <Row className="employee" style={{border:"solid 1px"}}>
                 <Col>
-                  Username:
-                  {user ? user.username: ""}
+                  <strong>Username: </strong> {user ? user.username: ""}
                 </Col>
                 <Col>
-                  Employee ID:
-                  {this.props.employee.employeeId}
+                  <strong>Employee ID: </strong> {this.props.employee.employeeId}
                 </Col>
                 <Col>
-                  Phone Number: (831) 585-0879
+                  <strong>Phone Number: </strong> (831) 585-0879
                 </Col>
                 <Col>
-                  Email: {user ? user.email: ""}
+                  <strong>Email: </strong> {user ? user.email: ""}
                 </Col>
               </Row>
 
-              <Row className="transaction" style={{border:"solid 1px"}}>
+              <Row className="transaction" style={{border:"solid 1px", background:"#E0E0E0"}}>
                 <Col>
-                  Overall Transactions qty: 3
+                  <strong>Overall Transactions Qty: </strong> 3
                 </Col>
                 <Col>
-                  Total Sales: 120.18
+                  <strong>Total Sales: </strong> 120.18
                 </Col>
                 <Col>
-                  Investment Purchases: 60.09
+                  <strong>Investment Purchases: </strong> 60.09
                 </Col>
               </Row>
             </Col>
@@ -100,6 +99,8 @@ outgoingTransaction(){
           </Row>
 
           <h2>Transactions</h2>
+
+          <TransactionHeaders/>
           <Row className="transactions-convas">
             <EmployeeOutgoingAvatar data={this.state.data}/>
           </Row>
