@@ -30,12 +30,22 @@ const EmployeeOutgoingAvatar =(props)=>{
           >
             <List.Item.Meta/>
             <Row type="flex" justify="start" style={{textAlign:"left"}}>
-              <Col span={2} style={{width:"17%"}} ><strong>{item.transactionId}</strong></Col>
-              <Col span={2} style={{width:"16%"}}><strong>{item.storeId}</strong></Col>
-              <Col span={2} style={{width:"16%"}}><strong>{item.subtotal}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.tax}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.subtotal}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.createdAt}</strong></Col>
+
+                <Col lg={12}><h2>Transaction ID: <strong>{item.transactionId} </strong></h2></Col>
+                <Col lg={12}>Date/Time: <strong>{item.createdAt} </strong></Col>
+            </Row>
+            <Row style={{padding:"5px", background:"#F5F5F5"}}>
+                <h4>VendorID:
+                  <strong>
+                  {item.storeId? item.storeId : item.vendorId}
+                  </strong>
+                </h4>
+
+            </Row>
+            <Row style={{paddingLeft:"10px"}}>
+              <Col lg={8}> <h4>Subtotal: <strong>{item.subtotal}</strong></h4></Col>
+              <Col lg={8}> <h4>Tax: <strong>{item.tax}</strong></h4></Col>
+              <Col lg={8}> <h4>Total: <strong>{item.total}</strong></h4></Col>
             </Row>
 
           </List.Item>

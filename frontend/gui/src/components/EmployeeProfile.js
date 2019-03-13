@@ -59,10 +59,10 @@ class EmployeeProfile extends React.Component{
 
   }
 
+
   render(){
 
       const {employee} = this.props
-      console.log(this.state.items)
       return(
 
         <div className="employee-profile">
@@ -99,15 +99,16 @@ class EmployeeProfile extends React.Component{
             </Col>
 
             <Col md={12} lg={12}  className="graph-data">
-              <img style={{margin:"0", padding:"0", width:"100%", height:"165px"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+              <img style={{margin:"0", padding:"0", width:"100%", height:"155px"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
             </Col>
           </Row>
 
           <h2>Transactions</h2>
 
-          <TransactionHeaders/>
+
           <Row className="transactions-convas">
-            <Col lg={this.state.items.length > 0 ? 12: 24}>
+
+            <Col lg={this.state.items.length > 0 ? 12: 24} >
               <EmployeeOutgoingAvatar
                 data={this.state.data}
                 getOutgoingItems={this.getOutgoingItems}/>
@@ -116,24 +117,20 @@ class EmployeeProfile extends React.Component{
 
               {this.state.items.length > 0
                   ?
-                  <Col lg={12}>
-                  <EmployeeOutgoingItemAvatar data={this.state.items}/>
+                  <Col lg={12} style={{border:"1px solid"}}>
+                    <EmployeeOutgoingItemAvatar data={this.state.items} />
                   </Col>
                   :""
 
             }
 
           </Row>
-
-
         </div>
       )
-
   }
-
-
 }
 
+// <TransactionHeaders/> => need styling
 
 const mapStateToProps = ({CombinedEmployee}, props) =>{
   // return object is what you want to map into a property

@@ -40,6 +40,8 @@ outgoingTransaction(){
     .catch(e=>{
       console.log(e)
     })
+    console.log(this.state.data)
+
 }
 
 getOutgoingItems=(id)=>{
@@ -57,6 +59,7 @@ getOutgoingItems=(id)=>{
 
   render(){
       const {employee} = this.props
+      
       return(
         <div className="employee-profile">
           <h1>Employee: {employee ? employee.first_name: ""} {employee ? employee.last_name: ""}</h1>

@@ -27,12 +27,18 @@ const EmployeeOutgoingItemAvatar =(props)=>{
           >
             <List.Item.Meta/>
             <Row type="flex" justify="start" style={{textAlign:"right" }}>
-              <Col span={2} style={{width:"17%"}} ><strong>{item.barcode}</strong></Col>
-              <Col span={2} style={{width:"16%"}}><strong>{item.name}</strong></Col>
-              <Col span={2} style={{width:"16%"}}><strong>{item.quantity}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.price}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.tax}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.itemSaleTotal}</strong></Col>
+
+              <Col lg={12} style={{textAlign:"center" }}>
+                <Col >Barcode: <strong>{item.barcode}</strong></Col>
+                <Col >Item: <strong>{item.name}</strong></Col>
+              </Col>
+
+              <Col lg={12}>
+                <h4>Qty: <strong>{item.quantity}</strong></h4>
+                <h4>Price: <strong>{item.price}</strong></h4>
+                <h4>Tax: <strong>{item.tax}</strong></h4>
+                <h4>Sale: <strong>{item.itemSaleTotal}</strong></h4>
+              </Col>
             </Row>
 
           </List.Item>
