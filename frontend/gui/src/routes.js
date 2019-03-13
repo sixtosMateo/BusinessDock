@@ -52,7 +52,6 @@ const BaseRouter = () =>(
     <Route exact path='/employees/newEmployee/' component={NewEmployee}/>{" "}
     <Route exact path='/employee/edit/:id/' component={EditEmployee}/>{" "}
     <Route exact path='/employee/:employeeId/outgoing/' component={EmployeeProfile}/>{" "}
-    <Route exact path='/employee/:employeeId/outgoing/:id/' component={EmployeeProfile}/>{" "}
     <Route exact path='/employee/:employeeId/incoming/' component={EmployeeProfile2}/>{" "}
 
 

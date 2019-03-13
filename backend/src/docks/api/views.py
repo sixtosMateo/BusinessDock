@@ -64,8 +64,10 @@ class VendorViewSet(viewsets.ModelViewSet):
     serializer_class = VendorSerializer
 
 class OutgoingTransactionItemViewSet(viewsets.ModelViewSet):
-    queryset = OutgoingTransactionItem.objects.all()
     serializer_class = OutgoingTransactionItemSerializer
+    def get_queryset(self):
+        outgoingTransactionIdItems = OutgoingTransactionItem.objects.filter(transactionId=self.kwargs['transactionId'])
+        return outgoingTransactionIdItems
 
 class IncomingTransactionItemViewSet(viewsets.ModelViewSet):
     queryset = IncomingTransactionItem.objects.all()

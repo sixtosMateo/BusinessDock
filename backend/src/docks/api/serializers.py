@@ -44,7 +44,7 @@ class VendorSerializer(serializers.ModelSerializer):
 class OutgoingTransactionItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OutgoingTransactionItem
-        fields = '__all__'
+        fields = ('barcode', 'transactionId', 'name', 'transactionType', 'quantity', 'price', 'tax', 'itemSaleTotal','createdAt')
 
 class IncomingTransactionItemSerializer(serializers.ModelSerializer):
     class Meta:

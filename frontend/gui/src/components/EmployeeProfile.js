@@ -20,6 +20,7 @@ class EmployeeProfile extends React.Component{
   state ={
     query:  '',
     data:[],
+    items:[]
   }
 
   componentDidMount(){
@@ -31,7 +32,7 @@ class EmployeeProfile extends React.Component{
 }
 
   outgoingTransaction(){
-    console.log("called");
+
     axios.get(`http://127.0.0.1:8000/api/outgoingTransactionById/${parseInt(this.props.match.params.employeeId)}/`)
       .then((res) =>
         this.setState({
@@ -44,10 +45,23 @@ class EmployeeProfile extends React.Component{
 
 }
 
+  getOutgoingItems=(id)=>{
+    axios.get(`http://127.0.0.1:8000/api/outgoingtransactionItem/${id}/`)
+      .then((res) =>
+        this.setState({
+          items: res.data
+        })
+      )
+      .catch(e=>{
+        console.log(e)
+      })
+
+  }
+
   render(){
 
       const {employee} = this.props
-
+      console.log(this.state.data)
       return(
 
         <div className="employee-profile">
@@ -94,7 +108,15 @@ class EmployeeProfile extends React.Component{
           <Row className="transactions-convas">
             <EmployeeOutgoingAvatar
               data={this.state.data}
-              getTransactionItems={this.getTransactionItems}/>
+              getTransactionItems={this.getTransactionItems}
+              getOutgoingItems={this.getOutgoingItems}/>
+
+            {this.state.items.length > 0
+                ?
+                "hello"
+                :""
+              }
+
           </Row>
 
 
