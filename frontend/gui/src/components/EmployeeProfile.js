@@ -10,6 +10,7 @@ import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
 import * as actions from '../store/actions/auth';
 import EmployeeOutgoingAvatar from './avatar/EmployeeOutgoingAvatar';
+import EmployeeOutgoingItemAvatar from './avatar/EmployeeOutgoingItemAvatar';
 import TransactionHeaders from './avatar/TransactionHeaders';
 import { List, Icon, Row, Col } from 'antd';
 
@@ -61,7 +62,7 @@ class EmployeeProfile extends React.Component{
   render(){
 
       const {employee} = this.props
-      console.log(this.state.data)
+      console.log(this.state.items)
       return(
 
         <div className="employee-profile">
@@ -106,16 +107,22 @@ class EmployeeProfile extends React.Component{
 
           <TransactionHeaders/>
           <Row className="transactions-convas">
-            <EmployeeOutgoingAvatar
-              data={this.state.data}
-              getTransactionItems={this.getTransactionItems}
-              getOutgoingItems={this.getOutgoingItems}/>
+            <Col lg={this.state.items.length > 0 ? 12: 24}>
+              <EmployeeOutgoingAvatar
+                data={this.state.data}
+                getTransactionItems={this.getTransactionItems}
+                getOutgoingItems={this.getOutgoingItems}/>
+            </Col>
 
-            {this.state.items.length > 0
-                ?
-                "hello"
-                :""
-              }
+
+              {this.state.items.length > 0
+                  ?
+                  <Col lg={12}>
+                  <EmployeeOutgoingItemAvatar data={this.state.items}/>
+                  </Col>
+                  :""
+
+            }
 
           </Row>
 

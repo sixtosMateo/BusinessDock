@@ -29,7 +29,7 @@ const EmployeeOutgoingAvatar =(props)=>{
             extra={[]}
           >
             <List.Item.Meta/>
-            <Row type="flex" justify="start" style={{textAlign:"center"}}>
+            <Row type="flex" justify="start" style={{textAlign:"left"}}>
               <Col span={2} style={{width:"17%"}} ><strong>{item.transactionId}</strong></Col>
               <Col span={2} style={{width:"16%"}}><strong>{item.storeId}</strong></Col>
               <Col span={2} style={{width:"16%"}}><strong>{item.subtotal}</strong></Col>
