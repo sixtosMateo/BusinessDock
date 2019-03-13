@@ -12,7 +12,7 @@ class TotalTable extends React.Component{
           <div>
             <div style={{fontFamily: "Permanent Marker"}}><h3>Subtotal: {this.props.subTotal}</h3></div>
             <div style={{fontFamily: "Permanent Marker"}}><h3>Tax: {this.props.tax}</h3></div>
-            <div style={{fontFamily: "Permanent Marker"}}><h3>Total: {this.props.total}</h3></div>
+            <div style={{fontFamily: "Permanent Marker"}}><h3>Total: {this.props.total.toFixed(2)}</h3></div>
           </div>
         </div>
 

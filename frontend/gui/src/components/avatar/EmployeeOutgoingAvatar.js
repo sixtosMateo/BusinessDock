@@ -6,7 +6,19 @@ import { List, Icon, Row, Col } from 'antd';
 import {Link} from 'react-router-dom';
 
 
+
 const EmployeeOutgoingAvatar =(props)=>{
+  const IconText = ({ type, text, transactionId }) => (
+    <span onClick={()=>props.getOutgoingItems(transactionId)}>
+
+      <Icon type={type}
+            style={{ marginRight: 8, marginTop:15, fontSize:"20px",
+                        color:"#61B329" }}/>
+      {text}
+
+    </span>
+  );
+
   return(
       <List
         itemLayout="vertical"
@@ -22,10 +34,9 @@ const EmployeeOutgoingAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.transactionId}
-            actions={[<Icon type="ordered-list"
-                            text="view items"
-                            style={{ marginRight: 8, marginTop:15, color:"#61B329"}}
-                            onClick={()=>props.getOutgoingItems(item.transactionId)}/>]}
+            actions={[<IconText type="ordered-list"
+                            text="View Items"
+                            transactionId={item.transactionId}/>]}
             extra={[]}
           >
             <List.Item.Meta/>

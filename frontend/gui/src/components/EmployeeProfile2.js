@@ -40,7 +40,7 @@ outgoingTransaction(){
     .catch(e=>{
       console.log(e)
     })
-    console.log(this.state.data)
+
 
 }
 
@@ -59,7 +59,12 @@ getOutgoingItems=(id)=>{
 
   render(){
       const {employee} = this.props
-      
+      let totalSales
+      if(this.state.data.length > 0){
+        totalSales = this.state.data.reduce((total,trans)=>{
+            return total + trans.total},0)
+      }
+
       return(
         <div className="employee-profile">
           <h1>Employee: {employee ? employee.first_name: ""} {employee ? employee.last_name: ""}</h1>
@@ -83,13 +88,10 @@ getOutgoingItems=(id)=>{
 
               <Row className="transaction" style={{border:"solid 1px", background:"#E0E0E0"}}>
                 <Col>
-                  <strong>Overall Transactions Qty: </strong> 3
+                  <strong>Overall Transactions Qty: </strong> {this.state.data?this.state.data.length:"N/A"}
                 </Col>
                 <Col>
-                  <strong>Total Sales: </strong> 120.18
-                </Col>
-                <Col>
-                  <strong>Investment Purchases: </strong> 60.09
+                  <strong>Investment Purchases: </strong> {totalSales?totalSales.toFixed(2):"N/A"}
                 </Col>
               </Row>
             </Col>
@@ -101,7 +103,6 @@ getOutgoingItems=(id)=>{
 
           <h2>Transactions</h2>
 
-          <TransactionHeaders/>
           <Row className="transactions-convas">
             <Col lg={this.state.items.length > 0 ? 12: 24}>
               <EmployeeOutgoingAvatar

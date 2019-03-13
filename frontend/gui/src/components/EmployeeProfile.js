@@ -29,7 +29,6 @@ class EmployeeProfile extends React.Component{
       this.props.refreshUsers();
       this.props.refreshEmployeeCombo();
       this.outgoingTransaction()
-
 }
 
   outgoingTransaction(){
@@ -44,6 +43,8 @@ class EmployeeProfile extends React.Component{
         console.log(e)
       })
 
+
+
 }
 
   getOutgoingItems=(id)=>{
@@ -56,13 +57,16 @@ class EmployeeProfile extends React.Component{
       .catch(e=>{
         console.log(e)
       })
-
   }
 
 
   render(){
-
       const {employee} = this.props
+      let totalSales
+      if(this.state.data.length > 0){
+        totalSales = this.state.data.reduce((total,trans)=>{
+            return total + trans.total},0)
+      }
       return(
 
         <div className="employee-profile">
@@ -87,14 +91,12 @@ class EmployeeProfile extends React.Component{
 
               <Row className="transaction" style={{border:"solid 1px", background:"#E0E0E0"}}>
                 <Col>
-                  <strong>Overall Transactions Qty: </strong> 3
+                  <strong>Overall Transactions Qty: </strong> {this.state.data?this.state.data.length:"N/A"}
                 </Col>
                 <Col>
-                  <strong>Total Sales: </strong> 120.18
+                  <strong>Total Sales: </strong> {totalSales?totalSales.toFixed(2):"N/A"}
                 </Col>
-                <Col>
-                  <strong>Investment Purchases: </strong> 60.09
-                </Col>
+
               </Row>
             </Col>
 
