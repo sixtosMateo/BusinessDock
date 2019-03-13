@@ -87,6 +87,9 @@ class EmployeeProfile extends React.Component{
                 <Col>
                   <strong>Email: </strong> {employee ? employee.email: ""}
                 </Col>
+                <Col>
+                  <strong>Date Joined: </strong> {employee ? employee.date_joined: ""}
+                </Col>
               </Row>
 
               <Row className="transaction" style={{border:"solid 1px", background:"#E0E0E0"}}>

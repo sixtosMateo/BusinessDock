@@ -5,8 +5,6 @@ import React from 'react';
 import { List, Icon, Row, Col } from 'antd';
 import {Link} from 'react-router-dom';
 
-
-
 const EmployeeOutgoingAvatar =(props)=>{
   const IconText = ({ type, text, transactionId }) => (
     <span onClick={()=>props.getOutgoingItems(transactionId)}>
