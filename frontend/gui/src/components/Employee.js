@@ -58,14 +58,10 @@ class Employee extends React.Component{
           <EmployeeAvatar data={showingEmployees} />
         </div>
       )
-
   }
-
-
 }
 
-
-const mapStateToProps = ({EmployeeReducer, UserReducer, CombinedEmployee}) =>{
+const mapStateToProps = ({CombinedEmployee}) =>{
   // return object is what you want to map into a property
   return {
     combinedEmployee: CombinedEmployee.combinedEmployee

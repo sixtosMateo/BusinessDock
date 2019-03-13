@@ -16,32 +16,20 @@ import { List, Icon, Row, Col } from 'antd';
 import axios from 'axios';
 
 class EmployeeProfile2 extends React.Component{
-
   state ={
     query:  '',
-    user:{},
     data:[]
   }
 
-  updateQuery=(query)=>{
-
-  }
-
   componentDidMount(){
-
-
-      this.outgoingTransaction()
-      this.props.refreshEmployees();
-      this.props.refreshUsers();
-      const user = this.props.users.find((user) =>
-            user.id === this.props.employee.userId)
-      this.setState({
-        user:user
-      })
+    this.props.refreshEmployees();
+    this.props.refreshUsers();
+    this.props.refreshEmployeeCombo();
+    this.outgoingTransaction();
 }
 
 outgoingTransaction(){
-  axios.get(`http://127.0.0.1:8000/api/incomingTransactionById/${this.props.employee.employeeId}/`)
+  axios.get(`http://127.0.0.1:8000/api/incomingTransactionById/${parseInt(this.props.match.params.employeeId)}/`)
     .then((res) =>
       this.setState({
         data: res.data
@@ -53,27 +41,25 @@ outgoingTransaction(){
 }
 
   render(){
-
-      const {user} = this.state
+      const {employee} = this.props
       return(
-
         <div className="employee-profile">
-          <h1>Employee: {user ? user.first_name: ""} {user ? user.last_name: ""}</h1>
+          <h1>Employee: {employee ? employee.first_name: ""} {employee ? employee.last_name: ""}</h1>
 
           <Row className="employee-convas">
             <Col md={12} lg={12} className="employee-info">
               <Row className="employee" style={{border:"solid 1px"}}>
                 <Col>
-                  <strong>Username: </strong> {user ? user.username: ""}
+                  <strong>Username: </strong> {employee ? employee.username: ""}
                 </Col>
                 <Col>
-                  <strong>Employee ID: </strong> {this.props.employee.employeeId}
+                  <strong>Employee ID: </strong> {employee ? employee.employeeId: ""}
                 </Col>
                 <Col>
                   <strong>Phone Number: </strong> (831) 585-0879
                 </Col>
                 <Col>
-                  <strong>Email: </strong> {user ? user.email: ""}
+                  <strong>Email: </strong> {employee ? employee.email: ""}
                 </Col>
               </Row>
 
@@ -104,28 +90,24 @@ outgoingTransaction(){
 
         </div>
       )
-
   }
-
-
 }
 
 
-const mapStateToProps = ({EmployeeReducer, UserReducer}, props) =>{
+const mapStateToProps = ({CombinedEmployee}, props) =>{
   // return object is what you want to map into a property
   return {
-    employees: EmployeeReducer.employees,
-    users: UserReducer.users,
-    employee: EmployeeReducer.employees.find((employee) =>
+    combinedEmployee: CombinedEmployee.combinedEmployee,
+    employee: CombinedEmployee.combinedEmployee.find((employee) =>
           employee.employeeId === parseInt(props.match.params.employeeId)),
   }
 }
 
 const mapDispatchToProps = dispatch =>{
   return {
+      refreshEmployeeCombo: () => dispatch(actions.reloadEmployeeCombo()),
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
       refreshUsers: () => dispatch(actions.reloadLocalUsers())
-
   }
 }
 

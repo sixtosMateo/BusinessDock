@@ -13,6 +13,7 @@ import * as helper from '../../helperMethods/UpdateLocalStorage';
 
 
 // Reducers methods: Authentication methods
+
 export const authStart = () =>{
   return{
     type: actionTypes.AUTH_START
@@ -33,9 +34,8 @@ export const authFail = error =>{
   }
 }
 //########################################################################
+// Reducers method: initialize state array
 
-
-// // Reducers method: initialize state array
 export const initialCurrentUser = user =>{
   return{
     type: actionTypes.ADD_USER,
@@ -76,10 +76,10 @@ export const initializeEmployeeCombo = combinedEmployee =>{
     combinedEmployee: combinedEmployee
   }
 }
+
 //########################################################################
-
-
 // Reducers method: with CRUD operations for Items and Vendor
+
 export const addItem =(item)=>{
   return {
     type: actionTypes.ADD_ITEM,
@@ -125,9 +125,8 @@ export const deleteVendor = (id)=>{
 }
 
 //########################################################################
-
-
 // DB (API) and CACHE DELETION (localStorage)
+
 export const addVendorLocalStorage = (vendor) =>{
   return dispatch => {
     axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
@@ -199,9 +198,8 @@ export const editItemLocalStorage = (id, item) =>{
 }
 
 //########################################################################
-
-
 // Fetching data from API calls
+
 export const fetchEmployees = () =>{
   return dispatch => (
   EmployeesApi
@@ -255,7 +253,8 @@ export const fetchCurrentUser = () =>{
 )}
 
 //########################################################################
-// initializeEmployeeCombo
+// data from local storage and dispatching action types with new state
+
 export const reloadEmployeeCombo=()=>{
   return dispatch => {
       const users = JSON.parse(localStorage.getItem('localUsers'));
@@ -279,7 +278,6 @@ export const reloadEmployeeCombo=()=>{
   }
 }
 
-// data from local storage and dispatching action types with new state
 export const reloadLocalUsers=()=>{
   return dispatch=>{
       const users = JSON.parse(localStorage.getItem('localUsers'));
