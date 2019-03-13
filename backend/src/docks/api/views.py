@@ -70,8 +70,10 @@ class OutgoingTransactionItemViewSet(viewsets.ModelViewSet):
         return outgoingTransactionIdItems
 
 class IncomingTransactionItemViewSet(viewsets.ModelViewSet):
-    queryset = IncomingTransactionItem.objects.all()
     serializer_class = IncomingTransactionItemSerializer
+    def get_queryset(self):
+        incomingTransactionIdItems = IncomingTransactionItem.objects.filter(transactionId=self.kwargs['transactionId'])
+        return incomingTransactionIdItems
 
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()

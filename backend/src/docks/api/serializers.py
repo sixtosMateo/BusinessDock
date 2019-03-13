@@ -49,7 +49,7 @@ class OutgoingTransactionItemSerializer(serializers.ModelSerializer):
 class IncomingTransactionItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncomingTransactionItem
-        fields = '__all__'
+        fields = ('barcode', 'transactionId', 'name', 'transactionType', 'quantity', 'price', 'tax', 'itemSaleTotal','createdAt')
 
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:

@@ -10,6 +10,7 @@ import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
 import * as actions from '../store/actions/auth';
 import EmployeeOutgoingAvatar from './avatar/EmployeeOutgoingAvatar';
+import EmployeeOutgoingItemAvatar from './avatar/EmployeeOutgoingItemAvatar';
 import TransactionHeaders from './avatar/TransactionHeaders';
 import { List, Icon, Row, Col } from 'antd';
 
@@ -18,7 +19,8 @@ import axios from 'axios';
 class EmployeeProfile2 extends React.Component{
   state ={
     query:  '',
-    data:[]
+    data:[],
+    items:[]
   }
 
   componentDidMount(){
@@ -38,6 +40,19 @@ outgoingTransaction(){
     .catch(e=>{
       console.log(e)
     })
+}
+
+getOutgoingItems=(id)=>{
+  axios.get(`http://127.0.0.1:8000/api/incomingtransactionItem/${id}/`)
+    .then((res) =>
+      this.setState({
+        items: res.data
+      })
+    )
+    .catch(e=>{
+      console.log(e)
+    })
+
 }
 
   render(){
@@ -85,7 +100,20 @@ outgoingTransaction(){
 
           <TransactionHeaders/>
           <Row className="transactions-convas">
-            <EmployeeOutgoingAvatar data={this.state.data}/>
+            <Col lg={this.state.items.length > 0 ? 12: 24}>
+              <EmployeeOutgoingAvatar
+                data={this.state.data}
+                getOutgoingItems={this.getOutgoingItems}/>
+            </Col>
+
+              {this.state.items.length > 0
+                  ?
+                  <Col lg={12}>
+                  <EmployeeOutgoingItemAvatar data={this.state.items}/>
+                  </Col>
+                  :""
+            }
+
           </Row>
 
         </div>

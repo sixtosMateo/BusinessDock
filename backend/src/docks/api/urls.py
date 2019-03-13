@@ -22,7 +22,7 @@ router.register(r'outgoingTransactionById/(?P<employeeId>[0-9]+)', OutgoingTrans
 router.register(r'incomingTransactionById/(?P<employeeId>[0-9]+)', IncomingTransactionByEmployeeIdViewSet, base_name='incomingTransactionbyid')
 router.register(r'incomingTransaction', IncomingTransactionViewSet, base_name='incomingTransaction')
 router.register(r'outgoingtransactionItem/(?P<transactionId>[0-9]+)', OutgoingTransactionItemViewSet, base_name='outgoingtransactionItem')
-router.register(r'incomingtransactionItem', IncomingTransactionItemViewSet, base_name='incomingtransactionItem')
+router.register(r'incomingtransactionItem/(?P<transactionId>[0-9]+)', IncomingTransactionItemViewSet, base_name='incomingtransactionItem')
 router.register(r'stores', StoreViewSet, base_name='stores')
 router.register(r'vendors', VendorViewSet, base_name='vendors')
 router.register(r'damageItem', DamageItemViewSet, base_name='damageItem')

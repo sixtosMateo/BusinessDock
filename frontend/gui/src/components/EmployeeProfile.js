@@ -110,7 +110,6 @@ class EmployeeProfile extends React.Component{
             <Col lg={this.state.items.length > 0 ? 12: 24}>
               <EmployeeOutgoingAvatar
                 data={this.state.data}
-                getTransactionItems={this.getTransactionItems}
                 getOutgoingItems={this.getOutgoingItems}/>
             </Col>
 
