@@ -35,7 +35,6 @@ class Employee extends React.Component{
 
   setCombinedEmployees(){
     let tempArray = [...this.props.employees]
-
     this.props.users.forEach((user)=>{
      const matchEmployee = this.props.employees.find(employee => employee.userId === user.id)
      const index = tempArray.indexOf(matchEmployee)
@@ -92,7 +91,8 @@ const mapStateToProps = ({EmployeeReducer, UserReducer}) =>{
   // return object is what you want to map into a property
   return {
     employees: EmployeeReducer.employees,
-    users: UserReducer.users
+    users: UserReducer.users,
+
   }
 }
 

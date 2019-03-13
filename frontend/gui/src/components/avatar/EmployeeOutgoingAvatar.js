@@ -5,6 +5,15 @@ import React from 'react';
 import { List, Icon, Row, Col } from 'antd';
 import {Link} from 'react-router-dom';
 
+const IconText = ({ type, text,employeeId ,id }) => (
+  <span>
+  <Link to={`${id}`}>
+    <Icon type={type} style={{ marginRight: 8, marginTop:15, color:"#61B329" }}/>
+  </Link>
+    {text}
+  </span>
+);
+
 
 const EmployeeOutgoingAvatar =(props)=>{
   return(
@@ -22,7 +31,10 @@ const EmployeeOutgoingAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.transactionId}
-            actions={[]}
+            actions={[<IconText type="ordered-list"
+                            text="view items"
+                            employeeId={item.employeeId}
+                            id={item.transactionId}/>]}
             extra={[]}
           >
             <List.Item.Meta/>

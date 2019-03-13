@@ -20,16 +20,10 @@ class EmployeeProfile extends React.Component{
   state ={
     query:  '',
     user:{},
-    data:[]
-  }
-
-  updateQuery=(query)=>{
-
+    data:[],
   }
 
   componentDidMount(){
-
-
       this.outgoingTransaction()
       this.props.refreshEmployees();
       this.props.refreshUsers();
@@ -40,7 +34,7 @@ class EmployeeProfile extends React.Component{
       })
 }
 
-outgoingTransaction(){
+  outgoingTransaction(){
   axios.get(`http://127.0.0.1:8000/api/outgoingTransactionById/${this.props.employee.employeeId}/`)
     .then((res) =>
       this.setState({
@@ -51,13 +45,12 @@ outgoingTransaction(){
       console.log(e)
     })
 
-
-
 }
 
   render(){
 
       const {user} = this.state
+
       return(
 
         <div className="employee-profile">
@@ -102,8 +95,11 @@ outgoingTransaction(){
 
           <TransactionHeaders/>
           <Row className="transactions-convas">
-            <EmployeeOutgoingAvatar data={this.state.data}/>
+            <EmployeeOutgoingAvatar
+              data={this.state.data}
+              getTransactionItems={this.getTransactionItems}/>
           </Row>
+
 
         </div>
       )

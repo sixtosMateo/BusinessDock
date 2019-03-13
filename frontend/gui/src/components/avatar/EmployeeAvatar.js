@@ -90,11 +90,7 @@ const EmployeeAvatar =(props)=>{
           </List.Item>
         )}
       />
-
-
   );
 }
-
-
 
 export default EmployeeAvatar;

@@ -202,7 +202,6 @@ export const fetchEmployees = () =>{
       .then((res)=> {
         localStorage.setItem('localEmployees', JSON.stringify(res))
       })
-
 )
 }
 
@@ -251,6 +250,7 @@ export const fetchCurrentUser = () =>{
 //########################################################################
 
 
+
 // data from local storage and dispatching action types with new state
 export const reloadLocalUsers=()=>{
   return dispatch=>{
@@ -259,17 +259,17 @@ export const reloadLocalUsers=()=>{
   }
 }
 
-export const reloadLocalItems=()=>{
-  return dispatch=>{
-      const items = JSON.parse(localStorage.getItem('localItems'));
-      dispatch(initializeItems(items))
-  }
-}
-
 export const reloadLocalEmployees=()=>{
   return dispatch=>{
       const employees = JSON.parse(localStorage.getItem('localEmployees'));
       dispatch(initializeEmployees(employees))
+  }
+}
+
+export const reloadLocalItems=()=>{
+  return dispatch=>{
+      const items = JSON.parse(localStorage.getItem('localItems'));
+      dispatch(initializeItems(items))
   }
 }
 
