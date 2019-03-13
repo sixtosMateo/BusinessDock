@@ -67,7 +67,14 @@ export const initializeUsers = users =>{
   return {
     type: actionTypes.FETCH_USERS,
     users: users
+  }
 }
+
+export const initializeEmployeeCombo = combinedEmployee =>{
+  return {
+    type: actionTypes.COMBINED_EMPLOYEE,
+    combinedEmployee: combinedEmployee
+  }
 }
 //########################################################################
 
@@ -248,8 +255,29 @@ export const fetchCurrentUser = () =>{
 )}
 
 //########################################################################
+// initializeEmployeeCombo
+export const reloadEmployeeCombo=()=>{
+  return dispatch => {
+      const users = JSON.parse(localStorage.getItem('localUsers'));
+      const employees = JSON.parse(localStorage.getItem('localEmployees'));
 
+      let tempArray = employees
 
+      users.forEach((user)=>{
+       const matchEmployee = employees.find(employee => employee.userId === user.id)
+       const index = tempArray.indexOf(matchEmployee)
+       const item = tempArray[index]
+
+       item.first_name = user.first_name
+       item.last_name = user.last_name
+       item.username = user.username
+       item.email = user.email
+       item.is_staff = user.is_staff
+       item.date_joined = user.date_joined
+    })
+      dispatch(initializeEmployeeCombo(tempArray))
+  }
+}
 
 // data from local storage and dispatching action types with new state
 export const reloadLocalUsers=()=>{

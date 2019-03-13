@@ -18,7 +18,6 @@ class Employee extends React.Component{
 
   state ={
     query:  '',
-    combinedEmployee:[]
   }
 
   updateQuery=(query)=>{
@@ -28,33 +27,14 @@ class Employee extends React.Component{
   }
 
   componentDidMount(){
-      this.props.refreshEmployees();
-      this.props.refreshUsers();
-      this.setCombinedEmployees();
-}
+    this.props.refreshEmployees();
+    this.props.refreshUsers();
+    this.props.refreshEmployeeCombo();
+  }
 
-  setCombinedEmployees(){
-    let tempArray = [...this.props.employees]
-    this.props.users.forEach((user)=>{
-     const matchEmployee = this.props.employees.find(employee => employee.userId === user.id)
-     const index = tempArray.indexOf(matchEmployee)
-     const item = tempArray[index]
-
-     item.first_name = user.first_name
-     item.last_name = user.last_name
-     item.username = user.username
-     item.email = user.email
-     item.is_staff = user.is_staff
-     item.date_joined = user.date_joined
-  })
-  this.setState(() => {
-    return {combinedEmployee:[...tempArray]}
-   })
-
-}
   render(){
     let showingEmployees
-    const { combinedEmployee } = this.state
+    const { combinedEmployee } = this.props
       if(this.state.query){
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
 
@@ -64,9 +44,7 @@ class Employee extends React.Component{
       else{
         showingEmployees = combinedEmployee
       }
-
       showingEmployees.sort(sortBy('employeeId'))
-
       return(
 
         <div className="employeeComponent">
@@ -87,19 +65,18 @@ class Employee extends React.Component{
 }
 
 
-const mapStateToProps = ({EmployeeReducer, UserReducer}) =>{
+const mapStateToProps = ({EmployeeReducer, UserReducer, CombinedEmployee}) =>{
   // return object is what you want to map into a property
   return {
-    employees: EmployeeReducer.employees,
-    users: UserReducer.users,
-
+    combinedEmployee: CombinedEmployee.combinedEmployee
   }
 }
 
 const mapDispatchToProps = dispatch =>{
   return {
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
-      refreshUsers: () => dispatch(actions.reloadLocalUsers())
+      refreshUsers: () => dispatch(actions.reloadLocalUsers()),
+      refreshEmployeeCombo: () => dispatch(actions.reloadEmployeeCombo()),
 
   }
 }
