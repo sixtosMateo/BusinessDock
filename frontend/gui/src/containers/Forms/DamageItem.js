@@ -19,7 +19,6 @@ class DamageItem extends React.Component{
     .then(function (response) {
       if(response.status === 201){
         window.location.reload()
-        console.log("Success item was submit")
       }
     })
   }
@@ -116,12 +115,7 @@ class DamageItem extends React.Component{
               <Button type="primary" htmlType="submit">Submit</Button>
             </FormItem>
           </Form>
-
-
-
         </div>
-
-
       );
   }
 }

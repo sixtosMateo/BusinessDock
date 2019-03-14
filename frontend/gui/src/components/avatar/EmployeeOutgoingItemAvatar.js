@@ -1,10 +1,7 @@
-//item.email
-//item.birthDate
-//item.age
+//item.email //item.birthDate //item.age
 import React from 'react';
 import { List, Icon, Row, Col } from 'antd';
 import {Link} from 'react-router-dom';
-
 
 const EmployeeOutgoingItemAvatar =(props)=>{
   return(
@@ -44,11 +41,7 @@ const EmployeeOutgoingItemAvatar =(props)=>{
           </List.Item>
         )}
       />
-
-
   );
 }
-
-
 
 export default EmployeeOutgoingItemAvatar;

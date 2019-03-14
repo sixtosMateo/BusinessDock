@@ -63,8 +63,6 @@ const VendorAvatar =(props)=>{
           </List.Item>
         )}
       />
-
-
   );
 }
 

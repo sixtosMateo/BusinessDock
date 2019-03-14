@@ -40,8 +40,6 @@ outgoingTransaction(){
     .catch(e=>{
       console.log(e)
     })
-
-
 }
 
 getOutgoingItems=(id)=>{
@@ -120,9 +118,7 @@ getOutgoingItems=(id)=>{
                   </Col>
                   :""
             }
-
           </Row>
-
         </div>
       )
   }

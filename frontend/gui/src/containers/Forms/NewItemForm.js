@@ -1,15 +1,11 @@
 // IN THE STATE WE CAN HAVE AN ARRAY OF BARCODE TO INDENTIFY WHETHER ITEM EXIST OR NOT
 // maybe keep the button disable till all the necessary items are filled
-
-
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button, InputNumber} from 'antd';
 import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
-
-
 
 const FormItem = Form.Item;
 
@@ -41,7 +37,7 @@ class NewItem extends React.Component{
       {
         hash: true
       })
-      console.log(values)
+
       // need to check if values has content
       if(this.props.item){
         this.editItem(values)
@@ -149,8 +145,6 @@ class NewItem extends React.Component{
 
           </Form>
         </div>
-
-
       );
   }
 }

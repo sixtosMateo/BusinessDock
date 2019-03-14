@@ -10,7 +10,6 @@ import NewItem from './NewItemForm';
 class EditItem extends React.Component{
 
   render(){
-
     return(
       <div className = "edit-item" style={{background:"#F5F5F5"}}>
           <NewItem/>
@@ -18,7 +17,6 @@ class EditItem extends React.Component{
     );
   }
 }
-
 
 const mapStateToProps = ({ItemReducer}, props) => {
     return {

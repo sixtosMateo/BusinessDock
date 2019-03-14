@@ -10,7 +10,6 @@ const FormItem = Form.Item;
 class NewVendor extends React.Component{
   state = {
     confirmDirty: false,
-
   }
 
   createVendor(vendor){
@@ -18,7 +17,6 @@ class NewVendor extends React.Component{
     this.props.history.push('/vendors/')
   }
 
-  // console.log(this.props.vendor.vendorId, vendor)
   // need to guarantee that the form has real data and meets requirements
   editVendor(vendor){
     vendor.vendorId = this.props.vendor.vendorId
@@ -106,8 +104,6 @@ class NewVendor extends React.Component{
           </Form>
 
         </div>
-
-
       );
   }
 }
