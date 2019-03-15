@@ -119,15 +119,15 @@ class EmployeeProfile extends React.Component{
                 getOutgoingItems={this.getOutgoingItems}/>
             </Col>
 
+              {this.state.items.length > 0?
 
-              {this.state.items.length > 0
-                  ?
-                  <Col lg={12} style={{border:"1px solid"}}>
+                  <Col lg={12} style={{}}>
+                    <h2 style={{background:"#F5F5F5", textAlign:"center", border:"1px solid"}}>Items</h2>
                     <EmployeeOutgoingItemAvatar data={this.state.items} />
                   </Col>
                   :""
-
             }
+
 
           </Row>
         </div>

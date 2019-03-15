@@ -39,9 +39,8 @@ const EmployeeOutgoingAvatar =(props)=>{
           >
             <List.Item.Meta/>
             <Row type="flex" justify="start" style={{textAlign:"left"}}>
-
-                <Col lg={12}><h2>Transaction ID: <strong>{item.transactionId} </strong></h2></Col>
-                <Col lg={12}>Date/Time: <strong>{item.createdAt} </strong></Col>
+                <Col sm={12} md={12} lg={12} style={{textAlign:"left"}}><h2>Transaction ID: <strong>{item.transactionId} </strong></h2></Col>
+                <Col sm={12} md={12} lg={12} style={{textAlign:"right"}}><h4>Date/Time: <strong>{item.createdAt} </strong></h4></Col>
             </Row>
             <Row style={{padding:"5px", background:"#F5F5F5"}}>
                 <h4>VendorID:
@@ -52,9 +51,9 @@ const EmployeeOutgoingAvatar =(props)=>{
 
             </Row>
             <Row style={{paddingLeft:"10px"}}>
-              <Col lg={8}> <h4>Subtotal: <strong>{item.subtotal}</strong></h4></Col>
-              <Col lg={8}> <h4>Tax: <strong>{item.tax}</strong></h4></Col>
-              <Col lg={8}> <h4>Total: <strong>{item.total}</strong></h4></Col>
+              <Col sm={8} md={8} lg={8}> <h4>Subtotal: <strong>{item.subtotal}</strong></h4></Col>
+              <Col sm={8} md={8} lg={8}> <h4>Tax: <strong>{item.tax}</strong></h4></Col>
+              <Col sm={8} md={8} lg={8}> <h4>Total: <strong>{item.total}</strong></h4></Col>
             </Row>
 
           </List.Item>

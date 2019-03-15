@@ -21,9 +21,10 @@ const EmployeeOutgoingItemAvatar =(props)=>{
             key={item.transactionId}
             actions={[]}
             extra={[]}
+            style={{background:"#F8F8F8", border:"solid 1px"}}
           >
             <List.Item.Meta/>
-            <Row type="flex" justify="start" style={{textAlign:"right" }}>
+            <Row type="flex" justify="start" style={{textAlign:"right"}}>
 
               <Col lg={12} style={{textAlign:"center" }}>
                 <Col >Barcode: <strong>{item.barcode}</strong></Col>
