@@ -11,15 +11,7 @@ const OutgoingItemAvatar =(props)=>{
 
   const {increment, decrement, removeItem} = props;
   return(
-
     <div className="outgoing-item-avatar">
-        {props.data.length > 0 ?
-          <TransactionDashboard/>
-        :
-        ""
-      }
-
-
       <List
         itemLayout="vertical"
         size="small"
@@ -39,23 +31,35 @@ const OutgoingItemAvatar =(props)=>{
             >
             <List.Item.Meta/>
 
+            <Row>
+              <Col sm={8} md={8} lg={8}>
+                <h3>Barcode:</h3>
+                <span style={{padding:"20px", fontSize: '18px'}}>{item.barcode}</span>
+              </Col>
+              <Col sm={8} md={8} lg={8}>
+                <h3>Name:</h3>
+                <span style={{padding:"20px", fontSize: '18px'}}>{item.name}</span>
+              </Col>
+              <Col sm={8} md={8} lg={8} onClick={()=> removeItem(item.barcode)}>
+              <h3>Remove:</h3>
+              <Icon type="delete" style={{color:"#e50000", fontSize:"18px"}}/>
+              </Col>
 
-            <Row type="flex" justify="start" style={{marginLeft:"15px"}}>
-              <Col span={2} style={{fontSize:"18px", width:"17%"}}>{item.barcode} </Col>
-              <Col span={2} style={{fontSize:"18px", width:"16%"}}>{item.name}</Col>
-              <Col span={2} style={{fontSize:"18px", width:"16%"}}>{item.salePrice}</Col>
-              <Col span={2} style={{fontSize:"18px", width:"17%"}}>
+            </Row>
+            <Row style={{padding:"5px", background:"#F5F5F5"}}>
+              <Col sm={8} md={8} lg={8}>
+                <strong>Price: </strong>{item.salePrice}</Col>
+              <Col sm={8} md={8} lg={8}>
+                <strong>Qty: </strong>
                 <Icon type="minus" onClick={()=> decrement(item.barcode)}
                   style={{ fontSize: '16px', color: '#ff0000' }}/>
                 <span>  {  item.quantity  }  </span>
                 <Icon type="plus" onClick={()=> increment(item.barcode)}
                   style={{ fontSize: '16px', color: '#0000ff'}}/>
               </Col>
-              <Col span={2} style={{fontSize:"18px", width:"17%"}}>{item.itemSaleTotal}</Col>
-              <Col span={2} style={{fontSize:"18px", width:"17%"}} onClick={()=> removeItem(item.barcode)}><Icon type="delete" style={{color:"#e50000"}}/> Delete</Col>
-
+              <Col sm={8} md={8} lg={8}>
+                <strong>Sale Total: </strong>{item.itemSaleTotal}</Col>
             </Row>
-
 
           </List.Item>
         )}

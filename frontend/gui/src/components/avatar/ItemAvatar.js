@@ -49,29 +49,31 @@ const ItemAvatar =(props)=>{
           <List.Item.Meta
             />
             <Row style={{}}>
-              <Col sm={12} md={12} lg={12}>
+              <Col sm={8} md={8} lg={8}>
               <div><strong>Barcode: </strong></div>
               <h3><span style={{padding:"20px"}}>{item.barcode}</span></h3>
               </Col>
-              <Col sm={12} md={12} lg={12}>
+              <Col sm={8} md={8} lg={8}>
                 <div><strong>Name: </strong></div>
               <h3><span style={{padding:"20px"}}>{item.name}</span></h3>
               </Col>
-            </Row>
-            <Row style={{background:"#F5F5F5"}}>
-              <h3>InStockQty: {item.inStockQty}</h3>
+              <Col sm={8} md={8} lg={8}>
+              <div><strong>InStockQty: </strong></div>
+              <h3>{item.inStockQty}</h3>
+              </Col>
             </Row>
 
-            <Row>
-            <Col sm={8} md={8} lg={8}>
-              <strong>Price: </strong>{item.salePrice}
-            </Col>
-            <Col sm={8} md={8} lg={8}>
-              <strong>Color: </strong>{item.color}
-            </Col>
-            <Col sm={8} md={8} lg={8}>
-            <strong>Age: </strong>{item.ageRequirement}
-            </Col>
+
+            <Row style={{background:"#F5F5F5"}}>
+              <Col sm={8} md={8} lg={8}>
+                <strong>Price: </strong>{item.salePrice}
+              </Col>
+              <Col sm={8} md={8} lg={8}>
+                <strong>Color: </strong>{item.color}
+              </Col>
+              <Col sm={8} md={8} lg={8}>
+              <strong>Age: </strong>{item.ageRequirement}
+              </Col>
             </Row>
 
           </List.Item>

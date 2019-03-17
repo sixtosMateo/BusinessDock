@@ -227,19 +227,30 @@ class Outgoing extends React.Component{
 
       return(
         <div className="outgoingComponent">
-        <h2>Clerk: {user ? user.username: ""}</h2>
-        <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
-                             style={{border:"none",
-                                    color: "#000000",
-                                    backgroundColor:"transparent"}}
-                             disabled/></h3>
-        <h3 >Store ID: <InputNumber value={this.props.employee ? this.props.employee.storeId: ""}
-                             style={{border:"none",
-                                    color: "#000000",
-                                    backgroundColor:"transparent"}}
-                             disabled/></h3>
 
-          <Row>
+
+        <Row>
+          <h2>Clerk: {user ? user.username: ""}</h2>
+          <Col sm={12} md={12} lg={12}>
+          <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
+                               style={{border:"none",
+                                      color: "#000000",
+                                      backgroundColor:"transparent"}}
+                               disabled/></h3>
+          </Col>
+          <Col sm={12} md={12} lg={12} style={{}}>
+            <h3 >Store ID: <InputNumber value={this.props.employee ? this.props.employee.storeId: ""}
+                               style={{border:"none",
+                                      color: "#000000",
+                                      backgroundColor:"transparent"}}
+                               disabled/></h3>
+          </Col>
+        </Row>
+
+
+
+
+          <Row >
             <Col span={12} style={{width:"50%"}}>
               <DebounceInput
               minLength={5}
@@ -302,9 +313,6 @@ class Outgoing extends React.Component{
             />
 
         </div>
-
-
-
       );
   }
 }

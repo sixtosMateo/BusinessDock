@@ -265,6 +265,7 @@ class Incoming extends React.Component{
 
         <div className="incomingComponent" >
               <h2>Clerk: {user ? user.username: ""}</h2>
+
               <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
                                    style={{border:"none",
                                           color: "#000000",
