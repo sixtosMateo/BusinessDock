@@ -32,7 +32,7 @@ const ItemAvatar =(props)=>{
         size="large"
         pagination={{
           onChange: (page) => {
-            console.log(page);
+            // console.log(page);
           },
           pageSize: 8,
         }}
@@ -48,16 +48,31 @@ const ItemAvatar =(props)=>{
           >
           <List.Item.Meta
             />
-            <Row type="flex" justify="start" style={{textAlign:"center"}}>
-              <Col span={2} style={{width:"17%"}}><strong>{item.barcode}</strong></Col>
-              <Col span={2} style={{width:"16%"}}><strong>{item.name}</strong></Col>
-              <Col span={2} style={{width:"16%"}}><strong>{item.inStockQty}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.salePrice}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.color}</strong></Col>
-              <Col span={2} style={{width:"17%"}}><strong>{item.ageRequirement}</strong></Col>
+            <Row style={{}}>
+              <Col sm={12} md={12} lg={12}>
+              <div><strong>Barcode: </strong></div>
+              <h3><span style={{padding:"20px"}}>{item.barcode}</span></h3>
+              </Col>
+              <Col sm={12} md={12} lg={12}>
+                <div><strong>Name: </strong></div>
+              <h3><span style={{padding:"20px"}}>{item.name}</span></h3>
+              </Col>
+            </Row>
+            <Row style={{background:"#F5F5F5"}}>
+              <h3>InStockQty: {item.inStockQty}</h3>
             </Row>
 
-
+            <Row>
+            <Col sm={8} md={8} lg={8}>
+              <strong>Price: </strong>{item.salePrice}
+            </Col>
+            <Col sm={8} md={8} lg={8}>
+              <strong>Color: </strong>{item.color}
+            </Col>
+            <Col sm={8} md={8} lg={8}>
+            <strong>Age: </strong>{item.ageRequirement}
+            </Col>
+            </Row>
 
           </List.Item>
         )}

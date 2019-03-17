@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom';
 const EmployeeOutgoingAvatar =(props)=>{
   const IconText = ({ type, text, transactionId }) => (
     <span onClick={()=>props.getOutgoingItems(transactionId)}>
-
       <Icon type={type}
             style={{ marginRight: 8, marginTop:15, fontSize:"20px",
                         color:"#61B329" }}/>
@@ -23,7 +22,7 @@ const EmployeeOutgoingAvatar =(props)=>{
         size="medium"
         pagination={{
           onChange: (page) => {
-            console.log(page);
+            // console.log(page);
           },
           pageSize: 6,
         }}
@@ -38,6 +37,7 @@ const EmployeeOutgoingAvatar =(props)=>{
             extra={[]}
           >
             <List.Item.Meta/>
+
             <Row type="flex" justify="start" style={{textAlign:"left"}}>
                 <Col sm={12} md={12} lg={12} style={{textAlign:"left"}}><h2>Transaction ID: <strong>{item.transactionId} </strong></h2></Col>
                 <Col sm={12} md={12} lg={12} style={{textAlign:"right"}}><h4>Date/Time: <strong>{item.createdAt} </strong></h4></Col>
@@ -48,7 +48,6 @@ const EmployeeOutgoingAvatar =(props)=>{
                   {item.storeId? item.storeId : item.vendorId}
                   </strong>
                 </h4>
-
             </Row>
             <Row style={{paddingLeft:"10px"}}>
               <Col sm={8} md={8} lg={8}> <h4>Subtotal: <strong>{item.subtotal}</strong></h4></Col>

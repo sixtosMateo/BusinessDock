@@ -99,7 +99,6 @@ class EmployeeProfile extends React.Component{
                 <Col>
                   <strong>Total Sales: </strong> {totalSales?totalSales.toFixed(2):"N/A"}
                 </Col>
-
               </Row>
             </Col>
 
@@ -108,12 +107,10 @@ class EmployeeProfile extends React.Component{
             </Col>
           </Row>
 
-          <h2>Transactions</h2>
-
-
           <Row className="transactions-convas">
 
             <Col lg={this.state.items.length > 0 ? 12: 24} >
+              <h2 style={{background:"#F5F5F5", textAlign:"center", border:"1px solid"}}>Transactions</h2>
               <EmployeeOutgoingAvatar
                 data={this.state.data}
                 getOutgoingItems={this.getOutgoingItems}/>

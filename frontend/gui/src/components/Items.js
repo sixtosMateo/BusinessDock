@@ -80,8 +80,6 @@ class Items extends React.Component{
             onChange={(event) => this.updateQuery(event.target.value)}
             />
 
-            <ItemDashboard/>
-
             <ItemAvatar data={showingItems} openModel={this.openModel} />
 
             {
