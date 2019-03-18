@@ -28,8 +28,6 @@ class Outgoing extends React.Component{
     this.props.refreshItems()
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
-    // this.setItems()
-
   }
 
   // adding to cart
@@ -184,6 +182,7 @@ class Outgoing extends React.Component{
     })
 
   }
+
   postTrasanction = ()=>{
       const outgoing ={
         employeeId: this.props.employee.employeeId,
@@ -227,30 +226,24 @@ class Outgoing extends React.Component{
 
       return(
         <div className="outgoingComponent">
-
-
-        <Row>
-          <h2>Clerk: {user ? user.username: ""}</h2>
-          <Col sm={12} md={12} lg={12}>
-          <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
-                               style={{border:"none",
-                                      color: "#000000",
-                                      backgroundColor:"transparent"}}
-                               disabled/></h3>
-          </Col>
-          <Col sm={12} md={12} lg={12} style={{}}>
-            <h3 >Store ID: <InputNumber value={this.props.employee ? this.props.employee.storeId: ""}
-                               style={{border:"none",
-                                      color: "#000000",
-                                      backgroundColor:"transparent"}}
-                               disabled/></h3>
-          </Col>
-        </Row>
-
-
-
-
-          <Row >
+          <Row>
+            <h2>Clerk: {user ? user.username: ""}</h2>
+            <Col sm={12} md={12} lg={12}>
+            <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
+                                 style={{border:"none",
+                                        color: "#000000",
+                                        backgroundColor:"transparent"}}
+                                 disabled/></h3>
+            </Col>
+            <Col sm={12} md={12} lg={12} style={{}}>
+              <h3 >Store ID: <InputNumber value={this.props.employee ? this.props.employee.storeId: ""}
+                                 style={{border:"none",
+                                        color: "#000000",
+                                        backgroundColor:"transparent"}}
+                                 disabled/></h3>
+            </Col>
+          </Row>
+          <Row>
             <Col span={12} style={{width:"50%"}}>
               <DebounceInput
               minLength={5}
@@ -296,20 +289,15 @@ class Outgoing extends React.Component{
                                 tax={this.state.cartTax}
                                 clearCart={this.clearCart}/>
                   </Col>
-                </Col>
-
-
-
-              :
-              ""
+                </Col>:""
             }
             </Row>
 
             <OutgoingItemAvatar
-            data={this.state.cart}
-            increment={this.increment}
-            decrement={this.decrement}
-            removeItem={this.removeItem}
+              data={this.state.cart}
+              increment={this.increment}
+              decrement={this.decrement}
+              removeItem={this.removeItem}
             />
 
         </div>
