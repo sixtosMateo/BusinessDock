@@ -2,8 +2,10 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../../store/actions/auth';
 import { Form, Input, Button, InputNumber} from 'antd';
 import styled from 'styled-components';
+import serializeForm from 'form-serialize';
 
 const FormItem = Form.Item;
 
@@ -16,9 +18,20 @@ class Model extends React.Component{
     // console.log('changed', value);
   }
 
-  handleConfirmBlur = (e) => {
+  handleConfirmBlur=(e)=> {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  }
+
+  handleSubmit=(e)=>{
+    e.preventDefault()
+    const values = serializeForm(e.target, // e.target is the from itself
+    {
+      hash: true
+    })
+
+    this.props.addItem(values)
+
   }
 
 
@@ -39,7 +52,7 @@ class Model extends React.Component{
                         this.props.closeModel()
                       }}>Cancel</Button>
 
-                      <Form onSubmit={this.handleSubmit}>
+                      <Form onSubmit={this.handleSubmit, this.props.closeModel}>
 
                         <FormItem label="Barcode:" >
 
@@ -65,30 +78,8 @@ class Model extends React.Component{
                           )}
                         </FormItem>
 
-                        <FormItem label="InStockQty:">
-                          <InputNumber name="inStockQty" min={1} max={10000} />
-                          <span className="ant-form-text">qty</span>
-                        </FormItem>
-
-                        <FormItem label="Color:">
-                          <Input name="color"  placeholder="Enter the colors you see!" />
-                        </FormItem>
-
-                        <FormItem label="AgeRequirement:">
-                          <InputNumber name="ageRequirement" min={1} max={10000} />
-                          <span className="ant-form-text">+</span>
-                        </FormItem>
-
                         <FormItem label="PurchasedPrice:">
                           <InputNumber name="purchasedPrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
-                        </FormItem>
-
-                        <FormItem label="SalePrice:">
-                          <InputNumber name="salePrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
-                        </FormItem>
-
-                        <FormItem label="Department:">
-                          <Input name="department"  placeholder="Enter the department!" />
                         </FormItem>
 
                         <FormItem>
@@ -110,13 +101,6 @@ class Model extends React.Component{
     }
 }
 
-const mapStateToProps = ({AuthReducer}) =>{
-  // return object is what you want to map into a property
-  return {
-    token: AuthReducer.token
-  }
-}
-
 const ModelContainer= styled.div`
   position:fixed;
   top:0;
@@ -133,4 +117,21 @@ const ModelContainer= styled.div`
 `
 
 const WrappedItemForm = Form.create()(Model)
-export default withRouter(connect(mapStateToProps)(WrappedItemForm));
+
+const mapDispatchToProps = dispatch =>{
+  return {
+      refreshItems: () => dispatch(actions.reloadLocalItems()),
+      addItem:(item)=>dispatch(actions.addItemLocalStorage(item)),
+      editItem:(id,object) => dispatch(actions.editItemLocalStorage(id, object))
+  }
+}
+
+const mapStateToProps = ({AuthReducer}) =>{
+  // return object is what you want to map into a property
+  return {
+    token: AuthReducer.token
+  }
+}
+
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));
