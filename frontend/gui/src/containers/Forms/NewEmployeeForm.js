@@ -119,16 +119,14 @@ class NewEmployee extends React.Component{
                 }, {
                   validator: this.compareToFirstPassword,
                 }],
-              })
-              (
+              })(
                 <Input name="password2" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" onBlur={this.handleConfirmBlur} />
               )}
             </FormItem>
 
             <FormItem label="is_staff">
             {getFieldDecorator('is_staff', {
-            })
-            (
+            })(
               <Switch name="isStaff" />
             )}
             </FormItem>
@@ -136,8 +134,7 @@ class NewEmployee extends React.Component{
             <FormItem  label="is_active">
               {getFieldDecorator('is_active', {
                 valuePropName: 'checked'
-              })
-              (
+              })(
                 <Switch name="is_active"/>
               )}
             </FormItem>

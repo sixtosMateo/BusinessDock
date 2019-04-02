@@ -33,6 +33,7 @@ class Incoming extends React.Component{
     this.props.refreshVendors()
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
+
   }
 
   //copy
@@ -119,8 +120,6 @@ class Incoming extends React.Component{
     item.quantity = item.quantity + 1;
     const sum = item.quantity * item.purchasedPrice;
     item.itemSaleTotal = sum;
-
-
     this.setState(()=>{
       return { cart:[...tempCart]}
     },

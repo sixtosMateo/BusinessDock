@@ -14,10 +14,6 @@ class Model extends React.Component{
     confirmDirty: false,
   };
 
-  onChange = (value) => {
-    // console.log('changed', value);
-  }
-
   handleConfirmBlur=(e)=> {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
@@ -120,9 +116,9 @@ const WrappedItemForm = Form.create()(Model)
 
 const mapDispatchToProps = dispatch =>{
   return {
-      refreshItems: () => dispatch(actions.reloadLocalItems()),
+
       addItem:(item)=>dispatch(actions.addItemLocalStorage(item)),
-      editItem:(id,object) => dispatch(actions.editItemLocalStorage(id, object))
+
   }
 }
 
@@ -134,4 +130,4 @@ const mapStateToProps = ({AuthReducer}) =>{
 }
 
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedItemForm));
