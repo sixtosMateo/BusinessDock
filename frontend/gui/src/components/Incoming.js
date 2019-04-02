@@ -54,7 +54,6 @@ class Incoming extends React.Component{
     // item not found, we can use this to activate modal
     if(helper.getItem(barcode, this.props.items) == null){
       this.openModel(barcode)
-
       return
     }
 
@@ -81,35 +80,25 @@ class Incoming extends React.Component{
   }
 
   addTotal =()=>{
-    let subTotal = 0;
-    this.state.cart.map(item => (subTotal += item.itemSaleTotal));
-    const tempTax = subTotal * .0975;
-    const tax = parseFloat(tempTax.toFixed(2));
-    const total = subTotal + tax;
+    const cartCost = helper.addTotal(this.state.cart)
 
     this.setState(()=>{
       return {
-        subTotal,
-        tax,
-        total
+        subTotal: cartCost.subTotal,
+        tax: cartCost.tax,
+        total: cartCost.total
       }
     })
 
   }
 
   increment = (barcode)=>{
-    let tempCart =[...this.state.cart]
-    const duplicateItem = tempCart.find(item=> item.barcode === barcode)
-    const index = tempCart.indexOf(duplicateItem)
-    const item = tempCart[index]
+    const tempCart = helper.increment(this.state.cart, barcode)
 
-    item.quantity = item.quantity + 1;
-    const sum = item.quantity * item.purchasedPrice;
-    item.itemSaleTotal = sum;
     this.setState(()=>{
       return { cart:[...tempCart]}
     },
-    ()=>{this.addTotal()})
+    ()=>{this.addTotal(this.state.cart)})
   }
 
   decrement = (barcode)=>{

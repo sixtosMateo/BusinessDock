@@ -66,16 +66,8 @@ class Outgoing extends React.Component{
 
   // incrementing the quantity of products
   increment = (barcode)=>{
-    let tempCart =[...this.state.cart]
-    const duplicateItem = tempCart.find(item=>item.barcode === barcode)
-    const index = tempCart.indexOf(duplicateItem)
-    const item = tempCart[index]
-
-    item.quantity = item.quantity + 1;
-    const sum = item.quantity * item.salePrice;
-    item.itemSaleTotal = sum;
-
-
+    const tempCart = helper.increment(this.state.cart, barcode)
+    
     this.setState(()=>{
       return { cart:[...tempCart]}
     },
@@ -152,17 +144,12 @@ class Outgoing extends React.Component{
   }
 
   addTotal=()=>{
-    let subTotal = 0
-    this.state.cart.map(item=>(subTotal += item.itemSaleTotal));
-    const tempTax = subTotal * .0975;
-    const tax = parseFloat(tempTax.toFixed(2));
-    const total = subTotal + tax;
-
+    const cartCost = helper.addTotal(this.state.cart)
     this.setState(()=>{
       return{
-      cartSubtotal:subTotal,
-      cartTax:tax,
-      cartTotal:total
+      cartSubtotal: cartCost.subTotal,
+      cartTax: cartCost.tax,
+      cartTotal: cartCost.total
     }
     })
 
@@ -196,6 +183,9 @@ class Outgoing extends React.Component{
           })
         })
 
+      })
+      .then(()=>{
+        console.log(this.state.cart)
       })
       .then(()=>{
         window.location.reload();
