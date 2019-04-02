@@ -67,7 +67,7 @@ class Outgoing extends React.Component{
   // incrementing the quantity of products
   increment = (barcode)=>{
     const tempCart = helper.increment(this.state.cart, barcode)
-    
+
     this.setState(()=>{
       return { cart:[...tempCart]}
     },
@@ -120,23 +120,12 @@ class Outgoing extends React.Component{
 // ============ Helper methods ====================
 
   removeItem=(barcode)=>{
-    let tempItems = [...this.props.items];
-    let tempCart = [...this.state.cart];
-    tempCart = tempCart.filter(item => item.barcode !== barcode)
-
-    const index =  tempItems.indexOf(helper.getItem(barcode, this.props.items))
-    // remove item based on the index
-    let removedItem = tempItems[index]
-
-  // this the overall products and setting the values to defaut
-
-    removedItem.quantity = 0
-    removedItem.itemSaleTotal = 0
+    const list = helper.removeItem(this.props.items, this.state.cart, barcode)
 
     this.setState(()=>{
       return {
-        cart:[...tempCart],
-        product:[...tempItems]
+        cart:[...list.cart],
+        product:[...list.items]
       }
     },
     ()=> {this.addTotal()}

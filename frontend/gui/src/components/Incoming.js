@@ -98,15 +98,13 @@ class Incoming extends React.Component{
     this.setState(()=>{
       return { cart:[...tempCart]}
     },
-    ()=>{this.addTotal(this.state.cart)})
+    ()=>{this.addTotal()})
   }
 
   decrement = (barcode)=>{
     let tempCart = [...this.state.cart]
-    const selectedItem = tempCart.find(item=>item.barcode===barcode);
-
+    const selectedItem = tempCart.find(item=>item.barcode===barcode)
     const index = tempCart.indexOf(selectedItem)
-
     const item  = tempCart[index]
 
     item.quantity = item.quantity-1;
@@ -125,22 +123,12 @@ class Incoming extends React.Component{
   }
 
   removeItem=(barcode)=>{
-    let tempItems = [...this.props.items];
-    let tempCart = [...this.state.cart];
-    tempCart = tempCart.filter(item => item.barcode !== barcode)
-
-    const index =  tempItems.indexOf(helper.getItem(barcode, this.props.items))
-    let removedItem = tempItems[index]
-
-  // this the overall products and setting the values to defaut
-
-    removedItem.quantity = 0
-    removedItem.itemSaleTotal = 0
+    const list = helper.removeItem(this.props.items, this.state.cart, barcode)
 
     this.setState(()=>{
       return {
-        cart:[...tempCart],
-        product:[...tempItems]
+        cart:[...list.cart],
+        product:[...list.items]
       }
     },
     ()=> {this.addTotal()}
