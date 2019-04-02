@@ -12,6 +12,7 @@ import IncomingItemAvatar from './avatar/IncomingAvatar';
 import TotalTable from './cart/TotalTable';
 import { Row, Col , Icon, Select, Button, InputNumber} from 'antd';
 import Model from './general/ModelContainer';
+import * as helper from '../helperMethods/TransactionsMethods';
 
 const Option = Select.Option;
 
@@ -36,15 +37,6 @@ class Incoming extends React.Component{
 
   }
 
-  //copy
-  getItem=(barcode)=>{
-    const item = this.props.items.find(item => item.barcode === barcode)
-    if(item){
-      return item
-    }
-    return null
-  }
-
   updateQuery=(query)=>{
       this.setState({
         query: query.trim()
@@ -54,30 +46,24 @@ class Incoming extends React.Component{
         this.openModel(this.state.query)
         this.addToCart(this.state.query)
       }
-
-  }
-
-  isDuplicateCart=(barcode)=>{
-    let duplicate
-    duplicate = this.state.cart.find(item=> item.barcode === barcode)
-    return duplicate
   }
 
   addToCart=(barcode)=>{
     const tempBoughtItems = [...this.props.items]
 
     // item not found, we can use this to activate modal
-    if(this.getItem(barcode) == null){
+    if(helper.getItem(barcode, this.props.items) == null){
       this.openModel(barcode)
+
       return
     }
 
-    if(this.isDuplicateCart(barcode)){
+    if(helper.isDuplicateCart(barcode, this.state.cart)){
       this.increment(barcode)
       return
     }
 
-    const index = tempBoughtItems.indexOf(this.getItem(barcode))
+    const index = tempBoughtItems.indexOf(helper.getItem(barcode, this.props.items))
     const item = tempBoughtItems[index]
 
     item.quantity = 1;
@@ -154,7 +140,7 @@ class Incoming extends React.Component{
     let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.barcode !== barcode)
 
-    const index =  tempItems.indexOf(this.getItem(barcode))
+    const index =  tempItems.indexOf(helper.getItem(barcode, this.props.items))
     let removedItem = tempItems[index]
 
   // this the overall products and setting the values to defaut
@@ -185,7 +171,7 @@ class Incoming extends React.Component{
 
   // openModel
   openModel=(query)=>{
-    const product = this.getItem(query);
+    const product = helper.getItem(query, this.props.items);
 
     if(product == null){
       this.setState(()=>{

@@ -10,6 +10,7 @@ import * as actions from '../store/actions/auth';
 import OutgoingItemAvatar from './avatar/OutgoingAvatar';
 import TotalTable from './cart/TotalTable';
 import 'antd/dist/antd.css';
+import * as helper from '../helperMethods/TransactionsMethods';
 import { Row, Col , Icon, InputNumber, Button } from 'antd';
 
 
@@ -34,17 +35,17 @@ class Outgoing extends React.Component{
   setToCart=(barcode)=>{
     const tempSoldItems = [...this.props.items]
     // prevents if error if item is not found // could set it into var so it dont repeat
-    if(this.getItem(barcode) == null){
+    if(helper.getItem(barcode, this.props.items) == null){
       return;
     }
 
     // if item was scanned increment quantity
-    if(this.isDuplicateCart(barcode)){
+    if(helper.isDuplicateCart(barcode, this.state.cart)){
       this.increment(barcode)
       return
     }
 
-    const index = tempSoldItems.indexOf(this.getItem(barcode))
+    const index = tempSoldItems.indexOf(helper.getItem(barcode, this.props.items))
     const item = tempSoldItems[index]
 
     // setting the initial values
@@ -125,29 +126,13 @@ class Outgoing extends React.Component{
   }
 
 // ============ Helper methods ====================
-  // find items from copy of items
-  getItem =(barcode)=>{
-    const item = this.props.items.find(item=> item.barcode===barcode);
-    if(item){
-      return item
-    }
-
-      return null
-  }
-
-  // defines whether item is already in cart
-  isDuplicateCart=(barcode)=>{
-    let duplicate
-    duplicate = this.state.cart.find(item=> item.barcode === barcode)
-    return duplicate
-  }
 
   removeItem=(barcode)=>{
     let tempItems = [...this.props.items];
     let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.barcode !== barcode)
 
-    const index =  tempItems.indexOf(this.getItem(barcode))
+    const index =  tempItems.indexOf(helper.getItem(barcode, this.props.items))
     // remove item based on the index
     let removedItem = tempItems[index]
 

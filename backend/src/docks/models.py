@@ -74,11 +74,11 @@ class Item(models.Model):
     barcode = models.CharField(unique=True, max_length=30, default=None)
     name = models.CharField(max_length = 30, default=None)
     inStockQty = models.IntegerField(default = 0, blank=True)
-    color = models.CharField(max_length = 30, default=None, blank=True)
-    ageRequirement = models.CharField(max_length = 30, default=None, blank=True)
+    color = models.CharField(max_length = 30, blank=True)
+    ageRequirement = models.CharField(max_length = 30, blank=True)
     purchasedPrice = models.FloatField(default = 0.0, blank=True)
     salePrice = models.FloatField(default = 0.0, blank=True)
-    department = models.CharField(max_length = 30, default=None, blank=True)
+    department = models.CharField(max_length = 30,  blank=True)
     createdAt = models.DateTimeField(auto_now=True)
 
     class Meta:

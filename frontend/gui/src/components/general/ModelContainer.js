@@ -29,10 +29,9 @@ class Model extends React.Component{
     this.props.addItem(values)
 
   }
-
-
   render(){
       const { getFieldDecorator } = this.props.form;
+      
       return(
 
           <ModelContainer>
@@ -48,7 +47,9 @@ class Model extends React.Component{
                         this.props.closeModel()
                       }}>Cancel</Button>
 
-                      <Form onSubmit={this.handleSubmit, this.props.closeModel}>
+                      <Form onSubmit={
+                                      this.handleSubmit
+                                      }>
 
                         <FormItem label="Barcode:" >
 
@@ -112,11 +113,11 @@ const ModelContainer= styled.div`
   }
 `
 
-const WrappedItemForm = Form.create()(Model)
+
 
 const mapDispatchToProps = dispatch =>{
   return {
-
+      refreshItems: () => dispatch(actions.reloadLocalItems()),
       addItem:(item)=>dispatch(actions.addItemLocalStorage(item)),
 
   }
@@ -128,6 +129,6 @@ const mapStateToProps = ({AuthReducer}) =>{
     token: AuthReducer.token
   }
 }
+const WrappedItemForm = Form.create()(Model)
 
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedItemForm));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));
