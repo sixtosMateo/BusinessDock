@@ -57,7 +57,6 @@ class Outgoing extends React.Component{
 
 
     this.setState(()=>{
-      // return { soldItems: tempSoldItems, cart:[...this.state.cart, item]}
       return { cart:[...this.state.cart, item]}
     },
     ()=>{this.addTotal()})
@@ -70,8 +69,7 @@ class Outgoing extends React.Component{
 
     this.setState(()=>{
       return { cart:[...tempCart]}
-    },
-    ()=>{this.addTotal()})
+    }, ()=>{this.addTotal()})
   }
 
   // updating the query everytime it changes
@@ -86,33 +84,17 @@ class Outgoing extends React.Component{
   }
 
   decrement = (barcode) =>{
-    let tempCart = [...this.state.cart]
-    const selectedItem = tempCart.find(item=>item.barcode===barcode)
-    const index = tempCart.indexOf(selectedItem)
-    const item  = tempCart[index]
+    const tempCart = helper.decrement(this.state.cart, barcode)
 
-    item.quantity = item.quantity-1;
-
-    if(item.quantity ===0){
-      this.removeItem(barcode)
+    this.setState(()=>{
+      return {cart:[...tempCart]}},
+      ()=>{this.addTotal()})
     }
-    else{
-      item.itemSaleTotal = item.quantity * item.salePrice;
-
-      this.setState(()=>{
-        return {cart:[...tempCart]}},
-        ()=>{this.addTotal()}
-      )
-    }
-  }
 
   clearCart=()=>{
       this.setState(()=>{
         return {cart:[]}
       },()=>{
-        //callback function
-        // new originalfresh copy of all the items rather than referencing
-        // all the modify object are set to default
         this.addTotal();
       });
   }
@@ -127,13 +109,12 @@ class Outgoing extends React.Component{
         cart:[...list.cart],
         product:[...list.items]
       }
-    },
-    ()=> {this.addTotal()}
-  )
+    },()=> {this.addTotal()})
   }
 
   addTotal=()=>{
     const cartCost = helper.addTotal(this.state.cart)
+    
     this.setState(()=>{
       return{
       cartSubtotal: cartCost.subTotal,

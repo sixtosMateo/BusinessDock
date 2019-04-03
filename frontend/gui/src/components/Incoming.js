@@ -102,24 +102,11 @@ class Incoming extends React.Component{
   }
 
   decrement = (barcode)=>{
-    let tempCart = [...this.state.cart]
-    const selectedItem = tempCart.find(item=>item.barcode===barcode)
-    const index = tempCart.indexOf(selectedItem)
-    const item  = tempCart[index]
-
-    item.quantity = item.quantity-1;
-
-    if(item.quantity ===0){
-      this.removeItem(barcode)
-    }
-    else{
-      item.itemSaleTotal = item.quantity * item.salePrice;
-
-      this.setState(()=>{
-        return {cart:[...tempCart]}},
-        ()=>{this.addTotal()}
-      )
-    }
+    const tempCart = helper.decrement(this.state.cart, barcode)
+    
+    this.setState(()=>{
+      return {cart:[...tempCart]}},
+      ()=>{this.addTotal()})
   }
 
   removeItem=(barcode)=>{
@@ -139,9 +126,6 @@ class Incoming extends React.Component{
       this.setState(()=>{
         return {cart:[]}
       },()=>{
-        //callback function
-        // new originalfresh copy of all the items rather than referencing
-        // all the modify object are set to default
         this.addTotal();
       });
   }

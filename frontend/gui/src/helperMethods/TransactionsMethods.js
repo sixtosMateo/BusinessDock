@@ -62,8 +62,6 @@ export function removeItem(tempItems, tempCart, barcode){
   // remove item based on the index
   let removedItem = items[index]
 
-// this the overall products and setting the values to defaut
-
   removedItem.quantity = 0
   removedItem.itemSaleTotal = 0
 
@@ -71,4 +69,22 @@ export function removeItem(tempItems, tempCart, barcode){
     items:items,
     cart:cart
   }
+}
+
+export function decrement(list, barcode){
+  let tempCart = [...list]
+  const selectedItem = tempCart.find(item=>item.barcode===barcode)
+  const index = tempCart.indexOf(selectedItem)
+  const item  = tempCart[index]
+
+  item.quantity = item.quantity-1
+
+  if(item.quantity ===0){
+    removeItem(barcode)
+  }
+  else{
+    item.itemSaleTotal = item.quantity * item.salePrice
+  }
+  return tempCart
+
 }
