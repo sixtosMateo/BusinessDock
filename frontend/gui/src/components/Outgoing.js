@@ -33,10 +33,9 @@ class Outgoing extends React.Component{
 
   // adding to cart
   setToCart=(barcode)=>{
-    const tempSoldItems = [...this.props.items]
     // prevents if error if item is not found // could set it into var so it dont repeat
     if(helper.getItem(barcode, this.props.items) == null){
-      return;
+      return
     }
 
     // if item was scanned increment quantity
@@ -45,22 +44,11 @@ class Outgoing extends React.Component{
       return
     }
 
-    const index = tempSoldItems.indexOf(helper.getItem(barcode, this.props.items))
-    const item = tempSoldItems[index]
-
-    // setting the initial values
-    item.quantity = 1;
-    item.transactionType = "outgoing"
-    const price = item.salePrice;
-    item.tax = .0975;
-    item.itemSaleTotal = price;
-
+    const item = helper.initialCartItem(this.props.items, barcode, "outgoing")
 
     this.setState(()=>{
       return { cart:[...this.state.cart, item]}
-    },
-    ()=>{this.addTotal()})
-
+    },()=>{this.addTotal()})
   }
 
   // incrementing the quantity of products
@@ -114,7 +102,7 @@ class Outgoing extends React.Component{
 
   addTotal=()=>{
     const cartCost = helper.addTotal(this.state.cart)
-    
+
     this.setState(()=>{
       return{
       cartSubtotal: cartCost.subTotal,

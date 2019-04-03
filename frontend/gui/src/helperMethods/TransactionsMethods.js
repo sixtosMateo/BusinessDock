@@ -88,3 +88,22 @@ export function decrement(list, barcode){
   return tempCart
 
 }
+
+export function initialCartItem(list, barcode, type){
+  const tempSoldItems = [...list]
+  const index = tempSoldItems.indexOf(getItem(barcode, list))
+  const item = tempSoldItems[index]
+  let price = 0
+  
+  item.quantity = 1
+  item.tax = .0975
+  item.transactionType = type
+
+  if(type==="outgoing"){
+    price = item.salePrice
+  }else{
+    price = item.purchasedPrice
+  }
+  item.itemSaleTotal = price
+  return item
+}

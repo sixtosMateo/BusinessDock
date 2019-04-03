@@ -49,8 +49,6 @@ class Incoming extends React.Component{
   }
 
   addToCart=(barcode)=>{
-    const tempBoughtItems = [...this.props.items]
-
     // item not found, we can use this to activate modal
     if(helper.getItem(barcode, this.props.items) == null){
       this.openModel(barcode)
@@ -62,20 +60,11 @@ class Incoming extends React.Component{
       return
     }
 
-    const index = tempBoughtItems.indexOf(helper.getItem(barcode, this.props.items))
-    const item = tempBoughtItems[index]
-
-    item.quantity = 1;
-    item.transactionType = "incoming"
-    const price = item.purchasedPrice;
-    item.tax = .0975;
-    item.itemSaleTotal = price;
+    const item = helper.initialCartItem(this.props.items, barcode, "incoming")
 
     this.setState(()=>{
       return {cart:[...this.state.cart, item]}
-    },
-    ()=>{this.addTotal()
-    })
+    },()=>{this.addTotal()})
 
   }
 
@@ -103,7 +92,7 @@ class Incoming extends React.Component{
 
   decrement = (barcode)=>{
     const tempCart = helper.decrement(this.state.cart, barcode)
-    
+
     this.setState(()=>{
       return {cart:[...tempCart]}},
       ()=>{this.addTotal()})
@@ -138,7 +127,6 @@ class Incoming extends React.Component{
       this.setState(()=>{
         return { modelOpen:true}
       })
-
     }
     else{
       this.setState(()=>{
