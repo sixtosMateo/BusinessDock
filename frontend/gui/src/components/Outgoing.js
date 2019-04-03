@@ -1,6 +1,5 @@
 // when creating a item update state and post to db
 // sale tax has to be dynamically based on location geo-location AND api call
-
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 import { withRouter } from 'react-router-dom';
@@ -14,7 +13,6 @@ import * as helper from '../helperMethods/TransactionsMethods';
 import { Row, Col , Icon, InputNumber, Button } from 'antd';
 
 
-
 class Outgoing extends React.Component{
 
   state={
@@ -26,6 +24,7 @@ class Outgoing extends React.Component{
   }
 
   componentDidMount(){
+    this.props.onTryAutoSignup();
     this.props.refreshItems()
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
@@ -52,7 +51,7 @@ class Outgoing extends React.Component{
   }
 
   // incrementing the quantity of products
-  increment = (barcode)=>{
+  increment=(barcode)=>{
     const tempCart = helper.increment(this.state.cart, barcode)
 
     this.setState(()=>{
@@ -86,8 +85,6 @@ class Outgoing extends React.Component{
         this.addTotal();
       });
   }
-
-// ============ Helper methods ====================
 
   removeItem=(barcode)=>{
     const list = helper.removeItem(this.props.items, this.state.cart, barcode)
@@ -146,7 +143,7 @@ class Outgoing extends React.Component{
         console.log(this.state.cart)
       })
       .then(()=>{
-        window.location.reload();
+        window.location.reload()
       })
       .catch(e=>{
         console.log(e)
@@ -238,7 +235,6 @@ class Outgoing extends React.Component{
   }
 }
 
-
 const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer}) =>{
   // return object is what you want to map into a property
   return {
@@ -247,17 +243,16 @@ const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer}) =>{
     currentUser: AuthReducer.currentUser,
     items: ItemReducer.items,
     isAuthenticated: AuthReducer.token !== null
-
   }
 }
 
 const mapDispatchToProps = dispatch =>{
   return {
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
-
   }
 }
 

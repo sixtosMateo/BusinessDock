@@ -30,6 +30,7 @@ class Incoming extends React.Component{
   }
 
   componentDidMount(){
+    this.props.onTryAutoSignup();
     this.props.refreshItems()
     this.props.refreshVendors()
     this.props.fetchCurrentUser()
@@ -68,7 +69,7 @@ class Incoming extends React.Component{
 
   }
 
-  addTotal =()=>{
+  addTotal=()=>{
     const cartCost = helper.addTotal(this.state.cart)
 
     this.setState(()=>{
@@ -76,12 +77,10 @@ class Incoming extends React.Component{
         subTotal: cartCost.subTotal,
         tax: cartCost.tax,
         total: cartCost.total
-      }
-    })
-
+      }})
   }
 
-  increment = (barcode)=>{
+  increment=(barcode)=>{
     const tempCart = helper.increment(this.state.cart, barcode)
 
     this.setState(()=>{
@@ -90,7 +89,7 @@ class Incoming extends React.Component{
     ()=>{this.addTotal()})
   }
 
-  decrement = (barcode)=>{
+  decrement=(barcode)=>{
     const tempCart = helper.decrement(this.state.cart, barcode)
 
     this.setState(()=>{
@@ -119,7 +118,6 @@ class Incoming extends React.Component{
       });
   }
 
-  // openModel
   openModel=(query)=>{
     const product = helper.getItem(query, this.props.items);
 
@@ -139,6 +137,13 @@ class Incoming extends React.Component{
   closeModel=()=>{
     this.setState({
       modelOpen:false
+    })
+  }
+
+  handleChange=(value)=> {
+    this.setState({
+      vendorId: value,
+      disabled: false,
     })
   }
 
@@ -173,21 +178,14 @@ class Incoming extends React.Component{
       })
     })
     .then(()=>{
-      window.location.reload();
+      console.log(this.state.cart)
+    })
+    .then(()=>{
+      window.location.reload()
     })
     .catch(e=>{
       console.log(e)
     })
-
-
-  }
-
-  handleChange=(value)=> {
-    this.setState({
-      vendorId: value,
-      disabled: false,
-    })
-
   }
 
   render(){
@@ -195,7 +193,6 @@ class Incoming extends React.Component{
       const user = this.props.currentUser
 
       return(
-
         <div className="incomingComponent" >
               <h2>Clerk: {user ? user.username: ""}</h2>
 
@@ -280,10 +277,7 @@ class Incoming extends React.Component{
             <Model closeModel={this.closeModel} />:""
 
           }
-
         </div>
-
-
       );
     }
 }
@@ -302,6 +296,7 @@ const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer, VendorReduc
 
 const mapDispatchToProps = dispatch =>{
   return {
+      onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),

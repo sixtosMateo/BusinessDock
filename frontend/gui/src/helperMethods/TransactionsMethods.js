@@ -16,6 +16,7 @@ export function isDuplicateCart(barcode, list){
 
 }
 
+// adds total bill 
 export function addTotal(list){
   let subTotal = 0;
   list.map(item => (subTotal += item.itemSaleTotal));
@@ -53,6 +54,7 @@ export function increment(list, barcode){
 
 }
 
+// removes item from cart
 export function removeItem(tempItems, tempCart, barcode){
   let items = [...tempItems];
   let cart = [...tempCart];
@@ -71,6 +73,7 @@ export function removeItem(tempItems, tempCart, barcode){
   }
 }
 
+//decrement count of duplicate item
 export function decrement(list, barcode){
   let tempCart = [...list]
   const selectedItem = tempCart.find(item=>item.barcode===barcode)
@@ -89,12 +92,13 @@ export function decrement(list, barcode){
 
 }
 
+//initialize item to the cart
 export function initialCartItem(list, barcode, type){
   const tempSoldItems = [...list]
   const index = tempSoldItems.indexOf(getItem(barcode, list))
   const item = tempSoldItems[index]
   let price = 0
-  
+
   item.quantity = 1
   item.tax = .0975
   item.transactionType = type
