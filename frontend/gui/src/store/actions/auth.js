@@ -189,10 +189,9 @@ export const editItemLocalStorage = (id, item) =>{
   return dispatch =>{
     axios.put(`http://127.0.0.1:8000/api/items/${id}/`, item)
     .then(function (response) {
-      if(response.status === 200){
-        dispatch(editItem(id, response.data))
         helper.editItemLocalStorage('localItems', id, response.data)
-      }
+        dispatch(editItem(id, response.data))
+
     })
   }
 }

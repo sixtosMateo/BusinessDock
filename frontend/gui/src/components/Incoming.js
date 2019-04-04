@@ -13,6 +13,7 @@ import TotalTable from './cart/TotalTable';
 import { Row, Col , Icon, Select, Button, InputNumber} from 'antd';
 import Model from './general/ModelContainer';
 import * as helper from '../helperMethods/TransactionsMethods';
+import * as localStorage from '../helperMethods/UpdateLocalStorage';
 
 const Option = Select.Option;
 
@@ -194,7 +195,7 @@ class Incoming extends React.Component{
           transactionId: res.data.transactionId,
           barcode: cartItem.barcode,
           name: cartItem.name,
-          transactionType:"outgoing",
+          transactionType:"incoming",
           quantity: cartItem.quantity,
           price: cartItem.itemSaleTotal,
           tax: Math.round(1000 *(cartItem.itemSaleTotal * cartItem.tax))/1000,
@@ -211,6 +212,7 @@ class Incoming extends React.Component{
         const editItem = this.props.items.find(item => item.itemId === cartItem.itemId)
         editItem.inStockQty += cartItem.quantity
         this.props.updateItemQty(editItem.itemId, editItem)
+        localStorage.editItemLocalStorage('localItems', editItem.itemId, editItem)
       })
     })
     .then(()=>{
@@ -331,7 +333,6 @@ const mapDispatchToProps = dispatch =>{
   return {
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
-      onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),

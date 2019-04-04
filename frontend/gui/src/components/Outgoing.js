@@ -10,6 +10,7 @@ import OutgoingItemAvatar from './avatar/OutgoingAvatar';
 import TotalTable from './cart/TotalTable';
 import 'antd/dist/antd.css';
 import * as helper from '../helperMethods/TransactionsMethods';
+import * as localStorage from '../helperMethods/UpdateLocalStorage';
 import { Row, Col , Icon, InputNumber, Button } from 'antd';
 
 
@@ -28,6 +29,7 @@ class Outgoing extends React.Component{
     this.props.refreshItems()
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
+
   }
 
   // adding to cart
@@ -175,10 +177,12 @@ class Outgoing extends React.Component{
           const tempQty = editItem.inStockQty
           editItem.inStockQty = tempQty - cartItem.quantity
           this.props.updateItemQty(editItem.itemId, editItem)
+          localStorage.editItemLocalStorage('localItems', editItem.itemId, editItem)
         })
       })
       .then(()=>{
         window.location.reload()
+
       })
       .catch(e=>{
         console.log(e)
@@ -188,7 +192,6 @@ class Outgoing extends React.Component{
 
   render(){
     const user = this.props.currentUser
-
       return(
         <div className="outgoingComponent">
           <Row>
@@ -286,7 +289,6 @@ const mapDispatchToProps = dispatch =>{
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
-      onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
       updateItemQty: (id,item) => dispatch(actions.editItemLocalStorage(id,item)),
   }
