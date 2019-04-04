@@ -59,7 +59,7 @@ export function removeItem(tempItems, tempCart, barcode){
   let items = [...tempItems];
   let cart = [...tempCart];
   cart = tempCart.filter(item => item.barcode !== barcode)
-
+  
   const index =  items.indexOf(getItem(barcode, items))
   // remove item based on the index
   let removedItem = items[index]
