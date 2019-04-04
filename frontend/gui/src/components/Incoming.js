@@ -30,7 +30,7 @@ class Incoming extends React.Component{
   }
 
   componentDidMount(){
-    this.props.onTryAutoSignup();
+    this.props.onTryAutoSignup()
     this.props.refreshItems()
     this.props.refreshVendors()
     this.props.fetchCurrentUser()
@@ -178,7 +178,11 @@ class Incoming extends React.Component{
       })
     })
     .then(()=>{
-      console.log(this.state.cart)
+      this.state.cart.forEach((cartItem)=>{
+        const editItem = this.props.items.find(item => item.itemId === cartItem.itemId)
+        editItem.inStockQty += cartItem.quantity
+        this.props.updateItemQty(editItem.itemId, editItem)
+      })
     })
     .then(()=>{
       window.location.reload()
@@ -302,6 +306,7 @@ const mapDispatchToProps = dispatch =>{
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
+      updateItemQty: (id,item) => dispatch(actions.editItemLocalStorage(id,item)),
   }
 }
 

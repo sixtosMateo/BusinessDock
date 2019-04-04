@@ -70,14 +70,6 @@ class Outgoing extends React.Component{
       }
   }
 
-  decrement = (barcode) =>{
-    const tempCart = helper.decrement(this.state.cart, barcode)
-
-    this.setState(()=>{
-      return {cart:[...tempCart]}},
-      ()=>{this.addTotal()})
-    }
-
   clearCart=()=>{
       this.setState(()=>{
         return {cart:[]}
@@ -85,6 +77,14 @@ class Outgoing extends React.Component{
         this.addTotal();
       });
   }
+
+  decrement = (barcode) =>{
+    const tempCart = helper.decrement(this.props.items, this.state.cart, barcode)
+
+    this.setState(()=>{
+      return {cart:[...tempCart]}},
+      ()=>{this.addTotal()})
+    }
 
   removeItem=(barcode)=>{
     const list = helper.removeItem(this.props.items, this.state.cart, barcode)
@@ -138,9 +138,14 @@ class Outgoing extends React.Component{
           })
         })
 
-      })
+      }) //there can be a bug if inStockQty is less than cartitem, 
       .then(()=>{
-        console.log(this.state.cart)
+        this.state.cart.forEach((cartItem)=>{
+          const editItem = this.props.items.find(item => item.itemId === cartItem.itemId)
+          const tempQty = editItem.inStockQty
+          editItem.inStockQty = tempQty - cartItem.quantity
+          this.props.updateItemQty(editItem.itemId, editItem)
+        })
       })
       .then(()=>{
         window.location.reload()
@@ -253,6 +258,7 @@ const mapDispatchToProps = dispatch =>{
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
+      updateItemQty: (id,item) => dispatch(actions.editItemLocalStorage(id,item)),
   }
 }
 
