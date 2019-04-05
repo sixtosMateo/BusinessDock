@@ -230,6 +230,11 @@ class Incoming extends React.Component{
 
       return(
         <div className="incomingComponent" >
+        {
+          this.props.isAuthenticated?
+          "":
+          this.props.history.push("/login/")
+        }
               <h2>Clerk: {user ? user.username: ""}</h2>
 
               <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}

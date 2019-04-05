@@ -18,21 +18,18 @@ class NormalLoginForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if (!err) {
+      if(!err) {
         this.props.onAuth(values.userName, values.password);
         this.props.getItems();
         this.props.getEmployees();
         this.props.getVendors();
         this.props.getUsers();
-
-        this.props.history.push('/');
       }
-
     });
   }
 
   render() {
-    console.log(this.props.currentUser)
+    // console.log(this.props.currentUser)
     let errorMessage = null;
     if(this.props.error){
       errorMessage=(
@@ -43,8 +40,12 @@ class NormalLoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-
       <div>
+        {
+          this.props.isAuthenticated?
+          this.props.history.push("/"):
+          ""
+        }
         {errorMessage}
         {
 
@@ -90,7 +91,8 @@ const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 const mapStateToProps= ({AuthReducer}) =>{
   return{
     loading: AuthReducer.loading,
-    error: AuthReducer.error
+    error: AuthReducer.error,
+    isAuthenticated: AuthReducer.token !== null
   }
 }
 
