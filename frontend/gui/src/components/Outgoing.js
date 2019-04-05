@@ -224,11 +224,7 @@ class Outgoing extends React.Component{
       return(
 
         <div className="outgoingComponent">
-        {
-          this.props.isAuthenticated?
-          "":
-          this.props.history.push("/login/")
-        }
+        
           <Row>
             <h2>Clerk: {user ? user.username: ""}</h2>
             <Col sm={12} md={12} lg={12}>
