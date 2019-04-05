@@ -202,7 +202,7 @@ class Incoming extends React.Component{
           tax: Math.round(1000 *(cartItem.itemSaleTotal * cartItem.tax))/1000,
           itemSaleTotal: Math.round(1000 * (cartItem.itemSaleTotal+ (cartItem.itemSaleTotal* cartItem.tax)))/1000
         }
-        axios.post('http://127.0.0.1:8000/api/incomingtransactionItem/', object)
+        axios.post(`http://127.0.0.1:8000/api/incomingtransactionItem/${res.data.transactionId}/`, object)
         .catch(e=>{
           console.log(e)
         })

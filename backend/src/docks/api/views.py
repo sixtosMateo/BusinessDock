@@ -37,10 +37,12 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
+# access all outgoing transactions
 class OutgoingTransactionViewSet(viewsets.ModelViewSet):
     queryset = OutgoingTransaction.objects.all()
     serializer_class = OutgoingTransactionSerializer
 
+# access outgoing transactions based on employeeId
 class OutgoingTransactionByEmployeeIdViewSet(viewsets.ModelViewSet):
     serializer_class = OutgoingTransactionSerializer
 
@@ -48,10 +50,12 @@ class OutgoingTransactionByEmployeeIdViewSet(viewsets.ModelViewSet):
         outgoingTransactionbyid = OutgoingTransaction.objects.filter(employeeId=self.kwargs['employeeId'])
         return outgoingTransactionbyid
 
+# access all incoming transactions
 class IncomingTransactionViewSet(viewsets.ModelViewSet):
     queryset = IncomingTransaction.objects.all()
     serializer_class = IncomingTransactionSerializer
 
+# access incoming transactions based on employeeId
 class IncomingTransactionByEmployeeIdViewSet(viewsets.ModelViewSet):
     serializer_class = IncomingTransactionSerializer
 
@@ -63,12 +67,14 @@ class VendorViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
 
+# access all items for each outgoing transaction based on transactionId
 class OutgoingTransactionItemViewSet(viewsets.ModelViewSet):
     serializer_class = OutgoingTransactionItemSerializer
     def get_queryset(self):
         outgoingTransactionIdItems = OutgoingTransactionItem.objects.filter(transactionId=self.kwargs['transactionId'])
         return outgoingTransactionIdItems
 
+# access all items for each incoming transaction based on transactionId
 class IncomingTransactionItemViewSet(viewsets.ModelViewSet):
     serializer_class = IncomingTransactionItemSerializer
     def get_queryset(self):
