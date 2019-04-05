@@ -53,7 +53,7 @@ class Employee(models.Model):
     birthDate = models.DateField(blank=True)
     age = models.IntegerField(default = 0, blank=True)
     employmentType = models.CharField(max_length = 30, default=None)
-    createdAt = models.DateTimeField(default=timezone.now)
+    createdAt = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table="docks_employee"

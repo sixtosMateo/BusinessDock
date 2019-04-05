@@ -119,7 +119,9 @@ class EmployeeProfile extends React.Component{
               {this.state.items.length > 0?
 
                   <Col lg={12} style={{}}>
-                    <h2 style={{background:"#F5F5F5", textAlign:"center", border:"1px solid"}}>Items</h2>
+                    <h2 style={{background:"#F5F5F5",
+                                textAlign:"center",
+                                border:"1px solid"}}>Items</h2>
                     <EmployeeOutgoingItemAvatar data={this.state.items} />
                   </Col>
                   :""

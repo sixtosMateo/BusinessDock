@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import { Form, Input, Button, DatePicker, InputNumber, Switch, Icon } from 'antd';
 import axios from 'axios';
 import serializeForm from 'form-serialize';
+import moment from 'moment';
 
 const FormItem = Form.Item;
+
+
 
 class NewEmployee extends React.Component{
   state = {
@@ -14,7 +17,6 @@ class NewEmployee extends React.Component{
 
   handleSubmit = (e) =>{
     e.preventDefault()
-    console.log(e.target)
     const values = serializeForm(e.target, // e.target is the from itself
     {
       hash: true
@@ -88,17 +90,15 @@ class NewEmployee extends React.Component{
               )}
             </FormItem>
 
-            <FormItem label="Email" >
-              {getFieldDecorator('email', {
+            <Form.Item label="Email">
+            {getFieldDecorator('email', {
                 rules: [{
                   type: 'email', message: 'The input is not valid E-mail!',
-                }, {
-                  required: true, message: 'Please input your E-mail!',
-                }],
-              })(
-                <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email"  />
-              )}
-            </FormItem>
+                  required: true, message: 'Please input your E-mail!'}]
+                })(
+                  <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email"  />
+                )}
+            </Form.Item>
 
             <FormItem label="Password" >
               {getFieldDecorator('password', {
@@ -123,37 +123,12 @@ class NewEmployee extends React.Component{
                 <Input name="password2" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" onBlur={this.handleConfirmBlur} />
               )}
             </FormItem>
-
-            <FormItem label="is_staff">
-            {getFieldDecorator('is_staff', {
-            })(
-              <Switch name="isStaff" />
-            )}
-            </FormItem>
-
-            <FormItem  label="is_active">
-              {getFieldDecorator('is_active', {
-                valuePropName: 'checked'
-              })(
-                <Switch name="is_active"/>
-              )}
-            </FormItem>
-
             <FormItem label="StoreId">
               <InputNumber name="storeId" min={1} max={100000} />
             </FormItem>
 
             <FormItem label="EmploymentType">
               <Input name="employmentType"  placeholder="Part-Time / Full-Time" />
-            </FormItem>
-
-            <FormItem label="Birthdate">
-               <DatePicker name="birthdate"/>
-            </FormItem>
-
-            <FormItem label="Age">
-              <InputNumber min={1} max={110} name="age"/>
-              <span className="ant-form-text"> years</span>
             </FormItem>
 
             <FormItem>
