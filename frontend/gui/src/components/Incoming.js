@@ -28,6 +28,7 @@ class Incoming extends React.Component{
     modelOpen: false,
     confirmDirty: false,
     disabled: true,
+    error:""
   }
 
   componentDidMount(){

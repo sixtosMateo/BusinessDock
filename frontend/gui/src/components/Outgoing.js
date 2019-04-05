@@ -22,6 +22,7 @@ class Outgoing extends React.Component{
     cartSubtotal:0,
     cartTax:0,
     cartTotal: 0,
+    error:""
   }
 
   componentDidMount(){
@@ -35,9 +36,31 @@ class Outgoing extends React.Component{
   // adding to cart
   setToCart=(barcode)=>{
     // prevents if error if item is not found // could set it into var so it dont repeat
-    if(helper.getItem(barcode, this.props.items) == null){
+    const temp = helper.getItem(barcode, this.props.items)
+    if(temp == null){
+      this.setState({
+        error:"item does not exist"
+      })
       return
     }
+    else{
+        this.setState({
+          error:""
+        })
+    }
+
+    // #############this can be function ############
+    if(temp.inStockQty <=0){
+      this.setState({
+        error:"out of stock"
+      })
+      return
+    }else{
+      this.setState({
+        error:""
+      })
+    }
+    //####################################################
 
     // if item was scanned increment quantity
     if(helper.isDuplicateCart(barcode, this.state.cart)){
@@ -190,6 +213,8 @@ class Outgoing extends React.Component{
 
   }
 
+
+
   render(){
     const user = this.props.currentUser
       return(
@@ -222,7 +247,12 @@ class Outgoing extends React.Component{
               onChange={ (event) =>{
                 this.updateQuery(event.target.value)}}
                 />
+                {
+                  this.state.error!=""?
+                  <h3 style={{color:"#ff3232"}}>{this.state.error}</h3>:""
+                }
             </Col>
+
 
             {
               this.state.cart.length > 0 ?
