@@ -54,7 +54,7 @@ class Incoming extends React.Component{
   addToCart=(barcode)=>{
     // item not found, we can use this to activate modal
     if(helper.getItem(barcode, this.props.items) == null){
-      this.openModel(barcode)
+      this.openModel()
       return
     }
 
@@ -149,19 +149,10 @@ class Incoming extends React.Component{
       });
   }
 
-  openModel=(query)=>{
-    const product = helper.getItem(query, this.props.items);
-
-    if(product == null){
+  openModel=()=>{
       this.setState(()=>{
         return { modelOpen:true}
       })
-    }
-    else{
-      this.setState(()=>{
-        return { modelOpen:false}
-      })
-    }
 
   }
 
@@ -178,7 +169,6 @@ class Incoming extends React.Component{
     })
   }
 
-  //post item
   postTrasanction = ()=>{
 
     const incoming ={
@@ -230,7 +220,7 @@ class Incoming extends React.Component{
 
       return(
         <div className="incomingComponent" >
-        
+
               <h2>Clerk: {user ? user.username: ""}</h2>
 
               <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
@@ -311,7 +301,10 @@ class Incoming extends React.Component{
           {
             this.state.modelOpen  ?
 
-            <Model closeModel={this.closeModel} />:""
+            <Model
+              closeModel={this.closeModel}
+              barcode={this.state.query}
+              addToCart={this.addToCart}/>:""
 
           }
         </div>

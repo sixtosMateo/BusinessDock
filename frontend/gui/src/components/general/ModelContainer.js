@@ -31,10 +31,11 @@ class Model extends React.Component{
   }
   render(){
       const { getFieldDecorator } = this.props.form;
-      
+
       return(
 
           <ModelContainer>
+          
                     <div id="modal" style={{width: "75%",
                                             height:"60%",
                                             padding:"20px 20px 20px 20px",
@@ -54,6 +55,7 @@ class Model extends React.Component{
                         <FormItem label="Barcode:" >
 
                           {getFieldDecorator('barcode', {
+                              initialValue: this.props.barcode? this.props.barcode:"",
                               rules: [{
                                 required: true,
                                 message: 'Please scan barcode',
