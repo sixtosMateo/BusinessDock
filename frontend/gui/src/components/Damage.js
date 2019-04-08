@@ -26,6 +26,7 @@ class Damage extends React.Component{
       return(
 
         <div className="DamageItemComponent">
+          <Link to="/outgoing/editTransaction/">new damage</Link>
           <DamageItemAvatar data={this.props.damageItem}/>
         </div>
       )

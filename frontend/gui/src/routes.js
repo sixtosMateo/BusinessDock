@@ -62,6 +62,7 @@ const BaseRouter = () =>(
     <Route exact path='/inventory/newItem/' component={NewItem}/>{" "}
     <Route exact path='/item/edit/:barcode/' component={EditItem}/>{" "}
     <Route exact path='/inventory/damageItem/' component={Damage}/>{" "}
+    <Route exact path='/inventory/newDamageItem/' component={DamageItem}/>{" "}
     <Route exact path='/inventory/countCycle/' component={CountCycle}/>{" "}
 
 

@@ -26,7 +26,7 @@ const DamageItemAvatar =(props)=>{
             key={item.barcode}
 
             // image
-            
+
           >
           <List.Item.Meta
             />
@@ -36,7 +36,7 @@ const DamageItemAvatar =(props)=>{
               <h3><span style={{padding:"20px"}}>{item.barcode}</span></h3>
               </Col>
               <Col sm={8} md={8} lg={8}>
-                <div><strong>Name: </strong></div>
+                <div><strong>ItemId: </strong></div>
               <h3><span style={{padding:"20px"}}>{item.itemId}</span></h3>
               </Col>
               <Col sm={8} md={8} lg={8}>
@@ -48,13 +48,13 @@ const DamageItemAvatar =(props)=>{
 
             <Row style={{background:"#F5F5F5"}}>
               <Col sm={8} md={8} lg={8}>
-                <strong>Price: </strong>{item.employeeId}
+                <strong>EmployeeId: </strong>{item.employeeId}
               </Col>
               <Col sm={8} md={8} lg={8}>
-                <strong>Color: </strong>{item.storeId}
+                <strong>StoreId: </strong>{item.storeId}
               </Col>
               <Col sm={8} md={8} lg={8}>
-              <strong>Age: </strong>{item.description}
+              <strong>Description: </strong>{item.description}
               </Col>
             </Row>
 
