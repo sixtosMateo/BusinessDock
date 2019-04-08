@@ -1,10 +1,10 @@
 // change in database that employeeId is integer not varchar
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Form, Input, Button, InputNumber } from 'antd';
 import { connect } from 'react-redux';
 import axios from 'axios';
-// import * as actions from '../../store/actions/auth';
+import * as actions from '../../store/actions/auth';
 import serializeForm from 'form-serialize';
 
 const FormItem = Form.Item;
@@ -15,12 +15,8 @@ class DamageItem extends React.Component{
   }
 
   createDamageItem(damageItem){
-    axios.post('http://127.0.0.1:8000/api/damageItem/', damageItem)
-    .then(function (response) {
-      if(response.status === 201){
-        window.location.reload()
-      }
-    })
+    this.props.refreshDamageItems(damageItem)
+    this.props.history.push("/inventory/damageItem/")
   }
 
   handleSubmit = (e) =>{
@@ -48,6 +44,8 @@ class DamageItem extends React.Component{
 
       return(
         <div className="damageItemComponent">
+          <Link to="/inventory/damageItem/">Go Back</Link>
+
           <Form onSubmit={this.handleSubmit}>
             <FormItem label="Barcode" >
 
@@ -113,6 +111,7 @@ class DamageItem extends React.Component{
 
             <FormItem>
               <Button type="primary" htmlType="submit">Submit</Button>
+              <Button type="danger"><Link to="/inventory/damageItem/">Cancel</Link></Button>
             </FormItem>
           </Form>
         </div>
@@ -128,5 +127,10 @@ const mapStateToProps = ({AuthReducer})=>{
     token: AuthReducer.token
   }
 }
+const mapDispatchToProps = dispatch =>{
+  return {
+      refreshDamageItems: (damageItem) => dispatch(actions.addDamageItemLocalStorage(damageItem)),
+  }
+}
 
-export default withRouter(connect(mapStateToProps)(WrappedDamageItemForm));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedDamageItemForm));

@@ -132,19 +132,26 @@ export const deleteVendor = (id)=>{
   }
 }
 
+export const addDamageItem =(damageItem)=>{
+  return {
+    type: actionTypes.ADD_DAMAGE_ITEM,
+    damageItem: damageItem
+  }
+}
+
 //########################################################################
 // DB (API) and CACHE DELETION (localStorage)
-// export const addDamageItemLocalStorage = (damageItem) =>{
-//   return dispatch => {
-//     axios.post('http://127.0.0.1:8000/api/damageItem/', damageItem)
-//     .then(function (response) {
-//       if(response.status === 201){
-//         dispatch(initializeDamageItem(response.data))
-//         // helper.addDamageItemLocalStorage('localdDamageItem',response.data)
-//       }
-//     })
-//   }
-// }
+export const addDamageItemLocalStorage = (damageItem) =>{
+  return dispatch => {
+    axios.post('http://127.0.0.1:8000/api/damageItem/', damageItem)
+    .then(function (response) {
+      if(response.status === 201){
+        dispatch(addDamageItem(response.data))
+        helper.addDamageItemLocalStorage('localDamageItems',response.data)
+      }
+    })
+  }
+}
 
 
 export const addVendorLocalStorage = (vendor) =>{

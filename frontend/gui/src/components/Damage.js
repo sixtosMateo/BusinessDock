@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { Input } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
@@ -26,7 +26,7 @@ class Damage extends React.Component{
       return(
 
         <div className="DamageItemComponent">
-          <Link to="/outgoing/editTransaction/">new damage</Link>
+          <Link to="/inventory/newDamageItem/">new damage</Link>
           <DamageItemAvatar data={this.props.damageItem}/>
         </div>
       )

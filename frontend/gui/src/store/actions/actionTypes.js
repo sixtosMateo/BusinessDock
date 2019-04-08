@@ -24,3 +24,4 @@ export const DELETE_ITEM = "DELETE_ITEM";
 
 
 export const DAMAGE_ITEM = "DAMAGE_ITEM";
+export const ADD_DAMAGE_ITEM = "ADD_DAMAGE_ITEM"
