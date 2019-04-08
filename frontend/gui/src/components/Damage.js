@@ -8,9 +8,7 @@ import { connect } from 'react-redux';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by'
 import * as actions from '../store/actions/auth';
-import ItemAvatar from './avatar/ItemAvatar';
-
-
+import DamageItemAvatar from './avatar/DamageItemAvatar';
 
 
 class Damage extends React.Component{
@@ -28,7 +26,7 @@ class Damage extends React.Component{
       return(
 
         <div className="DamageItemComponent">
-          {console.log(this.props.damageItem)}
+          <DamageItemAvatar data={this.props.damageItem}/>
         </div>
       )
   }
