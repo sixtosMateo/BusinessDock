@@ -8,6 +8,7 @@ import * as EmployeesApi from '../../api/getEmployeesRequest';
 import * as VendorsApi from '../../api/getVendorsRequest';
 import * as UsersApi from '../../api/getUserRequest';
 import * as CurrentUserApi from '../../api/getCurrentUserRequest';
+import * as DamageItemApi from '../../api/getDamageItemRequest';
 import * as helper from '../../helperMethods/UpdateLocalStorage';
 
 
@@ -77,6 +78,13 @@ export const initializeEmployeeCombo = combinedEmployee =>{
   }
 }
 
+export const initializeDamageItem = damageItem =>{
+  return {
+    type: actionTypes.DAMAGE_ITEM,
+    damageItem: damageItem
+  }
+}
+
 //########################################################################
 // Reducers method: with CRUD operations for Items and Vendor
 
@@ -126,6 +134,18 @@ export const deleteVendor = (id)=>{
 
 //########################################################################
 // DB (API) and CACHE DELETION (localStorage)
+// export const addDamageItemLocalStorage = (damageItem) =>{
+//   return dispatch => {
+//     axios.post('http://127.0.0.1:8000/api/damageItem/', damageItem)
+//     .then(function (response) {
+//       if(response.status === 201){
+//         dispatch(initializeDamageItem(response.data))
+//         // helper.addDamageItemLocalStorage('localdDamageItem',response.data)
+//       }
+//     })
+//   }
+// }
+
 
 export const addVendorLocalStorage = (vendor) =>{
   return dispatch => {
@@ -240,6 +260,16 @@ export const fetchVendors = () =>{
 )
 }
 
+export const fetchDamageItem = () =>{
+  return dispatch => (
+  DamageItemApi
+      .fetchDamageItems()
+      .then((res)=>
+      {
+        localStorage.setItem('localDamageItems', JSON.stringify(res))
+      })
+)}
+
 export const fetchCurrentUser = () =>{
   return dispatch => (
   CurrentUserApi
@@ -248,8 +278,9 @@ export const fetchCurrentUser = () =>{
       {
         dispatch(initialCurrentUser(res))
       })
-
 )}
+
+
 
 //########################################################################
 // data from local storage and dispatching action types with new state
@@ -281,6 +312,13 @@ export const reloadLocalUsers=()=>{
   return dispatch=>{
       const users = JSON.parse(localStorage.getItem('localUsers'));
       dispatch(initializeUsers(users))
+  }
+}
+
+export const reloadDamageItems=()=>{
+  return dispatch=>{
+      const damageItem = JSON.parse(localStorage.getItem('localDamageItems'));
+      dispatch(initializeDamageItem(damageItem))
   }
 }
 

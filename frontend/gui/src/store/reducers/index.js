@@ -5,6 +5,7 @@ import ItemReducer from './ItemsReducer';
 import EmployeeReducer from './EmployeesReducer'
 import UserReducer from './UsersReducer';
 import CombinedEmployee from './CombineEmployee';
+import DamageItem from './DamageItem';
 
 export default combineReducers({
   VendorReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   EmployeeReducer,
   UserReducer,
   CombinedEmployee,
+  DamageItem
 })
