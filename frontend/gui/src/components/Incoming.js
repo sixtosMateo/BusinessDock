@@ -65,7 +65,10 @@ class Incoming extends React.Component{
     const item = helper.initialCartItem(this.props.items, barcode, "incoming")
 
     this.setState(()=>{
-      return {cart:[...this.state.cart, item]}
+      return {
+        modelOpen: false,
+        cart:[...this.state.cart, item]
+      }
     },()=>{this.addTotal()})
 
   }
@@ -156,8 +159,8 @@ class Incoming extends React.Component{
   }
 
   closeModel=()=>{
-    this.setState({
-      modelOpen:false
+    this.setState(()=>{
+      return { modelOpen:false}
     })
   }
 

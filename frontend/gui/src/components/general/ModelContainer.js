@@ -26,10 +26,11 @@ class Model extends React.Component{
     {
       hash: true
     })
-
-    this.props.addItem(values)
+    // has to do with a promise situation
     this.props.closeModel()
-    this.props.addToCart(this.props.barcode)
+    this.props.addItem(values)
+    // this line prevents from closeModel() function to work
+    // this.props.addToCart(this.props.barcode)
   }
   render(){
       const { getFieldDecorator } = this.props.form;
