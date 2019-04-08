@@ -11,7 +11,7 @@ const initialDamageItem =(state, action)=>{
   });
 }
 
-const DamageItem = (state=initialState, action) =>{
+const DamageItemReducer = (state=initialState, action) =>{
   switch (action.type) {
       case actionTypes.DAMAGE_ITEM: return initialDamageItem(state, action);
       default:
@@ -19,4 +19,4 @@ const DamageItem = (state=initialState, action) =>{
   }
 }
 
-export default DamageItem;
+export default DamageItemReducer;
