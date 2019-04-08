@@ -46,7 +46,6 @@ class Incoming extends React.Component{
       })
 
       if(this.state.query){
-        this.openModel(this.state.query)
         this.addToCart(this.state.query)
       }
   }

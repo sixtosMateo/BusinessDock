@@ -7,6 +7,7 @@ import { Form, Input, Button, InputNumber} from 'antd';
 import styled from 'styled-components';
 import serializeForm from 'form-serialize';
 
+
 const FormItem = Form.Item;
 
 class Model extends React.Component{
@@ -27,7 +28,8 @@ class Model extends React.Component{
     })
 
     this.props.addItem(values)
-
+    this.props.closeModel()
+    this.props.addToCart(this.props.barcode)
   }
   render(){
       const { getFieldDecorator } = this.props.form;
@@ -35,7 +37,7 @@ class Model extends React.Component{
       return(
 
           <ModelContainer>
-          
+
                     <div id="modal" style={{width: "75%",
                                             height:"60%",
                                             padding:"20px 20px 20px 20px",

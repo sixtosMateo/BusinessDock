@@ -5,7 +5,6 @@ export function getItem(barcode, list){
     return item
   }
   return null
-
 }
 
 // determined if item with given barcode exist on shopping cart
@@ -13,7 +12,6 @@ export function isDuplicateCart(barcode, list){
   let duplicate
   duplicate = list.find(item=> item.barcode === barcode)
   return duplicate
-
 }
 
 // adds total bill
@@ -59,7 +57,7 @@ export function removeItem(tempItems, tempCart, barcode){
   let items = [...tempItems];
   let cart = [...tempCart];
   cart = tempCart.filter(item => item.barcode !== barcode)
-  
+
   const index =  items.indexOf(getItem(barcode, items))
   // remove item based on the index
   let removedItem = items[index]
