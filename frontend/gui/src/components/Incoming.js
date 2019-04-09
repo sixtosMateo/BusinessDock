@@ -66,7 +66,6 @@ class Incoming extends React.Component{
 
     this.setState(()=>{
       return {
-        modelOpen: false,
         cart:[...this.state.cart, item]
       }
     },()=>{this.addTotal()})
@@ -307,7 +306,6 @@ class Incoming extends React.Component{
               closeModel={this.closeModel}
               barcode={this.state.query}
               addToCart={this.addToCart}/>:""
-
           }
         </div>
       );

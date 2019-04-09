@@ -11,7 +11,9 @@ import * as CurrentUserApi from '../../api/getCurrentUserRequest';
 import * as DamageItemApi from '../../api/getDamageItemRequest';
 import * as helper from '../../helperMethods/UpdateLocalStorage';
 
-
+import * as PostItemsApi from '../../api/postItems';
+import * as PostVendorsApi from '../../api/postVendors';
+import * as PostDamageItemsApi from '../../api/postDamageItems';
 
 // Reducers methods: Authentication methods
 
@@ -143,7 +145,8 @@ export const addDamageItem =(damageItem)=>{
 // DB (API) and CACHE DELETION (localStorage)
 export const addDamageItemLocalStorage = (damageItem) =>{
   return dispatch => {
-    axios.post('http://127.0.0.1:8000/api/damageItem/', damageItem)
+    PostDamageItemsApi
+    .postDamageItem(damageItem)
     .then(function (response) {
       if(response.status === 201){
         dispatch(addDamageItem(response.data))
@@ -153,10 +156,10 @@ export const addDamageItemLocalStorage = (damageItem) =>{
   }
 }
 
-
 export const addVendorLocalStorage = (vendor) =>{
   return dispatch => {
-    axios.post('http://127.0.0.1:8000/api/vendors/', vendor)
+    PostVendorsApi
+    .postVendor()
     .then(function (response) {
       if(response.status === 201){
         dispatch(addVendor(response.data))
@@ -191,13 +194,16 @@ export const deleteVendorLocalStorage = (id) =>{
 
 export const addItemLocalStorage = (item) =>{
   return dispatch=>{
-    axios.post('http://127.0.0.1:8000/api/items/', item)
+    PostItemsApi
+    .postItem(item)
     .then(function (response) {
-
       if(response.status === 201){
         dispatch(addItem(response.data))
         helper.addLocalStorage('localItems',response.data)
       }
+    })
+    .catch(err => {
+      console.log(err)
     })
   }
 }
@@ -218,7 +224,6 @@ export const editItemLocalStorage = (id, item) =>{
     .then(function (response) {
         helper.editItemLocalStorage('localItems', id, response.data)
         dispatch(editItem(id, response.data))
-
     })
   }
 }

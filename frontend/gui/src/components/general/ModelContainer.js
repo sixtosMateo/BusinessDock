@@ -7,13 +7,13 @@ import { Form, Input, Button, InputNumber} from 'antd';
 import styled from 'styled-components';
 import serializeForm from 'form-serialize';
 
-
 const FormItem = Form.Item;
 
 class Model extends React.Component{
   state = {
     confirmDirty: false,
   };
+
 
   handleConfirmBlur=(e)=> {
     const value = e.target.value;
@@ -23,87 +23,88 @@ class Model extends React.Component{
   handleSubmit=(e)=>{
     e.preventDefault()
     const values = serializeForm(e.target, // e.target is the from itself
-    {
-      hash: true
-    })
-    // has to do with a promise situation
-    this.props.closeModel()
+      {
+        hash: true
+      })
+
     this.props.addItem(values)
-    // this line prevents from closeModel() function to work
+    this.props.closeModel()
+    // need to figure this out 
     // this.props.addToCart(this.props.barcode)
   }
-  render(){
+
+
+    render(){
       const { getFieldDecorator } = this.props.form;
 
       return(
+        <ModelContainer>
+          <div id="modal" style={{width: "75%",
+            height:"60%",
+            padding:"20px 20px 20px 20px",
+            overflow:"auto"}}>
+            <h1>New Item Form</h1>
 
-          <ModelContainer>
+            <Button type="danger"
+            style={{background:"#CC3333", color:"#FFFFFF"}}
+            onClick={()=>{
+              this.props.closeModel()
+            }}>Cancel</Button>
 
-                    <div id="modal" style={{width: "75%",
-                                            height:"60%",
-                                            padding:"20px 20px 20px 20px",
-                                            overflow:"auto"}}>
-                      <h1>New Item Form</h1>
+            <Form onSubmit={this.handleSubmit}>
 
-                      <Button type="danger"
-                      style={{background:"#CC3333", color:"#FFFFFF"}}
-                      onClick={()=>{
-                        this.props.closeModel()
-                      }}>Cancel</Button>
+              <FormItem label="Barcode:" >
 
-                      <Form onSubmit={
-                                      this.handleSubmit
-                                      }>
+              {getFieldDecorator('barcode', {
+                initialValue: this.props.barcode? this.props.barcode:"",
+                rules: [{
+                  required: true,
+                  message: 'Please scan barcode',
+                }],
+              })(
+                <Input name="barcode" placeholder="Please scan barcode" />
+              )}
+              </FormItem>
 
-                        <FormItem label="Barcode:" >
+              <FormItem label="Name:" >
 
-                          {getFieldDecorator('barcode', {
-                              initialValue: this.props.barcode? this.props.barcode:"",
-                              rules: [{
-                                required: true,
-                                message: 'Please scan barcode',
-                              }],
-                            })(
-                            <Input name="barcode" placeholder="Please scan barcode" />
-                          )}
-                        </FormItem>
+              {getFieldDecorator('name', {
+                rules: [{
+                  required: true,
+                  message: 'Please input name of product',
+                }],
+              })(
+                <Input name="name" placeholder="Enter Name" />
+              )}
+              </FormItem>
 
-                        <FormItem label="Name:" >
+              <FormItem label="PurchasedPrice:">
+              <InputNumber name="purchasedPrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
+              </FormItem>
 
-                          {getFieldDecorator('name', {
-                              rules: [{
-                                required: true,
-                                message: 'Please input name of product',
-                              }],
-                            })(
-                            <Input name="name" placeholder="Enter Name" />
-                          )}
-                        </FormItem>
+              <FormItem>
 
-                        <FormItem label="PurchasedPrice:">
-                          <InputNumber name="purchasedPrice" min={0} max={10000} step={0.1} onChange={this.onChange} />
-                        </FormItem>
+              <Button type="primary" htmlType="submit">Submit</Button>
+              <span>    </span>
 
-                        <FormItem>
-                          <Button type="primary" htmlType="submit">Submit</Button>
-                          <span>    </span>
-                          <Button type="danger"
-                          style={{background:"#CC3333", color:"#FFFFFF"}}
-                          onClick={()=>{
-                            this.props.closeModel()
-                          }}>Cancel</Button>
-                        </FormItem>
+              <Button type="danger"
+              style={{background:"#CC3333", color:"#FFFFFF"}}
+              onClick={()=>{
+                this.props.closeModel()
+              }}>Cancel</Button>
 
-                      </Form>
+              </FormItem>
 
-              </div>
-          </ModelContainer>
+            </Form>
+
+          </div>
+        </ModelContainer>
 
       );
     }
-}
+  }
 
-const ModelContainer= styled.div`
+  const ModelContainer= styled.div`
   position:fixed;
   top:0;
   left:0;
@@ -116,24 +117,24 @@ const ModelContainer= styled.div`
   #modal{
     background: #f3f3f3
   }
-`
+  `
 
 
 
-const mapDispatchToProps = dispatch =>{
-  return {
+  const mapDispatchToProps = dispatch =>{
+    return {
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       addItem:(item)=>dispatch(actions.addItemLocalStorage(item)),
 
+    }
   }
-}
 
-const mapStateToProps = ({AuthReducer}) =>{
-  // return object is what you want to map into a property
-  return {
-    token: AuthReducer.token
+  const mapStateToProps = ({AuthReducer}) =>{
+    // return object is what you want to map into a property
+    return {
+      token: AuthReducer.token
+    }
   }
-}
-const WrappedItemForm = Form.create()(Model)
+  const WrappedItemForm = Form.create()(Model)
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));
+  export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));
