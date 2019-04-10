@@ -12,15 +12,17 @@ import * as actions from '../store/actions/auth';
 import EmployeeOutgoingAvatar from './avatar/EmployeeOutgoingAvatar';
 import EmployeeOutgoingItemAvatar from './avatar/EmployeeOutgoingItemAvatar';
 import TransactionHeaders from './avatar/TransactionHeaders';
+import {DebounceInput} from 'react-debounce-input';
 import { List, Icon, Row, Col } from 'antd';
 
 import axios from 'axios';
 
 class EmployeeProfile2 extends React.Component{
   state ={
-    query:  '',
+    query:'',
     data:[],
-    items:[]
+    items:[],
+    error:""
   }
 
   componentDidMount(){
@@ -28,40 +30,87 @@ class EmployeeProfile2 extends React.Component{
     this.props.refreshUsers();
     this.props.refreshEmployeeCombo();
     this.outgoingTransaction();
-}
+  }
 
-outgoingTransaction(){
-  axios.get(`http://127.0.0.1:8000/api/incomingTransactionById/${parseInt(this.props.match.params.employeeId)}/`)
-    .then((res) =>
-      this.setState({
-        data: res.data
+  outgoingTransaction(){
+    axios.get(`http://127.0.0.1:8000/api/incomingTransactionById/${parseInt(this.props.match.params.employeeId)}/`)
+      .then((res) =>
+        this.setState({
+          data: res.data
+        })
+      )
+      .catch(e=>{
+        console.log(e)
       })
-    )
-    .catch(e=>{
-      console.log(e)
-    })
-}
+  }
 
-getOutgoingItems=(id)=>{
-  axios.get(`http://127.0.0.1:8000/api/incomingtransactionItem/${id}/`)
-    .then((res) =>
-      this.setState({
-        items: res.data
+  getOutgoingItems=(id)=>{
+    axios.get(`http://127.0.0.1:8000/api/incomingtransactionItem/${id}/`)
+      .then((res) =>
+        this.setState({
+          items: res.data
+        })
+      )
+      .catch(e=>{
+        console.log(e)
       })
-    )
-    .catch(e=>{
-      console.log(e)
-    })
 
-}
+  }
+
+  updateQuery=(query)=>{
+      this.setState({
+        query: query.trim()
+      })
+
+      if(this.state.query){
+        this.filterTransaction(this.state.query)
+      }else{
+        this.setState({
+          error:"",
+          items:[]
+        })
+      }
+  }
+
+  filterTransaction=(query)=>{
+    const q = parseInt(query)
+    const transaction = this.state.data.find(transaction => transaction.transactionId === q)
+    if(transaction){
+      this.setState({
+        error:"",
+        items:[]
+      })
+    }else{
+      this.setState({
+        error:"transaction does not exist",
+        items:[]
+      })
+    }
+  }
+
 
   render(){
       const {employee} = this.props
       let totalSales
+
       if(this.state.data.length > 0){
         totalSales = this.state.data.reduce((total,trans)=>{
             return total + trans.total},0)
       }
+
+      const {data} = this.state
+      let showingTransactions
+
+      if(this.state.query){
+        const match = new RegExp(escapeRegExp(this.state.query), 'i')
+        showingTransactions = data.filter((transaction) =>
+        match.test(transaction.transactionId))
+
+      }
+      else{
+        showingTransactions = data
+      }
+      showingTransactions.sort(sortBy('transactionId'))
 
       return(
         <div className="employee-profile">
@@ -108,8 +157,23 @@ getOutgoingItems=(id)=>{
 
             <Col lg={this.state.items.length > 0 ? 12: 24}>
               <h2 style={{background:"#F5F5F5", textAlign:"center", border:"1px solid"}}>Transactions</h2>
+
+              <DebounceInput
+                minLength={5}
+                debounceTimeout={300}
+                onClick={(event => event.target.select())}
+                placeholder="Scan or Enter: Transaction ID"
+                style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
+                onChange={ (event) =>{
+                  this.updateQuery(event.target.value)}}
+              />
+              {
+                this.state.error!=""?
+                <h3 style={{color:"#ff3232"}}>{this.state.error}</h3>:""
+              }
+
               <EmployeeOutgoingAvatar
-                data={this.state.data}
+                data={showingTransactions}
                 getOutgoingItems={this.getOutgoingItems}/>
             </Col>
 
