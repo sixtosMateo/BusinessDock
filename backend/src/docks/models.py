@@ -99,7 +99,7 @@ class DamageItem(models.Model):
     itemId = models.AutoField(primary_key=True)
     quantity = models.IntegerField(default = 0, blank=True)
     createdAt = models.DateTimeField(auto_now=True)
-    employeeId = models.CharField(max_length = 30, default=None)
+    employeeId = models.IntegerField(default = 0, blank=True)
     storeId = models.IntegerField(default = 0, blank=True)
     locationId = models.IntegerField(default = 0, blank=True)
     barcode = models.CharField(unique=True, max_length = 30, default=None)
