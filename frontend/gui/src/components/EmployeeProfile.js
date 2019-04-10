@@ -1,6 +1,7 @@
 // new item or edit employee change state
 // when logging in the employees dont display employees
 // maybe for the combinedEmployee state array
+// code can be reduce and set to another file
 
 import React from 'react';
 import { Input } from 'antd';
@@ -13,15 +14,16 @@ import EmployeeOutgoingAvatar from './avatar/EmployeeOutgoingAvatar';
 import EmployeeOutgoingItemAvatar from './avatar/EmployeeOutgoingItemAvatar';
 import TransactionHeaders from './avatar/TransactionHeaders';
 import { List, Icon, Row, Col } from 'antd';
-
+import {DebounceInput} from 'react-debounce-input';
 import axios from 'axios';
 
 class EmployeeProfile extends React.Component{
 
   state ={
-    query:  '',
+    query:null,
     data:[],
-    items:[]
+    items:[],
+    error:""
   }
 
   componentDidMount(){
@@ -59,14 +61,60 @@ class EmployeeProfile extends React.Component{
       })
   }
 
+  updateQuery=(query)=>{
+      this.setState({
+        query: query.trim()
+      })
+
+      if(this.state.query){
+        this.filterTransaction(this.state.query)
+      }else{
+        this.setState({
+          error:"",
+          items:[]
+        })
+      }
+  }
+
+  filterTransaction=(query)=>{
+    const q = parseInt(query)
+    const transaction = this.state.data.find(transaction => transaction.transactionId === q)
+    if(transaction){
+      this.setState({
+        error:"",
+        items:[]
+      })
+    }else{
+      this.setState({
+        error:"transaction does not exist",
+        items:[]
+      })
+    }
+  }
 
   render(){
       const {employee} = this.props
+
       let totalSales
       if(this.state.data.length > 0){
         totalSales = this.state.data.reduce((total,trans)=>{
             return total + trans.total},0)
       }
+
+      const {data} = this.state
+      let showingTransactions
+
+      if(this.state.query){
+        const match = new RegExp(escapeRegExp(this.state.query), 'i')
+        showingTransactions = data.filter((transaction) =>
+        match.test(transaction.transactionId))
+
+      }
+      else{
+        showingTransactions = data
+      }
+      showingTransactions.sort(sortBy('transactionId'))
+
       return(
 
         <div className="employee-profile">
@@ -111,8 +159,21 @@ class EmployeeProfile extends React.Component{
 
             <Col lg={this.state.items.length > 0 ? 12: 24} >
               <h2 style={{background:"#F5F5F5", textAlign:"center", border:"1px solid"}}>Transactions</h2>
+              <DebounceInput
+                minLength={3}
+                debounceTimeout={300}
+                onClick={(event => event.target.select())}
+                placeholder="Scan or Enter: Transaction ID"
+                style={{ width: "100%", border: "1px solid #ccc", font:"sans-serif"}}
+                onChange={ (event) =>{
+                  this.updateQuery(event.target.value)}}
+              />
+              {
+                this.state.error!=""?
+                <h3 style={{color:"#ff3232"}}>{this.state.error}</h3>:""
+              }
               <EmployeeOutgoingAvatar
-                data={this.state.data}
+                data={showingTransactions}
                 getOutgoingItems={this.getOutgoingItems}/>
             </Col>
 
@@ -126,8 +187,6 @@ class EmployeeProfile extends React.Component{
                   </Col>
                   :""
             }
-
-
           </Row>
         </div>
       )
