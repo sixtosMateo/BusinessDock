@@ -26,13 +26,10 @@ class Outgoing extends React.Component{
   }
 
   componentDidMount(){
-
       this.props.onTryAutoSignup();
       this.props.refreshItems()
       this.props.fetchCurrentUser()
       this.props.refreshEmployees()
-
-
   }
 
   // adding to cart
@@ -217,14 +214,12 @@ class Outgoing extends React.Component{
 
   }
 
-
-
   render(){
     const user = this.props.currentUser
       return(
 
         <div className="outgoingComponent">
-        
+
           <Row>
             <h2>Clerk: {user ? user.username: ""}</h2>
             <Col sm={12} md={12} lg={12}>
