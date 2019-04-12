@@ -57,7 +57,7 @@ class NewItem extends React.Component{
       return(
         <div className="newItemComponent">
 
-          <Form onSubmit={this.handleSubmit} >
+          <Form onSubmit={this.handleSubmit}>
             <FormItem label="Barcode" >
 
               {getFieldDecorator('barcode', {

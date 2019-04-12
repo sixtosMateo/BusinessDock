@@ -1,6 +1,5 @@
 // new item or edit item change state
 // have an db parameter determines whether its on the floor or not // backend work too
-
 import React from 'react';
 import { Input } from 'antd';
 import { withRouter } from 'react-router-dom';
