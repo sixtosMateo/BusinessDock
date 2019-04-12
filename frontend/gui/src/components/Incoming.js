@@ -37,7 +37,6 @@ class Incoming extends React.Component{
     this.props.refreshVendors()
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
-
   }
 
   updateQuery=(query)=>{
