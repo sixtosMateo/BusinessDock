@@ -201,6 +201,7 @@ export const addItemLocalStorage = (item) =>{
         dispatch(addItem(response.data))
         helper.addLocalStorage('localItems',response.data)
       }
+      return response.data
     })
     .catch(err => {
       console.log(err)

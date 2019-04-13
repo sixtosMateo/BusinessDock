@@ -6,7 +6,7 @@ import * as actions from '../../store/actions/auth';
 import { Form, Input, Button, InputNumber} from 'antd';
 import styled from 'styled-components';
 import serializeForm from 'form-serialize';
-
+import * as helper from '../../helperMethods/TransactionsMethods';
 const FormItem = Form.Item;
 
 class Model extends React.Component{
@@ -14,6 +14,10 @@ class Model extends React.Component{
     confirmDirty: false,
   };
 
+  componentDidMount(){
+    this.props.refreshItems()
+
+  }
 
   handleConfirmBlur=(e)=> {
     const value = e.target.value;
@@ -29,9 +33,9 @@ class Model extends React.Component{
 
     this.props.addItem(values)
     this.props.closeModel()
-    // need to figure this out 
-    // this.props.addToCart(this.props.barcode)
-  }
+
+
+    }
 
 
     render(){
@@ -129,10 +133,11 @@ class Model extends React.Component{
     }
   }
 
-  const mapStateToProps = ({AuthReducer}) =>{
+  const mapStateToProps = ({ItemReducer, AuthReducer}) =>{
     // return object is what you want to map into a property
     return {
-      token: AuthReducer.token
+      token: AuthReducer.token,
+      items: ItemReducer.items,
     }
   }
   const WrappedItemForm = Form.create()(Model)

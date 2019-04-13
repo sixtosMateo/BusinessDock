@@ -28,7 +28,8 @@ class Incoming extends React.Component{
     modelOpen: false,
     confirmDirty: false,
     disabled: true,
-    error:""
+    error:"",
+    newItem:{}
   }
 
   componentDidMount(){
@@ -38,6 +39,7 @@ class Incoming extends React.Component{
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
   }
+
 
   updateQuery=(query)=>{
       this.setState({
@@ -50,7 +52,8 @@ class Incoming extends React.Component{
   }
 
   addToCart=(barcode)=>{
-    // item not found, we can use this to activate modal
+
+
     if(helper.getItem(barcode, this.props.items) == null){
       this.openModel()
       return
@@ -157,10 +160,16 @@ class Incoming extends React.Component{
   }
 
   closeModel=()=>{
+
     this.setState(()=>{
       return { modelOpen:false}
     })
   }
+  new=(newItem)=>(
+    this.setState(()=>{
+      return { newItem:newItem}
+    })
+  )
 
   handleChange=(value)=> {
     this.setState({
@@ -304,7 +313,8 @@ class Incoming extends React.Component{
             <Model
               closeModel={this.closeModel}
               barcode={this.state.query}
-              addToCart={this.addToCart}/>:""
+              addToCart={this.addToCart}
+              new = {this.new}/>:""
           }
         </div>
       );
