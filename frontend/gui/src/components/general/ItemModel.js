@@ -1,3 +1,5 @@
+/// for incoming, outgoing, cart, etc we need to display a Modal
+// with the information of the item
 import React from 'react';
 import 'antd/dist/antd.css';
 import { withRouter } from 'react-router-dom';
