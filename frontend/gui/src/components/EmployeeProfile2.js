@@ -179,7 +179,7 @@ class EmployeeProfile2 extends React.Component{
 
               {this.state.items.length > 0
                   ?
-                  <Col lg={12}>
+                  <Col lg={12} >
                   <h2 style={{background:"#F5F5F5",
                               textAlign:"center",
                               border:"1px solid"}}>Items</h2>

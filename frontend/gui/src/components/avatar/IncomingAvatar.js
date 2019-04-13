@@ -11,6 +11,7 @@ const IncomingItemAvatar =(props)=>{
     <div className="incoming-item-avatar">
 
       <List
+        style={{overflow:"auto", height: "800px"}}
         itemLayout="vertical"
         size="small"
         pagination={{

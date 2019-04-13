@@ -18,13 +18,14 @@ const EmployeeOutgoingAvatar =(props)=>{
 
   return(
       <List
+
         itemLayout="vertical"
         size="medium"
         pagination={{
           onChange: (page) => {
             // console.log(page);
           },
-          pageSize: 6,
+          pageSize: 5,
         }}
         dataSource={props.data}
 

@@ -26,6 +26,7 @@ const VendorAvatar =(props)=>{
 
   return(
       <List
+        style={{overflow:"auto", height: "500px"}}
         itemLayout="vertical"
         size="large"
         pagination={{

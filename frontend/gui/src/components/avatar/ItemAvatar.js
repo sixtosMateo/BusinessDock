@@ -28,6 +28,7 @@ const ItemAvatar =(props)=>{
 
   return(
       <List
+        style={{overflow:"auto", height: "800px"}}
         itemLayout="vertical"
         size="large"
         pagination={{

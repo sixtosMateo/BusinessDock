@@ -13,6 +13,7 @@ const OutgoingItemAvatar =(props)=>{
   return(
     <div className="outgoing-item-avatar">
       <List
+        style={{overflow:"auto", height: "800px"}}
         itemLayout="vertical"
         size="small"
         pagination={{

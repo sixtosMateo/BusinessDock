@@ -6,13 +6,14 @@ import {Link} from 'react-router-dom';
 const EmployeeOutgoingItemAvatar =(props)=>{
   return(
       <List
+        style={{overflow:"auto", height: "500px"}}
         itemLayout="vertical"
         size="medium"
         pagination={{
           onChange: (page) => {
             console.log(page);
           },
-          pageSize: 6,
+          pageSize: 5,
         }}
         dataSource={props.data}
 
@@ -21,7 +22,9 @@ const EmployeeOutgoingItemAvatar =(props)=>{
             key={item.transactionId}
             actions={[]}
             extra={[]}
-            style={{background:"#F8F8F8", border:"solid 1px"}}
+            style={{background:"#F8F8F8",
+                    border:"solid 1px",
+                    }}
           >
             <List.Item.Meta/>
             <Row type="flex" justify="start" style={{textAlign:"right"}}>

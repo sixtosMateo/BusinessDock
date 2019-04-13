@@ -45,6 +45,7 @@ const IconTextIncoming = ({ type, text, employeeId }) => (
 const EmployeeAvatar =(props)=>{
   return(
       <List
+        style={{overflow:"auto", height: "800px"}}
         itemLayout="vertical"
         size="medium"
         pagination={{
