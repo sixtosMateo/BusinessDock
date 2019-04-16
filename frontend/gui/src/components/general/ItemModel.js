@@ -15,17 +15,17 @@ class ItemModel extends React.Component{
 
   componentDidMount(){
     this.props.refreshItems()
-
   }
 
   render(){
+    console.log(this.props.item)
       return(
         <ModelContainer>
           <div id="modal" style={{width: "75%",
             height:"60%",
             padding:"20px 20px 20px 20px",
             overflow:"auto"}}>
-            <h1>Item Modal</h1>
+            <h1>Item Modal: </h1>
 
           </div>
         </ModelContainer>
@@ -62,6 +62,5 @@ class ItemModel extends React.Component{
       items: ItemReducer.items,
     }
   }
-  const WrappedItemForm = Form.create()(ItemModel)
 
-  export default withRouter(connect(mapStateToProps,mapDispatchToProps)(WrappedItemForm));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(ItemModel));

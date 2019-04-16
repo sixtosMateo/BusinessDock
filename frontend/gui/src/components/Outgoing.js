@@ -11,6 +11,7 @@ import TotalTable from './cart/TotalTable';
 import 'antd/dist/antd.css';
 import * as helper from '../helperMethods/TransactionsMethods';
 import * as localStorage from '../helperMethods/UpdateLocalStorage';
+import ItemModel from './general/ItemModel';
 import { Row, Col , Icon, InputNumber, Button } from 'antd';
 
 
@@ -22,7 +23,9 @@ class Outgoing extends React.Component{
     cartSubtotal:0,
     cartTax:0,
     cartTotal: 0,
-    error:""
+    error:"",
+    itemModel:false,
+    modelData:{}
   }
 
   componentDidMount(){
@@ -30,6 +33,20 @@ class Outgoing extends React.Component{
       this.props.refreshItems()
       this.props.fetchCurrentUser()
       this.props.refreshEmployees()
+  }
+
+  openItemModel=(item)=>{
+    console.log(item)
+    // this.setState({
+    //   itemModel:true,
+    //   modelData:item
+    // })
+  }
+
+  closeItemModel(){
+    this.setState({
+      itemModel:false
+    })
   }
 
   // adding to cart
@@ -297,7 +314,16 @@ class Outgoing extends React.Component{
               increment={this.increment}
               decrement={this.decrement}
               removeItem={this.removeItem}
+              openItemModel={this.openItemModel}
             />
+
+            {
+              this.state.itemModel  ?
+
+              <ItemModel
+                item={this.state.modelData}
+              />:""
+            }
 
         </div>
       );

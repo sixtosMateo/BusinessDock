@@ -2,6 +2,7 @@
 import React from 'react';
 import { List, Icon, Row, Col } from 'antd';
 import {Link} from 'react-router-dom';
+import ItemModel from '../general/ItemModel';
 
 const EmployeeOutgoingItemAvatar =(props)=>{
   return(
