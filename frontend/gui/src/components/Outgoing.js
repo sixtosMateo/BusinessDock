@@ -1,4 +1,3 @@
-// when creating a item update state and post to db
 // sale tax has to be dynamically based on location geo-location AND api call
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';

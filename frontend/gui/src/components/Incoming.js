@@ -14,6 +14,9 @@ import { Row, Col , Icon, Select, Button, InputNumber} from 'antd';
 import Model from './general/ModelContainer';
 import * as helper from '../helperMethods/TransactionsMethods';
 import * as localStorage from '../helperMethods/UpdateLocalStorage';
+import * as PostIncomingApi from '../api/postIncoming';
+import * as PostIncomingItemApi from '../api/postIncomingItem';
+
 
 const Option = Select.Option;
 
@@ -165,6 +168,7 @@ class Incoming extends React.Component{
       return { modelOpen:false}
     })
   }
+  
   new=(newItem)=>(
     this.setState(()=>{
       return { newItem:newItem}
@@ -179,29 +183,12 @@ class Incoming extends React.Component{
   }
 
   postTrasanction = ()=>{
-
-    const incoming ={
-      employeeId: this.props.employee.employeeId,
-      vendorId: this.state.vendorId,
-      tax: this.state.tax,
-      subtotal: this.state.subTotal,
-      total: this.state.total
-    }
-
-    axios.post('http://127.0.0.1:8000/api/incomingTransaction/', incoming)
+    PostIncomingApi
+    .postIncoming(this.props, this.state)
     .then((res)=>{
       this.state.cart.forEach((cartItem)=>{
-        const object={
-          transactionId: res.data.transactionId,
-          barcode: cartItem.barcode,
-          name: cartItem.name,
-          transactionType:"incoming",
-          quantity: cartItem.quantity,
-          price: cartItem.itemSaleTotal,
-          tax: Math.round(1000 *(cartItem.itemSaleTotal * cartItem.tax))/1000,
-          itemSaleTotal: Math.round(1000 * (cartItem.itemSaleTotal+ (cartItem.itemSaleTotal* cartItem.tax)))/1000
-        }
-        axios.post(`http://127.0.0.1:8000/api/incomingtransactionItem/${res.data.transactionId}/`, object)
+        PostIncomingItemApi
+        .postIncomingItem(res.data, cartItem)
         .catch(e=>{
           console.log(e)
         })
