@@ -43,20 +43,17 @@ class Incoming extends React.Component{
     this.props.refreshEmployees()
   }
 
-
   updateQuery=(query)=>{
-      this.setState({
-        query: query.trim()
-      })
+    this.setState({
+      query: query.trim()
+    })
 
-      if(this.state.query){
-        this.addToCart(this.state.query)
-      }
+    if(this.state.query){
+      this.addToCart(this.state.query)
+    }
   }
 
   addToCart=(barcode)=>{
-
-
     if(helper.getItem(barcode, this.props.items) == null){
       this.openModel()
       return
@@ -74,7 +71,6 @@ class Incoming extends React.Component{
         cart:[...this.state.cart, item]
       }
     },()=>{this.addTotal()})
-
   }
 
   addTotal=()=>{
@@ -86,89 +82,82 @@ class Incoming extends React.Component{
         tax: cartCost.tax,
         total: cartCost.total
       }})
-  }
-
-  increment=(barcode)=>{
-    const tempCart = helper.increment(this.state.cart, barcode)
-
-    this.setState(()=>{
-      return { cart:[...tempCart]}
-    },
-    ()=>{this.addTotal()})
-  }
-
-  decrement = (barcode) =>{
-    // const tempCart = helper.decrement(this.props.items, this.state.cart, barcode)
-
-    let tempCart = [...this.state.cart]
-   const selectedItem = tempCart.find(item=>item.barcode===barcode);
-
-   const index = tempCart.indexOf(selectedItem)
-
-   const item  = tempCart[index]
-
-   item.quantity = item.quantity-1;
-
-   if(item.quantity ===0){
-     this.removeItem(barcode)
-   }
-   else{
-     item.itemSaleTotal = item.quantity * item.salePrice;
-
-     this.setState(()=>{
-       return {cart:[...tempCart]}},
-       ()=>{this.addTotal()}
-     )
-   }
-
     }
 
-  removeItem=(barcode)=>{
-    // const tempCart = helper.removeItem(this.props.items, this.state.cart, barcode)
-     let tempItems = [...this.props.items];
-     let tempCart = [...this.state.cart];
-     tempCart = tempCart.filter(item => item.barcode !== barcode)
+    increment=(barcode)=>{
+      const tempCart = helper.increment(this.state.cart, barcode)
+      this.setState(()=>{
+        return { cart:[...tempCart]}
+      },
+      ()=>{this.addTotal()})
+    }
 
-     const index =  tempItems.indexOf(helper.getItem(barcode, this.props.items))
-     let removedItem = tempItems[index]
+    decrement = (barcode) =>{
+      // const tempCart = helper.decrement(this.props.items, this.state.cart, barcode)
+      let tempCart = [...this.state.cart]
+      const selectedItem = tempCart.find(item=>item.barcode===barcode);
 
-    // this the overall products and setting the values to defaut
+      const index = tempCart.indexOf(selectedItem)
 
-     removedItem.quantity = 0
-     removedItem.itemSaleTotal = 0
+      const item  = tempCart[index]
 
-     this.setState(()=>{
-       return {
-         cart:[...tempCart],
-         product:[...tempItems]
-       }
-     },
-     ()=> {this.addTotal()}
+      item.quantity = item.quantity-1;
+
+      if(item.quantity ===0){
+        this.removeItem(barcode)
+      }
+      else{
+        item.itemSaleTotal = item.quantity * item.salePrice;
+
+        this.setState(()=>{
+          return {cart:[...tempCart]}},
+          ()=>{this.addTotal()}
+        )
+      }
+    }
+
+    removeItem=(barcode)=>{
+      // const tempCart = helper.removeItem(this.props.items, this.state.cart, barcode)
+      let tempItems = [...this.props.items];
+      let tempCart = [...this.state.cart];
+      tempCart = tempCart.filter(item => item.barcode !== barcode)
+      const index =  tempItems.indexOf(helper.getItem(barcode, this.props.items))
+      let removedItem = tempItems[index]
+
+      // this the overall products and setting the values to defaut
+      removedItem.quantity = 0
+      removedItem.itemSaleTotal = 0
+
+      this.setState(()=>{
+        return {
+          cart:[...tempCart],
+          product:[...tempItems]
+        }
+      },
+      ()=> {this.addTotal()}
     )
   }
 
   clearCart=()=>{
-      this.setState(()=>{
-        return {cart:[]}
-      },()=>{
-        this.addTotal();
-      });
+    this.setState(()=>{
+      return {cart:[]}
+    },()=>{
+      this.addTotal();
+    });
   }
 
   openModel=()=>{
-      this.setState(()=>{
-        return { modelOpen:true}
-      })
-
+    this.setState(()=>{
+      return { modelOpen:true}
+    })
   }
 
   closeModel=()=>{
-
     this.setState(()=>{
       return { modelOpen:false}
     })
   }
-  
+
   new=(newItem)=>(
     this.setState(()=>{
       return { newItem:newItem}
@@ -196,7 +185,8 @@ class Incoming extends React.Component{
     })
     .then(()=>{
       this.state.cart.forEach((cartItem)=>{
-        const editItem = this.props.items.find(item => item.itemId === cartItem.itemId)
+        const editItem = this.props.items.find(item =>
+                                                item.itemId === cartItem.itemId)
         editItem.inStockQty += cartItem.quantity
         this.props.updateItemQty(editItem.itemId, editItem)
         localStorage.editItemLocalStorage('localItems', editItem.itemId, editItem)
@@ -211,124 +201,129 @@ class Incoming extends React.Component{
   }
 
   render(){
-      const { vendors} = this.props.vendors
-      const user = this.props.currentUser
+    const { vendors} = this.props.vendors
+    const user = this.props.currentUser
 
-      return(
-        <div className="incomingComponent" >
+    return(
+      <div className="incomingComponent" >
 
-              <h2>Clerk: {user ? user.username: ""}</h2>
+      <h2>Clerk: {user ? user.username: ""}</h2>
 
-              <h3>EmployeeID: <InputNumber value={this.props.employee ? this.props.employee.employeeId: ""}
-                                   style={{border:"none",
-                                          color: "#000000",
-                                          backgroundColor:"transparent"}}
-                                   disabled/></h3>
+      <h3>EmployeeID:
+        <InputNumber
+          value={this.props.employee ? this.props.employee.employeeId: ""}
+      style={{border:"none",
+      color: "#000000",
+      backgroundColor:"transparent"}}
+      disabled/></h3>
 
-              <Select showSearch
-                      placeholder="Select a vendor"
-                      style={{ width: 150, marginBottom:"20px" }}
-                      onChange={this.handleChange}>
-                {
-                  vendors.map((vendor)=>{
-                    return <Option key={vendor.vendorId}
-                                   value={vendor.vendorId}>{vendor.name}
-                            </Option>
-                  })
-                }
-              </Select>
+      <Select showSearch
+      placeholder="Select a vendor"
+      style={{ width: 150, marginBottom:"20px" }}
+      onChange={this.handleChange}>
+      {
+        vendors.map((vendor)=>{
+          return <Option key={vendor.vendorId}
+          value={vendor.vendorId}>{vendor.name}
+          </Option>
+        })
+      }
+      </Select>
 
 
-          <Row>
-            <Col span={12} style={{width:"50%"}}>
-                <DebounceInput
-                minLength={5}
-                debounceTimeout={300}
-                onClick={(event => event.target.select())}
-                placeholder="Incoming: Scan Item"
-                style={{width:"100%",border: "1px solid #ccc", font:"sans-serif"}}
-                onChange={event =>
-                  this.updateQuery(event.target.value)}/>
+      <Row>
+      <Col span={12} style={{width:"50%"}}>
+      <DebounceInput
+      minLength={5}
+      debounceTimeout={300}
+      onClick={(event => event.target.select())}
+      placeholder="Incoming: Scan Item"
+      style={{width:"100%",border: "1px solid #ccc", font:"sans-serif"}}
+      onChange={event =>
+        this.updateQuery(event.target.value)}/>
 
-            </Col>
+        </Col>
 
-            {
-              this.state.cart.length > 0 ?
+        {
+          this.state.cart.length > 0 ?
 
-              <Col span={12} style={{width:"50%", padding:"2px"}}>
+          <Col span={12} style={{width:"50%", padding:"2px"}}>
 
-                  <Col span={12} style={{padding:"1px", width:"50%"}}>
-                    <Button onClick={()=>this.postTrasanction()} disabled={this.state.disabled}>
-                      <Icon type="shopping-cart"
-                            className="submit-cart"
-                            style={{fontFamily: "Permanent Marker",
-                                    color:"#00AF33"}}/>
-                                    <span style={{color:"#00AF33"}}>Submit</span>
-                    </Button>
+          <Col span={12} style={{padding:"1px", width:"50%"}}>
+          <Button onClick={()=>this.postTrasanction()}
+          disabled={this.state.disabled}>
+          <Icon type="shopping-cart"
+          className="submit-cart"
+          style={{fontFamily: "Permanent Marker",
+          color:"#00AF33"}}/>
+          <span style={{color:"#00AF33"}}>Submit</span>
+          </Button>
 
-                    <Button type="danger" onClick={()=>this.clearCart()}
-                            style={{backgroundColor:"transparent"}}>
-                    <Icon type="delete"
-                          className="empty-cart"
-                          style={{fontFamily: "Permanent Marker",
-                                  color:"#cc0000",
-                                  }}/>
-                                  <span style={{color:"#cc0000"}}>ClearCart</span>
-                    </Button>
-                  </Col>
+          <Button type="danger" onClick={()=>this.clearCart()}
+          style={{backgroundColor:"transparent"}}>
+          <Icon type="delete"
+          className="empty-cart"
+          style={{fontFamily: "Permanent Marker",
+          color:"#cc0000",
+        }}/>
+        <span style={{color:"#cc0000"}}>ClearCart</span>
+        </Button>
+        </Col>
 
-                  <Col span={12} style={{padding:"1px", width:"50%"}}>
-                    <TotalTable
-                      total={this.state.total}
-                      subTotal={this.state.subTotal}
-                      tax={this.state.tax}
-                      clearCart={this.clearCart}/>
-                  </Col>
-              </Col>:""}
-          </Row>
+        <Col span={12} style={{padding:"1px", width:"50%"}}>
+        <TotalTable
+        total={this.state.total}
+        subTotal={this.state.subTotal}
+        tax={this.state.tax}
+        clearCart={this.clearCart}/>
+        </Col>
+        </Col>:""}
+        </Row>
 
-          <IncomingItemAvatar
-            data={this.state.cart}
-            increment={this.increment}
-            decrement={this.decrement}
-            removeItem={this.removeItem}
-          />
+        <IncomingItemAvatar
+        data={this.state.cart}
+        increment={this.increment}
+        decrement={this.decrement}
+        removeItem={this.removeItem}
+        />
 
-          {
-            this.state.modelOpen  ?
+        {
+          this.state.modelOpen  ?
 
-            <Model
-              closeModel={this.closeModel}
-              barcode={this.state.query}
-              addToCart={this.addToCart}
-              new = {this.new}/>:""
-          }
+          <Model
+          closeModel={this.closeModel}
+          barcode={this.state.query}
+          addToCart={this.addToCart}
+          new = {this.new}/>:""
+        }
         </div>
       );
     }
-}
-
-const mapStateToProps = ({ItemReducer, EmployeeReducer, AuthReducer, VendorReducer}) =>{
-  // return object is what you want to map into a property
-  return {
-    employees:  EmployeeReducer.employees,
-    employee: EmployeeReducer.employees.find(employee => employee.userId === AuthReducer.currentUser.pk),
-    currentUser: AuthReducer.currentUser,
-    items: ItemReducer.items,
-    vendors: VendorReducer,
-    isAuthenticated: AuthReducer.token !== null
   }
-}
 
-const mapDispatchToProps = dispatch =>{
-  return {
+  const mapStateToProps = (
+                {ItemReducer, EmployeeReducer, AuthReducer, VendorReducer}) =>{
+    // return object is what you want to map into a property
+    return {
+      employees:  EmployeeReducer.employees,
+      employee: EmployeeReducer.employees.find(employee =>
+                                employee.userId === AuthReducer.currentUser.pk),
+      currentUser: AuthReducer.currentUser,
+      items: ItemReducer.items,
+      vendors: VendorReducer,
+      isAuthenticated: AuthReducer.token !== null
+    }
+  }
+
+  const mapDispatchToProps = dispatch =>{
+    return {
       onTryAutoSignup: ()=> dispatch(actions.authCheckState()),
       fetchCurrentUser:()=>dispatch(actions.reloadCurrentUser()),
       refreshItems: () => dispatch(actions.reloadLocalItems()),
       refreshVendors: () => dispatch(actions.reloadLocalVendors()),
       refreshEmployees: () => dispatch(actions.reloadLocalEmployees()),
       updateItemQty: (id,item) => dispatch(actions.editItemLocalStorage(id,item)),
+    }
   }
-}
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Incoming));
+  export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Incoming));
