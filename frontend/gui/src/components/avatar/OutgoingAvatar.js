@@ -11,6 +11,7 @@ const OutgoingItemAvatar =(props)=>{
 
   const {increment, decrement, removeItem} = props;
   return(
+
     <div className="outgoing-item-avatar">
       <List
         style={{overflow:"auto", height: "800px"}}
@@ -34,7 +35,7 @@ const OutgoingItemAvatar =(props)=>{
                    alt="logo"
                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
                    onClick={()=>{
-                     props.openItemModel({item})
+                     props.openItemModel(item)
                    }}/>}
             >
             <List.Item.Meta/>

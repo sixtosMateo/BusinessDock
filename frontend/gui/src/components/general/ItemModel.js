@@ -2,6 +2,7 @@
 // with the information of the item
 import React from 'react';
 import 'antd/dist/antd.css';
+import { Button} from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
@@ -18,14 +19,24 @@ class ItemModel extends React.Component{
   }
 
   render(){
-    console.log(this.props.item)
       return(
         <ModelContainer>
           <div id="modal" style={{width: "75%",
             height:"60%",
             padding:"20px 20px 20px 20px",
             overflow:"auto"}}>
-            <h1>Item Modal: </h1>
+            <h1>Item added to cart</h1>
+            <h2>{this.props.item.barcode}: {this.props.item.name}</h2>
+            <h4>{this.props.item.salePrice}</h4>
+            <h4>{this.props.item.inStockQty}</h4>
+            <h4>{this.props.item.color}</h4>
+            <h4>{this.props.item.department}</h4>
+            <h4>{this.props.item.ageRequirement}</h4>
+            <Button type="danger"
+            style={{background:"#CC3333", color:"#FFFFFF"}}
+            onClick={()=>{
+              this.props.closeItemModel()
+            }}>Cancel</Button>
 
           </div>
         </ModelContainer>

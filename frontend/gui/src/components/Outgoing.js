@@ -36,14 +36,13 @@ class Outgoing extends React.Component{
   }
 
   openItemModel=(item)=>{
-    console.log(item)
-    // this.setState({
-    //   itemModel:true,
-    //   modelData:item
-    // })
+    this.setState({
+      itemModel:true,
+      modelData:item
+    })
   }
 
-  closeItemModel(){
+  closeItemModel=()=>{
     this.setState({
       itemModel:false
     })
@@ -322,6 +321,7 @@ class Outgoing extends React.Component{
 
               <ItemModel
                 item={this.state.modelData}
+                closeItemModel = {this.closeItemModel}
               />:""
             }
 
