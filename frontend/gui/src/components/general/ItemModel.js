@@ -11,7 +11,6 @@ import styled from 'styled-components';
 
 class ItemModel extends React.Component{
   state = {
-
   };
 
   componentDidMount(){
