@@ -16,7 +16,7 @@ import * as helper from '../helperMethods/TransactionsMethods';
 import * as localStorage from '../helperMethods/UpdateLocalStorage';
 import * as PostIncomingApi from '../api/postIncoming';
 import * as PostIncomingItemApi from '../api/postIncomingItem';
-
+import ItemModel from './general/ItemModel';
 
 const Option = Select.Option;
 
@@ -32,6 +32,7 @@ class Incoming extends React.Component{
     confirmDirty: false,
     disabled: true,
     error:"",
+    itemModel:false,
     newItem:{}
   }
 
@@ -41,6 +42,19 @@ class Incoming extends React.Component{
     this.props.refreshVendors()
     this.props.fetchCurrentUser()
     this.props.refreshEmployees()
+  }
+
+  openItemModel=(item)=>{
+    this.setState({
+      itemModel:true,
+      modelData:item
+    })
+  }
+
+  closeItemModel=()=>{
+    this.setState({
+      itemModel:false
+    })
   }
 
   updateQuery=(query)=>{
@@ -285,6 +299,7 @@ class Incoming extends React.Component{
         increment={this.increment}
         decrement={this.decrement}
         removeItem={this.removeItem}
+        openItemModel={this.openItemModel}
         />
 
         {
@@ -295,6 +310,14 @@ class Incoming extends React.Component{
           barcode={this.state.query}
           addToCart={this.addToCart}
           new = {this.new}/>:""
+        }
+
+        {
+          this.state.itemModel  ?
+          <ItemModel
+            item={this.state.modelData}
+            closeItemModel = {this.closeItemModel}
+            />:""
         }
         </div>
       );

@@ -24,7 +24,15 @@ const IncomingItemAvatar =(props)=>{
         renderItem={item => (
           <List.Item
             key={item.barcode}
-            extra={<img width={175} style={{margin:"0", padding:"0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}>
+            extra={<img
+              width={175}
+              style={{margin:"0", padding:"0"}}
+              alt="logo"
+              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+              onClick={()=>{
+                props.openItemModel(item)
+              }}
+              />}>
             <List.Item.Meta/>
 
             <Row>
