@@ -104,7 +104,6 @@ class Outgoing extends React.Component{
     this.setState({
       query: query.trim()
     })
-
     if(this.state.query){
       this.setToCart(this.state.query);
     }
@@ -134,26 +133,21 @@ class Outgoing extends React.Component{
       this.removeItem(barcode)
     }
     else{
-      item.itemSaleTotal = item.quantity * item.salePrice;
-
+      item.itemSaleTotal = item.quantity * item.salePrice
       this.setState(()=>{
         return {cart:[...tempCart]}},
         ()=>{this.addTotal()}
       )
     }
-
   }
 
   removeItem=(barcode)=>{
     let tempItems = [...this.props.items];
     let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.barcode !== barcode)
-
     const index =  tempItems.indexOf(helper.getItem(barcode, this.props.items))
     let removedItem = tempItems[index]
-
     // this the overall products and setting the values to defaut
-
     removedItem.quantity = 0
     removedItem.itemSaleTotal = 0
 
@@ -169,7 +163,6 @@ class Outgoing extends React.Component{
 
   addTotal=()=>{
     const cartCost = helper.addTotal(this.state.cart)
-
     this.setState(()=>{
       return{
         cartSubtotal: cartCost.subTotal,
@@ -189,7 +182,6 @@ class Outgoing extends React.Component{
         .postOutgoingItem(res.data, cartItem)
         .catch(e=>{
           console.log(e)
-
         })
       })
     }) //there can be a bug if inStockQty is less than cartitem,
@@ -204,7 +196,6 @@ class Outgoing extends React.Component{
     })
     .then(()=>{
       window.location.reload()
-
     })
     .catch(e=>{
       console.log(e)
@@ -214,7 +205,6 @@ class Outgoing extends React.Component{
 render(){
   const user = this.props.currentUser
   return(
-
     <div className="outgoingComponent">
 
       <Row>

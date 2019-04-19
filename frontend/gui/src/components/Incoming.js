@@ -1,6 +1,4 @@
 // what happens when user wants to buy a new item: display a modal
-// i think its best two have two separate table for incoming and outgoing tables
-// display table when item is new ask user if they want to add new item
 // when user finished scanning the value needs to disapear
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
@@ -89,7 +87,6 @@ class Incoming extends React.Component{
 
   addTotal=()=>{
     const cartCost = helper.addTotal(this.state.cart)
-
     this.setState(()=>{
       return {
         subTotal: cartCost.subTotal,
@@ -349,4 +346,4 @@ class Incoming extends React.Component{
     }
   }
 
-  export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Incoming));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Incoming));

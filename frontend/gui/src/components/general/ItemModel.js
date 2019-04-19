@@ -25,12 +25,13 @@ class ItemModel extends React.Component{
             padding:"20px 20px 20px 20px",
             overflow:"auto"}}>
             <h1>Item added to cart</h1>
-            <h2>{this.props.item.barcode}: {this.props.item.name}</h2>
-            <h4>{this.props.item.salePrice}</h4>
-            <h4>{this.props.item.inStockQty}</h4>
-            <h4>{this.props.item.color}</h4>
-            <h4>{this.props.item.department}</h4>
-            <h4>{this.props.item.ageRequirement}</h4>
+            <h2>Barcode: {this.props.item.barcode}</h2>
+            <h4>Name: {this.props.item.name}</h4>
+            <h4>Sale Price: {this.props.item.salePrice}</h4>
+            <h4>Instock: {this.props.item.inStockQty}</h4>
+            <h4>Color: {this.props.item.color}</h4>
+            <h4>Department: {this.props.item.department}</h4>
+            <h4>Age: {this.props.item.ageRequirement}</h4>
             <Button type="danger"
             style={{background:"#CC3333", color:"#FFFFFF"}}
             onClick={()=>{
