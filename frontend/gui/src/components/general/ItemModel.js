@@ -26,27 +26,30 @@ class ItemModel extends React.Component{
             overflow:"auto"}}>
 
             <h1 style={{fontFamily: "Permanent Marker", textAlign:"center"}}>Item added to cart</h1>
-            <Row>
-              <Col>
+            <Row  style={{background:"#FFFFFF"}}>
+              <Col sm={12} md={12} lg={12} style={{}}>
                 <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Name: {this.props.item.name}</h2>
-                <h2>Barcode: {this.props.item.barcode}</h2>
+                <h3>Barcode: {this.props.item.barcode}</h3>
                 <h4>Instock: {this.props.item.inStockQty}</h4>
+              </Col>
+              <Col sm={12} md={12} lg={12} style={{}}>
+                <img width={175} style={{margin:"0", padding:"0", position: "absolute",right: "0"}} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
               </Col>
             </Row>
 
-            <Row>
-              <Col md={12} lg={12}>
+            <Row style={{background:"#F5F5F5"}}>
+              <Col sm={12} md={12} lg={12} style={{}}>
                 <h4>Sale Price: {this.props.item.salePrice}</h4>
                 <h4>Color: {this.props.item.color}</h4>
               </Col>
-              <Col md={12} lg={12}>
+              <Col sm={12} md={12} lg={12} style={{}}>
                 <h4>Department: {this.props.item.department}</h4>
                 <h4>Age: {this.props.item.ageRequirement}</h4>
               </Col>
             </Row>
 
-            <Row>
-              <Col>
+            <Row style={{}}>
+              <Col style={{}}>
                 <h4 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Description:</h4>
                 <p>
                   This section will be the decription of the item.
