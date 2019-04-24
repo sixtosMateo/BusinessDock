@@ -2,7 +2,7 @@
 // with the information of the item
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Button} from 'antd';
+import { Button, Col, Row} from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
@@ -24,9 +24,11 @@ class ItemModel extends React.Component{
             height:"60%",
             padding:"20px 20px 20px 20px",
             overflow:"auto"}}>
-            <h1>Item added to cart</h1>
+
+            <h1 style={{fontFamily: "Permanent Marker", textAlign:"center"}}>Item added to cart</h1>
+            <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Name: {this.props.item.name}</h2>
+            
             <h2>Barcode: {this.props.item.barcode}</h2>
-            <h4>Name: {this.props.item.name}</h4>
             <h4>Sale Price: {this.props.item.salePrice}</h4>
             <h4>Instock: {this.props.item.inStockQty}</h4>
             <h4>Color: {this.props.item.color}</h4>
