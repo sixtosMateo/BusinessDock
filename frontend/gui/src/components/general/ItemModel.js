@@ -26,14 +26,37 @@ class ItemModel extends React.Component{
             overflow:"auto"}}>
 
             <h1 style={{fontFamily: "Permanent Marker", textAlign:"center"}}>Item added to cart</h1>
-            <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Name: {this.props.item.name}</h2>
-            
-            <h2>Barcode: {this.props.item.barcode}</h2>
-            <h4>Sale Price: {this.props.item.salePrice}</h4>
-            <h4>Instock: {this.props.item.inStockQty}</h4>
-            <h4>Color: {this.props.item.color}</h4>
-            <h4>Department: {this.props.item.department}</h4>
-            <h4>Age: {this.props.item.ageRequirement}</h4>
+            <Row>
+              <Col>
+                <h2 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Name: {this.props.item.name}</h2>
+                <h2>Barcode: {this.props.item.barcode}</h2>
+                <h4>Instock: {this.props.item.inStockQty}</h4>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col md={12} lg={12}>
+                <h4>Sale Price: {this.props.item.salePrice}</h4>
+                <h4>Color: {this.props.item.color}</h4>
+              </Col>
+              <Col md={12} lg={12}>
+                <h4>Department: {this.props.item.department}</h4>
+                <h4>Age: {this.props.item.ageRequirement}</h4>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col>
+                <h4 style={{color:"#5f9ea0", fontFamily: "Permanent Marker"}}>Description:</h4>
+                <p>
+                  This section will be the decription of the item.
+                </p>
+
+              </Col>
+            </Row>
+
+
+
             <Button type="danger"
             style={{background:"#CC3333", color:"#FFFFFF"}}
             onClick={()=>{
